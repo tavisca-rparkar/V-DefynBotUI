@@ -12,13 +12,13 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class ThemeService {
-  private _themesURL = "assets/themes/bank-themes.json";
   headers: HttpHeaders;
 
   constructor(private http: HttpClient) {}
 
-  GetTheme(): Observable<any> {
-    var theme = this.http.get<JSON>(this._themesURL);
+  GetTheme(bankName: string): Observable<any> {
+    let themesURL = "assets/themes/" + bankName + ".json";
+    let theme = this.http.get<JSON>(themesURL);
     return theme;
   }
 }

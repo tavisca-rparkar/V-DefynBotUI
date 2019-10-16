@@ -7,12 +7,15 @@ import { ThemeService } from "src/app/services/theme.service";
   styleUrls: ["./chat-header.component.css"]
 })
 export class ChatHeaderComponent implements AfterViewInit {
-  bankTheme: JSON;
-  name: string;
+  bankName: string;
+  bankColor: string;
+  bankDpUrl: string;
   ngAfterViewInit(): void {
-    this.themes.GetTheme().subscribe(theme => (this.bankTheme = theme));
-    console.log(this.bankTheme.banks.bankName);
-    //this.name = this.bankTheme.banks.bankName;
+    this.themes.GetTheme("usbank").subscribe(theme => {
+      this.bankName = theme.bank.name;
+      this.bankColor = theme.bank.color;
+      this.bankDpUrl = theme.bank.dpUrl;
+    });
   }
   constructor(private themes: ThemeService) {}
 }

@@ -1,8 +1,4 @@
-<div class="header">
-  <img
-    src="
-      https://pbs.twimg.com/profile_images/960529625188220928/hDC7W9eq_400x400.jpg
-    "
-  />
-  <h1>US Bank</h1>
+<div class="header" [ngStyle]="{ backgroundColor: bankColor }">
+  <img src="{{ bankDpUrl }}" />
+  <h1>{{ bankName }}</h1>
 </div>
