@@ -1,0 +1,10 @@
+button {
+    padding: 2%;
+    margin: 1% 0% 1% 7%;
+    display: block;
+    background: #007bff none repeat scroll 0 0;
+    color: #fff;
+    border-radius: 5px;
+    border: 0px;
+    font-size: 14px;
+}

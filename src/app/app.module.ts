@@ -14,6 +14,7 @@ import { HeaderComponent } from "./components/launcher/header/header.component";
 import { FormComponent } from "./components/launcher/form/form.component";
 import { TextBubbleComponent } from "./components/chatbot/chat-body/text-bubble/text-bubble.component";
 import { HttpClientModule } from "@angular/common/http";
+import { ChoiceButtonComponent } from './components/chatbot/chat-body/choice-button/choice-button.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClientModule } from "@angular/common/http";
     LauncherComponent,
     HeaderComponent,
     FormComponent,
-    TextBubbleComponent
+    TextBubbleComponent,
+    ChoiceButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,6 @@ import { HttpClientModule } from "@angular/common/http";
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [TextBubbleComponent]
+  entryComponents: [TextBubbleComponent,ChoiceButtonComponent]
 })
 export class AppModule {}

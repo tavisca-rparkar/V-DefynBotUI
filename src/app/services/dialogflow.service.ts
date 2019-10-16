@@ -26,19 +26,19 @@ export class DialogflowService {
 
   constructor(private http: HttpClient) {}
 
-  GetResponse(request: String) {
+  GetResponseMock(request: String) {
     let response = {
-      intent: request,
-      message: "Hello User"
+      intent: "Mock",
+      message: "Hello User, This is a mock response from a mock server!"
     };
     return response;
   }
 
-  GetResponseNew(userInput: string): Observable<JSON> {
+  GetResponse(userInput: string): Observable<JSON> {
     this.headers = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization:
-        "Bearer ya29.c.Kl6bB8CxJ_RR6k3bOhhTLUd5anjMgf5jrD97M21owUzGfafzzE0ohQt9yOoeAJvqc2JVw2FEKcjJmHnp82Wnl1CMwdg0XujLP6lkRfGb6lg23s3YjXfyopCZgzA7DbV9"
+        "Bearer ya29.c.Kl6bB25bDCBVhRmN0EV5wVVzXCZzhuwvr0UqkLScWrcfUFy3ZJOa96q0qbG_dGPgUuS-8wHJPh12QvDfFt8Ed7BI5KYHaIqkputzH3MvT2t3mTrvGtADgLMvDJFhvOlr"
     });
     //Body for dialogflow
     this.text = new Text();
@@ -49,14 +49,12 @@ export class DialogflowService {
     this.format = new Format();
     this.format.queryInput = this.queryInput;
     //end of body of dialogflow
-    var sample = this.http.post<JSON>(
-      this.productUrl,
-      JSON.stringify(this.format),
-      { headers: this.headers, responseType: "json" }
-    );
-    console.log("Inside service");
-    //console.log(JSON.stringify(sample));
-    console.log(sample);
+    
+      var sample = this.http.post<JSON>(
+        this.productUrl,
+        JSON.stringify(this.format),
+        { headers: this.headers, responseType: "json" }
+      );
     return sample;
   }
 }
