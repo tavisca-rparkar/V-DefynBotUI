@@ -8,5 +8,7 @@ import { Component, OnInit } from "@angular/core";
 export class ChatbotComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 }

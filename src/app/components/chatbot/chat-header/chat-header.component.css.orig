@@ -11,6 +11,10 @@ img {
 }
 
 h1 {
+<<<<<<< HEAD
+=======
+  width: 50%;
+>>>>>>> de3b4c11d789e0a5b8480ec7d9496ac1d1e7fec2
   float: left;
   font-size: 20px;
   font-family: arial;

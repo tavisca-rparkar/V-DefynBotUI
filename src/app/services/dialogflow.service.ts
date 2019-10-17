@@ -10,6 +10,8 @@ import { catchError, tap, map, sample } from "rxjs/operators";
 import { variable } from "@angular/compiler/src/output/output_ast";
 import { JsonPipe } from "@angular/common";
 import { Format, Text, QueryInput } from "src/app/components/dialogflow/format";
+import { MockableService } from "./mockable.service";
+import { async } from "q";
 
 @Injectable({
   providedIn: "root"
@@ -19,22 +21,28 @@ export class DialogflowService {
     "https://dialogflow.googleapis.com/v2/projects/v-defynbot-rkixcd/agent/sessions/1235:detectIntent";
   headers: HttpHeaders;
 
+  authKey =
+    "Bearer ya29.c.Kl6bB9QLO_KFXilwTce3SRffe2o0WxTMyfJHjlscmPUzLm3kutIpxMuTAfp-kTyzKBTUCCJ3a4xfy-Ttkei520NDXe-m-4LPc087te-Ny3gkcuQvsSA56x7hEY5-Z6zX";
+
   //queryFormat.queryInput.text.text="";
   text: Text;
   queryInput: QueryInput;
   format: Format;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private mockableService: MockableService
+  ) {}
 
-  GetResponse(request: String) {
+  GetResponseMock(request: String) {
     let response = {
-      intent: request,
-      message: "Hello User"
+      intent: "Mock",
+      message: "Hello User, This is a mock response from a mock server!"
     };
     return response;
   }
 
-  GetResponseNew(userInput: string): Observable<JSON> {
+  GetResponse(userInput: string): Observable<JSON> {
     this.headers = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization:
@@ -49,14 +57,12 @@ export class DialogflowService {
     this.format = new Format();
     this.format.queryInput = this.queryInput;
     //end of body of dialogflow
+
     var sample = this.http.post<JSON>(
       this.productUrl,
       JSON.stringify(this.format),
       { headers: this.headers, responseType: "json" }
     );
-    console.log("Inside service");
-    //console.log(JSON.stringify(sample));
-    console.log(sample);
     return sample;
   }
 }
