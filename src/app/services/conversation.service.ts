@@ -33,7 +33,6 @@ export class ConversationService {
       this.dialogflowService.GetResponse(userInput)
       .pipe(catchError(err => {
         this.chatService.AddTextBubble("Sorry, I am unable to talk at the momment. Please contact the Site Administrator to report this issue.", "bot");
-        console.log(err);
         return throwError(err);
     }))
       .subscribe(response => {
@@ -77,11 +76,9 @@ export class ConversationService {
         this.locationService.GetResponse(city)
         .pipe(catchError(err => {
             this.chatService.AddTextBubble("Sorry, I was unable to contact the vendor, can you please try again after some time.", "bot");
-            console.log(err);
             return throwError(err);
         }))
         .subscribe((data) => {
-              console.log(data);
               if(data[0] === "true")
               {
                 this.chatService.AddTextBubble("Showing you Restaurants in "+city+".", "bot");

@@ -10,6 +10,8 @@ import { catchError, tap, map, sample } from "rxjs/operators";
 import { variable } from "@angular/compiler/src/output/output_ast";
 import { JsonPipe } from "@angular/common";
 import { Format, Text, QueryInput } from "src/app/components/dialogflow/format";
+import { MockableService } from './mockable.service';
+import { async } from 'q';
 
 @Injectable({
   providedIn: "root"
@@ -18,13 +20,15 @@ export class DialogflowService {
   private productUrl =
     "https://dialogflow.googleapis.com/v2/projects/v-defynbot-rkixcd/agent/sessions/1235:detectIntent";
   headers: HttpHeaders;
+  
+  authKey = "Bearer ya29.c.Kl6bB9QLO_KFXilwTce3SRffe2o0WxTMyfJHjlscmPUzLm3kutIpxMuTAfp-kTyzKBTUCCJ3a4xfy-Ttkei520NDXe-m-4LPc087te-Ny3gkcuQvsSA56x7hEY5-Z6zX";
 
   //queryFormat.queryInput.text.text="";
   text: Text;
   queryInput: QueryInput;
   format: Format;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private mockableService: MockableService) {}
 
   GetResponseMock(request: String) {
     let response = {
@@ -35,20 +39,20 @@ export class DialogflowService {
   }
 
   GetResponse(userInput: string): Observable<JSON> {
+    
     this.headers = new HttpHeaders({
       "Content-Type": "application/json",
-      Authorization:
-        "Bearer ya29.c.Kl6bB1C76rZZXwYp2XSbiRQBW4W6siJbKznGMbEoITs0ao4LEnYrgGq0K0H9ru-rWn02OliBF2wk5AcDCsAIyiA_zVJKWUfIOJ40RR5nxm0M-c_wHELL1ScnoN12cWcF"
+      "Authorization": this.authKey
     });
-    //Body for dialogflow
-    this.text = new Text();
-    this.text.text = userInput;
-    this.text.languageCode = "en";
-    this.queryInput = new QueryInput();
-    this.queryInput.text = this.text;
-    this.format = new Format();
-    this.format.queryInput = this.queryInput;
-    //end of body of dialogflow
+      //Body for dialogflow
+      this.text = new Text();
+      this.text.text = userInput;
+      this.text.languageCode = "en";
+      this.queryInput = new QueryInput();
+      this.queryInput.text = this.text;
+      this.format = new Format();
+      this.format.queryInput = this.queryInput;
+      //end of body of dialogflow
     
       var sample = this.http.post<JSON>(
         this.productUrl,
