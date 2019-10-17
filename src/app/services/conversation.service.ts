@@ -3,6 +3,8 @@ import { ChatService } from "src/app/services/chat.service";
 import { DialogflowService } from "./dialogflow.service";
 import { HttpErrorResponse } from '@angular/common/http';
 import { LocationService } from './location.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: "root"
@@ -28,7 +30,13 @@ export class ConversationService {
   }
 
   IntentProcessing(userInput:string){
-      this.dialogflowService.GetResponse(userInput).subscribe(response => {
+      this.dialogflowService.GetResponse(userInput)
+      .pipe(catchError(err => {
+        this.chatService.AddTextBubble("Sorry, I am unable to talk at the momment. Please contact the Site Administrator to report this issue.", "bot");
+        console.log(err);
+        return throwError(err);
+    }))
+      .subscribe(response => {
 
         this.IntentRouter(response["queryResult"]["intent"]["displayName"],response);
         
@@ -64,18 +72,26 @@ export class ConversationService {
   BookTableIntent(response){
     if(response["queryResult"]["allRequiredParamsPresent"])
     {
-      let city = response["queryResult"]["parameters"]["geo-city"]
-      this.locationService.GetResponse(city)
-      .subscribe((data) => {
-          console.log(data);
-          if(data[0] === "true")
-          {
-            this.chatService.AddTextBubble("Showing you Restaurants in "+city+".", "bot");
-            // show results here - 
-          }else{
-            this.chatService.AddTextBubble("Sorry, I don't serve in your city!", "bot");
-          }
-      });
+      
+        let city = response["queryResult"]["parameters"]["geo-city"]
+        this.locationService.GetResponse(city)
+        .pipe(catchError(err => {
+            this.chatService.AddTextBubble("Sorry, I was unable to contact the vendor, can you please try again after some time.", "bot");
+            console.log(err);
+            return throwError(err);
+        }))
+        .subscribe((data) => {
+              console.log(data);
+              if(data[0] === "true")
+              {
+                this.chatService.AddTextBubble("Showing you Restaurants in "+city+".", "bot");
+                // show results here - 
+              }else{
+                this.chatService.AddTextBubble("Sorry, I don't serve in your city!", "bot");
+              }
+        });    
+      
+      
       
     }else{
       this.chatService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
