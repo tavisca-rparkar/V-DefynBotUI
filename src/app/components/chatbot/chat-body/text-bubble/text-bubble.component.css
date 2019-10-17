@@ -5,15 +5,15 @@
 
 .user {
   float: right;
-  width: 50%;
+  max-width: 50%;
   margin-right: 7%;
 }
 
 .user p {
   background: #007bff none repeat scroll 0 0;
   color: #fff;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 10px 0px 10px 10px;
+  font-size: 16px;
   margin: 0;
   color: #fff;
   padding: 5px 10px 5px 12px;
@@ -22,15 +22,15 @@
 
 .bot {
   float: left;
-  width: 50%;
+  max-width: 50%;
   margin-left: 2%;
 }
 
 .bot p {
   background: #efefef none repeat scroll 0 0;
   color: #646464;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 0px 10px 10px 10px;
+  font-size: 16px;
   margin: 0;
   padding: 5px 10px 5px 12px;
   width: 100%;

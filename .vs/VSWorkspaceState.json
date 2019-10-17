@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\e2e",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\services"
+  ],
+  "SelectedNode": "\\src\\app\\services\\conversation.service.ts",
+  "PreviewInSolutionExplorer": false
+}
