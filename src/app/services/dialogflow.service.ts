@@ -38,7 +38,7 @@ export class DialogflowService {
     this.headers = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization:
-        "Bearer ya29.c.Kl6bB25bDCBVhRmN0EV5wVVzXCZzhuwvr0UqkLScWrcfUFy3ZJOa96q0qbG_dGPgUuS-8wHJPh12QvDfFt8Ed7BI5KYHaIqkputzH3MvT2t3mTrvGtADgLMvDJFhvOlr"
+        "Bearer ya29.c.Kl6bB1C76rZZXwYp2XSbiRQBW4W6siJbKznGMbEoITs0ao4LEnYrgGq0K0H9ru-rWn02OliBF2wk5AcDCsAIyiA_zVJKWUfIOJ40RR5nxm0M-c_wHELL1ScnoN12cWcF"
     });
     //Body for dialogflow
     this.text = new Text();

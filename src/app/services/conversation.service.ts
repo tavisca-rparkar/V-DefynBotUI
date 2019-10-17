@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ChatService } from "src/app/services/chat.service";
 import { DialogflowService } from "./dialogflow.service";
 import { HttpErrorResponse } from '@angular/common/http';
+import { LocationService } from './location.service';
 
 @Injectable({
   providedIn: "root"
@@ -11,7 +12,8 @@ export class ConversationService {
 
   constructor(
     private chatService: ChatService,
-    private dialogflowService: DialogflowService
+    private dialogflowService: DialogflowService,
+    private locationService: LocationService
   ) {}
 
   InitiateConversation(){
@@ -28,19 +30,19 @@ export class ConversationService {
   IntentProcessing(userInput:string){
       this.dialogflowService.GetResponse(userInput).subscribe(response => {
 
-        this.IntentRouter(response.queryResult.intent.displayName,response);
+        this.IntentRouter(response["queryResult"]["intent"]["displayName"],response);
         
         // logging all responses from dialogflow for developers
         console.log("Query Text : ");
-        console.log(response.queryResult.queryText);
+        console.log(response["queryResult"]["queryText"]);
         console.log("Result Parameters : ");
-        console.log(response.queryResult.parameters);
+        console.log(response["queryResult"]["parameters"]);
         console.log("AllRequiredParametersPresent : ");
-        console.log(response.queryResult.allRequiredParamsPresent);
+        console.log(response["queryResult"]["allRequiredParamsPresent"]);
         console.log("Response Text : ");
-        console.log(response.queryResult.fulfillmentText);
+        console.log(response["queryResult"]["fulfillmentText"]);
         console.log("Intent : ");
-        console.log(response.queryResult.intent.displayName);
+        console.log(response["queryResult"]["intent"]["displayName"]);
         console.log("_________________________________________________________");
       });
     
@@ -60,17 +62,34 @@ export class ConversationService {
   }
 
   BookTableIntent(response){
-    this.chatService.AddTextBubble(response.queryResult.fulfillmentText, "bot");
+    if(response["queryResult"]["allRequiredParamsPresent"])
+    {
+      let city = response["queryResult"]["parameters"]["geo-city"]
+      this.locationService.GetResponse(city)
+      .subscribe((data) => {
+          console.log(data);
+          if(data[0] === "true")
+          {
+            this.chatService.AddTextBubble("Showing you Restaurants in "+city+".", "bot");
+            // show results here - 
+          }else{
+            this.chatService.AddTextBubble("Sorry, I don't serve in your city!", "bot");
+          }
+      });
+      
+    }else{
+      this.chatService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
+    }
   }
 
   WelcomeIntentIntent(response) {
-    this.chatService.AddTextBubble(response.queryResult.fulfillmentText, "bot");
+    this.chatService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
     this.chatService.AddChoiceButton("Book a Table");
     this.chatService.AddChoiceButton("Order Food");
   }
 
   SmallTalkIntent(response){
-    this.chatService.AddTextBubble(response.queryResult.fulfillmentText, "bot");
+    this.chatService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
   }
 
   FallbackIntent() {
