@@ -21,7 +21,7 @@ export class DialogflowService {
     "https://dialogflow.googleapis.com/v2/projects/v-defynbot-rkixcd/agent/sessions/1235:detectIntent";
   headers: HttpHeaders;
   
-  authKey = "Bearer ya29.c.Kl6iB_Axn7MRljcSLAkFTR1LR6etQCKNSWqUdpdPfDGSwj0s3E6mEGFJZlCgI5aBwcSaKta1GK5gXhsyb--5GwYApCeIz07htqbtve7DS5iga61cE6jzeBk2s2W7gHxK";
+  authKey = "Bearer ya29.c.Kl6iB_LCfSNLVvh_C1pDwFvHnNIxxoQ_MRROTfANZ9t3ni0yXT4OEPm3m6hRc0IAfcOp2jGjryYnvIgZ97SGLVjzz0FO7p2Tr84L_FTmw0-3On36MM7nzGE79mz11OfX";
 
   //queryFormat.queryInput.text.text="";
   text: Text;
