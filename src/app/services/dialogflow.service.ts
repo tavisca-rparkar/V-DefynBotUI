@@ -28,7 +28,12 @@ export class DialogflowService {
   queryInput: QueryInput;
   format: Format;
 
-  constructor(private http: HttpClient, private mockableService: MockableService) {}
+  constructor(private http: HttpClient) {}
+
+SetKey(key:string)
+{
+this.authKey= "Bearer "+key;
+}
 
   GetResponseMock(request: String) {
     let response = {
@@ -39,7 +44,7 @@ export class DialogflowService {
   }
 
   GetResponse(userInput: string): Observable<JSON> {
-    
+
     this.headers = new HttpHeaders({
       "Content-Type": "application/json",
       "Authorization": this.authKey
