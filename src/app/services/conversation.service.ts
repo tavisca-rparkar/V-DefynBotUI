@@ -97,8 +97,7 @@ export class ConversationService {
 
   WelcomeIntentIntent(response) {
     this.chatService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
-    this.chatService.AddChoiceButton("Book a Table");
-    this.chatService.AddChoiceButton("Order Food");
+    this.chatService.AddChoiceButton(["Book a Table","Order Food"]);
   }
 
   SmallTalkIntent(response){

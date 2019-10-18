@@ -12,7 +12,7 @@ export class ChatService {
     this.CreateTextBubble.emit(data);
   }
 
-  AddChoiceButton(buttonText: string) {
+  AddChoiceButton(buttonText: string[]) {
     this.CreateChoiceButton.emit(buttonText);
   }
 

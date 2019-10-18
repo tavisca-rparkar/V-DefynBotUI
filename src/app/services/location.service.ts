@@ -11,7 +11,7 @@ export class LocationService {
   constructor(private http: HttpClient) { }
 
   private ApiURL =
-    "https://localhost:44364/api/values/";
+    "https://localhost:5001/api/restrauntsearch?localityverbose=";
 
     GetResponse(userInput: string){
       return this.http.get(this.ApiURL+userInput);

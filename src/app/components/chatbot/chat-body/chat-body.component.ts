@@ -50,10 +50,13 @@ export class ChatBodyComponent implements OnInit, AfterViewInit{
     instance.textType = data.textType;
   }
 
-  addChoiceButton(buttonText:string) {
+  addChoiceButton(buttonText:string[]) {
     const factory = this.factory.resolveComponentFactory(ChoiceButtonComponent);
-    const componentRef = this.vc.createComponent(factory);
-    let instance = <ChoiceButtonComponent>componentRef.instance;
-    instance.buttonText = buttonText;
+    const componentRef1 = this.vc.createComponent(factory);
+    let instance1 = <ChoiceButtonComponent>componentRef1.instance;
+    instance1.buttonText = buttonText[0];
+    const componentRef2 = this.vc.createComponent(factory);
+    let instance2 = <ChoiceButtonComponent>componentRef2.instance;
+    instance2.buttonText = buttonText[1];
   }
 }
