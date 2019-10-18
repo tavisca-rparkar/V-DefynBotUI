@@ -6,4 +6,4 @@ COPY ./dist/ /app
 
 FROM nginx:alpine
 
-COPY --from=builder /app/test-project/* /usr/share/nginx/html/
+COPY --from=builder /app/ConciergeBookingApp/* /usr/share/nginx/html/
