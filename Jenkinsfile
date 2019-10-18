@@ -20,11 +20,11 @@ pipeline {
             }
         stage('Preparing_Docker_Image') {
         	steps {
-                    bat 'docker build --tag=%PROJECT_NAME%:%BUILD_NUMBER% .'
+                    bat 'docker build --tag=rohit1998/%PROJECT_NAME% .'
                     bat 'docker login --username=%DOCKERHUB_USERNAME% --password=%DOCKERHUB_PASSWORD%'
                              
-                    bat 'docker tag %PROJECT_NAME%:%BUILD_NUMBER% rohit1998/%PROJECT_NAME%:%BUILD_NUMBER%'
-                    bat 'docker push rohit1998/%PROJECT_NAME%:%BUILD_NUMBER%'
+                   
+                    bat 'docker push rohit1998/%PROJECT_NAME%'
             	}	
            }
        }   
