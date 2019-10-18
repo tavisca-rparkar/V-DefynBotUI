@@ -84,7 +84,7 @@ export class ConversationService {
                 this.chatService.AddTextBubble("Showing you Restaurants in "+city+".", "bot");
                 // show results here - 
               }else{
-                this.chatService.AddTextBubble("Sorry, I don't serve in your city!", "bot");
+                this.chatService.AddTextBubble("Please provide a valid city name!", "bot");
               }
         });    
       
