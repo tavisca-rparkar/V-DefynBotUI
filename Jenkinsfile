@@ -11,13 +11,13 @@ pipeline {
             steps {              
             	powershell '''
                 	npm install
-                	ng build --prod '''
+                	npm run ng build --prod '''
              }
             }
         stage('Test') {
             steps {
                powershell''' 
-                ng test --watch=false
+                npm run ng test --watch=false
                 '''
                 }
             }
