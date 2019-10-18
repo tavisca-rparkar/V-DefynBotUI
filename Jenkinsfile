@@ -10,12 +10,12 @@ pipeline {
         stage('Build') {  
             steps {              
             	bat 'npm install'
-				bat 'npm run ng build --prod'
+				bat 'npm run ng -- build --prod'
              }
             }
         stage('Test') {
             steps {
-               bat'npm run ng test --watch=false'
+               bat'npm run ng -- test --watch=false'
                 }
             }
         stage('Preparing_Docker_Image') {
