@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { LocationService } from './location.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { MockableService } from './mockable.service';
 
 @Injectable({
   providedIn: "root"
@@ -15,10 +16,12 @@ export class ConversationService {
   constructor(
     private chatService: ChatService,
     private dialogflowService: DialogflowService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private mockableService: MockableService
   ) {}
 
-  InitiateConversation(){
+  async InitiateConversation(){
+    await this.mockableService.GetResponse();
     this.IntentProcessing("Hello");
   }
 
@@ -84,12 +87,9 @@ export class ConversationService {
                 this.chatService.AddTextBubble("Showing you Restaurants in "+city+".", "bot");
                 // show results here - 
               }else{
-                this.chatService.AddTextBubble("Sorry, I don't serve in your city!", "bot");
+                this.chatService.AddTextBubble("Please provide a valid city!", "bot");
               }
         });    
-      
-      
-      
     }else{
       this.chatService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
     }
