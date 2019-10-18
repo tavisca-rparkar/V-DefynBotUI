@@ -9,25 +9,22 @@ pipeline {
     stages {
         stage('Build') {  
             steps {              
-            	powershell '''
-                	npm install
-                	npm run ng build --prod '''
+            	bat 'npm install'
+				bat 'npm run ng build --prod'
              }
             }
         stage('Test') {
             steps {
-               powershell''' 
-                npm run ng test --watch=false
-                '''
+               bat'npm run ng test --watch=false'
                 }
             }
         stage('Preparing_Docker_Image') {
         	steps {
-                    powershell "docker build --tag=${PROJECT_NAME}:${BUILD_NUMBER} ."
-                    powershell "docker login --username=${DOCKERHUB_USERNAME} --password=${DOCKERHUB_PASSWORD}"
+                    bat 'docker build --tag=${PROJECT_NAME}:${BUILD_NUMBER} .'
+                    bat 'docker login --username=${DOCKERHUB_USERNAME} --password=${DOCKERHUB_PASSWORD}'
                              
-                    powershell "docker tag ${PROJECT_NAME}:${BUILD_VERSION} rohit1998/${PROJECT_NAME}:${BUILD_NUMBER}"
-                    powershell "docker push rohit1998/${PROJECT_NAME}:${BUILD_NUMBER}"
+                    bat 'docker tag ${PROJECT_NAME}:${BUILD_VERSION} rohit1998/${PROJECT_NAME}:${BUILD_NUMBER}'
+                    bat 'docker push rohit1998/${PROJECT_NAME}:${BUILD_NUMBER}'
             	}	
            }
        }   
