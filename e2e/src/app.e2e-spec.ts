@@ -1,5 +1,4 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,16 +7,28 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should Check the title', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('ConciergeBookingApp app is running!');
+    expect(page.getTitleText()).toEqual('US Bank');
+  });
+  
+  it('Check default message', () => {
+    page.navigateTo();
+    expect(page.getTextBubble()).not.toBe('');
+  });
+  
+  it('should enter  text in textbox', () => {
+    page.navigateTo();
+    page.getTextBox().sendKeys("cgaksjcbasncjanclakmclaskcmakcnjccsancka");
+    
+    
+  });
+  it('should enter  text in textbox and click send', () => {
+    page.navigateTo();
+    page.getTextBox().sendKeys("cgaksjcbasncjanclakmclaskcmakcnjccsancka");
+    page.sendText().click();
+    //expect(page.getTextBubble()).toEqual('cgaksjcbasncjanclakmclaskcmakcnjccsancka');
   });
 
-  afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    expect(logs).not.toContain(jasmine.objectContaining({
-      level: logging.Level.SEVERE,
-    } as logging.Entry));
-  });
+
 });

@@ -6,6 +6,16 @@ export class AppPage {
   }
 
   getTitleText() {
-    return element(by.css('app-root .content span')).getText() as Promise<string>;
+
+    return element(by.css('app-chat-header div.header h1')).getText() as Promise<string>;
+  }
+  getTextBox(){
+    return element(by.css('app-chat-input div input'));
+  }
+  sendText(){
+    return element(by.css('app-chat-input div button'));
+  }
+  getTextBubble(){
+    return element(by.css('app-chat-body app-text-bubble div p')).getText() as Promise<string>;
   }
 }
