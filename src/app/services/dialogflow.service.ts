@@ -9,7 +9,7 @@ import { Observable, throwError, from } from "rxjs";
 import { catchError, tap, map, sample } from "rxjs/operators";
 import { variable } from "@angular/compiler/src/output/output_ast";
 import { JsonPipe } from "@angular/common";
-import { Format, Text, QueryInput } from "src/app/components/dialogflow/format";
+//import { Format, Text, QueryInput } from "src/app/components/dialogflow/format";
 import { MockableService } from "./mockable.service";
 import { async } from "q";
 
@@ -29,10 +29,11 @@ export class DialogflowService {
   queryInput: QueryInput;
   format: Format;
 
-  constructor(
-    private http: HttpClient,
-    private mockableService: MockableService
-  ) {}
+  constructor(private http: HttpClient) {}
+
+  SetKey(key: string) {
+    this.authKey = "Bearer " + key;
+  }
 
   GetResponseMock(request: String) {
     let response = {
@@ -64,4 +65,16 @@ export class DialogflowService {
     );
     return sample;
   }
+}
+
+export class Format {
+  queryInput: QueryInput;
+}
+export class Text {
+  languageCode: string;
+  text: string;
+}
+
+export class QueryInput {
+  text: Text;
 }

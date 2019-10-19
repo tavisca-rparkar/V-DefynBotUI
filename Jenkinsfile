@@ -23,8 +23,8 @@ pipeline {
                     bat 'docker build --tag=rohit1998/%PROJECT_NAME% .'
                     bat 'docker login --username=%DOCKERHUB_USERNAME% --password=%DOCKERHUB_PASSWORD%'
                              
-                   
                     bat 'docker push rohit1998/%PROJECT_NAME%'
+                    bat 'docker run -d -p 4000:80 rohit1998/%PROJECT_NAME%'
             	}	
            }
        }   
