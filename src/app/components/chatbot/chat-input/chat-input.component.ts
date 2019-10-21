@@ -14,6 +14,7 @@ export class ChatInputComponent {
   ) {}
 
   SendUserInput() {
+    this._userInput = this._userInput.trim();
     if (this._userInput.length !== 0) {
       this._appService.ProcessInput(this._userInput);
     }
