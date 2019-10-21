@@ -1,43 +1,42 @@
-import { Injectable, OnInit } from "@angular/core";
-import { ChatService } from "src/app/services/chat.service";
-import { DialogflowService } from "./dialogflow.service";
-import { LocationService } from './location.service';
+import { Injectable } from "@angular/core";
+import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
+import { DialogflowApiService } from "./dialogflowApi.service";
+import { LocationApiService } from './locationApi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { MockableService } from './mockable.service';
+import { MockableApiService } from './mockableApi.service';
 
 @Injectable({
   providedIn: "root"
 })
 
-export class ConversationService {
-  response: JSON;
+export class AppService {
 
   constructor(
-    private chatService: ChatService,
-    private dialogflowService: DialogflowService,
-    private locationService: LocationService,
-    private mockableService: MockableService
+    private _componentFactoryService: ComponentFactoryService,
+    private _dialogflowService: DialogflowApiService,
+    private _locationService: LocationApiService,
+    private _mockableService: MockableApiService
   ) {}
 
   async InitiateConversation(){
-    await this.mockableService.GetResponse();
+    await this._mockableService.GetResponse();
     this.IntentProcessing("Hello");
   }
 
   ProcessInput(userInput: string) {
     // print on screen
-    this.chatService.AddTextBubble(userInput, "user");
+    this._componentFactoryService.AddTextBubble(userInput, "user");
     // send to dialogflow and call necessary functions
     this.IntentProcessing(userInput);
   }
 
   IntentProcessing(userInput:string){
-      this.dialogflowService.GetResponse(userInput)
+      this._dialogflowService.GetResponse(userInput)
       .pipe(catchError(err => {
-        this.chatService.AddTextBubble("Sorry, I am unable to talk at the momment. Please contact the Site Administrator to report this issue.", "bot");
+        this._componentFactoryService.AddTextBubble("Sorry, I am unable to talk at the momment. Please contact the Site Administrator to report this issue.", "bot");
         return throwError(err);
-    }))
+      }))
       .subscribe(response => {
 
         this.IntentRouter(response["queryResult"]["intent"]["displayName"],response);
@@ -76,37 +75,37 @@ export class ConversationService {
     {
       
         let city = response["queryResult"]["parameters"]["geo-city"]
-        this.locationService.GetResponse(city)
+        this._locationService.GetResponse(city)
         .pipe(catchError(err => {
-            this.chatService.AddTextBubble("Sorry, I was unable to contact the vendor, can you please try again after some time.", "bot");
+            this._componentFactoryService.AddTextBubble("Sorry, I was unable to contact the vendor, can you please try again after some time.", "bot");
             return throwError(err);
         }))
-        .subscribe((data) => {
+        .subscribe((data) => { // code for location check -(only used in sprint-1)
               if(data[0] === "true")
               {
-                this.chatService.AddTextBubble("Showing you Restaurants in "+city+".", "bot");
+                this._componentFactoryService.AddTextBubble("Showing you Restaurants in "+city+".", "bot");
                 // show results here - 
               }else{
-                this.chatService.AddTextBubble("Please provide a valid city!", "bot");
+                this._componentFactoryService.AddTextBubble("Please tell me where do you want me look for restaurants!", "bot");
               }
         });    
     }else{
-      this.chatService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
+      this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
     }
   }
 
   WelcomeIntentIntent(response) {
-    this.chatService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
-    this.chatService.AddChoiceButton(["Book a Table","Order Food"]);
+    this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
+    this._componentFactoryService.AddChoiceButton(["Book a Table","Order Food"]);
   }
 
   SmallTalkIntent(response){
-    this.chatService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
+    this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
   }
 
   FallbackIntent() {
-    this.chatService.AddTextBubble(
-      "Sorry, I didn't catch that! Can you be more specific",
+    this._componentFactoryService.AddTextBubble(
+      "Sorry, I didn't catch that! I can help you book tables at restaurants nearby and order food from nearby outlets.",
       "bot"
     );
   }

@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ConversationService } from './conversation.service';
+import { AppService } from './app.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('ConversationService', () => {
+describe('AppService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports:[FormsModule,HttpClientTestingModule]
   }));
 
   it('should be created', () => {
-    const service: ConversationService = TestBed.get(ConversationService);
+    const service: AppService = TestBed.get(AppService);
     expect(service).toBeTruthy();
   });
 });

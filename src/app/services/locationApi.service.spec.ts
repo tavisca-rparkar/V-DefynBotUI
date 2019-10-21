@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DialogflowService } from './dialogflow.service';
+import { LocationApiService } from './locationApi.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('DialogflowService', () => {
+describe('LocationApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports:[FormsModule,HttpClientTestingModule]
   }));
 
   it('should be created', () => {
-    const service: DialogflowService = TestBed.get(DialogflowService);
+    const service: LocationApiService = TestBed.get(LocationApiService);
     expect(service).toBeTruthy();
   });
 });

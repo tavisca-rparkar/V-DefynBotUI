@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
-import { ChatService } from 'src/app/services/chat.service';
-import { ConversationService } from 'src/app/services/conversation.service';
+import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-choice-button',
@@ -8,17 +8,16 @@ import { ConversationService } from 'src/app/services/conversation.service';
   styleUrls: ['./choice-button.component.css']
 })
 export class ChoiceButtonComponent implements AfterViewInit {
- 
-  constructor(private _conversationService: ConversationService,
-    private _chatService : ChatService ) { }
-
-  ngAfterViewInit() {
-    this._chatService.updateScroll();
-  }
-  
   @Input() buttonText: string;
 
+  constructor(private _appService: AppService,
+    private _componentFactoryService : ComponentFactoryService ) { }
+
+  ngAfterViewInit() {
+    this._componentFactoryService.updateScroll();
+  }
+  
   SendUserInput(){
-    this._conversationService.ProcessInput(this.buttonText);
+    this._appService.ProcessInput(this.buttonText);
   }
 }

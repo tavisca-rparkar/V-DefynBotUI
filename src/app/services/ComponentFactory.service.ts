@@ -4,7 +4,8 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: "root"
 })
-export class ChatService {
+
+export class ComponentFactoryService {
   private _textBubbleSource = new Subject<any>();
   createTextBubble$ =this._textBubbleSource.asObservable();
   private _choiceButtonSource = new Subject<string[]>();
@@ -21,8 +22,8 @@ export class ChatService {
     this._choiceButtonSource.next(buttonText);
   }
 
-  // called in AfterViewInit of all the chatbody components
-  updateScroll() {
+  
+  updateScroll() { // called in AfterViewInit of all the chatbody components
     var element = document.getElementById("msg-page");
     element.scrollTop = element.scrollHeight;
   }

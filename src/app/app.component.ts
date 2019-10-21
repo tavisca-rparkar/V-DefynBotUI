@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { MockableService } from "./services/mockable.service";
+import { MockableApiService } from "./services/mockableApi.service";
 
 @Component({
   selector: "app-root",

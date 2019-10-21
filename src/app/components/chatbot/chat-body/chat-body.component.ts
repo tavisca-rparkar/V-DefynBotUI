@@ -4,12 +4,11 @@ import {
   OnInit,
   ViewContainerRef,
   ViewChild,
-  ComponentFactoryResolver
-} from "@angular/core";
+  ComponentFactoryResolver} from "@angular/core";
 import { TextBubbleComponent } from './text-bubble/text-bubble.component';
 import { ChoiceButtonComponent } from './choice-button/choice-button.component';
-import { ChatService } from 'src/app/services/chat.service';
-import { ConversationService } from 'src/app/services/conversation.service';
+import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
+import { AppService } from 'src/app/services/app.service';
 
 
 @Component({
@@ -17,15 +16,25 @@ import { ConversationService } from 'src/app/services/conversation.service';
   templateUrl: "./chat-body.component.html",
   styleUrls: ["./chat-body.component.css"]
 })
+
 export class ChatBodyComponent implements OnInit,AfterViewInit{
+  @ViewChild("chatContainer", { read: ViewContainerRef, static: false })
+  vc: ViewContainerRef;
+
+  constructor(
+    private _appService : AppService,
+    private _factory: ComponentFactoryResolver,
+    private _componentFactoryService : ComponentFactoryService
+  ) {}
+
   ngOnInit() {
-    this._chatService.createTextBubble$
+    this._componentFactoryService.createTextBubble$
     .subscribe(
       data => {
           this.addTextBubble(data);
       }
     );
-    this._chatService.createChoiceButton$
+    this._componentFactoryService.createChoiceButton$
     .subscribe(
       data => {
           this.addChoiceButton(data);
@@ -33,22 +42,13 @@ export class ChatBodyComponent implements OnInit,AfterViewInit{
     );
   }
 
-  @ViewChild("chatContainer", { read: ViewContainerRef, static: false })
-  vc: ViewContainerRef;
-  
-  constructor(
-    private _conversationService : ConversationService,
-    private factory: ComponentFactoryResolver,
-    private _chatService : ChatService
-  ) {}
-
   ngAfterViewInit() {
     // initiating conversation for default welcome message-
-    this._conversationService.InitiateConversation();
+    this._appService.InitiateConversation();
   }
 
   addTextBubble(data) {
-    const factory = this.factory.resolveComponentFactory(TextBubbleComponent);
+    const factory = this._factory.resolveComponentFactory(TextBubbleComponent);
     const componentRef = this.vc.createComponent(factory);
     let instance = <TextBubbleComponent>componentRef.instance;
     instance.text = data.userText;
@@ -56,7 +56,7 @@ export class ChatBodyComponent implements OnInit,AfterViewInit{
   }
 
   addChoiceButton(buttonText:string[]) {
-    const factory = this.factory.resolveComponentFactory(ChoiceButtonComponent);
+    const factory = this._factory.resolveComponentFactory(ChoiceButtonComponent);
     const componentRef1 = this.vc.createComponent(factory);
     let instance1 = <ChoiceButtonComponent>componentRef1.instance;
     instance1.buttonText = buttonText[0];

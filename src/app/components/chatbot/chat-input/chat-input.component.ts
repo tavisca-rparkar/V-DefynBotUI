@@ -1,5 +1,5 @@
 import { Component} from "@angular/core";
-import { ConversationService } from 'src/app/services/conversation.service';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: "app-chat-input",
@@ -7,16 +7,16 @@ import { ConversationService } from 'src/app/services/conversation.service';
   styleUrls: ["./chat-input.component.css"]
 })
 export class ChatInputComponent {
+  private _userInput: string = "";
+
   constructor(
-    private _conversationService : ConversationService
+    private _appService : AppService
   ) {}
 
-  userInput: string = "";
-
   SendUserInput() {
-    if (this.userInput.length !== 0) {
-      this._conversationService.ProcessInput(this.userInput);
+    if (this._userInput.length !== 0) {
+      this._appService.ProcessInput(this._userInput);
     }
-    this.userInput = "";
+    this._userInput = "";
   }
 }

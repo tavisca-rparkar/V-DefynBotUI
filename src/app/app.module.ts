@@ -34,7 +34,7 @@ import { HeaderModule } from "./modules/header/header.module";
     HttpClientModule,
     HeaderModule
   ],
-  providers: [ChatBodyComponent],
+  providers: [],
   bootstrap: [AppComponent],
   entryComponents: [TextBubbleComponent, ChoiceButtonComponent]
 })

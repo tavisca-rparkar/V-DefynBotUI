@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, AfterViewInit } from "@angular/core";
-import { ChatService } from 'src/app/services/chat.service';
+import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
 
 @Component({
   selector: "app-text-bubble",
@@ -10,9 +10,9 @@ export class TextBubbleComponent implements AfterViewInit {
   @Input() text: string;
   @Input() textType: string;
 
-  constructor(private _chatService : ChatService) {}
+  constructor(private _componentFactoryService : ComponentFactoryService) {}
 
   ngAfterViewInit() {
-    this._chatService.updateScroll();
+    this._componentFactoryService.updateScroll();
   }
 }

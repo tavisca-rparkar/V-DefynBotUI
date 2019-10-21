@@ -5,18 +5,18 @@ import { timeout } from "rxjs/operators";
 @Injectable({
   providedIn: "root"
 })
-export class LocationService {
-  response: Response;
 
-  constructor(private http: HttpClient) {}
+export class LocationApiService {
 
-  private ApiURL =
+  constructor(private _http: HttpClient) {}
+
+  private _apiUrl =
     "http://172.16.5.195:5000/api/restrauntsearch?localityverbose=";
 
   SetURL(url: string) {
-    this.ApiURL = url;
+    this._apiUrl = url;
   }
   GetResponse(userInput: string) {
-    return this.http.get(this.ApiURL + userInput).pipe(timeout(4000));
+    return this._http.get(this._apiUrl + userInput).pipe(timeout(3000));
   }
 }
