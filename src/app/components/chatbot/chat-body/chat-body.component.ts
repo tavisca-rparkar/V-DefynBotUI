@@ -1,46 +1,51 @@
 import {
   Component,
+  AfterViewInit,
   OnInit,
-  ComponentFactoryResolver,
-  ViewChild,
   ViewContainerRef,
-  AfterViewInit
+  ViewChild,
+  ComponentFactoryResolver
 } from "@angular/core";
-import { ChatService } from "src/app/services/chat.service";
-import { TextBubbleComponent } from "./text-bubble/text-bubble.component";
-import { ConversationService } from 'src/app/services/conversation.service';
+import { InteractionService } from 'src/app/services/interaction.service';
+import { TextBubbleComponent } from './text-bubble/text-bubble.component';
 import { ChoiceButtonComponent } from './choice-button/choice-button.component';
+import { ChatService } from 'src/app/services/chat.service';
+
 
 @Component({
   selector: "app-chat-body",
   templateUrl: "./chat-body.component.html",
   styleUrls: ["./chat-body.component.css"]
 })
-export class ChatBodyComponent implements OnInit, AfterViewInit{
+export class ChatBodyComponent implements OnInit,AfterViewInit{
+  ngOnInit() {
+    this._chatService.createTextBubble$
+    .subscribe(
+      data => {
+          this.addTextBubble(data);
+      }
+    );
+    this._chatService.createChoiceButton$
+    .subscribe(
+      data => {
+          this.addChoiceButton(data);
+      }
+    );
+  }
+
   @ViewChild("chatContainer", { read: ViewContainerRef, static: false })
   vc: ViewContainerRef;
-
+  
   constructor(
+    private interactionService : InteractionService,
     private factory: ComponentFactoryResolver,
-    private chatService: ChatService,
-    private conversationService : ConversationService
+    private _chatService : ChatService
   ) {}
 
-  ngOnInit() {
-    this.chatService.CreateTextBubble.subscribe(data => {
-      this.addTextBubble(data);
-    });
-    this.chatService.CreateChoiceButton.subscribe(buttonText => {
-      this.addChoiceButton(buttonText);
-    });
-  }
-
   ngAfterViewInit() {
-    //this.chatService.AddTextBubble("Greetings!", "bot");
-    //this.chatService.AddTextBubble(" I can help you to book a table in nearby restaurants or I can help you order food to your home. How can I assist?!", "bot");
-    this.conversationService.InitiateConversation();
+    // initiating conversation for default welcome message-
+    this.interactionService.sendChatBodyMessage("hello");
   }
-
 
   addTextBubble(data) {
     const factory = this.factory.resolveComponentFactory(TextBubbleComponent);
