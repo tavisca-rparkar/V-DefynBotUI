@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { ChatService } from "src/app/services/chat.service";
 import { DialogflowService } from "./dialogflow.service";
-import { HttpErrorResponse } from '@angular/common/http';
 import { LocationService } from './location.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -10,6 +9,7 @@ import { MockableService } from './mockable.service';
 @Injectable({
   providedIn: "root"
 })
+
 export class ConversationService {
   response: JSON;
 

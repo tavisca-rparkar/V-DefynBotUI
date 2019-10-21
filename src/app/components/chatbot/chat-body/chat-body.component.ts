@@ -6,10 +6,10 @@ import {
   ViewChild,
   ComponentFactoryResolver
 } from "@angular/core";
-import { InteractionService } from 'src/app/services/interaction.service';
 import { TextBubbleComponent } from './text-bubble/text-bubble.component';
 import { ChoiceButtonComponent } from './choice-button/choice-button.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { ConversationService } from 'src/app/services/conversation.service';
 
 
 @Component({
@@ -37,14 +37,14 @@ export class ChatBodyComponent implements OnInit,AfterViewInit{
   vc: ViewContainerRef;
   
   constructor(
-    private interactionService : InteractionService,
+    private _conversationService : ConversationService,
     private factory: ComponentFactoryResolver,
     private _chatService : ChatService
   ) {}
 
   ngAfterViewInit() {
     // initiating conversation for default welcome message-
-    this.interactionService.sendChatBodyMessage("hello");
+    this._conversationService.InitiateConversation();
   }
 
   addTextBubble(data) {

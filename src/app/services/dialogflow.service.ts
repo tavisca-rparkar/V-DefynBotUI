@@ -1,17 +1,9 @@
 import { Injectable } from "@angular/core";
 import {
   HttpClient,
-  HttpErrorResponse,
   HttpHeaders,
-  HttpParams
 } from "@angular/common/http";
-import { Observable, throwError, from } from "rxjs";
-import { catchError, tap, map, sample } from "rxjs/operators";
-import { variable } from "@angular/compiler/src/output/output_ast";
-import { JsonPipe } from "@angular/common";
-//import { Format, Text, QueryInput } from "src/app/components/dialogflow/format";
-import { MockableService } from "./mockable.service";
-import { async } from "q";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"

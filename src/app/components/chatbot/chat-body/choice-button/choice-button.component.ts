@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
-import { InteractionService } from 'src/app/services/interaction.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { ConversationService } from 'src/app/services/conversation.service';
 
 @Component({
   selector: 'app-choice-button',
@@ -9,7 +9,7 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class ChoiceButtonComponent implements AfterViewInit {
  
-  constructor(private _interactionService: InteractionService,
+  constructor(private _conversationService: ConversationService,
     private _chatService : ChatService ) { }
 
   ngAfterViewInit() {
@@ -19,6 +19,6 @@ export class ChoiceButtonComponent implements AfterViewInit {
   @Input() buttonText: string;
 
   SendUserInput(){
-    this._interactionService.sendButtonMessage(this.buttonText);
+    this._conversationService.ProcessInput(this.buttonText);
   }
 }
