@@ -7,8 +7,8 @@ export class ChatService {
   @Output() CreateTextBubble: EventEmitter<any> = new EventEmitter();
   @Output() CreateChoiceButton: EventEmitter<any> = new EventEmitter();
 
-  AddTextBubble(userText: string, textType: string) {
-    let data = { userText: userText, textType: textType };
+  AddTextBubble(userText: string, sentBy: string) {
+    let data = { userText: userText, sentBy: sentBy };
     this.CreateTextBubble.emit(data);
   }
 

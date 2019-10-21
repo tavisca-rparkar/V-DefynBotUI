@@ -1,12 +1,15 @@
 <div class="input-block">
-  <input
-    type="text"
-    class="input-box"
-    [(ngModel)]="userInput"
-    placeholder="Type your message..."
-    (keydown.enter)="SendUserInput()"
-  />
-  <button (click)="SendUserInput()">
-    Send
-  </button>
+  <div class="textInput">
+    <input
+      type="text"
+      [(ngModel)]="userInput"
+      placeholder="Type your message..."
+      (keydown.enter)="SendUserInput()"
+    />
+  </div>
+  <div class="send">
+    <button (click)="SendUserInput()">
+      Send
+    </button>
+  </div>
 </div>

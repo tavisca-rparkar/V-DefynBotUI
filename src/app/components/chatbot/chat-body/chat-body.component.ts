@@ -8,22 +8,22 @@ import {
 } from "@angular/core";
 import { ChatService } from "src/app/services/chat.service";
 import { TextBubbleComponent } from "./text-bubble/text-bubble.component";
-import { ConversationService } from 'src/app/services/conversation.service';
-import { ChoiceButtonComponent } from './choice-button/choice-button.component';
+import { ConversationService } from "src/app/services/conversation.service";
+import { ChoiceButtonComponent } from "./choice-button/choice-button.component";
 
 @Component({
   selector: "app-chat-body",
   templateUrl: "./chat-body.component.html",
   styleUrls: ["./chat-body.component.css"]
 })
-export class ChatBodyComponent implements OnInit, AfterViewInit{
+export class ChatBodyComponent implements OnInit, AfterViewInit {
   @ViewChild("chatContainer", { read: ViewContainerRef, static: false })
   vc: ViewContainerRef;
 
   constructor(
     private factory: ComponentFactoryResolver,
     private chatService: ChatService,
-    private conversationService : ConversationService
+    private conversationService: ConversationService
   ) {}
 
   ngOnInit() {
@@ -41,16 +41,15 @@ export class ChatBodyComponent implements OnInit, AfterViewInit{
     this.conversationService.InitiateConversation();
   }
 
-
   addTextBubble(data) {
     const factory = this.factory.resolveComponentFactory(TextBubbleComponent);
     const componentRef = this.vc.createComponent(factory);
     let instance = <TextBubbleComponent>componentRef.instance;
     instance.text = data.userText;
-    instance.textType = data.textType;
+    instance.sentBy = data.sentBy;
   }
 
-  addChoiceButton(buttonText:string[]) {
+  addChoiceButton(buttonText: string[]) {
     const factory = this.factory.resolveComponentFactory(ChoiceButtonComponent);
     const componentRef1 = this.vc.createComponent(factory);
     let instance1 = <ChoiceButtonComponent>componentRef1.instance;

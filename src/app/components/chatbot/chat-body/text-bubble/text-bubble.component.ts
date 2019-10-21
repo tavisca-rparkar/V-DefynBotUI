@@ -11,7 +11,7 @@ export class TextBubbleComponent implements AfterViewInit {
     this.chatService.updateScroll();
   }
   @Input() text: string;
-  @Input() textType: string;
+  @Input() sentBy: string;
 
   constructor(private chatService: ChatService) {}
 
