@@ -1,4 +1,5 @@
 import { AppPage } from './app.po';
+import { element } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -30,5 +31,14 @@ describe('workspace-project App', () => {
     //expect(page.getTextBubble()).toEqual('cgaksjcbasncjanclakmclaskcmakcnjccsancka');
   });
 
+  it('should click Book a table button',()=>{
+    page.navigateTo();
+    page.getBookATableButton().click();
+  });
 
+  it('should click Order food button',()=>{
+    page.navigateTo();
+    page.getOrderFoodButton().click();
+    
+  });
 });
