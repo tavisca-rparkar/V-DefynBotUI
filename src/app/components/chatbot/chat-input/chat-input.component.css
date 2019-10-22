@@ -6,20 +6,22 @@
 }
 
 .textInput {
-  width: auto;
+  width: 70%;
   height: 100%;
   float: left;
+  display: flex;
+  align-content: center;
 }
 
 input {
-  float: left;
-  font-size: 17px;
-  border-radius: 20px;
+  font-size: 100%;
+  border-radius: 30px;
   border: none;
-  width: 100%;
+  width: 96%;
   height: 50%;
-  margin: 2%;
   padding: 2%;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 button {
