@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
-import { ChatHeaderComponent } from './components/chatbot/chat-header/chat-header.component';
+import { HeaderModule } from './modules/header/header.module';
 import { ChatBodyComponent } from './components/chatbot/chat-body/chat-body.component';
 import { ChatInputComponent } from './components/chatbot/chat-input/chat-input.component';
 import { FormsModule } from '@angular/forms';
@@ -14,12 +14,13 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         FormsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        HeaderModule
       ],
       declarations: [
         AppComponent,
         ChatbotComponent,
-        ChatHeaderComponent,
+        
         ChatBodyComponent,
         ChatInputComponent,
         

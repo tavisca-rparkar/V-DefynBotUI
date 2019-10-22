@@ -1,6 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 
-import { ComponentFactoryService } from "./chatComponentCreator.service";
+import { ComponentFactoryService } from "./ComponentFactory.service";
 
 describe("ChatService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
