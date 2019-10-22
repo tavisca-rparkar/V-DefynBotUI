@@ -7,7 +7,7 @@ export class AppPage {
 
   getTitleText() {
 
-    return element(by.css('app-chat-header div.header h1')).getText() as Promise<string>;
+    return element(by.css('app-header div h1')).getText() as Promise<string>;
   }
   getTextBox(){
     return element(by.css('app-chat-input div input'));
