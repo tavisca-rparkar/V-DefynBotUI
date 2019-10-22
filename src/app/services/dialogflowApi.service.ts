@@ -1,27 +1,20 @@
 import { Injectable } from "@angular/core";
 import {
   HttpClient,
-  HttpErrorResponse,
   HttpHeaders,
-  HttpParams
 } from "@angular/common/http";
-import { Observable, throwError, from } from "rxjs";
-import { catchError, tap, map, sample } from "rxjs/operators";
-import { variable } from "@angular/compiler/src/output/output_ast";
-import { JsonPipe } from "@angular/common";
-//import { Format, Text, QueryInput } from "src/app/components/dialogflow/format";
-import { MockableService } from "./mockable.service";
-import { async } from "q";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
-export class DialogflowService {
-  private productUrl =
-    "https://dialogflow.googleapis.com/v2/projects/v-defynbot-rkixcd/agent/sessions/1235:detectIntent";
-  headers: HttpHeaders;
 
-  authKey =
+export class DialogflowApiService {
+  private _productUrl =
+    "https://dialogflow.googleapis.com/v2/projects/v-defynbot-rkixcd/agent/sessions/1235:detectIntent";
+  private _headers: HttpHeaders;
+
+  private _authKey =
     "Bearer ya29.c.Kl6iB4sTWHKn1NMZqfODVP2VTaAdsIuxQ7JoHMuwS6I-6Or4xsy5a6NWQQVwZu9p3_4M_qW_1aBa_xHa7_8dMrqaC8b3T38zN-eKXquppNSpcb8xfoop0z1ncb4zcR8h";
 
   //queryFormat.queryInput.text.text="";
@@ -29,10 +22,10 @@ export class DialogflowService {
   queryInput: QueryInput;
   format: Format;
 
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
   SetKey(key: string) {
-    this.authKey = "Bearer " + key;
+    this._authKey = "Bearer " + key;
   }
 
   GetResponseMock(request: String) {
@@ -44,10 +37,11 @@ export class DialogflowService {
   }
 
   GetResponse(userInput: string): Observable<JSON> {
-    this.headers = new HttpHeaders({
+    this._headers = new HttpHeaders({
       "Content-Type": "application/json",
-      Authorization: this.authKey
+      Authorization: this._authKey
     });
+
     //Body for dialogflow
     this.text = new Text();
     this.text.text = userInput;
@@ -58,18 +52,20 @@ export class DialogflowService {
     this.format.queryInput = this.queryInput;
     //end of body of dialogflow
 
-    var sample = this.http.post<JSON>(
-      this.productUrl,
+    var sample = this._http.post<JSON>(
+      this._productUrl,
       JSON.stringify(this.format),
-      { headers: this.headers, responseType: "json" }
+      { headers: this._headers, responseType: "json" }
     );
     return sample;
   }
 }
 
+
 export class Format {
   queryInput: QueryInput;
 }
+
 export class Text {
   languageCode: string;
   text: string;

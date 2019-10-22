@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MockableService } from './mockable.service';
+import { MockableApiService } from './mockableApi.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('MockableService', () => {
+describe('MockableApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports:[FormsModule,HttpClientTestingModule]
   }));
 
   it('should be created', () => {
-    const service: MockableService = TestBed.get(MockableService);
+    const service: MockableApiService = TestBed.get(MockableApiService);
     expect(service).toBeTruthy();
   });
 });

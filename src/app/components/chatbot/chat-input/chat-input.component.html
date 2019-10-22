@@ -2,8 +2,8 @@
   <input
     type="text"
     class="input-box"
-    [(ngModel)]="userInput"
-    placeholder="Type your message..."
+    [(ngModel)]="_userInput"
+    placeholder="Type your message here..."
     (keydown.enter)="SendUserInput()"
   />
   <button (click)="SendUserInput()">
