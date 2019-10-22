@@ -40,6 +40,6 @@ import { CarouselComponent } from './components/chatbot/chat-body/carousel/carou
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [TextBubbleComponent, ChoiceButtonComponent]
+  entryComponents: [TextBubbleComponent, ChoiceButtonComponent, CarouselComponent]
 })
 export class AppModule {}

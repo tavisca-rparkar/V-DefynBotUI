@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
+import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
 
 @Component({
   selector: 'app-carousel',
@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent {
+  @Input() data: string;
+  
   slides = [{
     "restaurantId": 1,
     "restaurantName": "Dominos Pizza",
@@ -14,48 +16,48 @@ export class CarouselComponent {
     "locality": "Viman Nagar, Pune",
     "userRatings" : 5,
     "cuisines": "Italian",
-    "image": "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?cs=srgb&dl=beauty-bloom-blue-67636.jpg&fm=jpg"
+    "image": "https://www.washingtonpost.com/resizer/M-WnldvRmvg3qyWg0Om8ssM6E3M=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/UM4VXMMJ5Y7T5MPQALWPL73RGM.jpg"
   },
   {
     "restaurantId": 2,
     "restaurantName": "La Pino's Pizza",
     "supplierName": "Uber Eats",
-    "locality": "Viman Nagar, Pune",
-    "userRatings" : 4,
+    "locality": "Raja Park, Jaipur",
+    "userRatings" : 4.1,
     "cuisines": "Italian",
-    "image": "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=beautiful-beauty-blue-414612.jpg&fm=jpg"
+    "image": "http://images.jdmagicbox.com/comp/ahmedabad/q7/079pxx79.xx79.180505075834.p8q7/catalogue/la-pinoz-pizza-vastrapur-ahmedabad-pizza-outlets-8m4gg.jpg"
   },
   {
     "restaurantId": 1,
     "restaurantName": "Pizza Hut",
     "supplierName": "Zomato",
-    "locality": "Viman Nagar, Pune",
-    "userRatings" : 1,
+    "locality": "Flora Complex, Udaipur",
+    "userRatings" : 1.8,
     "cuisines": "Italian",
-    "image": "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?cs=srgb&dl=beauty-bloom-blue-67636.jpg&fm=jpg"
+    "image": "https://cdn.images.express.co.uk/img/dynamic/14/590x/Pizza-hut-piiza-817060.jpg"
   },
   {
     "restaurantId": 2,
     "restaurantName": "Aunty's Pizza",
     "supplierName": "Uber Eats",
-    "locality": "Viman Nagar, Pune",
-    "userRatings" : 3,
+    "locality": "Hunumangadh, Delhi",
+    "userRatings" : 3.5,
     "cuisines": "Italian",
-    "image": "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=beautiful-beauty-blue-414612.jpg&fm=jpg"
+    "image": "http://img.tasteofcity.com/tasteimages/201602/image_original/C53FE067A86472A3_pizza-1.jpg"
   }];
+
   activeSlideIndex = 0;
  
-  constructor() {
-    for (let i = 0; i < 4; i++) {
-      this.addSlide();
-    }
+  constructor(private _componentFactoryService: ComponentFactoryService ) {
+  }
+  ngAfterViewInit() {
+    this._componentFactoryService.updateScroll();
   }
 
-  addSlide(): void {
-  }
- 
-  removeSlide(index?: number): void {
-    const toRemove = index ? index : this.activeSlideIndex;
-    this.slides.splice(toRemove, 1);
-  }
+  showDetails(index:number){
+    alert("Selected Restaurant- "+this.slides[index]["restaurantName"]);
+}
+
+
+
 }

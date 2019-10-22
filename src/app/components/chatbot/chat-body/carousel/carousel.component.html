@@ -1,24 +1,30 @@
 <div class="carousel-continer">
   <carousel [(activeSlide)]="activeSlideIndex"
     [interval] = false
-    [itemsPerSlide]=1 
+    [itemsPerSlide]=1
     class="carousel">
     <slide *ngFor="let slide of slides; let index=index" class= "slide"> 
-      <div class="slide-card">
-        <div class="slide-image-container">
-          <img [src]="slide.image" alt="image slide">
-        </div>
-        <div class="slide-text-container">
-            <div class="slide-name">
-                <h1><b>{{slide["restaurantName"]}}</b></h1>
-            </div>
-            <div class="slide-data">
-                <p class="right">Rating: <b>{{slide["userRatings"]}}</b></p>
-                <p>{{slide["locality"]}}</p>
-                <p>Cuisines: <b>{{slide["cuisines"]}}</b></p>
-            </div>          
-        </div>
-      </div>
+      <a >
+          <div class="slide-card">
+              <div class="slide-image-container">
+                  <img [src]="slide.image" alt="image slide">
+              </div>
+              <div class="slide-text-container">
+                  <div class="slide-name">
+                      <h1><b>{{slide["restaurantName"]}}</b></h1>
+                  </div>
+                  <div class="slide-data">
+                      <div class="ratings">
+                        <p><b> &#9734;&nbsp;{{slide["userRatings"]}}</b></p>
+                      </div>
+                      <p>{{slide["locality"]}}</p>
+                      <div class="button-div">
+                        <button (click)="showDetails(index)" class="see-details-button">See More Details</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </a>
     </slide>
   </carousel>
 </div>

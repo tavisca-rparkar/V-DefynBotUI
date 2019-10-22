@@ -4,11 +4,13 @@ import {
   OnInit,
   ViewContainerRef,
   ViewChild,
-  ComponentFactoryResolver} from "@angular/core";
+  ComponentFactoryResolver,
+  ChangeDetectorRef} from "@angular/core";
 import { TextBubbleComponent } from './text-bubble/text-bubble.component';
 import { ChoiceButtonComponent } from './choice-button/choice-button.component';
 import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
 import { AppService } from 'src/app/services/app.service';
+import { CarouselComponent } from './carousel/carousel.component';
 
 
 @Component({
@@ -24,7 +26,8 @@ export class ChatBodyComponent implements OnInit,AfterViewInit{
   constructor(
     private _appService : AppService,
     private _factory: ComponentFactoryResolver,
-    private _componentFactoryService : ComponentFactoryService
+    private _componentFactoryService : ComponentFactoryService,
+    private cdRef : ChangeDetectorRef  
   ) {}
 
   ngOnInit() {
@@ -38,6 +41,12 @@ export class ChatBodyComponent implements OnInit,AfterViewInit{
     .subscribe(
       data => {
           this.addChoiceButton(data);
+      }
+    );
+    this._componentFactoryService.createRestaurantCarousel$
+    .subscribe(
+      data => {
+          this.addRestaurantCarousel(data);
       }
     );
   }
@@ -63,5 +72,13 @@ export class ChatBodyComponent implements OnInit,AfterViewInit{
     const componentRef2 = this.vc.createComponent(factory);
     let instance2 = <ChoiceButtonComponent>componentRef2.instance;
     instance2.buttonText = buttonText[1];
+  }
+
+  addRestaurantCarousel(data) {
+    const factory = this._factory.resolveComponentFactory(CarouselComponent);
+    const componentRef1 = this.vc.createComponent(factory);
+    let instance = <CarouselComponent>componentRef1.instance;
+    instance.data = data;
+    this.cdRef.detectChanges();     
   }
 }
