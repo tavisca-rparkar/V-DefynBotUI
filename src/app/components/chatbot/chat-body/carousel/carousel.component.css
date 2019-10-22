@@ -1,0 +1,74 @@
+.carousel-continer, .slide{
+    background-color: #efefef;
+    height: 220px;
+    width: 90%;
+    margin: auto;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.slide-card{
+    width: 80%;
+    display: flex;
+    height: 180px;
+    background-color: #fff;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 2%;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.slide-image-container{
+    
+  position: relative;
+}
+
+.slide-text-container{
+  display: block;
+  position: relative;
+  padding: 1%;
+  letter-spacing: 0px;
+}
+
+
+img{
+    display: block;
+    height: 100px;
+    width: 100%;
+    margin: auto;
+    object-fit: fill;    
+    border-radius: 10px 10px 10px 10px;
+}
+
+
+h1{
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    display: block;
+    float: left;
+    margin-left: 5%;
+}
+
+p{
+    font-size: 14px;
+    letter-spacing: 0px;
+    padding: 0;
+    margin: 0;
+    float: left;
+    padding-left: 5%;
+}
+
+p.right{
+    float: right;
+    padding-right: 5%;
+}
+
+
+  ::ng-deep  .carousel-control-next-icon {
+    background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E")
+}
+
+::ng-deep  .carousel-control-prev-icon {
+    background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E")
+}
