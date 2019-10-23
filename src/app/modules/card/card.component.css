@@ -1,0 +1,163 @@
+.card {
+  width: 70%;
+  max-width: 300px;
+  min-height: 350px;
+  border-radius: 20px;
+  border: none;
+  height: auto;
+  overflow: hidden;
+  background-color: #efefef;
+  margin-left: 5%;
+  margin-top: 2%;
+}
+
+.carousel-container {
+  width: 100%;
+}
+
+img {
+  border-radius: 10px 10px 0px 0px;
+  width: 100%;
+  height: 180px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  object-fit: fill;
+}
+
+.restaurantInfo {
+  margin: 5%;
+  height: 37%;
+}
+
+.name {
+  width: 70%;
+  height: auto;
+  float: left;
+}
+
+.restaurantName {
+  font-family: arial;
+  font-size: 18px;
+  display: block;
+  float: left;
+  margin: 0%;
+  color: #cb202d;
+  margin: 2%;
+}
+
+.rating-view {
+  width: 70%;
+  float: left;
+}
+
+.ratings p {
+  color: #fff;
+  font-size: 14px;
+}
+.ratings {
+  float: left;
+  border-radius: 5px;
+  display: block;
+  border-color: #099e44;
+  background-color: #099e44;
+  text-align: center;
+  margin: 2%;
+  padding: 1%;
+  padding-left: 2%;
+  padding-right: 4%;
+  color: #fff;
+}
+
+.map {
+  float: right;
+  display: block;
+  height: 50px;
+  width: 50px;
+}
+
+h2 {
+  margin: 0%;
+}
+
+p {
+  margin: 0%;
+  font-size: 14px;
+}
+
+.address {
+  float: left;
+  clear: both;
+  color: #575757;
+  margin: 2%;
+}
+
+.cuisines {
+  float: left;
+  clear: both;
+  color: #575757;
+  margin: 2%;
+}
+
+.price {
+  font-family: arial;
+  float: left;
+  clear: both;
+  color: #575757;
+  margin: 2%;
+}
+
+.proceed-button {
+  font-family: arial;
+  width: 90%;
+  text-align: center;
+  clear: both;
+  margin: 5%;
+}
+
+.proceed-button button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 3%;
+  padding-left: 7%;
+  padding-right: 7%;
+  border-radius: 10px;
+  font-size: 16px;
+  border: none;
+  margin-top: 5%;
+}
+
+.browse-button {
+  font-family: arial;
+  width: 90%;
+  text-align: center;
+  clear: both;
+  margin: 5%;
+}
+
+.browse-button button {
+  background-color: gray;
+  color: #fff;
+  padding: 1%;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-size: 14px;
+  border-radius: 10px;
+  border: none;
+}
+
+::ng-deep .carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+::ng-deep .carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+::ng-deep .carousel-indicators li {
+  background-color: #efefef;
+}
+::ng-deep .carousel-indicators .active {
+  background-color: #575757;
+}
