@@ -14,6 +14,8 @@ import { TextBubbleComponent } from "./components/chatbot/chat-body/text-bubble/
 import { HttpClientModule } from "@angular/common/http";
 import { ChoiceButtonComponent } from "./components/chatbot/chat-body/choice-button/choice-button.component";
 import { HeaderModule } from "./modules/header/header.module";
+import { CardModule } from "./modules/card/card.module";
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { HeaderModule } from "./modules/header/header.module";
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    HeaderModule
+    HeaderModule,
+    CardModule,
+    CarouselModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

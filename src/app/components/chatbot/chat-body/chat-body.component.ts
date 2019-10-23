@@ -4,42 +4,36 @@ import {
   OnInit,
   ViewContainerRef,
   ViewChild,
-  ComponentFactoryResolver} from "@angular/core";
-import { TextBubbleComponent } from './text-bubble/text-bubble.component';
-import { ChoiceButtonComponent } from './choice-button/choice-button.component';
-import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
-import { AppService } from 'src/app/services/app.service';
-
+  ComponentFactoryResolver
+} from "@angular/core";
+import { TextBubbleComponent } from "./text-bubble/text-bubble.component";
+import { ChoiceButtonComponent } from "./choice-button/choice-button.component";
+import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
+import { AppService } from "src/app/services/app.service";
+import { CardModule } from "src/app/modules/card/card.module";
 
 @Component({
   selector: "app-chat-body",
   templateUrl: "./chat-body.component.html",
   styleUrls: ["./chat-body.component.css"]
 })
-
-export class ChatBodyComponent implements OnInit,AfterViewInit{
+export class ChatBodyComponent implements OnInit, AfterViewInit {
   @ViewChild("chatContainer", { read: ViewContainerRef, static: false })
   vc: ViewContainerRef;
 
   constructor(
-    private _appService : AppService,
+    private _appService: AppService,
     private _factory: ComponentFactoryResolver,
-    private _componentFactoryService : ComponentFactoryService
+    private _componentFactoryService: ComponentFactoryService
   ) {}
 
   ngOnInit() {
-    this._componentFactoryService.createTextBubble$
-    .subscribe(
-      data => {
-          this.addTextBubble(data);
-      }
-    );
-    this._componentFactoryService.createChoiceButton$
-    .subscribe(
-      data => {
-          this.addChoiceButton(data);
-      }
-    );
+    this._componentFactoryService.createTextBubble$.subscribe(data => {
+      this.addTextBubble(data);
+    });
+    this._componentFactoryService.createChoiceButton$.subscribe(data => {
+      this.addChoiceButton(data);
+    });
   }
 
   ngAfterViewInit() {
@@ -55,8 +49,10 @@ export class ChatBodyComponent implements OnInit,AfterViewInit{
     instance.textType = data.textType;
   }
 
-  addChoiceButton(buttonText:string[]) {
-    const factory = this._factory.resolveComponentFactory(ChoiceButtonComponent);
+  addChoiceButton(buttonText: string[]) {
+    const factory = this._factory.resolveComponentFactory(
+      ChoiceButtonComponent
+    );
     const componentRef1 = this.vc.createComponent(factory);
     let instance1 = <ChoiceButtonComponent>componentRef1.instance;
     instance1.buttonText = buttonText[0];
