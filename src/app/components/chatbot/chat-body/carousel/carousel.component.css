@@ -1,0 +1,119 @@
+.carousel-continer, .slide{
+    background-color: #fff;
+    min-height: 200px;
+    width: 90%;
+    margin: auto;
+    border-radius: 10px 10px 10px 10px;
+    height: auto;
+    overflow: hidden;
+}
+
+.slide-card{
+    width: 80%;
+    display: flex;
+    min-height: 200px;
+    background-color: #efefef;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 2%;
+    border-radius: 10px 10px 10px 10px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.slide-image-container{
+    
+  position: relative;
+}
+
+.slide-text-container{
+  display: block;
+  position: relative;
+  padding: 1%;
+  letter-spacing: 0px;
+}
+
+
+img{
+    display: block;
+    height: 100px;
+    width: 100%;
+    margin: auto;
+    object-fit: fill;    
+    border-radius: 10px 10px 0px 0px;
+}
+
+
+h1{
+    font-size: 18px;
+    padding: 0;
+    color: #cb202d;
+    margin: 0;
+    text-align: left;
+    display: block;
+    float: left;
+    margin-left: 5%;
+    overflow: hidden;
+}
+
+p{
+    font-size: 14px;
+    letter-spacing: 0px;
+    padding: 0;
+    margin: 0;
+    float: left;
+    padding-left: 5%;
+    color: #575757;
+    display: block;
+}
+
+.ratings p{
+    color: #FFF;
+    font-size: 16px;
+}
+.ratings{
+    float: right;
+    border-radius: 5px;
+    display: block;
+    border-color: #099e44;
+    background-color: #099e44;
+    text-align: center;
+    margin: 2%;
+    padding: 1%;
+    padding-left: 3%;
+    padding-right: 5%;
+    color: #fff;
+}
+
+.see-details-button{
+    padding: 1%;
+    padding-left: 15%;
+    padding-right: 15%;
+    margin: 3%;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff ;
+    border-radius: 10px;
+    position: relative;
+}
+
+.button-div{
+    width: 100%;
+    text-align: center;
+}
+
+  ::ng-deep  .carousel-control-next-icon {
+    background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E")
+}
+
+::ng-deep  .carousel-control-prev-icon {
+    background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E")
+}
+
+::ng-deep .carousel-indicators li {
+    background-color: #efefef;    
+}
+::ng-deep .carousel-indicators .active {
+    background-color: #575757;
+}

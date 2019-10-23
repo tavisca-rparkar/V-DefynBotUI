@@ -5,6 +5,7 @@ import { LocationApiService } from './locationApi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MockableApiService } from './mockableApi.service';
+import { RestaurantApiService } from './restaurant-api.service';
 
 @Injectable({
   providedIn: "root"
@@ -16,10 +17,18 @@ export class AppService {
     private _componentFactoryService: ComponentFactoryService,
     private _dialogflowService: DialogflowApiService,
     private _locationService: LocationApiService,
-    private _mockableService: MockableApiService
+    private _mockableService: MockableApiService,
+    private _restaurantApiService: RestaurantApiService
   ) {}
 
   async InitiateConversation(){
+    /* ************ JUST FOR DEVELOPMENT ************
+    
+    let data = this._restaurantApiService.GetMockRestaurantsList("Dummy(initiate-conversation)");
+    console.log(data);
+    this._componentFactoryService.AddRestaurantCarousel(data);
+
+    // ************ JUST FOR DEVELOPMENT  ************/
     await this._mockableService.GetResponse();
     this.IntentProcessing("Hello");
   }
