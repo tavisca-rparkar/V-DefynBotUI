@@ -6,15 +6,34 @@
       [itemsPerSlide]="1"
     >
       <slide *ngFor="let slide of data.slides" class="slide">
-        <img [src]="slide" alt="image slide" class="restaurant-image" />
+        <img
+          [src]="slide"
+          alt="image slide"
+          class="restaurant-image"
+          onError="this.src='https://icon-library.net/images/no-image-available-icon/no-image-available-icon-6.jpg';"
+        />
       </slide>
     </carousel>
   </div>
   <div class="restaurantInfo">
-    <div class="name-rating">
+    <div class="name">
       <h1 class="restaurantName">
         <b>{{ data.restaurantName }}</b>
       </h1>
+    </div>
+
+    <div class="map">
+      <a
+        href="https://maps.google.com/?q={{ data.latitude }},{{
+          data.longitude
+        }}"
+        ><img
+          style="width: 40px; height:40px;"
+          src="../assets/images/google-map.png"
+      /></a>
+    </div>
+
+    <div class="rating-view">
       <div class="ratings">
         <p>
           <b> &#9734; &nbsp;{{ data.userRating }}</b>
@@ -23,7 +42,9 @@
     </div>
 
     <div class="address">
-      <p>{{ data.restaurantAddress }}</p>
+      <p>
+        {{ data.restaurantAddress }}
+      </p>
     </div>
 
     <div class="cuisines">
