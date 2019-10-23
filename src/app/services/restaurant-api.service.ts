@@ -8,15 +8,50 @@ import { timeout } from 'rxjs/operators';
 export class RestaurantApiService {
 
   constructor(private _http: HttpClient) { }
-  private _restaurantApiUrl =
+  private _restaurantListApiUrl =
   "http://172.16.5.151/api/bookingtable?locality=";
+  private _restaurantDetailsApiUrl =
+  "http://172.16.5.143:5000/api/RestaurantDetails?restaurantId=";
+  private _carouselData;
 
-  SetURL(url: string) {
-    this._restaurantApiUrl = url;
+  SetURL(listUrl: string, detailsUrl) {
+    this._restaurantListApiUrl = listUrl;
+    this._restaurantDetailsApiUrl = detailsUrl;
+  }
+  SetCarouselData(data){
+    this._carouselData = data
+  } 
+  GetCarouselData(){
+    return this._carouselData;
   }
 
   GetRestaurantsList(city:string){
-    return this._http.get(this._restaurantApiUrl + city).pipe(timeout(15000));
+    return this._http.get(this._restaurantListApiUrl + city).pipe(timeout(15000));
+  }
+
+  GetRestaurantDetails(restId, supplier){
+    return this._http.get(this._restaurantDetailsApiUrl+restId+"&supplierName="+supplier).pipe(timeout(5000));
+  }
+
+
+  GetMockRestaurantDetails(restId, supplier){
+    const data = {
+      restaurantId: 1,
+      restaurantName: "Pizza Hut",
+      supplierName: "Zomato",
+      restaurantAddress: "Next to Vaishali Restaurant, Lane no. 5, FC Road, Pune",
+      userRating: 4.6,
+      cuisines: "Italian, American",
+      images: [
+        "https://b.zmtcdn.com/data/reviews_photos/ba0/f8479684d01cddc1d606c665107aeba0_1563545265.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "https://imgix.bustle.com/uploads/image/2019/4/9/e5e17083-273e-40f5-91cf-63a5ca339e99-ea3557c8-71a1-48e8-967f-4c166054baab-pizza-image_no-text.jpg?w=1020&h=574&fit=crop&crop=faces&auto=format&q=70",
+        "https://dynl.mktgcdn.com/p/d9AXTJEWMZ156q11dLLVRHsmufNu0K-ng4JYb_4WwRI/1900x1427.jpg"
+      ],
+      pricePerPerson: 5000,
+      latitude: 18.5208,
+      longitude: 73.8412
+    };
+    return data;
   }
   
 

@@ -25,7 +25,7 @@ async GetResponse(){
                   .toPromise();
       this._dialogflowService.SetKey(data["key"]);
       this._locationService.SetURL(data["locationApiUrl"]);
-      this._restaurantApiService.SetURL(data["restaurantApiUrl"]);
+      this._restaurantApiService.SetURL(data["restaurantApiUrl"],data["restaurantDetailsApiUrl"]);
     }
     catch (err) {
       return await Promise.resolve();

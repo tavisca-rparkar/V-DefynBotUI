@@ -22,7 +22,7 @@ export class CarouselComponent {
 
   showDetails(index: number) {
     const request = [
-      this.data[index]["restarauntId"],
+      this.data[index]["restaurantId"],
       this.data[index]["supplierName"]
     ];
     this._appService.IntentRouter("Show Details", request);

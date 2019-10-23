@@ -17,6 +17,7 @@ import { HeaderModule } from "./modules/header/header.module";
 import { CardModule } from "./modules/card/card.module";
 import { CarouselModule } from "ngx-bootstrap";
 import { CarouselComponent } from "./components/chatbot/chat-body/carousel/carousel.component";
+import { CardComponent } from './modules/card/card.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CarouselComponent } from "./components/chatbot/chat-body/carousel/carou
   entryComponents: [
     TextBubbleComponent,
     ChoiceButtonComponent,
-    CarouselComponent
+    CarouselComponent,
+    CardComponent
   ]
 })
 export class AppModule {}

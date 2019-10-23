@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { DialogflowApiService } from "./dialogflowApi.service";
-import { LocationApiService } from './locationApi.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MockableApiService } from './mockableApi.service';
@@ -21,13 +20,6 @@ export class AppService {
   ) {}
 
   async InitiateConversation(){
-    /* ************ JUST FOR DEVELOPMENT ************
-    
-    let data = this._restaurantApiService.GetMockRestaurantsList("Dummy(initiate-conversation)");
-    console.log(data);
-    this._componentFactoryService.AddRestaurantCarousel(data);
-
-    // ************ JUST FOR DEVELOPMENT  ************/
     await this._mockableService.GetResponse();
     this.IntentProcessing("Hello");
   }
@@ -73,6 +65,10 @@ export class AppService {
       break;
       case "Show Details" : this.ShowDetailsIntent(response);
       break;
+      case "Show Carousel Again" : this.ShowCarouselAgainIntent();
+      break;
+      case "Proceed Booking" : this.ProceedTableBookingIntent();
+      break;
       case "Fallback" : this.FallbackIntent(response);
       break;
       case "Order Food" : this.OrderFoodIntent(response);
@@ -88,7 +84,7 @@ export class AppService {
         let city = response["queryResult"]["parameters"]["geo-city"]
         this._restaurantApiService.GetRestaurantsList(city)
         .pipe(catchError(err => {
-            this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this response at the momment", "bot");
+            this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this response at the moment", "bot");
             return throwError(err);
         }))
         .subscribe((data) => {
@@ -96,7 +92,7 @@ export class AppService {
               this._componentFactoryService.AddTextBubble("Sorry, I wasn't able to find any restaurants in that area.", "bot");
             }else{
               // show results here - 
-              this._componentFactoryService.AddTextBubble("Showing you Restaurants in "+city+"-", "bot");
+              this._restaurantApiService.SetCarouselData(data);
               this._componentFactoryService.AddRestaurantCarousel(data);
             }
         });    
@@ -106,11 +102,28 @@ export class AppService {
   }
 
   ShowDetailsIntent(response){
-      this._componentFactoryService.AddTextBubble("Showing you details...","bot");
-      console.log(response);
-      console.log(response[0] + "  " + response[1]  );
+      this._restaurantApiService.GetRestaurantDetails(response[0],response[1])
+        .pipe(catchError(err => {
+            this._componentFactoryService.AddTextBubble("Sorry, I am unable to fetch the selected restaurant details", "bot");
+            return throwError(err);
+        }))
+        .subscribe((data) => {
+            if(data===404){
+              this._componentFactoryService.AddTextBubble("Sorry, I am unable to fetch the selected restaurant details", "bot");
+            }else{
+              // show results here - 
+              this._componentFactoryService.AddRestaurantDetailsCard(data);
+            }
+        }); 
   }
-  
+  ShowCarouselAgainIntent(){
+    let data = this._restaurantApiService.GetCarouselData();
+    this._componentFactoryService.AddRestaurantCarousel(data);
+  }
+
+  ProceedTableBookingIntent(){
+  this._componentFactoryService.AddTextBubble("Processing your Booking, Please wait...", "bot");
+  }
 
   OrderFoodIntent(response) {
     if(response["queryResult"]["allRequiredParamsPresent"])

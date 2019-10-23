@@ -5,9 +5,9 @@
       [interval]="false"
       [itemsPerSlide]="1"
     >
-      <slide *ngFor="let slide of data.slides" class="slide">
+      <slide *ngFor="let image of data.images" class="slide">
         <img
-          [src]="slide"
+          [src]="image"
           alt="image slide"
           class="restaurant-image"
           onError="this.src='https://icon-library.net/images/no-image-available-icon/no-image-available-icon-6.jpg';"
@@ -36,14 +36,14 @@
     <div class="rating-view">
       <div class="ratings">
         <p>
-          <b> &#9734; &nbsp;{{ data.userRating }}</b>
+          <b> &#9734; &nbsp;{{ data.user_Rating }}</b>
         </p>
       </div>
     </div>
 
     <div class="address">
       <p>
-        {{ data.restaurantAddress }}
+        {{ data.address }}
       </p>
     </div>
 
@@ -55,14 +55,14 @@
 
     <div class="price">
       <p>
-        Price Per Person : <b>{{ data.pricePerPerson }}</b>
+        Price Per Person : <b>${{ data.pricePerHead }}</b>
       </p>
     </div>
 
-    <div class="proceed-button">
+    <div class="proceed-button" (click)="proceedForBooking()">
       <button>Proceed To Book</button>
     </div>
-    <div class="browse-button">
+    <div class="browse-button" (click)="showRestaurantList()" >
       <button>Browse more restaurants</button>
     </div>
   </div>
