@@ -10,6 +10,8 @@ export class ComponentFactoryService {
   createTextBubble$ =this._textBubbleSource.asObservable();
   private _choiceButtonSource = new Subject<string[]>();
   createChoiceButton$ =this._choiceButtonSource.asObservable();
+  private _restaurantCarouselSource = new Subject<object[]>();
+  createRestaurantCarousel$ =this._restaurantCarouselSource.asObservable();
   
   constructor() {}
 
@@ -22,6 +24,9 @@ export class ComponentFactoryService {
     this._choiceButtonSource.next(buttonText);
   }
 
+  AddRestaurantCarousel(data) {
+    this._restaurantCarouselSource.next(data);
+  }
   
   updateScroll() { // called in AfterViewInit of all the chatbody components
     var element = document.getElementById("msg-page");

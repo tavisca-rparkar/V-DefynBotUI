@@ -1,4 +1,4 @@
-.container {
+.ccontainer {
   margin: auto;
   font-family: sans-serif;
   letter-spacing: 0.5px;
@@ -6,49 +6,49 @@
 }
 
 @media (min-width: 320px) {
-  .container {
+  .ccontainer {
     width: 100%;
     height: 100%;
   }
 }
 
 @media (min-width: 411px) {
-  .container {
+  .ccontainer {
     width: 100%;
     height: 100%;
   }
 }
 
 @media (min-width: 481px) {
-  .container {
+  .ccontainer {
     width: 100%;
     height: 100%;
   }
 }
 
 @media (min-width: 600px) {
-  .container {
+  .ccontainer {
     width: 100%;
     height: 100%;
   }
 }
 
 @media (min-width: 769px) {
-  .container {
+  .ccontainer {
     width: 100%;
     height: 100%;
   }
 }
 
 @media (min-width: 1260px) {
-  .container {
+  .ccontainer {
     width: 100%;
     height: 100%;
   }
 }
 
 @media (min-width: 1281px) {
-  .container {
+  .ccontainer {
     width: 100%;
     height: 100%;
   }
