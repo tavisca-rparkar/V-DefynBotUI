@@ -12,6 +12,8 @@ import { ChoiceButtonComponent } from "./choice-button/choice-button.component";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { AppService } from "src/app/services/app.service";
 import { CarouselComponent } from "./carousel/carousel.component";
+import { CardModule } from "src/app/modules/card/card.module";
+import { CardComponent } from "src/app/modules/card/card.component";
 
 @Component({
   selector: "app-chat-body",
@@ -39,6 +41,11 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     this._componentFactoryService.createRestaurantCarousel$.subscribe(data => {
       this.addRestaurantCarousel(data);
     });
+    this._componentFactoryService.createRestaurantDetailsCard$.subscribe(
+      data => {
+        this.addRestaurantDetailsCard(data);
+      }
+    );
   }
 
   ngAfterViewInit() {
@@ -70,6 +77,14 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     const factory = this._factory.resolveComponentFactory(CarouselComponent);
     const componentRef1 = this.vc.createComponent(factory);
     let instance = <CarouselComponent>componentRef1.instance;
+    instance.data = data;
+    this.cdRef.detectChanges();
+  }
+
+  addRestaurantDetailsCard(data) {
+    const factory = this._factory.resolveComponentFactory(CardComponent);
+    const componentRef1 = this.vc.createComponent(factory);
+    let instance = <CardComponent>componentRef1.instance;
     instance.data = data;
     this.cdRef.detectChanges();
   }
