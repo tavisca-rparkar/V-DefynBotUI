@@ -1,11 +1,24 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { timeout } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantApiService {
 
-  constructor() { }
+  constructor(private _http: HttpClient) { }
+  private _restaurantApiUrl =
+  "http://172.16.5.151/api/bookingtable?locality=";
+
+  SetURL(url: string) {
+    this._restaurantApiUrl = url;
+  }
+
+  GetRestaurantsList(city:string){
+    return this._http.get(this._restaurantApiUrl + city).pipe(timeout(15000));
+  }
+  
 
   GetMockRestaurantsList(city:string){
     console.log("(RestaurantApiService)fetching restaurants in - "+city);
@@ -47,4 +60,6 @@ export class RestaurantApiService {
     }];
     return restaurantList;
   }
+
+
 }

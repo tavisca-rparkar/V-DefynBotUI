@@ -16,7 +16,6 @@ export class AppService {
   constructor(
     private _componentFactoryService: ComponentFactoryService,
     private _dialogflowService: DialogflowApiService,
-    private _locationService: LocationApiService,
     private _mockableService: MockableApiService,
     private _restaurantApiService: RestaurantApiService
   ) {}
@@ -62,17 +61,21 @@ export class AppService {
         console.log("Intent : ");
         console.log(response["queryResult"]["intent"]["displayName"]);
         console.log("_________________________________________________________");
+        console.log(response);
       });
-    
   }
 
-  IntentRouter(intent:string, response:JSON){
+  IntentRouter(intent:string, response){
     switch(intent){
       case "Welcome" : this.WelcomeIntentIntent(response);
       break;
       case "Book Table" : this.BookTableIntent(response);
       break;
-      case "Fallback" : this.FallbackIntent();
+      case "Show Details" : this.ShowDetailsIntent(response);
+      break;
+      case "Fallback" : this.FallbackIntent(response);
+      break;
+      case "Order Food" : this.OrderFoodIntent(response);
       break;
       default: this.SmallTalkIntent(response);
       break;
@@ -82,22 +85,38 @@ export class AppService {
   BookTableIntent(response){
     if(response["queryResult"]["allRequiredParamsPresent"])
     {
-      
         let city = response["queryResult"]["parameters"]["geo-city"]
-        this._locationService.GetResponse(city)
+        this._restaurantApiService.GetRestaurantsList(city)
         .pipe(catchError(err => {
-            this._componentFactoryService.AddTextBubble("Sorry, I was unable to contact the vendor, can you please try again after some time.", "bot");
+            this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this response at the momment", "bot");
             return throwError(err);
         }))
-        .subscribe((data) => { // code for location check -(only used in sprint-1)
-              if(data[0] === "true")
-              {
-                this._componentFactoryService.AddTextBubble("Showing you Restaurants in "+city+".", "bot");
-                // show results here - 
-              }else{
-                this._componentFactoryService.AddTextBubble("Please tell me where do you want me look for restaurants!", "bot");
-              }
+        .subscribe((data) => {
+            if(data===404){
+              this._componentFactoryService.AddTextBubble("Sorry, I wasn't able to find any restaurants in that area.", "bot");
+            }else{
+              // show results here - 
+              this._componentFactoryService.AddTextBubble("Showing you Restaurants in "+city+"-", "bot");
+              this._componentFactoryService.AddRestaurantCarousel(data);
+            }
         });    
+    }else{
+      this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
+    }
+  }
+
+  ShowDetailsIntent(response){
+      this._componentFactoryService.AddTextBubble("Showing you details...","bot");
+      console.log(response);
+      console.log(response[0] + "  " + response[1]  );
+  }
+  
+
+  OrderFoodIntent(response) {
+    if(response["queryResult"]["allRequiredParamsPresent"])
+    {
+        let city = response["queryResult"]["parameters"]["geo-city"]
+        this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
     }else{
       this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
     }
@@ -107,14 +126,15 @@ export class AppService {
     this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
     this._componentFactoryService.AddChoiceButton(["Book a Table","Order Food"]);
   }
+  
 
   SmallTalkIntent(response){
     this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
   }
 
-  FallbackIntent() {
+  FallbackIntent(response) {
     this._componentFactoryService.AddTextBubble(
-      "Sorry, I didn't catch that! I can help you book tables at restaurants nearby and order food from nearby outlets.",
+      response["queryResult"]["fulfillmentText"],
       "bot"
     );
   }

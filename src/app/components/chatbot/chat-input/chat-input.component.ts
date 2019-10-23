@@ -7,7 +7,7 @@ import { AppService } from 'src/app/services/app.service';
   styleUrls: ["./chat-input.component.css"]
 })
 export class ChatInputComponent {
-  private _userInput: string = "";
+  _userInput: string = "";
 
   constructor(
     private _appService : AppService
