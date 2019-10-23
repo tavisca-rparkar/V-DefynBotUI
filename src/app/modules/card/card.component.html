@@ -1,7 +1,17 @@
 <div class="card">
-  <div class="restaurantImage"></div>
+  <div class="carousel-container">
+    <carousel
+      [(activeSlide)]="activeSlideIndex"
+      [interval]="false"
+      [itemsPerSlide]="1"
+    >
+      <slide *ngFor="let slide of slides" class="slide">
+        <img [src]="slide" alt="image slide" class="restaurant-image" />
+      </slide>
+    </carousel>
+  </div>
   <div class="restaurantInfo">
-    <div class="line1">
+    <div class="name-rating">
       <h1 class="restaurantName">
         <b>{{ restaurantName }}</b>
       </h1>
@@ -12,20 +22,27 @@
       </div>
     </div>
 
-    <div class="line2">
+    <div class="address">
       <p>{{ restaurantAddress }}</p>
     </div>
 
-    <div class="line3">
-      <h4>Cuisines : {{ cuisines }}</h4>
+    <div class="cuisines">
+      <p>
+        Cuisines : <b>{{ cuisines }}</b>
+      </p>
     </div>
 
-    <div class="line4">
-      <h4>Price Per Person : {{ pricePerPerson }}</h4>
+    <div class="price">
+      <p>
+        Price Per Person : <b>{{ pricePerPerson }}</b>
+      </p>
     </div>
 
-    <div class="line5">
-      <button><b>Proceed To Book</b></button>
+    <div class="proceed-button">
+      <button>Proceed To Book</button>
+    </div>
+    <div class="browse-button">
+      <button>Browse more restaurants</button>
     </div>
   </div>
 </div>
