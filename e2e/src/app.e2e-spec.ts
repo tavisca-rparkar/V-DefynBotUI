@@ -8,7 +8,7 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should Check the title', () => {
+  /*it('should Check the title', () => {
     page.navigateTo();
     expect(page.getTitleText()).toEqual('US Bank');
   });
@@ -26,25 +26,32 @@ describe('workspace-project App', () => {
   });
   it('should enter  text in textbox and click send', () => {
     page.navigateTo();
+    browser.manage().window().setSize(1600,1000);
     page.getTextBox().sendKeys("cgaksjcbasncjanclakmclaskcmakcnjccsancka");
-    page.sendText().click();
-    //expect(page.getTextBubble()).toEqual('cgaksjcbasncjanclakmclaskcmakcnjccsancka');
-  });
+    //page.sendText().click();
+    
+    browser.actions().mouseMove(page.sendText()).click().perform();
+    
+    
+  });*/
 
   it('should click Book a table button',()=>{
     page.navigateTo();
+    browser.manage().window().setSize(375,667);
     page.getBookATableButton().click();
-    browser.pause();
-    browser.pause();
+    
       //expect(page.getLatestElement().getText()).toEqual('In which city are you looking for restaurants?'||'can you tell me in which city do you plan to look for restaurants?');
-      var val =page.getLatestElement().getText();
+     /* var val =page.getLatestElement().getText();
+      
       val.then(v=>
       expect(['In which city are you looking for restaurants?','can you tell me in which city do you plan to look for restaurants?']).toContain(v)
-      );
+      );*/
       var EC = protractor.ExpectedConditions;
       page.getTextBox().sendKeys("pune");
-      page.sendText().click();
-      //browser.wait(EC.presenceOf(page.getCorousal()), 10000);
+      //page.sendText().click();
+      
+      browser.actions().mouseMove(page.sendText()).click().perform();
+      browser.wait(EC.presenceOf(page.getCorousal()), 10000);
       page.getCorousal().click();
       browser.wait(EC.presenceOf(page.getCard()), 10000);
       page.getCard().click();
@@ -52,10 +59,10 @@ describe('workspace-project App', () => {
       browser.wait(EC.presenceOf(page.getBrowserStop()), 20000);
       
   });
-
+/*
   it('should click Order food button',()=>{
     page.navigateTo();
     page.getOrderFoodButton().click();
     
-  });
+  });*/
 });

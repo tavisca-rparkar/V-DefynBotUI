@@ -7,6 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { HeaderModule } from "src/app/modules/header/header.module";
+import { LoaderComponent } from 'src/app/modules/loader/loader/loader.component';
 
 describe("ChatbotComponent", () => {
   let component: ChatbotComponent;
@@ -14,7 +15,7 @@ describe("ChatbotComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ChatbotComponent, ChatBodyComponent, ChatInputComponent],
+      declarations: [ChatbotComponent, ChatBodyComponent, ChatInputComponent,LoaderComponent],
       imports: [FormsModule, HttpClientTestingModule, HeaderModule]
     }).compileComponents();
   }));
