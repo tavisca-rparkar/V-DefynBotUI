@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { element, browser } from 'protractor';
+import { element, browser, protractor } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -36,8 +36,21 @@ describe('workspace-project App', () => {
     page.getBookATableButton().click();
     browser.pause();
     browser.pause();
-      expect(page.getLatestElement().getText()).toEqual('In which city are you looking for restaurants?'||'can you tell me in which city do you plan to look for restaurants?');
-    
+      //expect(page.getLatestElement().getText()).toEqual('In which city are you looking for restaurants?'||'can you tell me in which city do you plan to look for restaurants?');
+      var val =page.getLatestElement().getText();
+      val.then(v=>
+      expect(['In which city are you looking for restaurants?','can you tell me in which city do you plan to look for restaurants?']).toContain(v)
+      );
+      var EC = protractor.ExpectedConditions;
+      page.getTextBox().sendKeys("pune");
+      page.sendText().click();
+      //browser.wait(EC.presenceOf(page.getCorousal()), 10000);
+      page.getCorousal().click();
+      browser.wait(EC.presenceOf(page.getCard()), 10000);
+      page.getCard().click();
+      page.getCourousalAgain().click();
+      browser.wait(EC.presenceOf(page.getBrowserStop()), 20000);
+      
   });
 
   it('should click Order food button',()=>{

@@ -27,4 +27,16 @@ export class AppPage {
   getLatestElement(){
     return element.all(by.css('app-chat-body app-text-bubble div p')).last();
   }
+  getCorousal(){
+    return element(by.buttonText('See More Details'));
+  }
+  getCard(){
+    return element(by.buttonText('Proceed To Book'));
+  }
+  getCourousalAgain(){
+    return element(by.buttonText('Browse more restaurants'));
+  }
+  getBrowserStop(){
+    return element(by.buttonText('NO button present'));
+  }
 }
