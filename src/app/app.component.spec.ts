@@ -7,6 +7,7 @@ import { ChatBodyComponent } from './components/chatbot/chat-body/chat-body.comp
 import { ChatInputComponent } from './components/chatbot/chat-input/chat-input.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { LoaderComponent } from './modules/loader/loader/loader.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -20,7 +21,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         ChatbotComponent,
-        
+        LoaderComponent,
         ChatBodyComponent,
         ChatInputComponent,
         
