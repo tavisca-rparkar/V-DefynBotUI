@@ -84,7 +84,7 @@ export class AppService {
     if(response["queryResult"]["allRequiredParamsPresent"])
     {
         this._componentFactoryService.StartLoader();
-        let city = response["queryResult"]["parameters"]["geo-city"]
+        let city = response["queryResult"]["parameters"]["address"]
         this._restaurantApiService.GetRestaurantsList(city)
         .pipe(catchError(err => {
             this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this response at the moment", "bot");
