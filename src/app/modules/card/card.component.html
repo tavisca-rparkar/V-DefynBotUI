@@ -5,7 +5,7 @@
       [interval]="false"
       [itemsPerSlide]="1"
     >
-      <slide *ngFor="let image of data.images" class="slide">
+      <slide *ngFor="let image of data['images']" class="slide">
         <img
           [src]="image"
           alt="image slide"
@@ -18,51 +18,48 @@
   <div class="restaurantInfo">
     <div class="name">
       <h1 class="restaurantName">
-        <b>{{ data.restaurantName }}</b>
+        <b>{{ data["restaurantName"] }}</b>
       </h1>
     </div>
 
     <div class="map">
-      <a
-        href="https://maps.google.com/?q={{ data.latitude }},{{
-          data.longitude
-        }}"
+      <a href="https://maps.google.com/?q={{ data['lat'] }},{{ data['lon'] }}" target="_blank"
         ><img
           style="width: 40px; height:40px;"
-          src="../assets/images/google-map.png"
+          src="https://cdn1.imggmi.com/uploads/2019/10/24/306122ba2ef5fce323452f18e56ae49a-full.png"
       /></a>
     </div>
 
     <div class="rating-view">
       <div class="ratings">
         <p>
-          <b> &#9734; &nbsp;{{ data.user_Rating }}</b>
+          <b> &#9734; &nbsp;{{ data["user_Rating"] }}</b>
         </p>
       </div>
     </div>
 
     <div class="address">
       <p>
-        {{ data.address }}
+        {{ data["address"] }}
       </p>
     </div>
 
     <div class="cuisines">
       <p>
-        Cuisines : <b>{{ data.cuisines }}</b>
+        Cuisines : <b>{{ data["cuisines"] }}</b>
       </p>
     </div>
 
     <div class="price">
       <p>
-        Price Per Person : <b>${{ data.pricePerHead }}</b>
+        Price Per Person : <b>${{ data["pricePerHead"] }}</b>
       </p>
     </div>
 
     <div class="proceed-button" (click)="proceedForBooking()">
       <button>Proceed To Book</button>
     </div>
-    <div class="browse-button" (click)="showRestaurantList()" >
+    <div class="browse-button" (click)="showRestaurantList()">
       <button>Browse more restaurants</button>
     </div>
   </div>

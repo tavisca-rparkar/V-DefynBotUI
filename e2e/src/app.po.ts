@@ -24,4 +24,7 @@ export class AppPage {
   getOrderFoodButton(){
     return element.all(by.buttonText('Order Food'));
   }
+  getLatestElement(){
+    return element.all(by.css('app-chat-body app-text-bubble div p')).last();
+  }
 }

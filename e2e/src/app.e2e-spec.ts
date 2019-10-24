@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { element } from 'protractor';
+import { element, browser } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -34,6 +34,10 @@ describe('workspace-project App', () => {
   it('should click Book a table button',()=>{
     page.navigateTo();
     page.getBookATableButton().click();
+    browser.pause();
+    browser.pause();
+      expect(page.getLatestElement().getText()).toEqual('In which city are you looking for restaurants?'||'can you tell me in which city do you plan to look for restaurants?');
+    
   });
 
   it('should click Order food button',()=>{
