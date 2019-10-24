@@ -12,7 +12,6 @@ import { ChoiceButtonComponent } from "./choice-button/choice-button.component";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { AppService } from "src/app/services/app.service";
 import { CarouselComponent } from "./carousel/carousel.component";
-import { CardModule } from "src/app/modules/card/card.module";
 import { CardComponent } from "src/app/modules/card/card.component";
 
 @Component({
@@ -46,6 +45,7 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
         this.addRestaurantDetailsCard(data);
       }
     );
+    
   }
 
   ngAfterViewInit() {

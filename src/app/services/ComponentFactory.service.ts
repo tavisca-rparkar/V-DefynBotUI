@@ -13,6 +13,8 @@ export class ComponentFactoryService {
   createRestaurantCarousel$ = this._restaurantCarouselSource.asObservable();
   private _restaurantDetailsCard = new Subject<object[]>();
   createRestaurantDetailsCard$ = this._restaurantDetailsCard.asObservable();
+  private _loader = new Subject<boolean>();
+  isLoaderShown$ = this._loader.asObservable();
 
   constructor() {}
 
@@ -37,5 +39,12 @@ export class ComponentFactoryService {
     // called in AfterViewInit of all the chatbody components
     var element = document.getElementById("msg-page");
     element.scrollTop = element.scrollHeight;
+  }
+
+  StartLoader(){
+    this._loader.next(true);
+  }
+  StopLoader(){
+    this._loader.next(false);
   }
 }

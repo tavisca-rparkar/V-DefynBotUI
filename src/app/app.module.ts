@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, ChangeDetectorRef } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -18,6 +18,7 @@ import { CardModule } from "./modules/card/card.module";
 import { CarouselModule } from "ngx-bootstrap";
 import { CarouselComponent } from "./components/chatbot/chat-body/carousel/carousel.component";
 import { CardComponent } from './modules/card/card.component';
+import { LoaderModule } from './modules/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CardComponent } from './modules/card/card.component';
     HttpClientModule,
     HeaderModule,
     CardModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    LoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

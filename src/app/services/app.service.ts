@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 import { MockableApiService } from './mockableApi.service';
 import { RestaurantApiService } from './restaurant-api.service';
 
+
 @Injectable({
   providedIn: "root"
 })
@@ -79,12 +80,15 @@ export class AppService {
   }
 
   BookTableIntent(response){
+    
     if(response["queryResult"]["allRequiredParamsPresent"])
     {
+        this._componentFactoryService.StartLoader();
         let city = response["queryResult"]["parameters"]["geo-city"]
         this._restaurantApiService.GetRestaurantsList(city)
         .pipe(catchError(err => {
             this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this response at the moment", "bot");
+            this._componentFactoryService.StopLoader();
             return throwError(err);
         }))
         .subscribe((data) => {
@@ -93,6 +97,7 @@ export class AppService {
             }else{
               // show results here - 
               this._restaurantApiService.SetCarouselData(data);
+              this._componentFactoryService.StopLoader();
               this._componentFactoryService.AddRestaurantCarousel(data);
             }
         });    
@@ -102,22 +107,28 @@ export class AppService {
   }
 
   ShowDetailsIntent(response){
+    this._componentFactoryService.StartLoader();
       this._restaurantApiService.GetRestaurantDetails(response[0],response[1])
         .pipe(catchError(err => {
+          this._componentFactoryService.StopLoader();
             this._componentFactoryService.AddTextBubble("Sorry, I am unable to fetch the selected restaurant details", "bot");
-            return throwError(err);
+            return throwError(err);            
         }))
         .subscribe((data) => {
             if(data===404){
+              this._componentFactoryService.StopLoader();
               this._componentFactoryService.AddTextBubble("Sorry, I am unable to fetch the selected restaurant details", "bot");
             }else{
+              this._componentFactoryService.StopLoader();
               // show results here - 
               this._componentFactoryService.AddRestaurantDetailsCard(data);
             }
         }); 
   }
   ShowCarouselAgainIntent(){
+    this._componentFactoryService.StartLoader();
     let data = this._restaurantApiService.GetCarouselData();
+    this._componentFactoryService.StopLoader();
     this._componentFactoryService.AddRestaurantCarousel(data);
   }
 
