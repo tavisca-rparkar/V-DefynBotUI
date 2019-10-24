@@ -39,4 +39,10 @@ export class AppPage {
   getBrowserStop(){
     return element(by.buttonText('NO button present'));
   }
+  getRightArrow(){
+    return element.all(by.css('app-chat-body div div carousel div a')).last();
+  }
+  getLeftArrow(){
+    return element(by.css('app-chat-body div div carousel div a'));
+  }
 }
