@@ -19,6 +19,7 @@ import { CarouselModule } from "ngx-bootstrap";
 import { CarouselComponent } from "./components/chatbot/chat-body/carousel/carousel.component";
 import { CardComponent } from './modules/card/card.component';
 import { LoaderModule } from './modules/loader/loader.module';
+import { LocationDetectionComponent } from './location-detection/location-detection.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoaderModule } from './modules/loader/loader.module';
     FormComponent,
     TextBubbleComponent,
     ChoiceButtonComponent,
-    CarouselComponent
+    CarouselComponent,
+    LocationDetectionComponent
   ],
   imports: [
     BrowserModule,
