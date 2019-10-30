@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChatInputComponent } from './chat-input.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ChatInputComponent', () => {
   let component: ChatInputComponent;
@@ -8,7 +10,8 @@ describe('ChatInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChatInputComponent ]
+      declarations: [ ChatInputComponent ],
+      imports:[FormsModule,HttpClientTestingModule]
     })
     .compileComponents();
   }));
@@ -18,8 +21,10 @@ describe('ChatInputComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
+

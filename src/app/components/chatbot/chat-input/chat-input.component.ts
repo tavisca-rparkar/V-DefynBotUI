@@ -1,7 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { ChatService } from "src/app/services/chat.service";
-import { ConversationService } from "src/app/services/conversation.service";
-import { ChatBodyComponent } from "../chat-body/chat-body.component";
+import { Component} from "@angular/core";
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: "app-chat-input",
@@ -9,19 +7,17 @@ import { ChatBodyComponent } from "../chat-body/chat-body.component";
   styleUrls: ["./chat-input.component.css"]
 })
 export class ChatInputComponent {
+  _userInput: string = "";
+
   constructor(
-    private chat: ChatService,
-    private conversation: ConversationService
+    private _appService : AppService
   ) {}
 
-  userInput: string = "";
-
   SendUserInput() {
-    if (this.userInput.length !== 0) {
-      //this.chat.textUpdate(this.userInput, "bot");
-      this.conversation.ProcessInput(this.userInput);
-      // user input text type is - "user"
+    this._userInput = this._userInput.trim();
+    if (this._userInput.length !== 0) {
+      this._appService.ProcessInput(this._userInput);
     }
-    this.userInput = "";
+    this._userInput = "";
   }
 }
