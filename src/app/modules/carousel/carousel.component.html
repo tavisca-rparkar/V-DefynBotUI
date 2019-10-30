@@ -1,0 +1,31 @@
+<div class="carousel-container">
+  <div class="slide" *ngFor="let slide of slides; let index = index">
+    <div class="slide-card" (click)="showDetails(index)">
+      <div class="slide-image-container">
+        <img
+          [src]="slide['image']"
+          alt="image slide"
+          onError="this.src='https://icon-library.net/images/no-image-available-icon/no-image-available-icon-6.jpg';"
+        />
+      </div>
+      <div class="slide-text-container">
+        <div class="slide-name">
+          <h1>
+            Dominos Pizza
+          </h1>
+        </div>
+        <div class="locality">
+          <p>Viman Nagar, Pune</p>
+        </div>
+        <div class="rating">
+          <p>
+            4.6
+          </p>
+          <img
+            src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/972e1cb487b3a5c72c30a6635596f477.svg"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

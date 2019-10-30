@@ -15,10 +15,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { ChoiceButtonComponent } from "./components/chatbot/chat-body/choice-button/choice-button.component";
 import { HeaderModule } from "./modules/header/header.module";
 import { CardModule } from "./modules/card/card.module";
-import { CarouselModule } from "ngx-bootstrap";
-import { CarouselComponent } from "./components/chatbot/chat-body/carousel/carousel.component";
-import { CardComponent } from './modules/card/card.component';
-import { LoaderModule } from './modules/loader/loader.module';
+import { CardComponent } from "./modules/card/card.component";
+import { LoaderModule } from "./modules/loader/loader.module";
+import { CarouselModule } from "./modules/carousel/carousel.module";
+import { CarouselComponent } from "./modules/carousel/carousel.component";
 
 @NgModule({
   declarations: [
@@ -29,8 +29,7 @@ import { LoaderModule } from './modules/loader/loader.module';
     LauncherComponent,
     FormComponent,
     TextBubbleComponent,
-    ChoiceButtonComponent,
-    CarouselComponent
+    ChoiceButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +39,7 @@ import { LoaderModule } from './modules/loader/loader.module';
     HttpClientModule,
     HeaderModule,
     CardModule,
-    CarouselModule.forRoot(),
+    CarouselModule,
     LoaderModule
   ],
   providers: [],
