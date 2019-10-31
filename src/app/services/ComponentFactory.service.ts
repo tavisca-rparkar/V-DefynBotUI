@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
   providedIn: "root"
 })
 export class ComponentFactoryService {
+  
   private _textBubbleSource = new Subject<any>();
   createTextBubble$ = this._textBubbleSource.asObservable();
   private _choiceButtonSource = new Subject<string[]>();
@@ -15,6 +16,9 @@ export class ComponentFactoryService {
   createRestaurantDetailsCard$ = this._restaurantDetailsCard.asObservable();
   private _loader = new Subject<boolean>();
   isLoaderShown$ = this._loader.asObservable();
+  private _loationButton = new Subject<boolean>();
+  locationButton$ = this._loationButton.asObservable();
+
 
   constructor() {}
 
@@ -46,5 +50,8 @@ export class ComponentFactoryService {
   }
   StopLoader(){
     this._loader.next(false);
+  }
+  addLocationButton() {
+    this._loationButton.next();
   }
 }

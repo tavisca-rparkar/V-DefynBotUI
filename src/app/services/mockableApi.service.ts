@@ -17,7 +17,7 @@ constructor(private _http: HttpClient,
     ) { }
 
 // Mockable.io URL for custom made Api for dialogflow key and api urls
-private _apiUrl ="https://demo8483055.mockable.io/dialogflowAuthKey";
+private _apiUrl ="http://demo3711129.mockable.io/dialogflowAuthKey";
 
 async GetResponse(){
   try {

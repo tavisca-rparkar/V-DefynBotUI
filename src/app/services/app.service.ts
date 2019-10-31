@@ -1,10 +1,14 @@
 import { Injectable } from "@angular/core";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { DialogflowApiService } from "./dialogflowApi.service";
-import { catchError } from 'rxjs/operators';
+import { catchError, delay } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MockableApiService } from './mockableApi.service';
 import { RestaurantApiService } from './restaurant-api.service';
+import { LocationAccessService } from './locationAccess.service';
+import { StateService } from './state.service';
+import { promise } from 'protractor';
+import { timeout, resolve } from 'q';
 
 
 @Injectable({
@@ -17,13 +21,24 @@ export class AppService {
     private _componentFactoryService: ComponentFactoryService,
     private _dialogflowService: DialogflowApiService,
     private _mockableService: MockableApiService,
-    private _restaurantApiService: RestaurantApiService
+    private _restaurantApiService: RestaurantApiService,
+    private _locationAccess:LocationAccessService,
+    private _stateService:StateService
   ) {}
 
-  async InitiateConversation(){
+   async InitiateConversation(){
     await this._mockableService.GetResponse();
-    this.IntentProcessing("Hello");
-  }
+    this._locationAccess.getLocation().then(()=>{
+        console.log("one: "+this._stateService.IslatLongProvided());
+        if(this._stateService.IslatLongProvided()){
+        this.IntentProcessing("Hello");
+      }
+    });    
+}
+  
+InitiateConversation2(){
+  
+}
 
   ProcessInput(userInput: string) {
     // print on screen
