@@ -25,7 +25,7 @@ export class RestaurantApiService {
     return this._carouselData;
   }
 
-  GetRestaurantsList(city:string){
+  GetRestaurantsList(city:string, latitude:string, longitude:string){
     return this._http.get(this._restaurantListApiUrl + city).pipe(timeout(15000));
   }
 

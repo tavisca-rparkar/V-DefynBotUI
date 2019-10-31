@@ -6,19 +6,26 @@ import { Injectable } from '@angular/core';
 export class StateService {
 
   constructor() { }
-  private _latlng:string;
+  
+  private _latitude:string;
+  private _longitude:string;
+
   private _isLatLongProvided:boolean = false;
 
   public IslatLongProvided(){
     return this._isLatLongProvided;
   }
-  public setLatLng(data:string){
-    console.log(data);
-    this._latlng=data;
+  public setLatLng(latitude:string,longitude:string){
+    this._latitude= latitude;
+    this._longitude=longitude;
     this._isLatLongProvided = true;
   }
-  public getLatLng(){
-    console.log(this._latlng);
-    return this._latlng;
+  public getLatitude(){
+    
+    return this._latitude;
+  }
+  public getLongitude()
+  {
+    return this._longitude;
   }
 }

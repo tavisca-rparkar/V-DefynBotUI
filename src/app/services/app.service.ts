@@ -100,7 +100,7 @@ InitiateConversation2(){
     {
         this._componentFactoryService.StartLoader();
         let city = response["queryResult"]["parameters"]["address"]
-        this._restaurantApiService.GetRestaurantsList(city)
+        this._restaurantApiService.GetRestaurantsList(city,this._stateService.getLatitude(),this._stateService.getLongitude())
         .pipe(catchError(err => {
             this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this response at the moment", "bot");
             this._componentFactoryService.StopLoader();

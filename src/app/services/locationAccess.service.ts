@@ -24,8 +24,7 @@ export class LocationAccessService {
             this.lat = position.coords.latitude;
             this.lng = position.coords.longitude;
             console.log(this.lat+","+this.lng);
-            //return lat+","+lng;
-            this._stateService.setLatLng(this.lat+","+this.lng);
+            this._stateService.setLatLng(this.lat.toString(),this.lng.toString());
               console.log(this._stateService.IslatLongProvided());
           }
           console.log(this.lat+","+this.lng);
