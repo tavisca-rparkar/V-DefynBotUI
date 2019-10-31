@@ -1,9 +1,9 @@
 <div class="carousel-container">
-  <div class="slide" *ngFor="let slide of slides; let index = index">
+  <div class="slide" *ngFor="let slide of data; let index = index">
     <div class="slide-card" (click)="showDetails(index)">
       <div class="slide-image-container">
         <img
-          [src]="slide['image']"
+          [src]="slide['thumbURL']"
           alt="image slide"
           onError="this.src='https://icon-library.net/images/no-image-available-icon/no-image-available-icon-6.jpg';"
         />
@@ -11,15 +11,20 @@
       <div class="slide-text-container">
         <div class="slide-name">
           <h1>
-            Dominos Pizza
+            {{ slide["restaurantName"] }}
           </h1>
         </div>
         <div class="locality">
-          <p>Viman Nagar, Pune</p>
+          <p>{{ slide["localityVerbose"] }}</p>
+        </div>
+        <div class="pricePerPerson">
+          <p>
+            $500 per person
+          </p>
         </div>
         <div class="rating">
           <p>
-            4.6
+            {{ slide["user_Rating"] }}
           </p>
           <img
             src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/972e1cb487b3a5c72c30a6635596f477.svg"
