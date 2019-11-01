@@ -19,7 +19,8 @@ import { CardComponent } from "./modules/card/card.component";
 import { LoaderModule } from "./modules/loader/loader.module";
 import { CarouselModule } from "./modules/carousel/carousel.module";
 import { CarouselComponent } from "./modules/carousel/carousel.component";
-import { LocationButtonComponent } from './components/location-button/location-button.component';
+import { LocationButtonComponent } from "./components/location-button/location-button.component";
+import { BookingCheckoutcardModule } from "./modules/bookingcheckoutcard/bookingcheckoutcard.module";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { LocationButtonComponent } from './components/location-button/location-b
     HeaderModule,
     CardModule,
     CarouselModule,
-    LoaderModule
+    LoaderModule,
+    BookingCheckoutcardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,210 @@
+.container {
+  width: 90%;
+  height: auto;
+  margin: 3% 5%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
+  display: flex;
+  background-color: #fff;
+}
+
+.checkout-card {
+  width: 96%;
+  height: 96%;
+  margin: 2% 2%;
+  border: none;
+}
+
+.points-error {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: red;
+  box-shadow: 1px 2px #8d8d8d;
+}
+
+.points-error p {
+  color: #fff;
+  font-size: 16px;
+  margin: 0%;
+}
+
+.title {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+  text-align: center;
+}
+
+.title h1 {
+  font-size: 26px;
+  line-height: 26px;
+  margin: 0%;
+  font-weight: normal;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.title span {
+  float: right;
+}
+
+.checkout-details {
+  width: 96%;
+  height: 96%;
+  margin: 2% 2%;
+  border: none;
+}
+
+.restaurant-details {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.restaurant-details p {
+  margin: 0%;
+}
+
+.restaurant-details .sectionHeading {
+  color: lightgrey;
+}
+
+.restaurantName {
+  width: 100%;
+  height: auto;
+}
+
+.restaurantName h1 {
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0%;
+  font-weight: normal;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.address {
+  width: 100%;
+  height: auto;
+}
+
+.address p {
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.booking-details {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.booking-details .sectionHeading {
+  color: lightgrey;
+}
+
+.booking-details p {
+  font-size: 16px;
+  line-height: 18px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.billing-details {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.billing-details p {
+  font-size: 16px;
+  line-height: 18px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.billing-details p span {
+  float: right;
+}
+
+.billing-details .sectionHeading {
+  color: lightgrey;
+}
+
+.billing-details hr {
+  padding: 0%;
+  margin: 0%;
+}
+
+.user-response {
+  width: 100%;
+  margin: 5% 0%;
+}
+
+.proceedToPay {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 48%;
+  margin: 0% 1%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #000000;
+  box-shadow: 1px 2px #8d8d8d;
+}
+
+.proceedToPay:hover {
+  background-color: #ffffff;
+  border: 1px solid #000000;
+}
+
+.proceedToPay p {
+  color: #fff;
+  font-size: 16px;
+  margin: 0%;
+}
+
+.proceedToPay p:hover {
+  color: #000000;
+}
+
+.cancel {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 48%;
+  margin: 0% 1%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: red;
+  box-shadow: 1px 2px #8d8d8d;
+}
+
+.cancel:hover {
+  background-color: #ffffff;
+  border: 1px solid red;
+}
+
+.cancel p {
+  color: #fff;
+  font-size: 16px;
+  margin: 0%;
+}
+
+.cancel p:hover {
+  color: #000000;
+}
