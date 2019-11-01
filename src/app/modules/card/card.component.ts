@@ -1,12 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
-<<<<<<< HEAD
 import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
 import { AppService } from 'src/app/services/app.service';
 import { StateService } from 'src/app/services/state.service';
-=======
-import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
-import { AppService } from "src/app/services/app.service";
->>>>>>> a8761a317b12a4d8987b494618d19f672488a048
 
 @Component({
   selector: "app-card",
@@ -25,6 +20,9 @@ export class CardComponent implements OnInit {
 
   ngAfterViewInit() {
     this._componentFactoryService.updateScroll();
+    let str = this.data["cuisines"];
+    console.log(str);
+    this.data["cuisines"] = str.join(", ");
   }
 
   proceedForBooking() {
