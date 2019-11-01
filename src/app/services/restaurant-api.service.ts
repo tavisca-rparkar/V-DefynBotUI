@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { timeout } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { timeout } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class RestaurantApiService {
-
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
   private _restaurantListApiUrl =
   "http://172.16.5.151/api/bookingtable?";
   private _restaurantDetailsApiUrl =
@@ -36,8 +35,10 @@ export class RestaurantApiService {
     }
   }
 
-  GetRestaurantDetails(restId, supplier){
-    return this._http.get(this._restaurantDetailsApiUrl+restId+"&supplierName="+supplier).pipe(timeout(5000));
+  GetRestaurantDetails(restId, supplier) {
+    return this._http
+      .get(this._restaurantDetailsApiUrl + restId + "&supplierName=" + supplier)
+      .pipe(timeout(5000));
   }
 
   BookingInitiateForRestaurant(bookingData){
@@ -57,7 +58,8 @@ export class RestaurantApiService {
       restaurantId: 1,
       restaurantName: "Pizza Hut",
       supplierName: "Zomato",
-      restaurantAddress: "Next to Vaishali Restaurant, Lane no. 5, FC Road, Pune",
+      restaurantAddress:
+        "Next to Vaishali Restaurant, Lane no. 5, FC Road, Pune",
       userRating: 4.6,
       cuisines: "Italian, American",
       images: [
@@ -71,7 +73,6 @@ export class RestaurantApiService {
     };
     return data;
   }
-  
 
   GetMockRestaurantsList(){
     const restaurantList = [{
@@ -112,6 +113,4 @@ export class RestaurantApiService {
     }];
     return restaurantList;
   }
-
-
 }

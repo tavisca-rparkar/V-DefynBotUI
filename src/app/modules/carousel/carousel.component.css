@@ -1,0 +1,118 @@
+.carousel-container {
+  width: 100%;
+  height: 50%;
+  margin: 5% 0%;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.slide {
+  width: 75%;
+  height: 90%;
+  display: inline-block;
+  white-space: normal;
+  background-color: #fff;
+  margin: 5% 3%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
+}
+
+.slide-card {
+  width: 94%;
+  height: 94%;
+  margin: 3% 3%;
+}
+
+.slide-image-container {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 65%;
+}
+
+.slide-image-container img {
+  max-height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+
+.slide-text-container {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 30%;
+  margin-top: 3%;
+  letter-spacing: 0px;
+}
+
+.slide-name {
+  height: 35%;
+  text-align: left;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.slide-name h1 {
+  font-size: 16px;
+  padding: 0;
+  color: #000000;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0px;
+  -webkit-font-smoothing: antialiased;
+  line-height: 24px;
+}
+
+.locality {
+  height: 25%;
+  text-align: left;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.locality p {
+  font-size: 14px;
+  letter-spacing: 0px;
+  padding: 0;
+  margin: 0;
+  color: #545454;
+  line-height: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rating {
+  height: 38%;
+  display: inline-flex;
+  background-color: #f6f6f6;
+  align-items: center;
+  padding: 1px 6px;
+  margin-top: 2%;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.rating p {
+  color: #000000;
+  font-size: 14px;
+  margin: 0;
+}
+
+.pricePerPerson {
+  height: 38%;
+  display: inline-flex;
+  background-color: #f6f6f6;
+  align-items: center;
+  padding: 1px 6px;
+  margin-top: 2%;
+  margin-right: 3%;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.pricePerPerson p {
+  color: #000000;
+  font-size: 14px;
+  margin: 0;
+}

@@ -1,7 +1,12 @@
 import { Component, OnInit, Input } from "@angular/core";
+<<<<<<< HEAD
 import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
 import { AppService } from 'src/app/services/app.service';
 import { StateService } from 'src/app/services/state.service';
+=======
+import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
+import { AppService } from "src/app/services/app.service";
+>>>>>>> a8761a317b12a4d8987b494618d19f672488a048
 
 @Component({
   selector: "app-card",
@@ -13,7 +18,7 @@ export class CardComponent implements OnInit {
     private _appService: AppService,
     private _stateService: StateService) {}
 
-  @Input() data:string;
+  @Input() data: string;
   activeSlideIndex = 0;
 
   ngOnInit() {}
@@ -42,6 +47,6 @@ export class CardComponent implements OnInit {
   }
 
   showRestaurantList() {
-    this._appService.IntentRouter("Show Carousel Again",null);
+    this._appService.IntentRouter("Show Carousel Again", null);
   }
 }

@@ -1,0 +1,34 @@
+<div class="carousel-container">
+  <div class="slide" *ngFor="let slide of data; let index = index">
+    <div class="slide-card" (click)="showDetails(index)">
+      <div class="slide-image-container">
+        <img
+          [src]="slide['thumbURL']"
+          alt="image slide"
+          onError="this.src='https://icon-library.net/images/no-image-available-icon/no-image-available-icon-6.jpg';"
+        />
+      </div>
+      <div class="slide-text-container">
+        <div class="slide-name">
+          <h1>
+            {{ slide["restaurantName"] }}
+          </h1>
+        </div>
+        <div class="locality">
+          <p>{{ slide["localityVerbose"] }}</p>
+        </div>
+        <div class="pricePerPerson">
+          <p>${{ slide["pricePerHead"] }} per person</p>
+        </div>
+        <div class="rating">
+          <p>
+            {{ slide["user_Rating"] }}
+          </p>
+          <img
+            src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/972e1cb487b3a5c72c30a6635596f477.svg"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

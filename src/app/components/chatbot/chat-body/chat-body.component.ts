@@ -11,7 +11,7 @@ import { TextBubbleComponent } from "./text-bubble/text-bubble.component";
 import { ChoiceButtonComponent } from "./choice-button/choice-button.component";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { AppService } from "src/app/services/app.service";
-import { CarouselComponent } from "./carousel/carousel.component";
+import { CarouselComponent } from "src/app/modules/carousel/carousel.component";
 import { CardComponent } from "src/app/modules/card/card.component";
 import {  LocationAccessService } from 'src/app/services/locationAccess.service';
 import { StateService } from 'src/app/services/state.service';
