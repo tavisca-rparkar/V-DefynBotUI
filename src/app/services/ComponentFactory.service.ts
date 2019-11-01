@@ -18,7 +18,8 @@ export class ComponentFactoryService {
   isLoaderShown$ = this._loader.asObservable();
   private _loationButton = new Subject<boolean>();
   locationButton$ = this._loationButton.asObservable();
-
+  private _restaurantCheckoutCard = new Subject<boolean>();
+  restaurantCheckoutCard$ = this._restaurantCheckoutCard.asObservable();
 
   constructor() {}
 
@@ -37,6 +38,10 @@ export class ComponentFactoryService {
 
   AddRestaurantDetailsCard(data) {
     this._restaurantDetailsCard.next(data);
+  }
+
+  AddRestaurantCheckoutCard(data) {
+    this._restaurantCheckoutCard.next(data);
   }
 
   updateScroll() {

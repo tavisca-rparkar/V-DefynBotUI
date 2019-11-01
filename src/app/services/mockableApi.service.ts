@@ -25,7 +25,8 @@ private _apiUrl ="http://demo3711129.mockable.io/dialogflowAuthKey";
       this._locationService.SetURL(data["locationApiUrl"]);
       this._restaurantApiService.SetURL(
         data["restaurantApiUrl"],
-        data["restaurantDetailsApiUrl"]
+        data["restaurantDetailsApiUrl"],
+        data["restaurantBookingUrl"]
       );
     } catch (err) {
       return await Promise.resolve();

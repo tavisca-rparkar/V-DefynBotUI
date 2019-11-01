@@ -7,7 +7,9 @@ import { StateService } from 'src/app/services/state.service';
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit {
-  constructor(private _stateService:StateService) {}
+  constructor(private _stateService:StateService) {
+    
+  }
 
   ngOnInit() {}
 }

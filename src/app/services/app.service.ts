@@ -79,6 +79,10 @@ export class AppService {
       break;
       case "Proceed Table Booking" : this.ProceedTableBookingIntent(response);
       break;
+      case "Process Booking Payment" : this.ProcessBookingPaymentIntent(response);
+      break;
+      case "Cancel Booking" : this.CancelBookingIntent(response);
+      break;
       case "Fallback" : this.FallbackIntent(response);
       break;
       case "Order Food" : this.OrderFoodIntent(response);
@@ -154,22 +158,60 @@ export class AppService {
   ProceedTableBookingIntent(response){
     if(response["queryResult"]["allRequiredParamsPresent"])
     {
-        let guestCount = response["queryResult"]["parameters"]["number"];
-        let date:string = response["queryResult"]["parameters"]["date"];
-        date = date.split("T")[0];
-        let time:string = response["queryResult"]["parameters"]["time"];
-        time = time.split("T")[1].split("+")[0];
-        if(guestCount>15){
-          this._componentFactoryService.AddTextBubble("You can only book upto 15 guests!","bot");
-          this.IntentProcessing("swimming on "+date+" at "+time);
-        }else if(guestCount<1){
-          this._componentFactoryService.AddTextBubble("I'd need atleast 1 guest for booking!","bot");
-          this.IntentProcessing("swimming on "+date+" at "+time);
-        }else{ // Proceed for booking
-          this._componentFactoryService.AddTextBubble("Booking for "+guestCount+" guests on "+date+" at "+time, "bot");
-        }
+      let guestCount = response["queryResult"]["parameters"]["number"];
+      let date:string = response["queryResult"]["parameters"]["date"];
+      date = date.split("T")[0];
+      let time:string = response["queryResult"]["parameters"]["time"];
+      time = time.split("T")[1].split("+")[0];
+      let restaurantData = this._stateService.getRestaurantBookingInitiateData();
+
+      if(this.BookingDetailsAreFine(guestCount,date,time))
+      { // Proceed for booking
+        this._componentFactoryService.StartLoader();
+        this._restaurantApiService.BookingInitiateForRestaurant({
+          "noOfGuests":guestCount,
+          "date":date,
+          "time":time,
+          "restaurantId":restaurantData["restaurantID"],
+          "userName":restaurantData["userName"],
+          "restaurantName":restaurantData["restaurantName"],
+          "perPersonPoints":restaurantData["pointsPerPerson"],
+          "pointBalance":restaurantData["pointBalance"]
+        }).pipe(catchError(err => {
+          this._componentFactoryService.StopLoader();
+            this._componentFactoryService.AddTextBubble("Sorry, I am unable to proceed with the booking right now, Please try again later", "bot");
+            return throwError(err);            
+        }))
+        .subscribe((data) => {
+          // show results here - 
+          this._componentFactoryService.AddRestaurantCheckoutCard(data);
+          this._componentFactoryService.StopLoader();
+        });
+      }
     }else{
-    this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
+    this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"],"bot");
+    }
+  }
+
+  ProcessBookingPaymentIntent(response){
+
+  }
+
+  CancelBookingIntent(response){
+
+  }
+
+  BookingDetailsAreFine(guestCount,date,time){
+    if(guestCount>15){
+      this._componentFactoryService.AddTextBubble("You can only book upto 15 guests!","bot");
+      this.IntentProcessing("swimming on "+date+" at "+time);
+      return false;
+    }else if(guestCount<1){
+      this._componentFactoryService.AddTextBubble("I'd need atleast 1 guest for booking!","bot");
+      this.IntentProcessing("swimming on "+date+" at "+time);
+      return false;
+    }else{
+      return true;
     }
   }
 

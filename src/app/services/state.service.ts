@@ -4,13 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StateService {
-
   constructor() { }
   
   public bankName:string = "US Bank";
   public userFirstName:string = "Neelesh";
   public userID:string = "19345";
   public pointBalance = 10000;
+  public CurrencyValueInPoints: 100;
 
   private _latitude:string;
   private _longitude:string;
@@ -35,11 +35,20 @@ export class StateService {
   {
     return this._longitude;
   }
-  public setRestaurantBookingData(data:any){
+  public setRestaurantBookingInitiateData(restaurantId,restaurantName,perPersonPrice,supplier){
+    let points= perPersonPrice*this.CurrencyValueInPoints;// converting price to points
+    let restaurantIdWithSupplier = supplier+"/"+restaurantId 
+    let data = {
+      "restaurantID":restaurantIdWithSupplier,
+      "restaurantName":restaurantName,
+      "pointsPerPerson":points,
+      "userName":this.userID,
+      "pointBalance":this.pointBalance
+    };
     this._restaurantBookingInitiateData = data;
     this._isBookingInitiated =true;
   }
-  public getRestaurantBookingData(){
+  public getRestaurantBookingInitiateData(){
     return this._restaurantBookingInitiateData;
   }
   public IsBookingInititated(){

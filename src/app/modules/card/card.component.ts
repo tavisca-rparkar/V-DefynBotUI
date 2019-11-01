@@ -21,12 +21,17 @@ export class CardComponent implements OnInit {
   ngAfterViewInit() {
     this._componentFactoryService.updateScroll();
     let str = this.data["cuisines"];
-    console.log(str);
     this.data["cuisines"] = str.join(", ");
   }
 
   proceedForBooking() {
-    //this._appService.IntentRouter("Proceed Booking",null);
+    //setting restaurant detials in stateService
+    this._stateService.setRestaurantBookingInitiateData(this.data["restaurantId"],
+    this.data["restaurantName"],
+    this.data["pricePerHead"],
+    this.data["supplierName"]
+    );
+    // sending intent for Booking Initiation
     let requestString = "swimming";
     let BookTableData = this._stateService.getBookTableData();
  

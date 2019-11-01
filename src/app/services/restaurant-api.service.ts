@@ -12,12 +12,13 @@ export class RestaurantApiService {
   private _restaurantDetailsApiUrl =
   "http://172.16.5.143:5000/api/RestaurantDetails?restaurantId=";
   private _restaurantBookingApiUrl =
-  "http://172.16.5.143:5000/api/RestaurantDetails?restaurantId=";
+  "https://localhost:44367/api/booking?";
   private _carouselData;
 
-  SetURL(listUrl: string, detailsUrl) {
+  SetURL(listUrl: string, detailsUrl:string, bookingUrl:string) {
     this._restaurantListApiUrl = listUrl;
     this._restaurantDetailsApiUrl = detailsUrl;
+    this._restaurantBookingApiUrl = bookingUrl;
   }
 
   SetCarouselData(data){
@@ -42,7 +43,12 @@ export class RestaurantApiService {
   }
 
   BookingInitiateForRestaurant(bookingData){
-    return this._http.get(this._restaurantBookingApiUrl).pipe(timeout(5000));
+    return this._http.get(this._restaurantBookingApiUrl+"noOfGuests=3&date=2019-11-11&time=11:59:59&restaurantId=zomato/1&userName=swar&restaurantName=Novetol&perPersonPoints=100&pointBalance=1000").pipe(timeout(5000));
+  }
+
+  MockBookingInitiateForRestaurant(bookingData){
+    console.log("Warning : Mock Api Called For Initiating Booking For Restaurants !!!")
+    return this._http.get("http://demo8483055.mockable.io/mockbookingapi").pipe(timeout(5000));
   }
 
   BookingConfirmaionForRestaurant(bookingData){

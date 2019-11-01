@@ -13,8 +13,6 @@ import { ComponentFactoryService } from "src/app/services/ComponentFactory.servi
 import { AppService } from "src/app/services/app.service";
 import { CarouselComponent } from "src/app/modules/carousel/carousel.component";
 import { CardComponent } from "src/app/modules/card/card.component";
-import {  LocationAccessService } from 'src/app/services/locationAccess.service';
-import { StateService } from 'src/app/services/state.service';
 import { LocationButtonComponent } from '../../location-button/location-button.component';
 
 @Component({
@@ -30,10 +28,7 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     private _appService: AppService,
     private _factory: ComponentFactoryResolver,
     private _componentFactoryService: ComponentFactoryService,
-    private cdRef: ChangeDetectorRef,
-    private _locationAccess:LocationAccessService,
-    private _stateService:StateService
-    
+    private cdRef: ChangeDetectorRef    
   ) {}
   
   ngOnInit() {
@@ -58,8 +53,14 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
         this.addLocationButton();
       }
     );
+    this._componentFactoryService.restaurantCheckoutCard$.subscribe(
+      data => {
+        this.addRestaurantCheckoutCard(data);
+      }
+    );
     
   }
+ 
 
   ngAfterViewInit() {
     // initiating conversation for default welcome message-
@@ -109,5 +110,12 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     let instance = <CardComponent>componentRef1.instance;
     instance.data = data;
     this.cdRef.detectChanges();
+  }
+
+  addRestaurantCheckoutCard(data) {
+    const factory = this._factory.resolveComponentFactory(CardComponent);
+    const componentRef1 = this.vc.createComponent(factory);
+    let instance = <CardComponent>componentRef1.instance;
+    instance.data = data;
   }
 }
