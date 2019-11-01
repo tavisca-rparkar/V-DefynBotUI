@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { timeout } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { timeout } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class RestaurantApiService {
-
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
   private _restaurantListApiUrl =
-  "http://172.16.5.151/api/bookingtable?locality=";
+  "http://172.16.5.151/api/bookingtable?";
   private _restaurantDetailsApiUrl =
+  "http://172.16.5.143:5000/api/RestaurantDetails?restaurantId=";
+  private _restaurantBookingApiUrl =
   "http://172.16.5.143:5000/api/RestaurantDetails?restaurantId=";
   private _carouselData;
 
@@ -18,6 +19,7 @@ export class RestaurantApiService {
     this._restaurantListApiUrl = listUrl;
     this._restaurantDetailsApiUrl = detailsUrl;
   }
+
   SetCarouselData(data){
     this._carouselData = data
   } 
@@ -25,21 +27,39 @@ export class RestaurantApiService {
     return this._carouselData;
   }
 
-  GetRestaurantsList(city:string){
-    return this._http.get(this._restaurantListApiUrl + city).pipe(timeout(15000));
+  GetRestaurantsList(city:string, latitude:string, longitude:string){
+    if(city==""){
+      return this._http.get(this._restaurantListApiUrl+"latitude="+latitude+"&longitude="+longitude).pipe(timeout(15000));
+    }else{
+      return this._http.get(this._restaurantListApiUrl+"locality="+city+"&latitude="+latitude+"&longitude="+longitude).pipe(timeout(15000));
+    }
   }
 
-  GetRestaurantDetails(restId, supplier){
-    return this._http.get(this._restaurantDetailsApiUrl+restId+"&supplierName="+supplier).pipe(timeout(5000));
+  GetRestaurantDetails(restId, supplier) {
+    return this._http
+      .get(this._restaurantDetailsApiUrl + restId + "&supplierName=" + supplier)
+      .pipe(timeout(5000));
   }
 
+  BookingInitiateForRestaurant(bookingData){
+    return this._http.get(this._restaurantBookingApiUrl).pipe(timeout(5000));
+  }
 
-  GetMockRestaurantDetails(restId, supplier){
+  BookingConfirmaionForRestaurant(bookingData){
+    /*return this._http.get(PUT URL HERE).pipe(timeout(5000));*/
+  }
+
+  BookingCancellationForRestaurant(bookingData){
+    /*return this._http.get(PUT URL HERE).pipe(timeout(5000));*/
+  }
+
+  GetMockRestaurantDetails(){
     const data = {
       restaurantId: 1,
       restaurantName: "Pizza Hut",
       supplierName: "Zomato",
-      restaurantAddress: "Next to Vaishali Restaurant, Lane no. 5, FC Road, Pune",
+      restaurantAddress:
+        "Next to Vaishali Restaurant, Lane no. 5, FC Road, Pune",
       userRating: 4.6,
       cuisines: "Italian, American",
       images: [
@@ -53,10 +73,8 @@ export class RestaurantApiService {
     };
     return data;
   }
-  
 
-  GetMockRestaurantsList(city:string){
-    console.log("(RestaurantApiService)fetching restaurants in - "+city);
+  GetMockRestaurantsList(){
     const restaurantList = [{
       "restaurantId": 1,
       "restaurantName": "Dominos Pizza",
@@ -95,6 +113,4 @@ export class RestaurantApiService {
     }];
     return restaurantList;
   }
-
-
 }

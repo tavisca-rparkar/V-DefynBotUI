@@ -10,8 +10,6 @@ import { AppService } from "src/app/services/app.service";
 export class CarouselComponent {
   @Input() data: string;
 
-  activeSlideIndex = 0;
-
   constructor(
     private _componentFactoryService: ComponentFactoryService,
     private _appService: AppService

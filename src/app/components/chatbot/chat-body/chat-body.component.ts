@@ -11,8 +11,11 @@ import { TextBubbleComponent } from "./text-bubble/text-bubble.component";
 import { ChoiceButtonComponent } from "./choice-button/choice-button.component";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { AppService } from "src/app/services/app.service";
-import { CarouselComponent } from "./carousel/carousel.component";
+import { CarouselComponent } from "src/app/modules/carousel/carousel.component";
 import { CardComponent } from "src/app/modules/card/card.component";
+import {  LocationAccessService } from 'src/app/services/locationAccess.service';
+import { StateService } from 'src/app/services/state.service';
+import { LocationButtonComponent } from '../../location-button/location-button.component';
 
 @Component({
   selector: "app-chat-body",
@@ -27,10 +30,15 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     private _appService: AppService,
     private _factory: ComponentFactoryResolver,
     private _componentFactoryService: ComponentFactoryService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private _locationAccess:LocationAccessService,
+    private _stateService:StateService
+    
   ) {}
-
+  
   ngOnInit() {
+   
+    
     this._componentFactoryService.createTextBubble$.subscribe(data => {
       this.addTextBubble(data);
     });
@@ -45,14 +53,28 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
         this.addRestaurantDetailsCard(data);
       }
     );
+    this._componentFactoryService.locationButton$.subscribe(
+      data => {
+        this.addLocationButton();
+      }
+    );
     
   }
 
   ngAfterViewInit() {
     // initiating conversation for default welcome message-
+    
+    
     this._appService.InitiateConversation();
   }
-
+  
+  addLocationButton(){
+    const factory = this._factory.resolveComponentFactory(
+      LocationButtonComponent
+    );
+    const componentRef1 = this.vc.createComponent(factory);
+    let instance = <LocationButtonComponent>componentRef1.instance;
+  }
   addTextBubble(data) {
     const factory = this._factory.resolveComponentFactory(TextBubbleComponent);
     const componentRef = this.vc.createComponent(factory);
