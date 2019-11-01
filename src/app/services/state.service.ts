@@ -7,6 +7,11 @@ export class StateService {
 
   constructor() { }
   
+  public bankName:string = "US Bank";
+  public userFirstName:string = "Neelesh";
+  public userID:string = "19345";
+  public pointBalance = 10000;
+
   private _latitude:string;
   private _longitude:string;
   private _isLatLongProvided:boolean = false;

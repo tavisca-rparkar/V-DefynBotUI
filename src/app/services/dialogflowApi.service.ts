@@ -4,6 +4,7 @@ import {
   HttpHeaders,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { StateService } from './state.service';
 
 @Injectable({
   providedIn: "root"
@@ -11,7 +12,7 @@ import { Observable } from "rxjs";
 
 export class DialogflowApiService {
   private _productUrl =
-    "https://dialogflow.googleapis.com/v2/projects/v-defynbot-rkixcd/agent/sessions/1235:detectIntent";
+    "https://dialogflow.googleapis.com/v2/projects/v-defynbot-rkixcd/agent/sessions/"+this._stateService.userID+":detectIntent";
   private _headers: HttpHeaders;
 
   private _authKey =
@@ -22,7 +23,8 @@ export class DialogflowApiService {
   queryInput: QueryInput;
   format: Format;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient,
+    private _stateService: StateService) {}
 
   SetKey(key: string) {
     this._authKey = "Bearer " + key;

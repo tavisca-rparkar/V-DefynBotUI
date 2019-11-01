@@ -83,6 +83,8 @@ export class AppService {
       break;
       case "Order Food" : this.OrderFoodIntent(response);
       break;
+      case "Get Point Balance" : this.GetPointBalanceIntent(response);
+      break;
       default: this.SmallTalkIntent(response);
       break;
     }
@@ -196,5 +198,8 @@ export class AppService {
       response["queryResult"]["fulfillmentText"],
       "bot"
     );
+  }
+  GetPointBalanceIntent(response){
+    this._componentFactoryService.AddTextBubble("Point Balance: "+this._stateService.pointBalance, "bot");
   }
 }
