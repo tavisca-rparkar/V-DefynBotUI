@@ -26,7 +26,7 @@ export class RestaurantApiService {
 
   GetRestaurantsList(city: string) {
     return this._http
-      .get(this._restaurantListApiUrl + city)
+      .get(this._restaurantListApiUrl + "locality=" + city)
       .pipe(timeout(15000));
   }
 

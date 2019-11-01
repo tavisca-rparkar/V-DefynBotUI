@@ -1,66 +1,68 @@
-<div class="card">
-  <div class="carousel-container">
-    <carousel
-      [(activeSlide)]="activeSlideIndex"
-      [interval]="false"
-      [itemsPerSlide]="1"
-    >
-      <slide *ngFor="let image of data['images']" class="slide">
-        <img
-          [src]="image"
-          alt="image slide"
-          class="restaurant-image"
-          onError="this.src='https://icon-library.net/images/no-image-available-icon/no-image-available-icon-6.jpg';"
-        />
-      </slide>
-    </carousel>
-  </div>
-  <div class="restaurantInfo">
-    <div class="name">
-      <h1 class="restaurantName">
-        <b>{{ data["restaurantName"] }}</b>
-      </h1>
-    </div>
-
-    <div class="map">
-      <a href="https://maps.google.com/?q={{ data['lat'] }},{{ data['lon'] }}" target="_blank"
-        ><img
-          style="width: 40px; height:40px;"
-          src="https://cdn1.imggmi.com/uploads/2019/10/24/306122ba2ef5fce323452f18e56ae49a-full.png"
-      /></a>
-    </div>
-
-    <div class="rating-view">
-      <div class="ratings">
-        <p>
-          <b> &#9734; &nbsp;{{ data["user_Rating"] }}</b>
-        </p>
+<div class="card-container">
+  <div class="card">
+    <div class="image-gallery">
+      <div class="image-container" *ngFor="let image of data['images']">
+        <div class="image">
+          <img
+            [src]="image"
+            alt="image slide"
+            class="restaurant-image"
+            onError="this.src='https://icon-library.net/images/no-image-available-icon/no-image-available-icon-6.jpg';"
+          />
+        </div>
       </div>
     </div>
+    <div class="restaurantInfo">
+      <div class="restaurantName">
+        <h1>
+          {{ data["restaurantName"] }}
+        </h1>
+      </div>
 
-    <div class="address">
-      <p>
-        {{ data["address"] }}
-      </p>
+      <div class="cuisines">
+        <p>
+          {{ data["cuisines"] }}
+        </p>
+      </div>
+
+      <div class="rating-price">
+        <div class="rating">
+          <p>
+            {{ data["user_Rating"] }}
+          </p>
+          <img
+            src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/972e1cb487b3a5c72c30a6635596f477.svg"
+          />
+        </div>
+
+        <div class="pricePerPerson">
+          <p>${{ data["pricePerHead"] }} per person</p>
+        </div>
+      </div>
+
+      <div class="address">
+        <p>
+          {{ data["address"] }}
+        </p>
+      </div>
+
+      <div class="map">
+        <a
+          href="https://maps.google.com/?q={{ data['lat'] }},{{ data['lon'] }}"
+          target="_blank"
+        >
+          <img
+            src="https://www.seekpng.com/png/full/1005-10056004_map-pointer-comments-location-icon-svg.png"
+          />
+          <p>Map View</p></a
+        >
+      </div>
     </div>
-
-    <div class="cuisines">
-      <p>
-        Cuisines : <b>{{ data["cuisines"] }}</b>
-      </p>
-    </div>
-
-    <div class="price">
-      <p>
-        Price Per Person : <b>${{ data["pricePerHead"] }}</b>
-      </p>
-    </div>
-
     <div class="proceed-button" (click)="proceedForBooking()">
-      <button>Proceed To Book</button>
-    </div>
-    <div class="browse-button" (click)="showRestaurantList()">
-      <button>Browse more restaurants</button>
+      <p>Proceed To Book</p>
     </div>
   </div>
+</div>
+<div class="browse-button">
+  <button (click)="showRestaurantList()">Browse more restaurants</button>
 </div>

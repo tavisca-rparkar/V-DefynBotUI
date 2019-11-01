@@ -68,6 +68,7 @@
   height: 25%;
   text-align: left;
   display: block;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
