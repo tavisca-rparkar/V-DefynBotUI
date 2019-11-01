@@ -1,7 +1,7 @@
 <div class="container">
   <div class="checkout-card">
     <div *ngIf="isErrorDetected" class="points-error">
-      <p>{{ data2["error"] }}</p>
+      <p>{{ data["error"] }}</p>
     </div>
     <div class="title">
       <h1>
@@ -14,36 +14,36 @@
       <div class="restaurant-details">
         <p class="sectionHeading">Booking For :</p>
         <div class="restaurantName">
-          <h1>{{ data2["restaurantName"] }}</h1>
+          <h1>{{ data["restaurantName"] }}</h1>
         </div>
-        <div class="address">
+        <!--div class="address">
           <p>
             Next to Vaishali Restaurant, FC Road, Deccan, Pune, Maharashtra,
             India
           </p>
-        </div>
+        </div-->
       </div>
       <hr />
       <div class="booking-details">
         <p class="sectionHeading">Booking Details :</p>
-        <p>Guests : {{ data2["noOfGuests"] }}</p>
-        <p>Date : {{ data2["date"] }}</p>
-        <p>Time : {{ data2["time"] }}</p>
+        <p>Guests : {{ data["noOfGuests"] }}</p>
+        <p>Date : {{ data["date"] }}</p>
+        <p>Time : {{ data["time"] }}</p>
       </div>
       <hr />
       <div class="billing-details">
         <p class="sectionHeading">Billing Details :</p>
         <p>
-          Available Point Balance : <span>{{ data2["pointBalance"] }}</span>
+          Available Point Balance : <span>{{ data["pointBalance"] }}</span>
         </p>
         <p>
-          Cost Per Person : <span>{{ data2["perPersonPoints"] }}</span>
+          Cost Per Person : <span>{{ data["perPersonPoints"] }}</span>
         </p>
         <hr />
         <p>
           <b
             >Final Amount :
-            <span>{{ data2["perPersonPoints"] * data2["noOfGuests"] }}</span></b
+            <span>{{ data["perPersonPoints"] * data["noOfGuests"] }}</span></b
           >
         </p>
       </div>

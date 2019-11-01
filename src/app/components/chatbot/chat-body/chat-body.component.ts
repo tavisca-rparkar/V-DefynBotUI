@@ -14,6 +14,7 @@ import { AppService } from "src/app/services/app.service";
 import { CarouselComponent } from "src/app/modules/carousel/carousel.component";
 import { CardComponent } from "src/app/modules/card/card.component";
 import { LocationButtonComponent } from '../../location-button/location-button.component';
+import { BookingCheckoutcardComponent } from 'src/app/modules/bookingcheckoutcard/bookingcheckoutcard.component';
 
 @Component({
   selector: "app-chat-body",
@@ -113,9 +114,9 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
   }
 
   addRestaurantCheckoutCard(data) {
-    const factory = this._factory.resolveComponentFactory(CardComponent);
+    const factory = this._factory.resolveComponentFactory(BookingCheckoutcardComponent);
     const componentRef1 = this.vc.createComponent(factory);
-    let instance = <CardComponent>componentRef1.instance;
+    let instance = <BookingCheckoutcardComponent>componentRef1.instance;
     instance.data = data;
   }
 }

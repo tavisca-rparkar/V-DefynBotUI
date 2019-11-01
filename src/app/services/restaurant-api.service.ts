@@ -43,7 +43,16 @@ export class RestaurantApiService {
   }
 
   BookingInitiateForRestaurant(bookingData){
-    return this._http.get(this._restaurantBookingApiUrl+"noOfGuests=3&date=2019-11-11&time=11:59:59&restaurantId=zomato/1&userName=swar&restaurantName=Novetol&perPersonPoints=100&pointBalance=1000").pipe(timeout(5000));
+    let noOfGuests = bookingData["noOfGuests"];
+    let date = bookingData["date"];
+    let time = bookingData["time"];
+    let restaurantId = bookingData["restaurantId"];
+    let userName = bookingData["userName"];
+    let restaurantName = bookingData["restaurantName"];
+    let perPersonPoints = bookingData["perPersonPoints"];
+    let pointBalance = bookingData["pointBalance"];
+
+    return this._http.get(this._restaurantBookingApiUrl+"noOfGuests="+noOfGuests+"&date="+date+"&time="+time+"&restaurantId="+restaurantId+"&userName="+userName+"&restaurantName="+restaurantName+"&perPersonPoints="+perPersonPoints+"&pointBalance="+pointBalance).pipe(timeout(5000));
   }
 
   MockBookingInitiateForRestaurant(bookingData){

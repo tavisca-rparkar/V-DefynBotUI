@@ -31,12 +31,12 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit(): void {
-    this.startCountdown(this.timer);
-    if (this.data2["status"] == "BookingInitiated") {
+    if (this.data["status"] == "BookingInitiated") {
       this.isErrorDetected = false;
     } else {
       this.isErrorDetected = true;
     }
+    this.startCountdown(this.timer);
   }
 
   startCountdown(seconds) {
@@ -50,7 +50,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
       if (counter < 0) {
         clearInterval(interval);
         this.isErrorDetected = true;
-        this.data2["error"] = "Session Expired!";
+        this.data["error"] = "Session Expired!";
       }
     }, 1000);
   }
