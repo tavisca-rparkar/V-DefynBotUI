@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, Input } from "@angular/core";
+import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
 
 @Component({
   selector: "app-bookingcheckoutcard",
@@ -26,7 +27,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     pointBalance: 1000
   };
 
-  constructor() {}
+  constructor(private _componentFactoryService:ComponentFactoryService) {}
 
   ngOnInit() {}
 
@@ -37,6 +38,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
       this.isErrorDetected = true;
     }
     this.startCountdown(this.timer);
+    this._componentFactoryService.updateScroll();
   }
 
   startCountdown(seconds) {

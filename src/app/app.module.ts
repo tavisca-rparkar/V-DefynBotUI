@@ -21,6 +21,7 @@ import { CarouselModule } from "./modules/carousel/carousel.module";
 import { CarouselComponent } from "./modules/carousel/carousel.component";
 import { LocationButtonComponent } from "./components/location-button/location-button.component";
 import { BookingCheckoutcardModule } from "./modules/bookingcheckoutcard/bookingcheckoutcard.module";
+import { BookingCheckoutcardComponent } from './modules/bookingcheckoutcard/bookingcheckoutcard.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { BookingCheckoutcardModule } from "./modules/bookingcheckoutcard/booking
     ChoiceButtonComponent,
     CarouselComponent,
     CardComponent,
-    LocationButtonComponent
+    LocationButtonComponent,
+    BookingCheckoutcardComponent
   ]
 })
 export class AppModule {}

@@ -27,7 +27,7 @@
       <div class="booking-details">
         <p class="sectionHeading">Booking Details :</p>
         <p>Guests : {{ data["noOfGuests"] }}</p>
-        <p>Date : {{ data["date"] }}</p>
+        <p>Date : {{ data["date"].split("T")[0] }}</p>
         <p>Time : {{ data["time"] }}</p>
       </div>
       <hr />
@@ -38,6 +38,9 @@
         </p>
         <p>
           Cost Per Person : <span>{{ data["perPersonPoints"] }}</span>
+        </p>
+        <p>
+          Guests : <span>X {{ data["noOfGuests"] }}</span>
         </p>
         <hr />
         <p>

@@ -43,6 +43,7 @@ export class RestaurantApiService {
   }
 
   BookingInitiateForRestaurant(bookingData){
+    console.log(bookingData);
     let noOfGuests = bookingData["noOfGuests"];
     let date = bookingData["date"];
     let time = bookingData["time"];

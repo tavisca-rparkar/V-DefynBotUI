@@ -118,5 +118,6 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     const componentRef1 = this.vc.createComponent(factory);
     let instance = <BookingCheckoutcardComponent>componentRef1.instance;
     instance.data = data;
+    this.cdRef.detectChanges();
   }
 }

@@ -9,8 +9,8 @@ export class StateService {
   public bankName:string = "US Bank";
   public userFirstName:string = "Neelesh";
   public userID:string = "19345";
-  public pointBalance = 10000;
-  public CurrencyValueInPoints: 100;
+  public pointBalance = 999989;
+  public CurrencyValueInPoints:number= 100;
 
   private _latitude:string;
   private _longitude:string;
@@ -46,6 +46,7 @@ export class StateService {
       "pointBalance":this.pointBalance
     };
     this._restaurantBookingInitiateData = data;
+    console.log(this._restaurantBookingInitiateData);
     this._isBookingInitiated =true;
   }
   public getRestaurantBookingInitiateData(){
