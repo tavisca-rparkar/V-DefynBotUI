@@ -9,8 +9,10 @@ export class StateService {
   
   private _latitude:string;
   private _longitude:string;
-
   private _isLatLongProvided:boolean = false;
+  private _restaurantBookingInitiateData:any;
+  private _isBookingInitiated:boolean = false;
+  private _bookTableData:any;
 
   public IslatLongProvided(){
     return this._isLatLongProvided;
@@ -27,5 +29,28 @@ export class StateService {
   public getLongitude()
   {
     return this._longitude;
+  }
+  public setRestaurantBookingData(data:any){
+    this._restaurantBookingInitiateData = data;
+    this._isBookingInitiated =true;
+  }
+  public getRestaurantBookingData(){
+    return this._restaurantBookingInitiateData;
+  }
+  public IsBookingInititated(){
+    return this._isBookingInitiated;
+  }
+
+  public setBookTableData(city,guestCount,date,time){
+    this._bookTableData = {
+      "city" : city,
+      "guestCount": guestCount,
+      "date":date,
+      "time":time
+    };
+    console.log("Guest Count is - "+this._bookTableData["guestCount"]);
+  }
+  public getBookTableData(){
+    return this._bookTableData;
   }
 }

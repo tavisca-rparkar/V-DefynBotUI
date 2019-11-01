@@ -29,15 +29,10 @@ export class AppService {
    async InitiateConversation(){
     await this._mockableService.GetResponse();
     this._locationAccess.getLocation().then(()=>{
-        console.log("one: "+this._stateService.IslatLongProvided());
         if(this._stateService.IslatLongProvided()){
         this.IntentProcessing("Hello");
       }
     });    
-}
-  
-InitiateConversation2(){
-  
 }
 
   ProcessInput(userInput: string) {
@@ -69,7 +64,6 @@ InitiateConversation2(){
         console.log("Intent : ");
         console.log(response["queryResult"]["intent"]["displayName"]);
         console.log("_________________________________________________________");
-        console.log(response);
       });
   }
 
@@ -83,7 +77,7 @@ InitiateConversation2(){
       break;
       case "Show Carousel Again" : this.ShowCarouselAgainIntent();
       break;
-      case "Proceed Booking" : this.ProceedTableBookingIntent();
+      case "Proceed Table Booking" : this.ProceedTableBookingIntent(response);
       break;
       case "Fallback" : this.FallbackIntent(response);
       break;
@@ -99,7 +93,13 @@ InitiateConversation2(){
     if(response["queryResult"]["allRequiredParamsPresent"])
     {
         this._componentFactoryService.StartLoader();
-        let city = response["queryResult"]["parameters"]["address"]
+        let city = response["queryResult"]["parameters"]["address"];
+        let guestCount =  response["queryResult"]["parameters"]["number"];
+        let date =  response["queryResult"]["parameters"]["date"];
+        let time =  response["queryResult"]["parameters"]["time"];
+
+        this._stateService.setBookTableData(city,guestCount,date,time);
+
         this._restaurantApiService.GetRestaurantsList(city,this._stateService.getLatitude(),this._stateService.getLongitude())
         .pipe(catchError(err => {
             this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this response at the moment", "bot");
@@ -109,6 +109,7 @@ InitiateConversation2(){
         .subscribe((data) => {
             if(data===404){
               this._componentFactoryService.AddTextBubble("Sorry, I wasn't able to find any restaurants in that area.", "bot");
+              this._componentFactoryService.StopLoader();
             }else{
               // show results here - 
               this._restaurantApiService.SetCarouselData(data);
@@ -140,6 +141,7 @@ InitiateConversation2(){
             }
         }); 
   }
+
   ShowCarouselAgainIntent(){
     this._componentFactoryService.StartLoader();
     let data = this._restaurantApiService.GetCarouselData();
@@ -147,8 +149,26 @@ InitiateConversation2(){
     this._componentFactoryService.AddRestaurantCarousel(data);
   }
 
-  ProceedTableBookingIntent(){
-  this._componentFactoryService.AddTextBubble("Processing your Booking, Please wait...", "bot");
+  ProceedTableBookingIntent(response){
+    if(response["queryResult"]["allRequiredParamsPresent"])
+    {
+        let guestCount = response["queryResult"]["parameters"]["number"];
+        let date:string = response["queryResult"]["parameters"]["date"];
+        date = date.split("T")[0];
+        let time:string = response["queryResult"]["parameters"]["time"];
+        time = time.split("T")[1].split("+")[0];
+        if(guestCount>15){
+          this._componentFactoryService.AddTextBubble("You can only book upto 15 guests!","bot");
+          this.IntentProcessing("swimming on "+date+" at "+time);
+        }else if(guestCount<1){
+          this._componentFactoryService.AddTextBubble("I'd need atleast 1 guest for booking!","bot");
+          this.IntentProcessing("swimming on "+date+" at "+time);
+        }else{ // Proceed for booking
+          this._componentFactoryService.AddTextBubble("Booking for "+guestCount+" guests on "+date+" at "+time, "bot");
+        }
+    }else{
+    this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
+    }
   }
 
   OrderFoodIntent(response) {

@@ -23,19 +23,16 @@ export class LocationAccessService {
           if (position) {
             this.lat = position.coords.latitude;
             this.lng = position.coords.longitude;
-            console.log(this.lat+","+this.lng);
             this._stateService.setLatLng(this.lat.toString(),this.lng.toString());
-              console.log(this._stateService.IslatLongProvided());
           }
-          console.log(this.lat+","+this.lng);
           resolve();
         },
-          (error: PositionError) => {
+          (error) => {
             console.log(error);
             this._componentFactoryService.AddTextBubble("Please grant us your Browser location access and click on continue.","bot");
             this._componentFactoryService.addLocationButton();
             resolve();
-          });
+          },{timeout : 23000});
     } else {
       console.log("Browser not supported");
       resolve();

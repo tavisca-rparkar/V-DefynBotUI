@@ -9,8 +9,10 @@ export class RestaurantApiService {
 
   constructor(private _http: HttpClient) { }
   private _restaurantListApiUrl =
-  "http://172.16.5.151/api/bookingtable?locality=";
+  "http://172.16.5.151/api/bookingtable?";
   private _restaurantDetailsApiUrl =
+  "http://172.16.5.143:5000/api/RestaurantDetails?restaurantId=";
+  private _restaurantBookingApiUrl =
   "http://172.16.5.143:5000/api/RestaurantDetails?restaurantId=";
   private _carouselData;
 
@@ -18,6 +20,7 @@ export class RestaurantApiService {
     this._restaurantListApiUrl = listUrl;
     this._restaurantDetailsApiUrl = detailsUrl;
   }
+
   SetCarouselData(data){
     this._carouselData = data
   } 
@@ -26,15 +29,30 @@ export class RestaurantApiService {
   }
 
   GetRestaurantsList(city:string, latitude:string, longitude:string){
-    return this._http.get(this._restaurantListApiUrl + city).pipe(timeout(15000));
+    if(city==""){
+      return this._http.get(this._restaurantListApiUrl+"latitude="+latitude+"&longitude="+longitude).pipe(timeout(15000));
+    }else{
+      return this._http.get(this._restaurantListApiUrl+"locality="+city+"&latitude="+latitude+"&longitude="+longitude).pipe(timeout(15000));
+    }
   }
 
   GetRestaurantDetails(restId, supplier){
     return this._http.get(this._restaurantDetailsApiUrl+restId+"&supplierName="+supplier).pipe(timeout(5000));
   }
 
+  BookingInitiateForRestaurant(bookingData){
+    return this._http.get(this._restaurantBookingApiUrl).pipe(timeout(5000));
+  }
 
-  GetMockRestaurantDetails(restId, supplier){
+  BookingConfirmaionForRestaurant(bookingData){
+    /*return this._http.get(PUT URL HERE).pipe(timeout(5000));*/
+  }
+
+  BookingCancellationForRestaurant(bookingData){
+    /*return this._http.get(PUT URL HERE).pipe(timeout(5000));*/
+  }
+
+  GetMockRestaurantDetails(){
     const data = {
       restaurantId: 1,
       restaurantName: "Pizza Hut",
@@ -55,8 +73,7 @@ export class RestaurantApiService {
   }
   
 
-  GetMockRestaurantsList(city:string){
-    console.log("(RestaurantApiService)fetching restaurants in - "+city);
+  GetMockRestaurantsList(){
     const restaurantList = [{
       "restaurantId": 1,
       "restaurantName": "Dominos Pizza",

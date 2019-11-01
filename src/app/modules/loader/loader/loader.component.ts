@@ -14,18 +14,7 @@ export class LoaderComponent implements OnInit {
     this._componentFactoryService.isLoaderShown$.subscribe(
       isShown => {
         this.isDivVisible= isShown;
-        console.log("value of loader is  - "+this.isDivVisible);
       }
     );
   }
-/*
-  StartLoader(){
-    this.isDivVisible = true;
-    console.log("value of loader is  - "+this.isDivVisible);
-  }
-  StopLoader(){
-    this.isDivVisible = false;
-    console.log("value of loader is  - "+this.isDivVisible);
-  }*/
-
 }
