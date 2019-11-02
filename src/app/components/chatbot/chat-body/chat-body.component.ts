@@ -13,8 +13,9 @@ import { ComponentFactoryService } from "src/app/services/ComponentFactory.servi
 import { AppService } from "src/app/services/app.service";
 import { CarouselComponent } from "src/app/modules/carousel/carousel.component";
 import { CardComponent } from "src/app/modules/card/card.component";
-import { LocationButtonComponent } from '../../location-button/location-button.component';
-import { BookingCheckoutcardComponent } from 'src/app/modules/bookingcheckoutcard/bookingcheckoutcard.component';
+import { LocationButtonComponent } from "../../location-button/location-button.component";
+import { BookingCheckoutcardComponent } from "src/app/modules/bookingcheckoutcard/bookingcheckoutcard.component";
+import { BookingsummarycardComponent } from "src/app/modules/bookingsummarycard/bookingsummarycard.component";
 
 @Component({
   selector: "app-chat-body",
@@ -29,12 +30,10 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     private _appService: AppService,
     private _factory: ComponentFactoryResolver,
     private _componentFactoryService: ComponentFactoryService,
-    private cdRef: ChangeDetectorRef    
+    private cdRef: ChangeDetectorRef
   ) {}
-  
+
   ngOnInit() {
-   
-    
     this._componentFactoryService.createTextBubble$.subscribe(data => {
       this.addTextBubble(data);
     });
@@ -49,28 +48,21 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
         this.addRestaurantDetailsCard(data);
       }
     );
-    this._componentFactoryService.locationButton$.subscribe(
-      data => {
-        this.addLocationButton();
-      }
-    );
-    this._componentFactoryService.restaurantCheckoutCard$.subscribe(
-      data => {
-        this.addRestaurantCheckoutCard(data);
-      }
-    );
-    
+    this._componentFactoryService.locationButton$.subscribe(data => {
+      this.addLocationButton();
+    });
+    this._componentFactoryService.restaurantCheckoutCard$.subscribe(data => {
+      this.addRestaurantCheckoutCard(data);
+    });
   }
- 
 
   ngAfterViewInit() {
     // initiating conversation for default welcome message-
-    
-    
+
     this._appService.InitiateConversation();
   }
-  
-  addLocationButton(){
+
+  addLocationButton() {
     const factory = this._factory.resolveComponentFactory(
       LocationButtonComponent
     );
@@ -114,9 +106,21 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
   }
 
   addRestaurantCheckoutCard(data) {
-    const factory = this._factory.resolveComponentFactory(BookingCheckoutcardComponent);
+    const factory = this._factory.resolveComponentFactory(
+      BookingCheckoutcardComponent
+    );
     const componentRef1 = this.vc.createComponent(factory);
     let instance = <BookingCheckoutcardComponent>componentRef1.instance;
+    instance.data = data;
+    this.cdRef.detectChanges();
+  }
+
+  addBookingSummaryCard(data) {
+    const factory = this._factory.resolveComponentFactory(
+      BookingsummarycardComponent
+    );
+    const componentRef1 = this.vc.createComponent(factory);
+    let instance = <BookingsummarycardComponent>componentRef1.instance;
     instance.data = data;
     this.cdRef.detectChanges();
   }
