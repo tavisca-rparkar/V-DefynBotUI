@@ -7,6 +7,7 @@ import { RestaurantApiService } from "./restaurant-api.service";
 @Injectable({
   providedIn: "root"
 })
+
 export class MockableApiService {
   constructor(
     private _http: HttpClient,
@@ -16,7 +17,7 @@ export class MockableApiService {
   ) {}
 
 // Mockable.io URL for custom made Api for dialogflow key and api urls
-private _apiUrl ="http://demo3711129.mockable.io/dialogflowAuthKey";
+private _apiUrl ="http://demo8483055.mockable.io/dialogflowAuthKey";
 
   async GetResponse() {
     try {

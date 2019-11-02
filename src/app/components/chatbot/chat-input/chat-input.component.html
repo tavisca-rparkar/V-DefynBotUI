@@ -5,8 +5,12 @@
     [(ngModel)]="_userInput"
     placeholder="Type your message here..."
     (keydown.enter)="SendUserInput()"
+    autofocus
   />
-  <button (click)="SendUserInput()">
-    Send
+  <button (click)="listen()" class="voice">
+    <img [src]="voiceButtonIcon">
+  </button>
+  <button (click)="SendUserInput()" class="text">
+    <img [src]="textButtonIcon">
   </button>
 </div>

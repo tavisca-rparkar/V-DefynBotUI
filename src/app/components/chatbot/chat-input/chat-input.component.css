@@ -9,22 +9,42 @@
 input {
   float: left;
   font-size: 17px;
-  border-radius: 20px;
+  border-radius: 20px 0px 0px 20px;
   border: none;
+  border-width: 0ch;
   width: 70%;
   height: 50%;
-  margin: 2%;
+  margin: 2% 0% 2% 2%;
   padding: 5%;
 }
 
-button {
-  border-radius: 20px;
+.text {
+  border-radius: 50px;
   border: none;
   float: right;
-  width: 15%;
+  width: 10%;
   height: 70%;
   margin: 2%;
   background-color: white;
   color: #007bff;
   padding: 5px;
+}
+
+.voice {
+  border-radius: 0px 20px 20px 0px;
+  display: inline-block;
+  border: none;
+  border-width: 0ch;
+  width: 10%;
+  height: 70%;
+  margin: 2% 0%;
+  background-color: white;
+  color: #007bff;
+  padding: 3px 8px 3px 3px;
+}
+
+
+img{
+  width: 60%;
+  height: 90%;
 }
