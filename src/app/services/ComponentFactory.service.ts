@@ -5,7 +5,6 @@ import { Subject } from "rxjs";
   providedIn: "root"
 })
 export class ComponentFactoryService {
-  
   private _textBubbleSource = new Subject<any>();
   createTextBubble$ = this._textBubbleSource.asObservable();
   private _choiceButtonSource = new Subject<string[]>();
@@ -20,6 +19,8 @@ export class ComponentFactoryService {
   locationButton$ = this._loationButton.asObservable();
   private _restaurantCheckoutCard = new Subject<boolean>();
   restaurantCheckoutCard$ = this._restaurantCheckoutCard.asObservable();
+  private _bookingSummaryCard = new Subject<boolean>();
+  bookingSummaryCard$ = this._bookingSummaryCard.asObservable();
 
   constructor() {}
 
@@ -44,16 +45,20 @@ export class ComponentFactoryService {
     this._restaurantCheckoutCard.next(data);
   }
 
+  AddBookingSummaryCard(data) {
+    this._bookingSummaryCard.next(data);
+  }
+
   updateScroll() {
     // called in AfterViewInit of all the chatbody components
     var element = document.getElementById("msg-page");
     element.scrollTop = element.scrollHeight;
   }
 
-  StartLoader(){
+  StartLoader() {
     this._loader.next(true);
   }
-  StopLoader(){
+  StopLoader() {
     this._loader.next(false);
   }
   addLocationButton() {

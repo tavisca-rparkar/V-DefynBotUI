@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="booking-card">
+    <div [ngClass]="status">
+      <p>Booked!</p>
+    </div>
+    <div class="title">
+      <h1>
+        Booking Voucher
+      </h1>
+    </div>
+    <div class="booking-details">
+      <div class="bookingId">
+        <p>Booking ID : BKNG1234</p>
+      </div>
+      <hr />
+      <div class="restaurant-details">
+        <p class="sectionHeading">Booking For :</p>
+        <div class="restaurantName">
+          <h1>{{ data["restaurantName"] }}</h1>
+        </div>
+        <div class="address">
+          <p>
+            Next to Vaishali Restaurant, FC Road, Deccan, Pune, Maharashtra,
+            India
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div class="booking-details">
+        <p class="sectionHeading">Booking Details :</p>
+        <p>Guests : {{ data["noOfGuests"] }}</p>
+        <p>Date : {{ data["date"].split("T")[0] }}</p>
+        <p>Time : {{ data["time"] }}</p>
+      </div>
+      <hr />
+      <div class="billing-details">
+        <p class="sectionHeading">Billing Details :</p>
+        <p>
+          Cost Per Person : <span>{{ data2["perPersonPoints"] }}</span>
+        </p>
+        <p>
+          Guests : <span>X {{ data["noOfGuests"] }}</span>
+        </p>
+        <hr />
+        <p>
+          Final Amount :
+          <span>{{ data["perPersonPoints"] * data["noOfGuests"] }}</span>
+        </p>
+      </div>
+      <hr />
+      <div class="pointsAfterPayment">
+        <p>
+          <b
+            >Points Available After Payment :
+            <span>
+              {{
+                data["pointBalance"] -
+                  data["perPersonPoints"] * data2["noOfGuests"]
+              }}</span
+            ></b
+          >
+        </p>
+      </div>
+    </div>
+    <div *ngIf="!isErrorDetected" class="user-response">
+      <div class="cancel"><p>Cancel Booking</p></div>
+    </div>
+  </div>
+</div>

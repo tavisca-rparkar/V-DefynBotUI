@@ -15,8 +15,8 @@ export class MockableApiService {
     private _restaurantApiService: RestaurantApiService
   ) {}
 
-// Mockable.io URL for custom made Api for dialogflow key and api urls
-private _apiUrl ="http://demo3711129.mockable.io/dialogflowAuthKey";
+  // Mockable.io URL for custom made Api for dialogflow key and api urls
+  private _apiUrl = "http://demo8483055.mockable.io/dialogflowAuthKey";
 
   async GetResponse() {
     try {

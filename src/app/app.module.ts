@@ -21,7 +21,8 @@ import { CarouselModule } from "./modules/carousel/carousel.module";
 import { CarouselComponent } from "./modules/carousel/carousel.component";
 import { LocationButtonComponent } from "./components/location-button/location-button.component";
 import { BookingCheckoutcardModule } from "./modules/bookingcheckoutcard/bookingcheckoutcard.module";
-import { BookingCheckoutcardComponent } from './modules/bookingcheckoutcard/bookingcheckoutcard.component';
+import { BookingCheckoutcardComponent } from "./modules/bookingcheckoutcard/bookingcheckoutcard.component";
+import { BookingsummarycardModule } from "./modules/bookingsummarycard/bookingsummarycard.module";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { BookingCheckoutcardComponent } from './modules/bookingcheckoutcard/book
     CardModule,
     CarouselModule,
     LoaderModule,
-    BookingCheckoutcardModule
+    BookingCheckoutcardModule,
+    BookingsummarycardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

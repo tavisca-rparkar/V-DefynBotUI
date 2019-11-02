@@ -7,7 +7,7 @@
   background-color: #fff;
 }
 
-.checkout-card {
+.booking-card {
   width: 96%;
   height: 96%;
   margin: 2% 2%;
@@ -23,12 +23,53 @@
   bottom: 0%;
   cursor: pointer;
   border-radius: 5px;
-  background-color: #f2dede;
-  border: 1px solid #ebccd1;
+  background-color: red;
   box-shadow: 1px 2px #8d8d8d;
 }
 
 .points-error p {
+  color: #fff;
+  font-size: 16px;
+  margin: 0%;
+}
+
+.booked {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #dff0d8;
+  border: 1px solid #d6e9c6;
+  box-shadow: 1px 2px #8d8d8d;
+  font-weight: bolder;
+}
+
+.booked p {
+  color: #3c763d;
+  font-size: 16px;
+  margin: 0%;
+}
+
+.cancelled {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  box-shadow: 1px 2px #8d8d8d;
+  font-weight: bolder;
+}
+
+.cancelled p {
   color: #a94442;
   font-size: 16px;
   margin: 0%;
@@ -54,11 +95,25 @@
   float: right;
 }
 
-.checkout-details {
+.booking-details {
   width: 96%;
   height: 96%;
   margin: 2% 2%;
   border: none;
+}
+
+.bookingId {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.bookingId p {
+  font-size: 16px;
+  line-height: 18px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
 }
 
 .restaurant-details {
@@ -147,45 +202,35 @@
   margin: 0%;
 }
 
+.pointsAfterPayment {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.pointsAfterPayment p {
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pointsAfterPayment p span {
+  float: right;
+}
+
 .user-response {
   width: 100%;
   margin: 5% 0%;
 }
 
-.proceedToPay {
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  width: 48%;
-  margin: 0% 1%;
-  padding: 2% 2%;
-  bottom: 0%;
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: #000000;
-  box-shadow: 1px 2px #8d8d8d;
-}
-
-.proceedToPay:hover {
-  background-color: #ffffff;
-  border: 1px solid #000000;
-}
-
-.proceedToPay p {
-  color: #fff;
-  font-size: 16px;
-  margin: 0%;
-}
-
-.proceedToPay p:hover {
-  color: #000000;
-}
-
 .cancel {
   display: inline-block;
   text-align: center;
+  font-weight: 400;
   vertical-align: middle;
-  width: 48%;
+  width: 98%;
   margin: 0% 1%;
   padding: 2% 2%;
   bottom: 0%;
