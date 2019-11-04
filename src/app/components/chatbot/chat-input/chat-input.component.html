@@ -1,16 +1,20 @@
 <div class="input-block">
-  <input
-    type="text"
-    class="input-box"
-    [(ngModel)]="_userInput"
-    placeholder="Type your message here..."
-    (keydown.enter)="SendUserInput()"
-    autofocus
-  />
-  <button (click)="listenCheck()" class="voice">
-    <img [src]="voiceButtonIcon" />
-  </button>
-  <button (click)="SendUserInput()" class="text">
-    <img [src]="textButtonIcon" />
-  </button>
+  <div class="inputWithMic">
+    <input
+      type="text"
+      class="input-box"
+      [(ngModel)]="_userInput"
+      placeholder="Type your message here..."
+      (keydown.enter)="SendUserInput()"
+      autofocus
+    />
+    <button (click)="listenCheck()" class="voice">
+      <img [src]="voiceButtonIcon" />
+    </button>
+  </div>
+  <div class="send">
+    <button (click)="SendUserInput()" class="text">
+      <img [src]="textButtonIcon" />
+    </button>
+  </div>
 </div>
