@@ -165,13 +165,13 @@
   bottom: 0%;
   cursor: pointer;
   border-radius: 5px;
-  background-color: #000000;
+  background-color: #5cb85c;
   box-shadow: 1px 2px #8d8d8d;
 }
 
 .proceedToPay:hover {
   background-color: #ffffff;
-  border: 1px solid #000000;
+  border: 1px solid #4cae4c;
 }
 
 .proceedToPay p {
@@ -181,7 +181,7 @@
 }
 
 .proceedToPay p:hover {
-  color: #000000;
+  color: #5cb85c;
 }
 
 .cancel {

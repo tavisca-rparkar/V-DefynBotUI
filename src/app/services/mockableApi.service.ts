@@ -26,7 +26,9 @@ export class MockableApiService {
       this._restaurantApiService.SetURL(
         data["restaurantApiUrl"],
         data["restaurantDetailsApiUrl"],
-        data["restaurantBookingUrl"]
+        data["restaurantBookingUrl"],
+        data["restaurantPaymentUrl"],
+        data["restaurantCancelUrl"]
       );
     } catch (err) {
       return await Promise.resolve();

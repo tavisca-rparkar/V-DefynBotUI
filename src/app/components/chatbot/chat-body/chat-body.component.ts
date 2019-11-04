@@ -54,6 +54,9 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     this._componentFactoryService.restaurantCheckoutCard$.subscribe(data => {
       this.addRestaurantCheckoutCard(data);
     });
+    this._componentFactoryService.bookingSummaryCard$.subscribe(data => {
+      this.addBookingSummaryCard(data);
+    });
   }
 
   ngAfterViewInit() {

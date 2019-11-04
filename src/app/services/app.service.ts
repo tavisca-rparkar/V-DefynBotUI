@@ -32,7 +32,18 @@ export class AppService {
         if(this._stateService.IslatLongProvided()){
         this.IntentProcessing("Hello");
       }
-    });    
+    });  
+    navigator.permissions.query({name:'geolocation'}).then((result) => {
+      if (result.state == 'granted') {
+      } else if (result.state == 'prompt') {  
+        this._componentFactoryService.AddTextBubble("Please grant us your Browser location access.","bot");
+        this._componentFactoryService.addLocationButton();
+      } else {
+        this._componentFactoryService.AddTextBubble("Please grant us your Browser location access and click on reload.","bot");
+        this._componentFactoryService.addLocationButton();
+      }
+     });  
+
 }
 
   ProcessInput(userInput: string) {
@@ -183,7 +194,7 @@ export class AppService {
             return throwError(err);            
         }))
         .subscribe((data) => {
-          // show results here - 
+          // showing Checkout Card here - 
           this._componentFactoryService.AddRestaurantCheckoutCard(data);
           this._componentFactoryService.StopLoader();
         });
@@ -194,11 +205,53 @@ export class AppService {
   }
 
   ProcessBookingPaymentIntent(response){
+    // processing booking payment
+    this._componentFactoryService.AddTextBubble("Processing Payment of: "+response["totalPointPrice"]+" points for Booking-ID: "+response["bookingId"],"bot");
 
+    this._componentFactoryService.StartLoader();
+
+    this._restaurantApiService.BookingPaymentForRestaurant(response)
+    .pipe(catchError(err => {
+      this._componentFactoryService.StopLoader();
+        this._componentFactoryService.AddTextBubble("Sorry, I am unable to proceed with payment of the booking, Please try again later", "bot");
+        return throwError(err);            
+    }))
+    .subscribe((data) => {
+          //updating user point balance on UI
+          if(data["status"]== "Booking Successful"){
+            this._stateService.pointBalance = data["pointBalance"];
+          }
+          // showing Booking Summary here - 
+          this._componentFactoryService.AddBookingSummaryCard(data);
+          this._componentFactoryService.StopLoader();
+        });
   }
 
   CancelBookingIntent(response){
+    this._componentFactoryService.AddTextBubble("Processing Cancellation of Booking-ID: "+response["bookingId"],"bot");
 
+    this._componentFactoryService.StartLoader();
+
+    this._restaurantApiService.BookingCancellationForRestaurant(response)
+    .pipe(catchError(err => {
+      this._componentFactoryService.StopLoader();
+        this._componentFactoryService.AddTextBubble("Sorry, I am unable to proceed with cancellation of this booking, Please try again later", "bot");
+        return throwError(err);            
+    }))
+    .subscribe((data) => {
+      //updating user point balance on UI
+      if(data["status"]== "Cancelled"){
+        this._stateService.pointBalance = data["updatedPointBalance"];
+      }
+      let pointBalance = this._stateService.pointBalance;
+      // showing Cancellation message here - 
+      if(data["status"]== "Cancelled"){
+        this._componentFactoryService.AddTextBubble("Booking Cancelled for Booking-Id: "+data["bookingId"]+". Point Balance updated to "+pointBalance+" pts.","bot");
+      }else{
+        this._componentFactoryService.AddTextBubble("Booking Cancellation Failed for Booking-Id: "+data["bookingId"]+". Reason: "+data["error"],"bot");
+      }
+      this._componentFactoryService.StopLoader();
+    });
   }
 
   BookingDetailsAreFine(guestCount,date,time){

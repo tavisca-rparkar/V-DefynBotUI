@@ -28,13 +28,12 @@ export class StateService {
     this._isLatLongProvided = true;
   }
   public getLatitude(){
-    
     return this._latitude;
   }
-  public getLongitude()
-  {
+  public getLongitude(){
     return this._longitude;
   }
+  
   public setRestaurantBookingInitiateData(restaurantId,restaurantName,perPersonPrice,supplier){
     let points= perPersonPrice*this.CurrencyValueInPoints;// converting price to points
     let restaurantIdWithSupplier = supplier+"/"+restaurantId 

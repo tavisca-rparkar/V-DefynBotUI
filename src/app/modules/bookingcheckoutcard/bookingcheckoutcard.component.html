@@ -5,9 +5,8 @@
     </div>
     <div class="title">
       <h1>
-        Checkout<span *ngIf="!isErrorDetected"
-          >{{ minutes }}:{{ seconds }}</span
-        >
+        Checkout<span *ngIf="!isErrorDetected && !disableAllButtons"
+          >{{ minutes }}:{{ seconds }}</span>
       </h1>
     </div>
     <div class="checkout-details">
@@ -34,7 +33,7 @@
       <div class="billing-details">
         <p class="sectionHeading">Billing Details :</p>
         <p>
-          Available Point Balance : <span>{{ data["pointBalance"] }}</span>
+          Available Point Balance : <span>{{pointBalance }}</span>
         </p>
         <p>
           Cost Per Person : <span>{{ data["perPersonPoints"] }}</span>
@@ -51,9 +50,9 @@
         </p>
       </div>
     </div>
-    <div *ngIf="!isErrorDetected" class="user-response">
-      <div class="proceedToPay"><p>Proceed To Pay</p></div>
-      <div class="cancel"><p>Cancel Booking</p></div>
+    <div *ngIf="!isErrorDetected && !disableAllButtons" class="user-response">
+      <button (click)="proceedToPay()" class="proceedToPay"><p>Proceed To Pay</p></button>
+      <button (click)="cancelBooking()" class="cancel"><p>Cancel Booking</p></button>
     </div>
   </div>
 </div>
