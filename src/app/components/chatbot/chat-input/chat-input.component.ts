@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, OnInit } from "@angular/core";
 import { AppService } from "src/app/services/app.service";
+import { Meta } from "@angular/platform-browser";
 
 @Component({
   selector: "app-chat-input",
@@ -14,7 +15,12 @@ export class ChatInputComponent implements OnInit {
     "https://cdn1.imggmi.com/uploads/2019/11/2/6fe47f39d2b33fc65e8395917d264ec9-full.png";
   isListening = false;
 
-  constructor(private _appService: AppService) {}
+  constructor(private _appService: AppService, private meta: Meta) {
+    this.meta.addTag({
+      name: "viewport",
+      content: "width=device-width, initial-scale=1.0"
+    });
+  }
 
   ngOnInit(): void {
     try {
