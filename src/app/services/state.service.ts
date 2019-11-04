@@ -33,6 +33,7 @@ export class StateService {
   public getLongitude() {
     return this._longitude;
   }
+
   public setRestaurantBookingInitiateData(
     restaurantId,
     restaurantName,

@@ -1,16 +1,16 @@
 <div class="container">
   <div class="booking-card">
-    <div [ngClass]="status">
-      <p>Booked!</p>
+    <div *ngIf="isErrorDetected" class="points-error">
+      <p>{{ data["error"] }}</p>
     </div>
-    <div class="title">
+    <div [ngClass]="status">
       <h1>
-        Booking Voucher
+        {{data["status"]}}
       </h1>
     </div>
     <div class="booking-details">
       <div class="bookingId">
-        <p>Booking ID : BKNG1234</p>
+        <p>Booking ID : {{data["bookingId"]}}</p>
       </div>
       <hr />
       <div class="restaurant-details">
@@ -18,12 +18,12 @@
         <div class="restaurantName">
           <h1>{{ data["restaurantName"] }}</h1>
         </div>
-        <div class="address">
+        <!--div class="address">
           <p>
             Next to Vaishali Restaurant, FC Road, Deccan, Pune, Maharashtra,
             India
           </p>
-        </div>
+        </div-->
       </div>
       <hr />
       <div class="booking-details">
@@ -36,7 +36,7 @@
       <div class="billing-details">
         <p class="sectionHeading">Billing Details :</p>
         <p>
-          Cost Per Person : <span>{{ data2["perPersonPoints"] }}</span>
+          Cost Per Person : <span>{{ data["perPersonPoints"] }}</span>
         </p>
         <p>
           Guests : <span>X {{ data["noOfGuests"] }}</span>
@@ -51,19 +51,18 @@
       <div class="pointsAfterPayment">
         <p>
           <b
-            >Points Available After Payment :
+            >Point Balance Available :
             <span>
               {{
-                data["pointBalance"] -
-                  data["perPersonPoints"] * data2["noOfGuests"]
+                pointBalance
               }}</span
             ></b
           >
         </p>
       </div>
     </div>
-    <div *ngIf="!isErrorDetected" class="user-response">
-      <div class="cancel"><p>Cancel Booking</p></div>
+    <div *ngIf="!isErrorDetected && !disableAllButtons" class="user-response">
+      <button class="cancel" (click)="cancelBooking()"><p>Cancel Booking</p></button>
     </div>
   </div>
 </div>

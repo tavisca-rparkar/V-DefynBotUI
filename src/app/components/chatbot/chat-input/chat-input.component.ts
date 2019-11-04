@@ -60,8 +60,20 @@ export class ChatInputComponent implements OnInit {
     }
   }
 
-  listen() {
-    if (this.isListening == false) {
+  listenCheck(){
+    navigator.permissions.query({name:'microphone'}).then((result) => {
+      if (result.state == 'granted') {
+        this.listen();
+      } else if (result.state == 'prompt') {
+        this.listen();
+      } else {
+        alert("mic permission not granted!");
+      }
+     });
+  }
+
+  listen(){
+    if(this.isListening==false){
       this.changeVoiceButtonIconTo("active");
       this.isListening = true;
       try {
@@ -85,13 +97,14 @@ export class ChatInputComponent implements OnInit {
 
           if (e.results[0].isFinal) {
             this._userInput = transcript;
+            this.SendUserInput();
           }
           console.log(transcript);
         });
 
-        recognition.addEventListener("end", e => {
-          console.log("Speech recognition service stopped");
-          this.listen();
+         recognition.addEventListener('end', e => { 
+          console.log('Speech recognition service stopped');
+          this.listenCheck();
           this.playStopSound();
         });
       } catch (err) {
@@ -99,8 +112,7 @@ export class ChatInputComponent implements OnInit {
         this.changeVoiceButtonIconTo("disabled");
         this.isListening = false;
       }
-    } else {
-      //alert("listening stopped! ");
+    }else{
       this.changeVoiceButtonIconTo("inactive");
       this.isListening = false;
     }

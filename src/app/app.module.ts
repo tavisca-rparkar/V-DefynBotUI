@@ -23,6 +23,7 @@ import { LocationButtonComponent } from "./components/location-button/location-b
 import { BookingCheckoutcardModule } from "./modules/bookingcheckoutcard/bookingcheckoutcard.module";
 import { BookingCheckoutcardComponent } from "./modules/bookingcheckoutcard/bookingcheckoutcard.component";
 import { BookingsummarycardModule } from "./modules/bookingsummarycard/bookingsummarycard.module";
+import { BookingsummarycardComponent } from './modules/bookingsummarycard/bookingsummarycard.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { BookingsummarycardModule } from "./modules/bookingsummarycard/bookingsu
     CarouselComponent,
     CardComponent,
     LocationButtonComponent,
-    BookingCheckoutcardComponent
+    BookingCheckoutcardComponent,
+    BookingsummarycardComponent
   ]
 })
 export class AppModule {}
