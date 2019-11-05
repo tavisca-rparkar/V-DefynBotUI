@@ -64,7 +64,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
         this.data["error"] = "Session Expired!";
         if(!this.disableAllButtons){
           // auto cancel when timer expires only if the proceed/cancel buttons are not manually clicked
-          this.cancelBooking();
+          this.cancelBookingInBG();
         }
       }
     }, 1000);
@@ -91,4 +91,14 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     this._appService.IntentRouter("Cancel Booking",bookingCancelData);
   }
 
+
+  cancelBookingInBG(){
+    this.disableAllButtons=true;
+    let bookingCancelData ={
+      "bookingId": this.data["bookingId"],
+      "pointBalance": this._stateService.pointBalance,
+      "totalPointPrice": this.data["totalPointPrice"]
+    }
+    this._appService.CancelBookingInBackground(bookingCancelData);
+  }
 }

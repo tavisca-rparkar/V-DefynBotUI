@@ -64,7 +64,7 @@ export class AppService {
   IntentProcessing(userInput:string){
       this._dialogflowService.GetResponse(userInput)
       .pipe(catchError(err => {
-        this._componentFactoryService.AddTextBubble("Sorry, I am unable to talk at the momment. Please contact the Site Administrator to report this issue.", "bot");
+        this._componentFactoryService.AddTextBubble("Sorry, I am unable to talk at the moment. Please contact the Site Administrator to report this issue.", "bot");
         return throwError(err);
       }))
       .subscribe(response => {
@@ -197,7 +197,7 @@ export class AppService {
       time = time.split("T")[1].split("+")[0];
       let restaurantData = this._stateService.getRestaurantBookingInitiateData();
 
-      if(this.BookingDetailsAreFine(guestCount,date,time))
+      //if(this.BookingDetailsAreFine(guestCount,date,time))
       { // Proceed for booking
         this._componentFactoryService.StartLoader();
         this._restaurantApiService.BookingInitiateForRestaurant({
@@ -247,6 +247,18 @@ export class AppService {
           this._componentFactoryService.StopLoader();
         });
   }
+
+  CancelBookingInBackground(response){
+    this._restaurantApiService.BookingCancellationForRestaurant(response)
+    .pipe(catchError(err => {
+      this._componentFactoryService.StopLoader();
+        console.log(err);
+        return throwError(err);            
+    }))
+    .subscribe((data) => {
+    });
+  }
+
 
   CancelBookingIntent(response){
     this._componentFactoryService.AddTextBubble("Processing Cancellation of Booking-ID: "+response["bookingId"],"bot");

@@ -23,16 +23,26 @@
   font-size: 17px;
   border-radius: 30px 0px 0px 30px;
   border: none;
+  border-color: transparent;
   border-width: 0ch;
   width: 90%;
   height: 40px;
   padding: 2% 5%;
+  outline: none;
+  cursor: pointer;
+}
+
+input{
+  outline: none;
+  cursor: pointer;
 }
 
 .voice {
   border-radius: 0px 30px 30px 0px;
   display: inline-block;
   border: none;
+  border-color: transparent;
+  outline: none;
   border-width: 0ch;
   width: 10%;
   height: 40px;
@@ -62,6 +72,8 @@
   width: 40px;
   height: 40px;
   border: none;
+  border-color: transparent;
+  outline: none;
   background-color: white;
   color: #007bff;
 }
