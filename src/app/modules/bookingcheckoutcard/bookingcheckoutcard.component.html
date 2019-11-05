@@ -1,7 +1,7 @@
 <div class="container">
   <div class="checkout-card">
     <div *ngIf="isErrorDetected" class="points-error">
-      <p>{{ data["error"] }}</p>
+      <p *ngFor="let error of data['error']">-{{ error }}</p>
     </div>
     <div class="title">
       <h1>

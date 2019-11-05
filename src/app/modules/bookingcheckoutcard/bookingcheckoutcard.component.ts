@@ -58,7 +58,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
       this.seconds = Math.floor(counter % 60);
       counter--;
 
-      if (counter < 0) {
+      if (counter < 0 && !this.isErrorDetected && !this.disableAllButtons) {
         clearInterval(interval);
         this.isErrorDetected = true;
         this.data["error"] = "Session Expired!";

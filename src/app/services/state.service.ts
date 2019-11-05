@@ -7,7 +7,7 @@ export class StateService {
   constructor() {}
 
   public bankName: string = "US Bank";
-  public userFirstName: string = "Neelesh Singh Rajpurohit";
+  public userFirstName: string = "Neelesh";
   public userID: string = "19345";
   public pointBalance = 999989;
   public CurrencyValueInPoints: number = 100;
