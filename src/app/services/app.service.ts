@@ -9,6 +9,7 @@ import { LocationAccessService } from './locationAccess.service';
 import { StateService } from './state.service';
 import { promise } from 'protractor';
 import { timeout, resolve } from 'q';
+import { FoodOrderingService } from './food-ordering.service';
 
 
 @Injectable({
@@ -23,7 +24,8 @@ export class AppService {
     private _mockableService: MockableApiService,
     private _restaurantApiService: RestaurantApiService,
     private _locationAccess:LocationAccessService,
-    private _stateService:StateService
+    private _stateService:StateService,
+    private _foodOrderingService : FoodOrderingService
   ) {}
 
    async InitiateConversation(){
@@ -50,7 +52,13 @@ export class AppService {
     // print on screen
     this._componentFactoryService.AddTextBubble(userInput, "user");
     // send to dialogflow and call necessary functions
-    this.IntentProcessing(userInput);
+    if(this._stateService.IslatLongProvided()){
+      this.IntentProcessing(userInput);
+    }else{
+      this._componentFactoryService.AddTextBubble("Please grant us your Browser location access.","bot");
+      this._componentFactoryService.addLocationButton();
+    }
+    
   }
 
   IntentProcessing(userInput:string){
@@ -86,7 +94,7 @@ export class AppService {
       break;
       case "Show Details" : this.ShowDetailsIntent(response);
       break;
-      case "Show Carousel Again" : this.ShowCarouselAgainIntent();
+      case "Show Carousel Again" : this.ShowCarouselAgainIntent(response);
       break;
       case "Proceed Table Booking" : this.ProceedTableBookingIntent(response);
       break;
@@ -97,6 +105,8 @@ export class AppService {
       case "Fallback" : this.FallbackIntent(response);
       break;
       case "Order Food" : this.OrderFoodIntent(response);
+      break;
+      case "Show Menu" : this.ShowFoodOrderMenu(response);
       break;
       case "Get Point Balance" : this.GetPointBalanceIntent(response);
       break;
@@ -131,7 +141,10 @@ export class AppService {
               // show results here - 
               this._restaurantApiService.SetCarouselData(data);
               this._componentFactoryService.StopLoader();
-              this._componentFactoryService.AddRestaurantCarousel(data);
+              this._componentFactoryService.AddRestaurantCarousel({
+                "data":data,
+                "carouselType":"Restaurant Booking"
+              });
             }
         });    
     }else{
@@ -159,11 +172,19 @@ export class AppService {
         }); 
   }
 
-  ShowCarouselAgainIntent(){
+  ShowCarouselAgainIntent(carouselType:string){
     this._componentFactoryService.StartLoader();
-    let data = this._restaurantApiService.GetCarouselData();
+    let data:any;
+    if(carouselType=="Restaurant Booking"){
+      data = this._restaurantApiService.GetCarouselData();
+    }else if(carouselType=="Food Ordering"){
+      data = this._foodOrderingService.GetCarouselData();
+    }
     this._componentFactoryService.StopLoader();
-    this._componentFactoryService.AddRestaurantCarousel(data);
+    this._componentFactoryService.AddRestaurantCarousel({
+      "data":data,
+      "carouselType":carouselType
+    });
   }
 
   ProceedTableBookingIntent(response){
@@ -269,15 +290,40 @@ export class AppService {
   }
 
   OrderFoodIntent(response) {
+     
     if(response["queryResult"]["allRequiredParamsPresent"])
     {
-        let city = response["queryResult"]["parameters"]["geo-city"]
-        this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
+        this._componentFactoryService.StartLoader();
+        let city = response["queryResult"]["parameters"]["address"];
+
+        this._foodOrderingService.GetRestaurantList(city,this._stateService.getLatitude(),this._stateService.getLongitude())
+        .pipe(catchError(err => {
+            this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this request at the moment", "bot");
+            this._componentFactoryService.StopLoader();
+            return throwError(err);
+        }))
+        .subscribe((data) => {
+            if(data===404){
+              this._componentFactoryService.AddTextBubble("Sorry, I wasn't able to find any restaurants in your area.", "bot");
+              this._componentFactoryService.StopLoader();
+            }else{
+              // show results here - 
+              this._foodOrderingService.SetCarouselData(data);
+              this._componentFactoryService.StopLoader();
+              this._componentFactoryService.AddRestaurantCarousel({
+                "data":data,
+                "carouselType": "Food Ordering"
+              });
+            }
+        });    
     }else{
       this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
     }
   }
 
+  ShowFoodOrderMenu(response){
+      this._componentFactoryService.AddTextBubble("I'll be able to show you the menu for the selected hotel in the next sprint ;) ","bot");
+  }
   WelcomeIntentIntent(response) {
     this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
     this._componentFactoryService.AddChoiceButton(["Book a Table","Order Food"]);

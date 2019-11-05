@@ -96,7 +96,7 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     const factory = this._factory.resolveComponentFactory(CarouselComponent);
     const componentRef1 = this.vc.createComponent(factory);
     let instance = <CarouselComponent>componentRef1.instance;
-    instance.data = data;
+    instance.mainData = data;
     this.cdRef.detectChanges();
   }
 

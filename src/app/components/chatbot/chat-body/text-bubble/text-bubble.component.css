@@ -5,7 +5,7 @@
 
 .user {
   float: right;
-  max-width: 50%;
+  max-width: 70%;
   margin-right: 2%;
 }
 
@@ -22,7 +22,7 @@
 
 .bot {
   float: left;
-  max-width: 50%;
+  max-width: 70%;
   margin-left: 2%;
 }
 

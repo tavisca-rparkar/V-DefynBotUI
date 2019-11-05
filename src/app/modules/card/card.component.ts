@@ -52,6 +52,6 @@ export class CardComponent implements OnInit {
   }
 
   showRestaurantList() {
-    this._appService.IntentRouter("Show Carousel Again", null);
+    this._appService.IntentRouter("Show Carousel Again","Restaurant Booking");
   }
 }
