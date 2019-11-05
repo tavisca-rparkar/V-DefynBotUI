@@ -24,6 +24,7 @@ export class MockableApiService {
     try {
       const data = await this._http.get(this._apiUrl).toPromise();
       this._dialogflowService.SetKey(data["key"]);
+      this._dialogflowService.SetUrl(data["dialogflowApiUrl"]);
       this._locationService.SetURL(data["locationApiUrl"]);
       this._restaurantApiService.SetURL(
         data["restaurantApiUrl"],
