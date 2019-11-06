@@ -61,7 +61,6 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // initiating conversation for default welcome message-
-
     this._appService.InitiateConversation();
   }
 

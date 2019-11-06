@@ -61,15 +61,22 @@ export class ChatInputComponent implements OnInit {
   }
 
   listenCheck(){
-    navigator.permissions.query({name:'microphone'}).then((result) => {
-      if (result.state == 'granted') {
-        this.listen();
-      } else if (result.state == 'prompt') {
-        this.listen();
-      } else {
-        alert("mic permission not granted!");
-      }
-     });
+    try{
+      navigator.permissions.query({name:'microphone'}).then((result) => {
+        if (result.state == 'granted') {
+          this.listen();
+        } else if (result.state == 'prompt') {
+          this.listen();
+        } else {
+          alert("mic permission not granted!");
+        }
+       });
+    }catch(err){
+      console.log(err);
+      alert("Your browser Doesn't Support Voice Input!");
+        this.changeVoiceButtonIconTo("disabled");
+        this.isListening = false;
+    }
   }
 
   listen(){
@@ -108,6 +115,7 @@ export class ChatInputComponent implements OnInit {
           this.playStopSound();
         });
       } catch (err) {
+        console.log(err);
         alert("Your browser Doesn't Support Voice Input!");
         this.changeVoiceButtonIconTo("disabled");
         this.isListening = false;
