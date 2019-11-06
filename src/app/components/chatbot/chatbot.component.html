@@ -1,5 +1,9 @@
 <div class="ccontainer">
-  <app-header></app-header>
+  <app-header
+  [bankName] = "this._stateService.bankName"
+  [userFirstName] = "this._stateService.userFirstName"
+  [pointBalance] = "this._stateService.pointBalance"
+  ></app-header>
   <app-chat-body></app-chat-body>
   <app-chat-input></app-chat-input>
 </div>
