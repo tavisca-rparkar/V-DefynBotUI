@@ -33,9 +33,7 @@ export class MockableApiService {
         data["restaurantPaymentUrl"],
         data["restaurantCancelUrl"]
       );
-      this._foodOrderingService.SetURL(
-        data["restaurantListUrl"]
-      );
+      this._foodOrderingService.SetURL(data["APIBaseUrl"]);
     } catch (err) {
       return await Promise.resolve();
     }

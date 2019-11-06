@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { LauncherData } from '../models/launcherData';
 
 @Injectable({
   providedIn: "root"
@@ -6,10 +7,9 @@ import { Injectable } from "@angular/core";
 export class StateService {
   constructor() {}
 
-  public bankName: string = "US Bank";
-  public userFirstName: string = "Neelesh";
-  public userID: string = "19345";
-  public pointBalance = 999989;
+  public appData:LauncherData = new LauncherData("","","","","","",0);
+  public isAppDataSet:boolean = false;
+  
   public CurrencyValueInPoints: number = 100;
 
   private _latitude: string;
@@ -46,8 +46,8 @@ export class StateService {
       restaurantID: restaurantIdWithSupplier,
       restaurantName: restaurantName,
       pointsPerPerson: points,
-      userName: this.userID,
-      pointBalance: this.pointBalance
+      userName: this.appData.userFirstName,
+      pointBalance: this.appData.pointBalance
     };
     this._restaurantBookingInitiateData = data;
     console.log(this._restaurantBookingInitiateData);

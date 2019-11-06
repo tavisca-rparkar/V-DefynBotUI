@@ -7,14 +7,16 @@ import { timeout } from "rxjs/operators";
 })
 export class FoodOrderingService {
   constructor(private _http: HttpClient) {}
+  private _ApiBaseUrl ="";
   private _restaurantListApiUrl = "";
   private _restaurantMenuApiUrl = "";
-  private _foodOrderingInitiateApiUrl = "";
   private _foodOrderingPaymentApiUrl = "";
   private _carouselData;
 
   SetURL(listUrl: string) {
-    this._restaurantListApiUrl = listUrl;
+    this._ApiBaseUrl = listUrl;
+    this._restaurantListApiUrl = this._ApiBaseUrl+"restaurants?";
+    this._restaurantMenuApiUrl = this._ApiBaseUrl+"menu?";
   }
 
   SetCarouselData(data) {
@@ -25,30 +27,19 @@ export class FoodOrderingService {
     return this._carouselData;
   }
 
-  GetRestaurantList(city: string, latitude: string, longitude: string) {
+  GetFoodOrderList(city: string, latitude: string, longitude: string) {
     if ((city = "")) {
-      return this._http
-        .get(
-          this._restaurantListApiUrl +
-            "latitude=" +
-            latitude +
-            "&longitude=" +
-            longitude
-        )
+      return this._http.get(
+          this._restaurantListApiUrl+"latitude="+latitude+"&longitude="+longitude)
         .pipe(timeout(15000));
     } else {
-      return this._http
-        .get(
-          this._restaurantListApiUrl +
-            "locality=" +
-            city +
-            "&latitude=" +
-            latitude +
-            "&longitude=" +
-            longitude
-        )
-        .pipe(timeout(15000));
+      return this._http.get( this._restaurantListApiUrl + "locality=" + city +"&latitude=" + latitude + "&longitude=" + longitude)
+      .pipe(timeout(15000));
     }
+  }
+
+  GetFoodOrderMenu(restaurantId:string, supplierName:string){
+    return this._http.get(this._restaurantMenuApiUrl+"restaurantId="+restaurantId+"&supplierName="+supplierName).pipe(timeout(5000));
   }
 
 }

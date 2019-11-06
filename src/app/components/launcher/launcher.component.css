@@ -1,8 +1,52 @@
 .launcher {
-  border: solid;
-  border-width: 1px;
-  width: 375px;
-  height: 667px;
-  margin: 0 auto;
+  width: 330px;
+  height: auto;
+  margin: 2% auto;
   position: relative;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
+  display: flex;
+  background-color: #fff;
+}
+
+.heading h1{
+  font-size: 20px;
+  text-align: center;
+}
+
+.form {
+  border: none;
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  padding: 10%;
+  font-size: 14px;
+}
+
+input {
+  width: 96%;
+  margin: 2%;
+  padding-left: 5%;
+}
+label {
+  width: 96%;
+  display: block;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 2%;
+}
+
+select {
+  width: 96%;
+  margin: 2%;
+  padding-left: 5%;;
+}
+
+button {
+  border-radius: 20px;
+  border: none;
+  width: 96%;
+  margin: 2%;
+  background-color: #007bff;
+  color: white;
+  padding: 3%;
+  font-size: 20px;
 }

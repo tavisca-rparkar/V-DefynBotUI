@@ -240,7 +240,7 @@ export class AppService {
     .subscribe((data) => {
           //updating user point balance on UI
           if(data["status"]== "Booking Successful"){
-            this._stateService.pointBalance = data["pointBalance"];
+            this._stateService.appData.pointBalance = data["pointBalance"];
           }
           // showing Booking Summary here - 
           this._componentFactoryService.AddBookingSummaryCard(data);
@@ -274,9 +274,9 @@ export class AppService {
     .subscribe((data) => {
       //updating user point balance on UI
       if(data["status"]== "Cancelled"){
-        this._stateService.pointBalance = data["updatedPointBalance"];
+        this._stateService.appData.pointBalance = data["updatedPointBalance"];
       }
-      let pointBalance = this._stateService.pointBalance;
+      let pointBalance = this._stateService.appData.pointBalance;
       // showing Cancellation message here - 
       if(data["status"]== "Cancelled"){
         this._componentFactoryService.AddTextBubble("Booking Cancelled for Booking-Id: "+data["bookingId"]+". Point Balance updated to "+pointBalance+" pts.","bot");
@@ -308,7 +308,7 @@ export class AppService {
         this._componentFactoryService.StartLoader();
         let city = response["queryResult"]["parameters"]["address"];
 
-        this._foodOrderingService.GetRestaurantList(city,this._stateService.getLatitude(),this._stateService.getLongitude())
+        this._foodOrderingService.GetFoodOrderList(city,this._stateService.getLatitude(),this._stateService.getLongitude())
         .pipe(catchError(err => {
             this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this request at the moment", "bot");
             this._componentFactoryService.StopLoader();
@@ -334,8 +334,19 @@ export class AppService {
   }
 
   ShowFoodOrderMenu(response){
-      this._componentFactoryService.AddTextBubble("I'll be able to show you the menu for the selected hotel in the next sprint ;) ","bot");
+    let restaurantId = response[0];
+    let supplierName = response[1];
+    this._foodOrderingService.GetFoodOrderMenu(restaurantId,supplierName)
+    .pipe(catchError(err => {
+      this._componentFactoryService.AddTextBubble("Sorry, I am unable to process this request at the moment", "bot");
+      this._componentFactoryService.StopLoader();
+      return throwError(err);
+  }))
+    .subscribe((data) => {
+      // show menu of the selected restaurant
+    });
   }
+  
   WelcomeIntentIntent(response) {
     this._componentFactoryService.AddTextBubble(response["queryResult"]["fulfillmentText"], "bot");
     this._componentFactoryService.AddChoiceButton(["Book a Table","Order Food"]);
@@ -353,6 +364,6 @@ export class AppService {
     );
   }
   GetPointBalanceIntent(response){
-    this._componentFactoryService.AddTextBubble("Point Balance: "+this._stateService.pointBalance, "bot");
+    this._componentFactoryService.AddTextBubble("Point Balance: "+this._stateService.appData.pointBalance, "bot");
   }
 }

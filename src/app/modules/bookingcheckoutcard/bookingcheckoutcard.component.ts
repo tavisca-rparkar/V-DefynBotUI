@@ -36,7 +36,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     private _appService: AppService) {}
 
   ngOnInit() {
-  this.pointBalance= this._stateService.pointBalance;
+  this.pointBalance= this._stateService.appData.pointBalance;
   this.startCountdown(this.timer);
   }
 
@@ -74,7 +74,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     this.disableAllButtons=true;
     let bookingPaymentData = {
       "bookingId": this.data["bookingId"],
-      "pointBalance": this._stateService.pointBalance,
+      "pointBalance": this._stateService.appData.pointBalance,
       "restaurantName":this.data["restaurantName"],
       "totalPointPrice": this.data["totalPointPrice"]
     };
@@ -85,7 +85,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     this.disableAllButtons=true;
     let bookingCancelData ={
       "bookingId": this.data["bookingId"],
-      "pointBalance": this._stateService.pointBalance,
+      "pointBalance": this._stateService.appData.pointBalance,
       "totalPointPrice": this.data["totalPointPrice"]
     }
     this._appService.IntentRouter("Cancel Booking",bookingCancelData);
@@ -96,7 +96,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     this.disableAllButtons=true;
     let bookingCancelData ={
       "bookingId": this.data["bookingId"],
-      "pointBalance": this._stateService.pointBalance,
+      "pointBalance": this._stateService.appData.pointBalance,
       "totalPointPrice": this.data["totalPointPrice"]
     }
     this._appService.CancelBookingInBackground(bookingCancelData);

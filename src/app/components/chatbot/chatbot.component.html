@@ -1,8 +1,8 @@
 <div class="ccontainer">
-  <app-header
-  [bankName] = "this._stateService.bankName"
-  [userFirstName] = "this._stateService.userFirstName"
-  [pointBalance] = "this._stateService.pointBalance"
+  <app-header *ngIf="this._stateService.isAppDataSet"
+  [bankName] = "this._stateService.appData.client"
+  [userFirstName] = "this._stateService.appData.userFirstName"
+  [pointBalance] = "this._stateService.appData.pointBalance"
   ></app-header>
   <app-chat-body></app-chat-body>
   <app-chat-input></app-chat-input>

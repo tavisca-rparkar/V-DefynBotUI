@@ -42,7 +42,7 @@ export class BookingsummarycardComponent implements OnInit {
       this.isErrorDetected = true;
       this.status = "cancelled";
     }
-    this.pointBalance= this._stateService.pointBalance;
+    this.pointBalance= this._stateService.appData.pointBalance;
   }
 
   ngAfterViewInit(): void {
@@ -53,7 +53,7 @@ export class BookingsummarycardComponent implements OnInit {
     this.disableAllButtons=true;
     let bookingCancelData ={
       "bookingId": this.data["bookingId"],
-      "pointBalance": this._stateService.pointBalance,
+      "pointBalance": this._stateService.appData.pointBalance,
       "totalPointPrice": this.data["totalPointPrice"]
     }
     this._appService.IntentRouter("Cancel Booking",bookingCancelData);

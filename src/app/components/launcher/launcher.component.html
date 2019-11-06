@@ -1,4 +1,48 @@
 <div class="launcher">
-  <app-header></app-header>
-  <app-form></app-form>
+  <div class="form" >
+      <div class="heading">
+          <h1>Concierge Booking App</h1>
+        </div>
+    <form action="">
+      <div class="environment">
+        <Label>Environment</Label>
+        <select [(ngModel)]="this.launcherData.environment"  name="environment" >
+          <option value="development">Development</option>
+        </select>
+      </div>
+  
+      <div class="client">
+        <label>Client</label>
+        <select [(ngModel)]="this.launcherData.client"  name="client"  >
+          <option value="client-1">Client-1</option>
+          <option value="client-2">Client-2</option>
+        </select>
+      </div>
+  
+      <div class="language">
+        <label>Language</label>
+        <select  [(ngModel)]="this.launcherData.language"  name="language" >
+          <option value="en-us">English US</option>
+        </select>
+      </div>
+  
+      <div class="userFirstName">
+        <label>User's First Name</label>
+        <input type="text" name="userFirstName" [(ngModel)]="this.launcherData.userFirstName" placeholder="John Snow" />
+      </div>
+
+      <div class="userId">
+        <label>User Id</label>
+        <input type="text"  name="userId"  [(ngModel)]="this.launcherData.userId" placeholder="RETSB500" />
+      </div>
+  
+      <div class="pointBalance">
+        <label>Point Balance</label>
+        <input type="text" name="pointBalance" [(ngModel)]="this.launcherData.pointBalance" placeholder="990000"/>
+      </div>
+  
+      <button type="submit" (click)="redirect()" >Launch</button>
+    </form>
+  </div>
+  
 </div>

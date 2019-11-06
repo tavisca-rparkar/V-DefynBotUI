@@ -1,9 +1,7 @@
 import { Injectable } from "@angular/core";
 import {
   HttpClient,
-  HttpHeaders,
 } from "@angular/common/http";
-import { Observable } from "rxjs";
 import { StateService } from './state.service';
 import { timeout } from 'rxjs/operators';
 
@@ -29,7 +27,7 @@ export class DialogflowApiService {
 
   GetResponse(userInput: string){
     return this._http.post(this._dialogflowApi,{
-      "userId":this._stateService.userID,
+      "userId":this._stateService.appData.userId,
       "key": this._authKey,
       "text":userInput,
       "languageCode":"en"
