@@ -28,21 +28,30 @@ export class AppPage {
     return element.all(by.css('app-chat-body app-text-bubble div p')).last();
   }
   getCorousal(){
-    return element(by.buttonText('See More Details'));
+    return element(by.className('slide-card'));
   }
   getCard(){
-    return element(by.buttonText('Proceed To Book'));
+    return element(by.className('proceed-button'));
   }
   getCourousalAgain(){
     return element(by.buttonText('Browse more restaurants'));
   }
+  getLatestCorousal()
+  {
+    return element.all(by.className('slide-card')).last();
+  }
+  getLatestCard()
+  {
+     return element.all(by.className('proceed-button')).last();
+  }
   getBrowserStop(){
     return element(by.buttonText('NO button present'));
   }
-  getRightArrow(){
-    return element.all(by.css('app-chat-body div div carousel div a')).last();
+  swipeRight(){
+    return element(by.css('app-chat-body app-carousel div div'));
+   
   }
-  getLeftArrow(){
+  swipeLeft(){
     return element(by.css('app-chat-body div div carousel div a'));
   }
 }

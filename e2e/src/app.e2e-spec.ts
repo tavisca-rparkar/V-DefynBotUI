@@ -13,10 +13,10 @@ describe('workspace-project App', () => {
     expect(page.getTitleText()).toEqual('US Bank');
   });
   
-  it('Check default message', () => {
-    page.navigateTo();
-    expect(page.getTextBubble()).not.toBe('');
-  });
+  // it('Check default message', () => {
+  //   page.navigateTo();
+  //   expect(page.getTextBubble()).not.toBe('');
+  // });
   
   it('should enter  text in textbox', () => {
     page.navigateTo();
@@ -38,9 +38,11 @@ describe('workspace-project App', () => {
   it('Happy Flow',()=>{
     page.navigateTo();
     browser.manage().window().setSize(375,667);
+    var EC = protractor.ExpectedConditions;
+    browser.wait(EC.presenceOf(page.getBookATableButton()),10000);
     page.getBookATableButton().click();
     
-    var EC = protractor.ExpectedConditions;
+    
     page.getTextBox().sendKeys("pune");
     
     
@@ -48,14 +50,30 @@ describe('workspace-project App', () => {
     browser.wait(EC.presenceOf(page.getCorousal()), 10000);
     browser.actions().mouseMove(page.getCorousal()).click().perform();
     browser.wait(EC.presenceOf(page.getCard()), 10000);
-    page.getCard().click();
     page.getCourousalAgain().click();
-    page.getRightArrow().click();
-    browser.actions().mouseMove(page.getCorousal()).click().perform();
+    browser.wait(EC.presenceOf(page.getLatestCorousal()), 10000);
+    var slider=page.swipeRight();
+    browser.actions().dragAndDrop(
+      slider,
+      {x:100, y:0}
+    ).click().perform();
+    browser.wait(EC.presenceOf(page.getLatestCard()), 10000);
+    page.getLatestCard().click();
+
+    
+    // browser.actions().mouseMove(page.getLatestCorousal()).click().perform();
+    // browser.wait(EC.presenceOf(page.getCard()), 10000);
+
+    
+    // page.getCourousalAgain().click();
+    // browser.wait(EC.presenceOf(page.getCorousal()), 10000);
+    
+    // browser.actions().mouseMove(page.getCorousal()).click().perform();
     
     
-      page.getCourousalAgain().click();
-      page.getLeftArrow().click();
+      // page.getCourousalAgain().click();
+      // page.swipeLeft().click();
+
     
     
      
