@@ -1,15 +1,18 @@
 <div class="container">
-  <div class="checkout-card">
+  <div class="booking-card">
     <div *ngIf="isErrorDetected" class="points-error">
       <p *ngFor="let error of data['error']">-{{ error }}</p>
     </div>
-    <div class="title">
+    <div [ngClass]="status">
       <h1>
-        Checkout<span *ngIf="!isErrorDetected && !disableAllButtons"
-          >{{ minutes }}:{{ seconds }}</span>
+        {{data["status"]}}
       </h1>
     </div>
-    <div class="checkout-details">
+    <div class="booking-details">
+      <div class="bookingId">
+        <p>Booking ID : {{data["bookingId"]}}</p>
+      </div>
+      <hr />
       <div class="restaurant-details">
         <p class="sectionHeading">Booking For :</p>
         <div class="restaurantName">
@@ -29,12 +32,9 @@
         <p>Date : {{ data["date"].split("T")[0] }}</p>
         <p>Time : {{ data["time"] }}</p>
       </div>
-      <hr *ngIf="!isErrorDetected" />
-      <div *ngIf="!isErrorDetected" class="billing-details">
+      <hr />
+      <div class="billing-details">
         <p class="sectionHeading">Billing Details :</p>
-        <p>
-          Available Point Balance : <span>{{pointBalance }}</span>
-        </p>
         <p>
           Cost Per Person : <span>{{ data["perPersonPoints"] }}</span>
         </p>
@@ -43,16 +43,26 @@
         </p>
         <hr />
         <p>
+          Final Amount :
+          <span>{{ data["perPersonPoints"] * data["noOfGuests"] }}</span>
+        </p>
+      </div>
+      <hr />
+      <div class="pointsAfterPayment">
+        <p>
           <b
-            >Final Amount :
-            <span>{{ data["perPersonPoints"] * data["noOfGuests"] }}</span></b
+            >Point Balance Available :
+            <span>
+              {{
+                pointBalance
+              }}</span
+            ></b
           >
         </p>
       </div>
     </div>
     <div *ngIf="!isErrorDetected && !disableAllButtons" class="user-response">
-      <button (click)="proceedToPay()" class="proceedToPay"><p>Proceed To Pay</p></button>
-      <button (click)="cancelBooking()" class="cancel"><p>Cancel Booking</p></button>
+      <button class="cancel" (click)="cancelBooking()"><p>Cancel Booking</p></button>
     </div>
   </div>
 </div>

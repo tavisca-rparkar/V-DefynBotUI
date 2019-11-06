@@ -13,12 +13,18 @@ export class RestaurantApiService {
   "http://172.16.5.143:5000/api/RestaurantDetails?restaurantId=";
   private _restaurantBookingApiUrl =
   "https://localhost:44367/api/booking?";
+  private _restaurantBookingPaymentApiUrl =
+  "https://localhost:44367/api/payment";
+  private _restaurantBookingCancelApiUrl =
+  "https://localhost:44367/api/cancel";
   private _carouselData;
 
-  SetURL(listUrl: string, detailsUrl:string, bookingUrl:string) {
+  SetURL(listUrl: string, detailsUrl:string, bookingUrl:string, paymentUrl:string, cancelUrl:string) {
     this._restaurantListApiUrl = listUrl;
     this._restaurantDetailsApiUrl = detailsUrl;
     this._restaurantBookingApiUrl = bookingUrl;
+    this._restaurantBookingPaymentApiUrl = paymentUrl;
+    this._restaurantBookingCancelApiUrl = cancelUrl;
   }
 
   SetCarouselData(data){
@@ -61,12 +67,20 @@ export class RestaurantApiService {
     return this._http.get("http://demo8483055.mockable.io/mockbookingapi").pipe(timeout(5000));
   }
 
-  BookingConfirmaionForRestaurant(bookingData){
-    /*return this._http.get(PUT URL HERE).pipe(timeout(5000));*/
+  BookingPaymentForRestaurant(bookingPaymentData){
+    return this._http.post(this._restaurantBookingPaymentApiUrl,{
+      "bookingId":bookingPaymentData["bookingId"],
+      "pointBalance":bookingPaymentData["pointBalance"],
+      "restaurantName":bookingPaymentData["restaurantName"]
+    }).pipe(timeout(5000));
   }
 
-  BookingCancellationForRestaurant(bookingData){
-    /*return this._http.get(PUT URL HERE).pipe(timeout(5000));*/
+  BookingCancellationForRestaurant(bookingCancellationData){
+    return this._http.post(this._restaurantBookingCancelApiUrl,{
+      "bookingId":bookingCancellationData["bookingId"],
+      "pointBalance":bookingCancellationData["pointBalance"],
+      "totalPointPrice":bookingCancellationData["totalPointPrice"]
+    }).pipe(timeout(5000));
   }
 
   GetMockRestaurantDetails(){

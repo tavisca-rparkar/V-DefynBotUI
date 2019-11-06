@@ -2,12 +2,11 @@
   width: 100%;
   height: 80%;
   overflow-y: auto;
-  border: 1px solid #ccc;
   display: block;
+  border: none;
 }
 
-.app-loader{
-  position: fixed;
+.app-loader {
   padding-left: 35%;
   padding-right: 35%;
   padding-top: 0px;

@@ -5,7 +5,8 @@
 
 .user {
   float: right;
-  max-width: 50%;
+  max-width: 70%;
+  overflow-wrap: break-word;
   margin-right: 2%;
 }
 
@@ -22,7 +23,8 @@
 
 .bot {
   float: left;
-  max-width: 50%;
+  max-width: 70%;
+  overflow-wrap: break-word;
   margin-left: 2%;
 }
 

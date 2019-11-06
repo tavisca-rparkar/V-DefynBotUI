@@ -29,10 +29,10 @@ export class LocationAccessService {
         },
           (error) => {
             console.log(error);
-            this._componentFactoryService.AddTextBubble("Please grant us your Browser location access and click on continue.","bot");
-            this._componentFactoryService.addLocationButton();
+            //this._componentFactoryService.AddTextBubble("Please grant us your Browser location access and click on continue.","bot");
+            //this._componentFactoryService.addLocationButton();
             resolve();
-          },{timeout : 23000});
+          },{timeout : 20000});
     } else {
       console.log("Browser not supported");
       resolve();

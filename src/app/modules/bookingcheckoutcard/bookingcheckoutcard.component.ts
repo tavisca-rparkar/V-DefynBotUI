@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit, Input } from "@angular/core";
 import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
+import { StateService } from 'src/app/services/state.service';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: "app-bookingcheckoutcard",
@@ -9,10 +11,12 @@ import { ComponentFactoryService } from 'src/app/services/ComponentFactory.servi
 export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
   @Input() data: string;
   isErrorDetected: boolean = false;
-  timer: number = 600;
-  minutes: number;
-  seconds: number;
-  data2 = {
+  disableAllButtons:boolean = false;
+  timer: number = 59;
+  minutes: number = 0;
+  seconds: number = 59;
+  pointBalance:number;
+  /*data2 = {
     status: "BookingInitiated",
     error: null,
     totalPointPrice: 300,
@@ -25,11 +29,16 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     restaurantName: "Novotel",
     perPersonPoints: 100,
     pointBalance: 1000
-  };
+  };*/
 
-  constructor(private _componentFactoryService:ComponentFactoryService) {}
+  constructor(private _componentFactoryService:ComponentFactoryService,
+    private _stateService: StateService,
+    private _appService: AppService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  this.pointBalance= this._stateService.pointBalance;
+  this.startCountdown(this.timer);
+  }
 
   ngAfterViewInit(): void {
     if (this.data["status"] == "BookingInitiated") {
@@ -37,7 +46,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     } else {
       this.isErrorDetected = true;
     }
-    this.startCountdown(this.timer);
+    
     this._componentFactoryService.updateScroll();
   }
 
@@ -49,11 +58,47 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
       this.seconds = Math.floor(counter % 60);
       counter--;
 
-      if (counter < 0) {
+      if (counter < 0 && !this.isErrorDetected && !this.disableAllButtons) {
         clearInterval(interval);
         this.isErrorDetected = true;
         this.data["error"] = "Session Expired!";
+        if(!this.disableAllButtons){
+          // auto cancel when timer expires only if the proceed/cancel buttons are not manually clicked
+          this.cancelBookingInBG();
+        }
       }
     }, 1000);
+  }
+
+  proceedToPay(){
+    this.disableAllButtons=true;
+    let bookingPaymentData = {
+      "bookingId": this.data["bookingId"],
+      "pointBalance": this._stateService.pointBalance,
+      "restaurantName":this.data["restaurantName"],
+      "totalPointPrice": this.data["totalPointPrice"]
+    };
+    this._appService.IntentRouter("Process Booking Payment",bookingPaymentData);
+  }
+
+  cancelBooking(){
+    this.disableAllButtons=true;
+    let bookingCancelData ={
+      "bookingId": this.data["bookingId"],
+      "pointBalance": this._stateService.pointBalance,
+      "totalPointPrice": this.data["totalPointPrice"]
+    }
+    this._appService.IntentRouter("Cancel Booking",bookingCancelData);
+  }
+
+
+  cancelBookingInBG(){
+    this.disableAllButtons=true;
+    let bookingCancelData ={
+      "bookingId": this.data["bookingId"],
+      "pointBalance": this._stateService.pointBalance,
+      "totalPointPrice": this.data["totalPointPrice"]
+    }
+    this._appService.CancelBookingInBackground(bookingCancelData);
   }
 }

@@ -1,20 +1,20 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { LocationButtonComponent } from './location-button.component';
+// import { BookingsummarycardComponent } from './bookingsummarycard.component';
 
-// describe('LocationButtonComponent', () => {
-//   let component: LocationButtonComponent;
-//   let fixture: ComponentFixture<LocationButtonComponent>;
+// describe('BookingsummarycardComponent', () => {
+//   let component: BookingsummarycardComponent;
+//   let fixture: ComponentFixture<BookingsummarycardComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ LocationButtonComponent ]
+//       declarations: [ BookingsummarycardComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(LocationButtonComponent);
+//     fixture = TestBed.createComponent(BookingsummarycardComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

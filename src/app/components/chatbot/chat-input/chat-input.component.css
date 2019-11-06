@@ -1,30 +1,236 @@
 .input-block {
   width: 100%;
+  min-height: 50px;
   height: 8%;
   display: inline-block;
+  position: fixed;
+  bottom: 0;
   background-color: #007bff;
-  padding: 1px;
+  border: none;
 }
 
-input {
+.inputWithMic {
+  width: 80%;
+  height: 96%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+}
+
+.input-box {
   float: left;
   font-size: 17px;
-  border-radius: 20px;
+  border-radius: 30px 0px 0px 30px;
   border: none;
-  width: 70%;
-  height: 50%;
-  margin: 2%;
-  padding: 5%;
+  border-color: transparent;
+  border-width: 0ch;
+  width: 90%;
+  height: 40px;
+  padding: 2% 5%;
+  outline: none;
+  cursor: pointer;
 }
 
-button {
-  border-radius: 20px;
+input{
+  outline: none;
+  cursor: pointer;
+}
+
+.voice {
+  border-radius: 0px 30px 30px 0px;
+  display: inline-block;
   border: none;
-  float: right;
-  width: 15%;
-  height: 70%;
-  margin: 2%;
+  border-color: transparent;
+  outline: none;
+  border-width: 0ch;
+  width: 10%;
+  height: 40px;
   background-color: white;
   color: #007bff;
-  padding: 5px;
+  padding: 3px 8px 3px 3px;
+}
+
+.voice img {
+  border: none;
+  max-width: 70%;
+  max-height: 70%;
+}
+
+.send {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: right;
+  border: none;
+}
+
+.text {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-color: transparent;
+  outline: none;
+  background-color: white;
+  color: #007bff;
+}
+
+.text img {
+  max-width: 70%;
+  max-height: 70%;
+}
+
+@media screen and (min-width: 320px) {
+  .header {
+    width: 100%;
+    height: 8%;
+  }
+  .text {
+    width: 40px;
+    height: 40px;
+  }
+  .voice {
+    width: 40px;
+    height: 40px;
+  }
+  .input-box {
+    width: 80%;
+    height: 40px;
+  }
+}
+
+@media screen and (min-width: 411px) {
+  .input-block {
+    width: 100%;
+    height: 8%;
+  }
+  .text {
+    width: 50px;
+    height: 50px;
+  }
+  .voice {
+    width: 50px;
+    height: 50px;
+  }
+  .input-box {
+    width: 80%;
+    height: 50px;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .input-block {
+    width: 100%;
+    height: 8%;
+  }
+  .text {
+    width: 50px;
+    height: 50px;
+  }
+  .voice {
+    width: 50px;
+    height: 50px;
+  }
+  .input-box {
+    width: 80%;
+    height: 50px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .input-block {
+    width: 100%;
+    height: 8%;
+  }
+  .text {
+    width: 50px;
+    height: 50px;
+  }
+  .voice {
+    width: 50px;
+    height: 50px;
+  }
+  .input-box {
+    width: 80%;
+    height: 50px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .input-block {
+    width: 100%;
+    height: 8%;
+  }
+  .text {
+    width: 50px;
+    height: 50px;
+  }
+  .voice {
+    width: 50px;
+    height: 50px;
+  }
+  .input-box {
+    width: 80%;
+    height: 50px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .input-block {
+    width: 100%;
+    height: 8%;
+  }
+  .text {
+    width: 40px;
+    height: 40px;
+  }
+  .voice {
+    width: 40px;
+    height: 40px;
+  }
+  .input-box {
+    width: 80%;
+    height: 40px;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .input-block {
+    width: 100%;
+    height: 8%;
+  }
+  .text {
+    width: 40px;
+    height: 40px;
+  }
+  .voice {
+    width: 40px;
+    height: 40px;
+  }
+  .input-box {
+    width: 80%;
+    height: 40px;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .input-block {
+    width: 100%;
+    height: 8%;
+  }
+  .text {
+    width: 40px;
+    height: 40px;
+  }
+  .voice {
+    width: 40px;
+    height: 40px;
+  }
+  .input-box {
+    width: 80%;
+    height: 40px;
+  }
 }
