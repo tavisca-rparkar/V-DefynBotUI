@@ -4,22 +4,98 @@
       <h1>{{ data["restaurantName"] }}</h1>
       <p>{{ data["locality"] }}</p>
     </div>
+    <hr />
     <div class="foodItemsMenu">
-      <div class="menu-container" *ngFor="let menu of data['menu']">
-        <div class="menu">
-          <div class="menu-item" *ngFor="let item of menu">
-            <h1>{{ item["name"] }}</h1>
-            <p>{{ item["price"] }}</p>
+      <ng-container *ngFor="let item of this.cart.item; let index = index">
+        <div *ngIf="index % 4 == 0" class="menu-container">
+          <div class="menu">
+            <!--  Element #1 -->
+            <div class="menu-item" *ngIf="this.cart.item[index]">
+              <div class="menu-item-info">
+                <h1>{{ this.cart.item[index] }}</h1>
+                <p>{{ this.cart.price[index] }}</p>
+              </div>
+              <div class="counter">
+                <button class="qtyChange" (click)="decrementCount(index)">
+                  -
+                </button>
+                <input
+                  type="text"
+                  class="quantity"
+                  value="{{ this.cart.qty[index] }}"
+                />
+                <button class="qtyChange" (click)="incrementCount(index)">
+                  +
+                </button>
+              </div>
+            </div>
+            <!--  Element #2 -->
+            <div class="menu-item" *ngIf="this.cart.item[index + 1]">
+              <div class="menu-item-info">
+                <h1>{{ this.cart.item[index + 1] }}</h1>
+                <p>{{ this.cart.price[index + 1] }}</p>
+              </div>
+              <div class="counter">
+                <button class="qtyChange" (click)="decrementCount(index + 1)">
+                  -
+                </button>
+                <input
+                  type="text"
+                  class="quantity"
+                  value="{{ this.cart.qty[index + 1] }}"
+                />
+                <button class="qtyChange" (click)="incrementCount(index + 1)">
+                  +
+                </button>
+              </div>
+            </div>
+            <!--  Element #3 -->
+            <div class="menu-item" *ngIf="this.cart.item[index + 2]">
+              <div class="menu-item-info">
+                <h1>{{ this.cart.item[index + 2] }}</h1>
+                <p>{{ this.cart.price[index + 2] }}</p>
+              </div>
+              <div class="counter">
+                <button class="qtyChange" (click)="decrementCount(index + 2)">
+                  -
+                </button>
+                <input
+                  type="text"
+                  class="quantity"
+                  value="{{ this.cart.qty[index + 2] }}"
+                />
+                <button class="qtyChange" (click)="incrementCount(index + 2)">
+                  +
+                </button>
+              </div>
+            </div>
+            <!--  Element #4 -->
+            <div class="menu-item" *ngIf="this.cart.item[index + 3]">
+              <div class="menu-item-info">
+                <h1>{{ this.cart.item[index + 3] }}</h1>
+                <p>{{ this.cart.price[index + 3] }}</p>
+              </div>
+              <div class="counter">
+                <button class="qtyChange" (click)="decrementCount(index + 3)">
+                  -
+                </button>
+                <input
+                  type="text"
+                  class="quantity"
+                  value="{{ this.cart.qty[index + 3] }}"
+                />
+                <button class="qtyChange" (click)="incrementCount(index + 3)">
+                  +
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
-    <div class="billInfo"></div>
+    <hr />
+    <div class="billInfo">
+      {{ totalPrice }}
+    </div>
   </div>
 </div>
-<!--
-     ########################################################################
-<div>
-
-</div>
--->

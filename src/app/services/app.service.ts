@@ -197,7 +197,7 @@ export class AppService {
       time = time.split("T")[1].split("+")[0];
       let restaurantData = this._stateService.getRestaurantBookingInitiateData();
 
-      //if(this.BookingDetailsAreFine(guestCount,date,time))
+      if(this.BookingDetailsAreFine(guestCount,date,time))
       { // Proceed for booking
         this._componentFactoryService.StartLoader();
         this._restaurantApiService.BookingInitiateForRestaurant({

@@ -43,10 +43,17 @@
   overflow-x: auto;
 }
 
+.wrapper {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
 .menu-container {
-  width: 96%;
+  width: 90%;
   height: 96%;
   margin: 1% 2%;
+  top: 0;
   display: inline-block;
   white-space: normal;
   background-color: #fff;
@@ -64,7 +71,13 @@
   height: 25%;
 }
 
-.menu-item h1 {
+.menu-item-info {
+  width: 70%;
+  height: 100%;
+  float: left;
+}
+
+.menu-item-info h1 {
   font-size: 14px;
   line-height: 14px;
   font-weight: normal;
@@ -72,10 +85,29 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.menu-item p {
+.menu-item-info p {
   font-size: 12px;
   line-height: 12px;
   margin: 0%;
   color: #545454;
   -webkit-font-smoothing: antialiased;
+}
+
+.counter {
+  width: 30%;
+  height: 100%;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity {
+  width: 40px;
+  height: 25px;
+  text-align: center;
+}
+.qtyChange {
+  width: 25px;
+  height: 25px;
 }

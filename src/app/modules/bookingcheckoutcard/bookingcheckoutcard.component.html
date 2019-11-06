@@ -1,12 +1,13 @@
 <div class="container">
   <div class="checkout-card">
     <div *ngIf="isErrorDetected" class="points-error">
-      <p *ngFor="let error of data['error']">-{{ error }}</p>
+      <p>{{ data["error"] }}</p>
     </div>
     <div class="title">
       <h1>
         Checkout<span *ngIf="!isErrorDetected && !disableAllButtons"
-          >{{ minutes }}:{{ seconds }}</span>
+          >{{ minutes }}:{{ seconds }}</span
+        >
       </h1>
     </div>
     <div class="checkout-details">
@@ -33,7 +34,7 @@
       <div *ngIf="!isErrorDetected" class="billing-details">
         <p class="sectionHeading">Billing Details :</p>
         <p>
-          Available Point Balance : <span>{{pointBalance }}</span>
+          Available Point Balance : <span>{{ pointBalance }}</span>
         </p>
         <p>
           Cost Per Person : <span>{{ data["perPersonPoints"] }}</span>
@@ -51,8 +52,12 @@
       </div>
     </div>
     <div *ngIf="!isErrorDetected && !disableAllButtons" class="user-response">
-      <button (click)="proceedToPay()" class="proceedToPay"><p>Proceed To Pay</p></button>
-      <button (click)="cancelBooking()" class="cancel"><p>Cancel Booking</p></button>
+      <button (click)="proceedToPay()" class="proceedToPay">
+        <p>Proceed To Pay</p>
+      </button>
+      <button (click)="cancelBooking()" class="cancel">
+        <p>Cancel Booking</p>
+      </button>
     </div>
   </div>
 </div>
