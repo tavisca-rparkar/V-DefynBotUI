@@ -1,0 +1,25 @@
+<div class="card-container">
+  <div class="card">
+    <div class="restaurantInfo">
+      <h1>{{ data["restaurantName"] }}</h1>
+      <p>{{ data["locality"] }}</p>
+    </div>
+    <div class="foodItemsMenu">
+      <div class="menu-container" *ngFor="let menu of data['menu']">
+        <div class="menu">
+          <div class="menu-item" *ngFor="let item of menu">
+            <h1>{{ item["name"] }}</h1>
+            <p>{{ item["price"] }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="billInfo"></div>
+  </div>
+</div>
+<!--
+     ########################################################################
+<div>
+
+</div>
+-->
