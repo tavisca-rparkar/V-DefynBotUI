@@ -35,7 +35,12 @@
               <button class="qtyChange" (click)="decrementCount(itemIndex)">
                 -
               </button>
-              <input type="text" class="quantity" value="{{ item.quantity }}" />
+              <input
+                type="text"
+                class="quantity"
+                value="{{ item.quantity }}"
+                readonly="readonly"
+              />
               <button class="qtyChange" (click)="incrementCount(itemIndex)">
                 +
               </button>

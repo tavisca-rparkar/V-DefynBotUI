@@ -138,6 +138,7 @@
   height: 25px;
   text-align: center;
   border: none;
+  outline: none;
 }
 .qtyChange {
   width: 25px;
@@ -146,6 +147,7 @@
   font-size: 18px;
   border-radius: 50%;
   border: 1px solid darkslategray;
+  outline: none;
 }
 
 .billInfo {
