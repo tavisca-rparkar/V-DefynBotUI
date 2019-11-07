@@ -8,13 +8,13 @@
       (keydown.enter)="SendUserInput()"
       autofocus
     />
-    <button (click)="listenCheck()" class="voice">
-      <img [src]="voiceButtonIcon" />
+    <button (click)="listen()" class="voice">
+      <i class="material-icons" [ngClass]="voiceButtonIcon">mic</i>
     </button>
   </div>
   <div class="send">
     <button (click)="SendUserInput()" class="text">
-      <img [src]="textButtonIcon" />
+      <i class="material-icons">send</i>
     </button>
   </div>
 </div>

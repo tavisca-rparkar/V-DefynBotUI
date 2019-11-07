@@ -9,10 +9,7 @@ import { Meta } from "@angular/platform-browser";
 })
 export class ChatInputComponent implements OnInit {
   _userInput: string = "";
-  textButtonIcon =
-    "https://cdn1.imggmi.com/uploads/2019/11/2/e373919184a03e32a37bd139399e4117-full.png";
-  voiceButtonIcon =
-    "https://cdn1.imggmi.com/uploads/2019/11/2/6fe47f39d2b33fc65e8395917d264ec9-full.png";
+  voiceButtonIcon: string = "voice-inactive";
   isListening = false;
 
   constructor(private _appService: AppService, private meta: Meta) {
@@ -46,45 +43,39 @@ export class ChatInputComponent implements OnInit {
   changeVoiceButtonIconTo(type: string) {
     switch (type) {
       case "inactive":
-        this.voiceButtonIcon =
-          "https://cdn1.imggmi.com/uploads/2019/11/2/6fe47f39d2b33fc65e8395917d264ec9-full.png";
+        this.voiceButtonIcon ="voice-inactive";
         break;
       case "active":
         this.voiceButtonIcon =
-          "https://cdn1.imggmi.com/uploads/2019/11/2/aabb7939d5cbe17d64b9a4866120c365-full.png";
+          "voice-active";
         break;
       case "disabled":
         this.voiceButtonIcon =
-          "https://cdn1.imggmi.com/uploads/2019/11/2/c49eb9eb0368c1f871f9c7a575757bcf-full.png";
+          "voice-disabled";
         break;
     }
   }
 
-  listenCheck(){
-    try{
-      navigator.permissions.query({name:'microphone'}).then((result) => {
-        if (result.state == 'granted') {
-          this.listen();
-        } else if (result.state == 'prompt') {
-          this.listen();
-        } else {
-          alert("mic permission not granted!");
-        }
-       });
-    }catch(err){
-      console.log(err);
-      alert("Your browser Doesn't Support Voice Input!");
-        this.changeVoiceButtonIconTo("disabled");
-        this.isListening = false;
-    }
-  }
+  // listenCheck(){
+  //   if(!!window.chrome){
+  //     navigator.permissions.query({name:'microphone'}).then((result) => {
+  //       if (result.state == 'granted') {
+  //         this.listen();
+  //       } else if (result.state == 'prompt') {
+  //         this.listen();
+  //       } else {
+  //         alert("mic permission not granted!");
+  //       }
+  //      });
+  //   }
+  // }
 
   listen(){
     if(this.isListening==false){
       this.changeVoiceButtonIconTo("active");
       this.isListening = true;
       try {
-        var recognition = new ((window as any).SpeechRecognition ||
+        let recognition = new ((window as any).SpeechRecognition ||
           (window as any).webkitSpeechRecognition ||
           (window as any).mozSpeechRecognition ||
           (window as any).msSpeechRecognition)();
@@ -100,22 +91,27 @@ export class ChatInputComponent implements OnInit {
             .map(result => result[0])
             .map(result => result.transcript)
             .join("");
-          this._userInput = transcript;
+          if(this.isListening==true){
+            this._userInput = transcript;
+          }
 
-          if (e.results[0].isFinal) {
+          if (e.results[0].isFinal && this.isListening==true) {
             this._userInput = transcript;
             this.SendUserInput();
+            console.log("User Said : "+transcript);
           }
-          console.log(transcript);
         });
 
          recognition.addEventListener('end', e => { 
-          console.log('Speech recognition service stopped');
-          this.listenCheck();
-          this.playStopSound();
+           if(this.isListening==true){
+            console.log('Speech recognition service stopped');
+            this.playStopSound();
+            this.changeVoiceButtonIconTo("inactive");
+            this.isListening = false;
+           }          
         });
       } catch (err) {
-        console.log(err);
+        //console.log(err);
         alert("Your browser Doesn't Support Voice Input!");
         this.changeVoiceButtonIconTo("disabled");
         this.isListening = false;
@@ -123,6 +119,8 @@ export class ChatInputComponent implements OnInit {
     }else{
       this.changeVoiceButtonIconTo("inactive");
       this.isListening = false;
+      console.log('Speech recognition service stopped');
+      this.playStopSound();
     }
   }
 
