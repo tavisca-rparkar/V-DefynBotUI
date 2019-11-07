@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Cart } from "src/app/models/cart";
+import { Cart, Category } from "src/app/models/cart";
 import { count } from "rxjs/operators";
 
 @Component({
@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
     restaurantName: "Domino's Pizza",
     locality: "Viman Nagar, Pune",
     menu: [
-      { name: "Bhature Chole", price: 100 },
+      { name: "name1", price: 100 },
       { name: "name2", price: 200 },
       { name: "name3", price: 100 },
       { name: "name4", price: 200 },
@@ -27,29 +27,69 @@ export class MenuComponent implements OnInit {
       { name: "name8", price: 200 },
       { name: "name9", price: 100 },
       { name: "Pav Bhaji", price: 200 }
+    ],
+    categories: [
+      {
+        categoryName: "Appetizers",
+        items: [
+          {
+            name: "Pani Puri",
+            price: 40
+          },
+          {
+            name: "Masala Papad",
+            price: 30
+          },
+          {
+            name: "Veg Crispy",
+            price: 120
+          }
+        ]
+      },
+      {
+        categoryName: "Deserts",
+        items: [
+          {
+            name: "Icecream",
+            price: 50
+          },
+          {
+            name: "Cake",
+            price: 100
+          }
+        ]
+      }
     ]
   };
 
   constructor() {}
   ngOnInit() {
     this.cart = new Cart();
-    this.cart.AddToCart(this.data.menu);
+    this.cart.AddToCart(this.data.categories);
   }
 
-  decrementCount(index: number) {
-    this.cart.DecrementCount(index);
+  decrementCount(category: number, item: number) {
+    this.cart.DecrementCount(category, item);
     this.UpdateTotalCost();
   }
 
-  incrementCount(index: number) {
-    this.cart.IncrementCount(index);
+  incrementCount(category: number, item: number) {
+    this.cart.IncrementCount(category, item);
     this.UpdateTotalCost();
   }
 
   UpdateTotalCost() {
     this.totalPrice = 0;
-    for (let i = 0; i < this.cart.item.length; i++) {
-      this.totalPrice += this.cart.qty[i] * this.cart.price[i];
+    for (let category = 0; category < this.cart.menu.length; category++) {
+      for (
+        let item = 0;
+        item < this.cart.menu[category].menuItem.length;
+        item++
+      ) {
+        this.totalPrice +=
+          this.cart.menu[category].menuItem[item].quantity *
+          this.cart.menu[category].menuItem[item].price;
+      }
     }
   }
 

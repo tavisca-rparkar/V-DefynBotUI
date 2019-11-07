@@ -1,31 +1,48 @@
 export class Cart {
-  item: string[];
-  price: number[];
-  qty: number[];
+  menu: Array<Category>;
+  category: Array<MenuItem>;
 
-  constructor() {}
+  constructor() {
+    this.menu = new Array<Category>();
+  }
 
   AddToCart(menu) {
-    this.item = new Array(menu.length);
-    this.price = new Array(menu.length);
-    this.qty = new Array(menu.length);
+    menu.forEach(category => {
+      this.category = new Array<MenuItem>();
+      category.items.forEach(item => {
+        this.category.push({
+          name: item.name,
+          price: item.price,
+          quantity: 0
+        });
+      });
+      this.menu.push({
+        categoryName: category.categoryName,
+        menuItem: this.category
+      });
+    });
+  }
 
-    for (let index = 0; index < menu.length; index++) {
-      this.item[index] = menu[index].name;
-      this.price[index] = menu[index].price;
-      this.qty[index] = 0;
+  DecrementCount(category, item) {
+    if (this.menu[category].menuItem[item].quantity > 0) {
+      this.menu[category].menuItem[item].quantity -= 1;
     }
   }
 
-  DecrementCount(index) {
-    if (this.qty[index] > 0) {
-      this.qty[index] -= 1;
+  IncrementCount(category, item) {
+    if (this.menu[category].menuItem[item].quantity < 10) {
+      this.menu[category].menuItem[item].quantity += 1;
     }
   }
+}
 
-  IncrementCount(index) {
-    if (this.qty[index] < 10) {
-      this.qty[index] += 1;
-    }
-  }
+export class MenuItem {
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+export class Category {
+  categoryName: string;
+  menuItem: MenuItem[];
 }
