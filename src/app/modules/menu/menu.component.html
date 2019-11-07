@@ -5,56 +5,50 @@
       <p>{{ data["locality"] }}</p>
     </div>
     <hr />
-    <p style="text-align: center;">MENU</p>
-    <hr style="margin: 0% 0%;" />
+    <p style="text-align: center; margin: 0%; font-size: 18px">MENU</p>
+    <hr />
     <div class="foodItemsMenu">
+      <div class="category-selector">
+        <div
+          class="category"
+          *ngFor="let category of this.cart.menu; let categoryIndex = index"
+          (click)="GetCategoryMenu(categoryIndex)"
+          [ngClass]="{
+            selected: categoryIndex == selectedCategoryIndex
+          }"
+        >
+          {{ category.categoryName }}
+        </div>
+      </div>
+      <hr />
       <div class="menu-container">
         <div class="menu">
-          <ng-container
-            *ngFor="let category of this.cart.menu; let categoryIndex = index"
+          <div
+            class="menu-item"
+            *ngFor="let item of selectedCategoryMenu; let itemIndex = index"
           >
-            <p>
-              {{ category.categoryName }}
-            </p>
-            <hr />
-            <div
-              class="menu-item"
-              *ngFor="let item of category.menuItem; let itemIndex = index"
-            >
-              <div class="menu-item-info">
-                <h1>{{ item.name }}</h1>
-                <p>{{ item.price }}</p>
-              </div>
-              <div class="counter">
-                <button
-                  class="qtyChange"
-                  (click)="decrementCount(categoryIndex, itemIndex)"
-                >
-                  -
-                </button>
-                <input
-                  type="text"
-                  class="quantity"
-                  value="{{ item.quantity }}"
-                />
-                <button
-                  class="qtyChange"
-                  (click)="incrementCount(categoryIndex, itemIndex)"
-                >
-                  +
-                </button>
-              </div>
+            <div class="menu-item-info">
+              <h1>{{ item.name }}</h1>
+              <p>{{ item.price }}</p>
             </div>
-            <hr />
-          </ng-container>
+            <div class="counter">
+              <button class="qtyChange" (click)="decrementCount(itemIndex)">
+                -
+              </button>
+              <input type="text" class="quantity" value="{{ item.quantity }}" />
+              <button class="qtyChange" (click)="incrementCount(itemIndex)">
+                +
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <hr />
-    <div class="billInfo">
+    <div class="billInfo" *ngIf="totalPrice > 0">
       <p>Total Price : {{ totalPrice }}</p>
       <button (click)="SeeCart()" class="see-cart">
-        <p>See Cart</p>
+        <p>View Cart</p>
       </button>
     </div>
   </div>
@@ -63,7 +57,7 @@
       <button (click)="BacktoMenu()" class="see-cart">
         <p>Back</p>
       </button>
-      <h1>Cart :</h1>
+      <h1>Cart</h1>
     </div>
     <hr />
     <ng-container

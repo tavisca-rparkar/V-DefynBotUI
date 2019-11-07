@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Cart, Category } from "src/app/models/cart";
+import { Cart, Category, MenuItem } from "src/app/models/cart";
 import { count } from "rxjs/operators";
 
 @Component({
@@ -10,28 +10,30 @@ import { count } from "rxjs/operators";
 export class MenuComponent implements OnInit {
   cart: Cart;
   isCartVisible: boolean = false;
+  selectedCategoryIndex: number;
+  selectedCategoryMenu: any;
   totalPrice: number = 0;
   data = {
     restaurantId: "12345",
     supplierName: "Zomato",
     restaurantName: "Domino's Pizza",
     locality: "Viman Nagar, Pune",
-    menu: [
-      { name: "name1", price: 100 },
-      { name: "name2", price: 200 },
-      { name: "name3", price: 100 },
-      { name: "name4", price: 200 },
-      { name: "name5", price: 100 },
-      { name: "name6", price: 200 },
-      { name: "name7", price: 100 },
-      { name: "name8", price: 200 },
-      { name: "name9", price: 100 },
-      { name: "Pav Bhaji", price: 200 }
-    ],
     categories: [
       {
         categoryName: "Appetizers",
         items: [
+          {
+            name: "Pani Puri",
+            price: 40
+          },
+          {
+            name: "Masala Papad",
+            price: 30
+          },
+          {
+            name: "Veg Crispy",
+            price: 120
+          },
           {
             name: "Pani Puri",
             price: 40
@@ -58,6 +60,71 @@ export class MenuComponent implements OnInit {
             price: 100
           }
         ]
+      },
+      {
+        categoryName: "Deserts",
+        items: [
+          {
+            name: "Icecream",
+            price: 50
+          },
+          {
+            name: "Cake",
+            price: 100
+          }
+        ]
+      },
+      {
+        categoryName: "Deserts",
+        items: [
+          {
+            name: "Icecream",
+            price: 50
+          },
+          {
+            name: "Cake",
+            price: 100
+          }
+        ]
+      },
+      {
+        categoryName: "Deserts",
+        items: [
+          {
+            name: "Icecream",
+            price: 50
+          },
+          {
+            name: "Cake",
+            price: 100
+          }
+        ]
+      },
+      {
+        categoryName: "Deserts",
+        items: [
+          {
+            name: "Icecream",
+            price: 50
+          },
+          {
+            name: "Cake",
+            price: 100
+          }
+        ]
+      },
+      {
+        categoryName: "Deserts",
+        items: [
+          {
+            name: "Icecream",
+            price: 50
+          },
+          {
+            name: "Cake",
+            price: 100
+          }
+        ]
       }
     ]
   };
@@ -68,13 +135,13 @@ export class MenuComponent implements OnInit {
     this.cart.AddToCart(this.data.categories);
   }
 
-  decrementCount(category: number, item: number) {
-    this.cart.DecrementCount(category, item);
+  decrementCount(item: number) {
+    this.cart.DecrementCount(this.selectedCategoryIndex, item);
     this.UpdateTotalCost();
   }
 
-  incrementCount(category: number, item: number) {
-    this.cart.IncrementCount(category, item);
+  incrementCount(item: number) {
+    this.cart.IncrementCount(this.selectedCategoryIndex, item);
     this.UpdateTotalCost();
   }
 
@@ -91,6 +158,11 @@ export class MenuComponent implements OnInit {
           this.cart.menu[category].menuItem[item].price;
       }
     }
+  }
+
+  GetCategoryMenu(categoryIndex: number) {
+    this.selectedCategoryMenu = this.cart.menu[categoryIndex].menuItem;
+    this.selectedCategoryIndex = categoryIndex;
   }
 
   SeeCart() {
