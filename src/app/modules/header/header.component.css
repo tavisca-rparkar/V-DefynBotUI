@@ -39,23 +39,24 @@ img {
 }
 
 .user-details {
-  width: 38%;
-  height: 100%;
-  margin-right: 2%;
-  float: right;
+  margin: auto;
+  margin:5px;
+  padding: 5px;;
+  float: left;
   justify-content: center;
   align-items: center;
   display: flex;
+  font-weight: bold;
 }
 
 .details {
   display: block;
-  text-align: center;
+  text-align: left;
 }
 
 .details p {
   font-family: arial;
-  color: #fff;
+  color: #414141;
   margin: 0%;
 }
 
@@ -65,8 +66,63 @@ img {
 }
 
 .points {
-  font-size: 12px;
+  font-size: 14px;
 }
+
+.logout{
+  height: 100%;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.logout .material-icons{
+  color: #007bff;
+  font-size: 38px;
+}
+
+/* dropdown CSS */
+.dropbtn {
+  background-color: #007bff;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.dropbtn .material-icons{
+  color: #fff;
+  font-size: 150%;
+}
+
+.dropdown {
+  position: relative;
+  height: 100%;
+  float: right;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+.dropdown:hover .dropbtn {
+  color: black;
+}
+
+/* dropdown CSS part ends here */
 
 @media screen and (min-width: 320px) {
   .header {

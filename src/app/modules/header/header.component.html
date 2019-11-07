@@ -7,10 +7,31 @@
   <div class="bankName">
     <h4>{{ bankName }}</h4>
   </div>
-  <div class="user-details">
+  <!--div class="user-details">
     <div class="details">
       <p class="username">{{ userFirstName }}</p>
       <p class="points">{{ pointBalance }}</p>
     </div>
+  </div-->
+  <div class="options">
+      <div class="dropdown">
+          <button class="dropbtn">
+            <i class="material-icons">
+            menu
+            </i>
+          </button>
+          <div class="dropdown-content">
+            <div class="user-details">
+              <div class="details">
+                <p class="username">{{ userFirstName }}</p>
+                <p class="points">{{ pointBalance }}</p>
+              </div>
+            </div>
+            <div class="logout" (click)="logout()">
+                <i class="material-icons">exit_to_app</i>
+            </div>
+          </div>
+        </div>
   </div>
+  
 </div>
