@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Cart } from "src/app/models/cart";
+import { count } from "rxjs/operators";
 
 @Component({
   selector: "app-menu",

@@ -111,3 +111,65 @@
   width: 25px;
   height: 25px;
 }
+
+.billInfo {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.billInfo p {
+  margin: 0%;
+}
+
+.see-cart {
+  text-align: center;
+  vertical-align: middle;
+  width: auto;
+  margin: 0% 1%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #5cb85c;
+  box-shadow: 1px 2px #8d8d8d;
+}
+
+.see-cart:hover {
+  background-color: #ffffff;
+  border: 1px solid #4cae4c;
+}
+
+.see-cart p {
+  color: #fff;
+  font-size: 16px;
+  margin: 0%;
+}
+
+.see-cart p:hover {
+  color: #5cb85c;
+}
+
+.order {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.order h1 {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: normal;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cartItems {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

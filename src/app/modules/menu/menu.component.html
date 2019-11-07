@@ -1,5 +1,5 @@
 <div class="card-container">
-  <div class="card">
+  <div class="card" *ngIf="!isCartVisible">
     <div class="restaurantInfo">
       <h1>{{ data["restaurantName"] }}</h1>
       <p>{{ data["locality"] }}</p>
@@ -95,7 +95,35 @@
     </div>
     <hr />
     <div class="billInfo">
-      {{ totalPrice }}
+      <p>Total Price : {{ totalPrice }}</p>
+      <button (click)="SeeCart()" class="see-cart">
+        <p>See Cart</p>
+      </button>
+    </div>
+  </div>
+  <div class="card" *ngIf="isCartVisible">
+    <div class="order">
+      <button (click)="BacktoMenu()" class="see-cart">
+        <p>Back</p>
+      </button>
+      <h1>Cart :</h1>
+    </div>
+    <hr />
+    <ng-container *ngFor="let quantity of this.cart.qty; let index = index">
+      <div class="cartItems" *ngIf="quantity > 0">
+        <p class="foodItem">{{ this.cart.item[index] }}</p>
+        <p>
+          {{ this.cart.qty[index] }} X {{ this.cart.price[index] }} :
+          {{ this.cart.qty[index] * this.cart.price[index] }}
+        </p>
+      </div>
+    </ng-container>
+    <hr />
+    <div class="billInfo">
+      <p>Total Price : {{ totalPrice }}</p>
+      <button (click)="SeeCart()" class="see-cart">
+        <p>Proceed To Pay</p>
+      </button>
     </div>
   </div>
 </div>
