@@ -7,7 +7,7 @@ import { LauncherData } from '../models/launcherData';
 export class StateService {
   constructor() {}
 
-  public appData:LauncherData = new LauncherData("","","","","",0);
+  public appData:LauncherData = new LauncherData("","","","","",0,"","");
   public isAppDataSet:boolean = false;
   
   public CurrencyValueInPoints: number = 100;

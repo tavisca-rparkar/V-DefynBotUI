@@ -4,6 +4,7 @@ import { DialogflowApiService } from "./dialogflowApi.service";
 import { LocationApiService } from "./locationApi.service";
 import { RestaurantApiService } from "./restaurant-api.service";
 import { FoodOrderingService } from './food-ordering.service';
+import { LauncherService } from './launcher.service';
 
 @Injectable({
   providedIn: "root"
@@ -14,7 +15,8 @@ export class MockableApiService {
     private _dialogflowService: DialogflowApiService,
     private _locationService: LocationApiService,
     private _restaurantApiService: RestaurantApiService,
-    private _foodOrderingService: FoodOrderingService
+    private _foodOrderingService: FoodOrderingService,
+    private _launcherService: LauncherService
   ) {}
 
   // Mockable.io URL for custom made Api for dialogflow key and api urls
@@ -33,7 +35,8 @@ export class MockableApiService {
         data["restaurantPaymentUrl"],
         data["restaurantCancelUrl"]
       );
-      this._foodOrderingService.SetURL(data["APIBaseUrl"]);
+      this._launcherService.SetUrl(data["ApiBaseUrl"]);
+      this._foodOrderingService.SetURL(data["ApiBaseUrl"]);
     } catch (err) {
       return await Promise.resolve();
     }
