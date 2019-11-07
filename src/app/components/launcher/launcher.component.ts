@@ -26,6 +26,7 @@ export class LauncherComponent implements OnInit {
     await this.mockableApiService.GetResponse();
     this._stateService.appData = new LauncherData("","","","","",0,"","");
     this._stateService.isAppDataSet = false;
+    this._stateService.clearSessionData();
   }
 
   redirect(){
@@ -33,10 +34,12 @@ export class LauncherComponent implements OnInit {
     .pipe(catchError(err => {
       this.launcherData.error = "Sorry! Unable to connect at the momment.";
       console.log(this.launcherData.error);
+      console.log(err);
       return throwError(err);
     }))
     .subscribe(response => {
       this.launcherData.sessionId = response["sessionId"];
+      this._stateService.setSessionData(this.launcherData);
       this._stateService.appData = this.launcherData;
       this._stateService.isAppDataSet = true;
       this._router.navigate(['./chatbot']);

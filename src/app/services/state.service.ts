@@ -19,6 +19,7 @@ export class StateService {
   private _isBookingInitiated: boolean = false;
   private _bookTableData: any;
 
+
   public IslatLongProvided() {
     return this._isLatLongProvided;
   }
@@ -71,5 +72,33 @@ export class StateService {
   }
   public getBookTableData() {
     return this._bookTableData;
+  }
+
+  setSessionData(launcherData:LauncherData){
+    localStorage.setItem("sessionId",launcherData.sessionId);
+    localStorage.setItem("userId",launcherData.userId);
+    localStorage.setItem("environment",launcherData.environment);
+    localStorage.setItem("client",launcherData.client);
+    localStorage.setItem("userFirstName",launcherData.userFirstName);
+    localStorage.setItem("pointBalance",launcherData.pointBalance.toString());
+    localStorage.setItem("language",launcherData.language);
+    localStorage.setItem("isLoggedIn","true");
+  }
+
+  getSessionData(){
+    if(localStorage.getItem("isLoggedIn")=="true"){
+      this.appData.sessionId = localStorage.getItem("sessionId");
+      this.appData.userId = localStorage.getItem("userId");
+      this.appData.environment = localStorage.getItem("environment");
+      this.appData.client = localStorage.getItem("client");
+      this.appData.userFirstName = localStorage.getItem("userFirstName");
+      this.appData.pointBalance = parseInt(localStorage.getItem("pointBalance"));
+      this.appData.language = localStorage.getItem("language");
+      this.isAppDataSet = true;
+    }   
+  }
+
+  clearSessionData(){
+      localStorage.clear();
   }
 }

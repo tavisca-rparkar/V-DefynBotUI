@@ -17,8 +17,11 @@ export class ChatbotComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(!this._stateService.isAppDataSet){
+    if(localStorage.getItem("isLoggedIn")!="true"){
+      alert("Your session expired! Please launch the app again!");
       this._router.navigate(['./launcher']);
+    }else{
+      this._stateService.getSessionData();
     }
   }
 }
