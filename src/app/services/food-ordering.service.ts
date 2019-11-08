@@ -7,7 +7,7 @@ import { timeout } from "rxjs/operators";
 })
 export class FoodOrderingService {
   constructor(private _http: HttpClient) {}
-  private _ApiBaseUrl ="";
+  private _ApiBaseUrl = "";
   private _restaurantListApiUrl = "";
   private _restaurantMenuApiUrl = "";
   private _foodOrderingPaymentApiUrl = "";
@@ -15,8 +15,8 @@ export class FoodOrderingService {
 
   SetURL(listUrl: string) {
     this._ApiBaseUrl = listUrl;
-    this._restaurantListApiUrl = this._ApiBaseUrl+"restaurants?";
-    this._restaurantMenuApiUrl = this._ApiBaseUrl+"menu?";
+    this._restaurantListApiUrl = this._ApiBaseUrl + "restaurants?";
+    this._restaurantMenuApiUrl = this._ApiBaseUrl + "menu?";
   }
 
   SetCarouselData(data) {
@@ -29,17 +29,50 @@ export class FoodOrderingService {
 
   GetFoodOrderList(city: string, latitude: string, longitude: string) {
     if ((city = "")) {
-      return this._http.get(
-          this._restaurantListApiUrl+"latitude="+latitude+"&longitude="+longitude)
+      return this._http
+        .get(
+          this._restaurantListApiUrl +
+            "latitude=" +
+            latitude +
+            "&longitude=" +
+            longitude
+        )
         .pipe(timeout(15000));
     } else {
-      return this._http.get( this._restaurantListApiUrl + "locality=" + city +"&latitude=" + latitude + "&longitude=" + longitude)
-      .pipe(timeout(15000));
+      return this._http
+        .get(
+          this._restaurantListApiUrl +
+            "locality=" +
+            city +
+            "&latitude=" +
+            latitude +
+            "&longitude=" +
+            longitude
+        )
+        .pipe(timeout(15000));
     }
   }
 
-  GetFoodOrderMenu(restaurantId:string, supplierName:string){
-    return this._http.get(this._restaurantMenuApiUrl+"restaurantId="+restaurantId+"&supplierName="+supplierName).pipe(timeout(5000));
+  GetRestaurantMenu(restaurantId: number, supplierName: string) {
+    return this._http
+      .get(
+        this._restaurantMenuApiUrl +
+          restaurantId +
+          "&supplierName=" +
+          supplierName
+      )
+      .pipe(timeout(5000));
   }
 
+  PaymentforFoodOrdering(orderingPaymentData) {
+    return this._http
+      .post(this._foodOrderingPaymentApiUrl, {
+        restaurantId: orderingPaymentData["restaurantId"],
+        restaurantName: orderingPaymentData["restaurantName"],
+        userId: orderingPaymentData["userId"],
+        totalPoints: orderingPaymentData["totalPoints"],
+        menuItems: orderingPaymentData["menuItems"]
+      })
+      .pipe(timeout(5000));
+  }
 }

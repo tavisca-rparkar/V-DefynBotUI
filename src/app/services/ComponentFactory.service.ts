@@ -21,6 +21,8 @@ export class ComponentFactoryService {
   restaurantCheckoutCard$ = this._restaurantCheckoutCard.asObservable();
   private _bookingSummaryCard = new Subject<boolean>();
   bookingSummaryCard$ = this._bookingSummaryCard.asObservable();
+  private _orderingMenuCard = new Subject<object[]>();
+  createOrderingMenuCard$ = this._orderingMenuCard.asObservable();
 
   constructor() {}
 
@@ -47,6 +49,10 @@ export class ComponentFactoryService {
 
   AddBookingSummaryCard(data) {
     this._bookingSummaryCard.next(data);
+  }
+
+  AddOrderingMenuCard(data) {
+    this._orderingMenuCard.next(data);
   }
 
   updateScroll() {

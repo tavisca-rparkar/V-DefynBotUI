@@ -16,6 +16,7 @@ import { CardComponent } from "src/app/modules/card/card.component";
 import { LocationButtonComponent } from "../../location-button/location-button.component";
 import { BookingCheckoutcardComponent } from "src/app/modules/bookingcheckoutcard/bookingcheckoutcard.component";
 import { BookingsummarycardComponent } from "src/app/modules/bookingsummarycard/bookingsummarycard.component";
+import { MenuComponent } from "src/app/modules/menu/menu.component";
 
 @Component({
   selector: "app-chat-body",
@@ -56,6 +57,9 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     });
     this._componentFactoryService.bookingSummaryCard$.subscribe(data => {
       this.addBookingSummaryCard(data);
+    });
+    this._componentFactoryService.createOrderingMenuCard$.subscribe(data => {
+      this.addOrderingMenuCard(data);
     });
   }
 
@@ -123,6 +127,14 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     );
     const componentRef1 = this.vc.createComponent(factory);
     let instance = <BookingsummarycardComponent>componentRef1.instance;
+    instance.data = data;
+    this.cdRef.detectChanges();
+  }
+
+  addOrderingMenuCard(data) {
+    const factory = this._factory.resolveComponentFactory(MenuComponent);
+    const componentRef1 = this.vc.createComponent(factory);
+    let instance = <MenuComponent>componentRef1.instance;
     instance.data = data;
     this.cdRef.detectChanges();
   }

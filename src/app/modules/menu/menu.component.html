@@ -1,0 +1,91 @@
+<div class="card-container">
+  <div class="card" *ngIf="!isCartVisible">
+    <div class="restaurantInfo">
+      <h1>{{ data["restaurantName"] }}</h1>
+      <p>{{ data["locality"] }}</p>
+    </div>
+    <hr />
+    <p style="text-align: center; margin: 0%; font-size: 18px">MENU</p>
+    <hr />
+    <div class="foodItemsMenu">
+      <div class="category-selector">
+        <div
+          class="category"
+          *ngFor="let category of this.cart.menu; let categoryIndex = index"
+          (click)="GetCategoryMenu(categoryIndex)"
+          [ngClass]="{
+            selected: categoryIndex == selectedCategoryIndex
+          }"
+        >
+          {{ category.categoryName }}
+        </div>
+      </div>
+      <hr />
+      <div class="menu-container">
+        <div class="menu">
+          <div
+            class="menu-item"
+            *ngFor="let item of selectedCategoryMenu; let itemIndex = index"
+          >
+            <div class="menu-item-info">
+              <h1>{{ item.name }}</h1>
+              <p>{{ item.price }}</p>
+            </div>
+            <div class="counter">
+              <button class="qtyChange" (click)="decrementCount(itemIndex)">
+                -
+              </button>
+              <input
+                type="text"
+                class="quantity"
+                value="{{ item.quantity }}"
+                readonly="readonly"
+              />
+              <button class="qtyChange" (click)="incrementCount(itemIndex)">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="billInfo" *ngIf="totalPrice > 0">
+      <p>Total Price : {{ totalPrice }}</p>
+      <button (click)="SeeCart()" class="see-cart">
+        <p>View Cart</p>
+      </button>
+    </div>
+  </div>
+  <div class="card" *ngIf="isCartVisible">
+    <div class="order">
+      <button (click)="BacktoMenu()" class="see-cart">
+        <p>Back</p>
+      </button>
+      <h1>Cart</h1>
+    </div>
+    <hr />
+    <ng-container
+      *ngFor="let category of this.cart.menu; let categoryIndex = index"
+    >
+      <ng-container
+        *ngFor="let item of category.menuItem; let itemIndex = index"
+      >
+        <div class="cartItems" *ngIf="item.quantity > 0">
+          <p class="foodItem">{{ item.name }}</p>
+          <p>
+            {{ item.quantity }} X {{ item.price }} :
+            {{ item.quantity * item.price }}
+          </p>
+        </div>
+      </ng-container>
+    </ng-container>
+    <hr />
+    <div class="billInfo">
+      <p>Total Price : {{ totalPrice }}</p>
+      <button (click)="SeeCart()" class="see-cart">
+        <p>Proceed To Pay</p>
+      </button>
+    </div>
+  </div>
+</div>
