@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Cart, Category, MenuItem } from "src/app/models/cart";
 import { count } from "rxjs/operators";
+import { StateService } from "src/app/services/state.service";
+import { AppService } from "src/app/services/app.service";
 
 @Component({
   selector: "app-menu",
@@ -8,12 +10,13 @@ import { count } from "rxjs/operators";
   styleUrls: ["./menu.component.css"]
 })
 export class MenuComponent implements OnInit {
+  @Input() data;
   cart: Cart;
   isCartVisible: boolean = false;
-  selectedCategoryIndex: number;
+  selectedCategoryIndex: number = 0;
   selectedCategoryMenu: any;
   totalPrice: number = 0;
-  data = {
+  /*data = {
     restaurantId: "12345",
     supplierName: "Zomato",
     restaurantName: "Domino's Pizza",
@@ -127,12 +130,15 @@ export class MenuComponent implements OnInit {
         ]
       }
     ]
-  };
-
-  constructor() {}
+  };*/
+  constructor(
+    private _stateService: StateService,
+    private _appService: AppService
+  ) {}
   ngOnInit() {
     this.cart = new Cart();
     this.cart.AddToCart(this.data.categories);
+    this.GetCategoryMenu(this.selectedCategoryIndex);
   }
 
   decrementCount(item: number) {
@@ -174,10 +180,24 @@ export class MenuComponent implements OnInit {
   }
 
   ProceedToPay() {
-    let response = {
+    let cart = new Array<MenuItem>();
+    this.cart.menu.forEach(category => {
+      category.menuItem.forEach(item => {
+        if (item.quantity > 0) {
+          cart.push(item);
+        }
+      });
+    });
+    let orderingPaymentData = {
       restaurantId: this.data.restaurantId,
       restaurantName: this.data.restaurantName,
-      cart: this.cart
+      userId: this._stateService.userID,
+      totalPoints: this.totalPrice,
+      menuItems: cart
     };
+    this._appService.IntentRouter(
+      "Process Ordering Payment",
+      orderingPaymentData
+    );
   }
 }

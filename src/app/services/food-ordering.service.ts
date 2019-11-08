@@ -9,7 +9,6 @@ export class FoodOrderingService {
   constructor(private _http: HttpClient) {}
   private _restaurantListApiUrl = "";
   private _restaurantMenuApiUrl = "";
-  private _foodOrderingInitiateApiUrl = "";
   private _foodOrderingPaymentApiUrl = "";
   private _carouselData;
 
@@ -51,4 +50,26 @@ export class FoodOrderingService {
     }
   }
 
+  GetRestaurantMenu(restaurantId: number, supplierName: string) {
+    return this._http
+      .get(
+        this._restaurantMenuApiUrl +
+          restaurantId +
+          "&supplierName=" +
+          supplierName
+      )
+      .pipe(timeout(5000));
+  }
+
+  PaymentforFoodOrdering(orderingPaymentData) {
+    return this._http
+      .post(this._foodOrderingPaymentApiUrl, {
+        restaurantId: orderingPaymentData["restaurantId"],
+        restaurantName: orderingPaymentData["restaurantName"],
+        userId: orderingPaymentData["userId"],
+        totalPoints: orderingPaymentData["totalPoints"],
+        menuItems: orderingPaymentData["menuItems"]
+      })
+      .pipe(timeout(5000));
+  }
 }
