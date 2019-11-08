@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   @Input() bankName:string;
   @Input() userFirstName:string;
   @Input() pointBalance:number;
-
+  @Input() clientLogo:string;
 
   constructor( private meta: Meta,
     private _router:Router) {
@@ -20,7 +20,9 @@ export class HeaderComponent implements OnInit {
       content: "width=device-width, initial-scale=1.0"
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   logout(){
     localStorage.clear();

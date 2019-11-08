@@ -11,7 +11,7 @@
 }
 
 .user p {
-  background: #007bff none repeat scroll 0 0;
+  background: var(--theme-color) none repeat scroll 0 0;
   color: #fff;
   border-radius: 15px 0px 15px 15px;
   font-size: 14px;
