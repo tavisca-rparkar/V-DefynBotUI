@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="ordering-card">
+      <div *ngIf="isErrorDetected" class="points-error">
+        <p *ngFor="let error of data['error']">-{{ error }}</p>
+      </div>
+      <div [ngClass]="status">
+        <h1>
+          {{data["status"]}}
+        </h1>
+      </div>
+      <div class="ordering-details">
+        <div class="orderingId">
+          <p>Order ID : {{data["orderId"]}}</p>
+        </div>
+        <hr />
+        <div class="restaurant-details">
+          <p class="sectionHeading">Ordeing From :</p>
+          <div class="restaurantName">
+            <h1>{{ data["restaurantName"] }}</h1>
+          </div>
+          <!--div class="address">
+            <p>
+              Next to Vaishali Restaurant, FC Road, Deccan, Pune, Maharashtda,
+              India
+            </p>
+          </div-->
+        </div>
+        <hr />
+        <div class="ordering-details">
+          <p class="sectionHeading">Order Details :</p>
+          
+            <p>Date : {{ data["date"].split("T")[0] }}</p>
+            <p>Time : {{ data["time"] }}</p>
+          
+          
+          
+          
+        </div>
+        <hr />
+        <div class="billing-details">
+                <p class="sectionHeading">Billing Details :</p>
+
+                <div class="order-info">
+
+                        <table>
+                            <tr *ngFor="let item of data['menu']">
+                                    <td class="item-name">
+                                        {{item.name}}
+                                    </td>
+                                    <td>                                        
+                                        {{item.quantity}}
+                                    </td>
+                                    <td>
+                                        x
+                                    </td>
+                                    <td>
+                                            {{item.price}} 
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        {{item.quantity * item.price}}
+                                    </td>
+                            </tr>
+                            
+                            </table>     
+                  </div>
+
+          <hr />
+          <p>
+            Final Amount :
+            <span>{{ data["totalPoints"] }}</span>
+          </p>
+        </div>
+        <hr />
+        <div class="pointsAfterPayment">
+          <p>
+            <b
+              >Point Balance Available :
+              <span>
+                {{
+                  pointBalance
+                }}</span
+              ></b
+            >
+          </p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  

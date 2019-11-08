@@ -24,6 +24,9 @@ import { BookingCheckoutcardComponent } from "./modules/bookingcheckoutcard/book
 import { BookingsummarycardModule } from "./modules/bookingsummarycard/bookingsummarycard.module";
 import { BookingsummarycardComponent } from "./modules/bookingsummarycard/bookingsummarycard.component";
 import { MenuModule } from "./modules/menu/menu.module";
+import { OrderingsummarycardModule } from './modules/orderingsummarycard/orderingsummarycard.module';
+import { OrderingsummarycardComponent } from './modules/orderingsummarycard/orderingsummarycard.component';
+import { MenuComponent } from './modules/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,8 @@ import { MenuModule } from "./modules/menu/menu.module";
     LoaderModule,
     BookingCheckoutcardModule,
     BookingsummarycardModule,
-    MenuModule
+    MenuModule,
+    OrderingsummarycardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -59,7 +63,9 @@ import { MenuModule } from "./modules/menu/menu.module";
     CardComponent,
     LocationButtonComponent,
     BookingCheckoutcardComponent,
-    BookingsummarycardComponent
+    BookingsummarycardComponent,
+    OrderingsummarycardComponent,
+    MenuComponent
   ]
 })
 export class AppModule {}

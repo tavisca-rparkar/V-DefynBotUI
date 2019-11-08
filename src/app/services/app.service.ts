@@ -354,6 +354,7 @@ export class AppService {
             this._stateService.appData.pointBalance -= data["totalPoints"];
           }
           // showing Ordering Summary here -
+          this._componentFactoryService.AddOrderingSummaryCard(data);
           this._componentFactoryService.StopLoader();
         });
     }

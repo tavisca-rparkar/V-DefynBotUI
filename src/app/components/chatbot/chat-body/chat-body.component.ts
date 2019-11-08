@@ -17,6 +17,7 @@ import { LocationButtonComponent } from "../../location-button/location-button.c
 import { BookingCheckoutcardComponent } from "src/app/modules/bookingcheckoutcard/bookingcheckoutcard.component";
 import { BookingsummarycardComponent } from "src/app/modules/bookingsummarycard/bookingsummarycard.component";
 import { MenuComponent } from "src/app/modules/menu/menu.component";
+import { OrderingsummarycardComponent } from 'src/app/modules/orderingsummarycard/orderingsummarycard.component';
 
 @Component({
   selector: "app-chat-body",
@@ -61,6 +62,10 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     this._componentFactoryService.createOrderingMenuCard$.subscribe(data => {
       this.addOrderingMenuCard(data);
     });
+    this._componentFactoryService.createOrderingSummaryCard$.subscribe(data => {
+      this.addOrderingSummaryCard(data);
+    });
+
   }
 
   ngAfterViewInit() {
@@ -135,6 +140,15 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     const factory = this._factory.resolveComponentFactory(MenuComponent);
     const componentRef1 = this.vc.createComponent(factory);
     let instance = <MenuComponent>componentRef1.instance;
+    instance.data = data;
+    this.cdRef.detectChanges();
+  }
+  addOrderingSummaryCard(data) {
+    const factory = this._factory.resolveComponentFactory(
+      OrderingsummarycardComponent
+    );
+    const componentRef1 = this.vc.createComponent(factory);
+    let instance = <OrderingsummarycardComponent>componentRef1.instance;
     instance.data = data;
     this.cdRef.detectChanges();
   }
