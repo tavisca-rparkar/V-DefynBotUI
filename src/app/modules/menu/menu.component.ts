@@ -191,7 +191,7 @@ export class MenuComponent implements OnInit {
     let orderingPaymentData = {
       restaurantId: this.data.restaurantId,
       restaurantName: this.data.restaurantName,
-      userId: this._stateService.userID,
+      userId: this._stateService.appData.userId,
       totalPoints: this.totalPrice,
       menuItems: cart
     };
