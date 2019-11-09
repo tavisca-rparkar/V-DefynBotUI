@@ -11,6 +11,7 @@ export class StateService {
   public isAppDataSet:boolean = false;
   
   public CurrencyValueInPoints: number = 100;
+  public _foodOrderRestauranData:any;
 
   private _latitude: string;
   private _longitude: string;
@@ -18,6 +19,8 @@ export class StateService {
   private _restaurantBookingInitiateData: any;
   private _isBookingInitiated: boolean = false;
   private _bookTableData: any;
+  
+
 
 
   public IslatLongProvided() {

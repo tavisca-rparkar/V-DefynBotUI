@@ -123,6 +123,9 @@ export class AppService {
       case "Cancel Booking":
         this.CancelBookingIntent(response);
         break;
+      case "After Cancellation Process":
+        this.AfterCancellationProcessIntent(response);
+        break;
       case "Process Ordering Payment":
         this.ProcesssOrderingPaymentIntent(response);
         break;
@@ -324,13 +327,13 @@ export class AppService {
   ProcesssOrderingPaymentIntent(response) {
     //process ordering payment
     this._componentFactoryService.AddTextBubble(
-      "Processing Payment of: " + response["totalPoints"] + " points",
+      "Placing your order...",
       "bot"
     );
 
     this._componentFactoryService.StartLoader();
 
-    if (response["totalPoints"] < this._stateService.appData.pointBalance) {
+    if (response.totalPoints > this._stateService.appData.pointBalance) {
       this._componentFactoryService.AddTextBubble(
         "You don't have enough points to complete this transaction",
         "bot"
@@ -350,6 +353,7 @@ export class AppService {
         )
         .subscribe(data => {
           //updating user point balance on UI
+          console.log(data);
           if(data["status"]== "Order Successful"){
             this._stateService.appData.pointBalance -= data["totalPoints"];
           }
@@ -396,11 +400,41 @@ export class AppService {
       // showing Cancellation message here - 
       if(data["status"]== "Cancelled"){
         this._componentFactoryService.AddTextBubble("Booking Cancelled for Booking-Id: "+data["bookingId"]+". Point Balance updated to "+pointBalance+" pts.","bot");
+        // "dancing" triggers dialogflow to initiate the After Cancellation Questioning... - for reference see: [After Cancellation Process Intent]
+        this.IntentProcessing("dancing");
       }else{
         this._componentFactoryService.AddTextBubble("Booking Cancellation Failed for Booking-Id: "+data["bookingId"]+". Reason: "+data["error"],"bot");
       }
       this._componentFactoryService.StopLoader();
     });
+  }
+
+  AfterCancellationProcessIntent(response){
+    if (response["queryResult"]["allRequiredParamsPresent"]) {
+      let IsBrowseMore = response["queryResult"]["parameters"]["boolean"];
+
+      if(IsBrowseMore == "yes"){
+        this.ShowCarouselAgainIntent("Restaurant Booking");
+      }else{
+        this._componentFactoryService.AddTextBubble(
+          "I can help you with the following-",
+          "bot"
+        );
+        this._componentFactoryService.AddChoiceButton([
+          "Book a Table",
+          "Order Food"
+        ]);
+      }
+    }else{
+      this._componentFactoryService.AddTextBubble(
+        response["queryResult"]["fulfillmentText"],
+        "bot"
+      );
+      this._componentFactoryService.AddChoiceButton([
+        "Yes",
+        "No"
+      ]);
+    }
   }
 
   BookingDetailsAreFine(guestCount, date, time) {
@@ -476,7 +510,7 @@ export class AppService {
         catchError(err => {
           this._componentFactoryService.StopLoader();
           this._componentFactoryService.AddTextBubble(
-            "Sorry, I am unable to fetch the selected restaurant menu",
+            "Sorry, I am unable to fetch the menu of the selected restaurant",
             "bot"
           );
           return throwError(err);
@@ -486,14 +520,14 @@ export class AppService {
         if (data === 404) {
           this._componentFactoryService.StopLoader();
           this._componentFactoryService.AddTextBubble(
-            "Sorry, I am unable to fetch the selected restaurant menu",
+            "Sorry, I am unable to fetch the menu of the selected restaurant",
             "bot"
           );
         } else {
           this._componentFactoryService.StopLoader();
           // show menu here -
-          this._componentFactoryService.AddRestaurantDetailsCard(data);
-        }
+          this._componentFactoryService.AddOrderingMenuCard(data); 
+       }
       });
   }
   

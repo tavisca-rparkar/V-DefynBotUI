@@ -10,7 +10,9 @@
       </div>
       <div class="ordering-details">
         <div class="orderingId">
-          <p>Order ID : {{data["orderId"]}}</p>
+          <p style="margin-bottom: 1%;">Order ID : {{data["orderId"]}}</p>
+          <p>Date : {{ data["date"].split("T")[0] }}</p>
+          <p>Time : {{ data["date"].split("T")[1].split(".")[0] }}</p>
         </div>
         <hr />
         <div class="restaurant-details">
@@ -26,24 +28,13 @@
           </div-->
         </div>
         <hr />
-        <div class="ordering-details">
-          <p class="sectionHeading">Order Details :</p>
-          
-            <p>Date : {{ data["date"].split("T")[0] }}</p>
-            <p>Time : {{ data["date"].split("T")[1].split(".")[0] }}</p>
-          
-          
-          
-          
-        </div>
-        <hr />
         <div class="billing-details">
-                <p class="sectionHeading">Billing Details :</p>
+                <p class="sectionHeading">Order Details :</p>
 
                 <div class="order-info">
 
                         <table>
-                            <tr *ngFor="let item of data['menu']">
+                            <tr *ngFor="let item of data['menuItems']">
                                     <td class="item-name">
                                         {{item.name}}
                                     </td>
@@ -68,7 +59,7 @@
                   </div>
 
           <hr />
-          <p>
+          <p style="margin-top: 5%;">
             Final Amount :
             <span>{{ data["totalPoints"] }}</span>
           </p>

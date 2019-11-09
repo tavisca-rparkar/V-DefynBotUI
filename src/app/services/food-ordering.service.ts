@@ -1,22 +1,24 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { timeout } from "rxjs/operators";
+import { OrderingPaymentData } from '../models/OrderingPaymentData';
 
 @Injectable({
   providedIn: "root"
 })
 export class FoodOrderingService {
   constructor(private _http: HttpClient) {}
-  private _ApiBaseUrl = "";
+  
   private _restaurantListApiUrl = "";
   private _restaurantMenuApiUrl = "";
   private _foodOrderingPaymentApiUrl = "";
   private _carouselData;
 
   SetURL(listUrl: string) {
-    this._ApiBaseUrl = listUrl;
-    this._restaurantListApiUrl = this._ApiBaseUrl + "restaurants?";
-    this._restaurantMenuApiUrl = this._ApiBaseUrl + "menu?";
+    
+    this._restaurantListApiUrl = listUrl + "restaurants?";
+    this._restaurantMenuApiUrl = listUrl + "menuitems?";
+    this._foodOrderingPaymentApiUrl=listUrl+"OrderPayment";
   }
 
   SetCarouselData(data) {
@@ -57,22 +59,28 @@ export class FoodOrderingService {
     return this._http
       .get(
         this._restaurantMenuApiUrl +
-          restaurantId +
-          "&supplierName=" +
+        "restaurantid="+
+          restaurantId+
+          "&suppliername="+
           supplierName
       )
       .pipe(timeout(5000));
   }
 
-  PaymentforFoodOrdering(orderingPaymentData) {
+  PaymentforFoodOrdering(orderingPaymentData:OrderingPaymentData) {
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    console.log(orderingPaymentData.menuItems[0].price);
+    /*let data = {
+      "restaurantId": orderingPaymentData.restaurantId,
+      "restaurantName": orderingPaymentData.restaurantName,
+      "userId": orderingPaymentData.userId,
+      "totalPoints": orderingPaymentData.totalPoints,
+      "menuItems": orderingPaymentData.menuItems
+    };*/
+   
+    console.log(JSON.stringify(orderingPaymentData));
     return this._http
-      .post(this._foodOrderingPaymentApiUrl, {
-        restaurantId: orderingPaymentData["restaurantId"],
-        restaurantName: orderingPaymentData["restaurantName"],
-        userId: orderingPaymentData["userId"],
-        totalPoints: orderingPaymentData["totalPoints"],
-        menuItems: orderingPaymentData["menuItems"]
-      })
+      .post(this._foodOrderingPaymentApiUrl, orderingPaymentData)
       .pipe(timeout(5000));
   }
 }

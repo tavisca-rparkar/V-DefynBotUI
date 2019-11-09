@@ -7,9 +7,9 @@ export class Cart {
   }
 
   AddToCart(menu) {
-    menu.forEach(category => {
+    menu.forEach(dataElement => {
       this.category = new Array<MenuItem>();
-      category.items.forEach(item => {
+      dataElement["items"].forEach(item => {
         this.category.push({
           name: item.name,
           price: item.price,
@@ -17,7 +17,7 @@ export class Cart {
         });
       });
       this.menu.push({
-        categoryName: category.categoryName,
+        categoryName: dataElement["category"],
         menuItem: this.category
       });
     });

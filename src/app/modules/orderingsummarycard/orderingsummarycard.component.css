@@ -43,6 +43,10 @@
     bottom: 0%;
     cursor: pointer;
     font-weight: bolder;
+    border-radius: 5px;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    box-shadow: 1px 2px #8d8d8d;
   }
   
   .ordered h1 {
@@ -60,6 +64,10 @@
     bottom: 0%;
     cursor: pointer;
     font-weight: bolder;
+    border-radius: 5px;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    box-shadow: 1px 2px #8d8d8d;
   }
   
   .cancelled h1 {

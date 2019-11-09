@@ -137,6 +137,7 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
   }
 
   addOrderingMenuCard(data) {
+    
     const factory = this._factory.resolveComponentFactory(MenuComponent);
     const componentRef1 = this.vc.createComponent(factory);
     let instance = <MenuComponent>componentRef1.instance;

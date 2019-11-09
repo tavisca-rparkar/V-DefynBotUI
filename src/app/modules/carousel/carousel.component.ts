@@ -1,6 +1,7 @@
 import { Component, Input, AfterViewInit, OnInit } from "@angular/core";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { AppService } from "src/app/services/app.service";
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: "app-carousel",
@@ -14,7 +15,8 @@ export class CarouselComponent implements AfterViewInit,OnInit {
 
   constructor(
     private _componentFactoryService: ComponentFactoryService,
-    private _appService: AppService
+    private _appService: AppService,
+    private _stateService: StateService
   ) {}
   ngOnInit(){
   this.data = this.mainData["data"];
@@ -25,14 +27,21 @@ export class CarouselComponent implements AfterViewInit,OnInit {
   }
 
   showDetails(index: number) {
-    const request = [
+    const data = [
       this.data[index]["restaurantId"],
       this.data[index]["supplierName"]
     ];
     if(this.carouselType=="Restaurant Booking"){
-      this._appService.IntentRouter("Show Details", request);
+      this._appService.IntentRouter("Show Details", data);
     }else{
-      this._appService.IntentRouter("Show Menu", request);
+      this._stateService._foodOrderRestauranData = {
+        "restaurantId": this.data[index]["restaurantId"],
+        "restaurantName":this.data[index]["restaurantName"],
+        "supplierName":this.data[index]["supplierName"],
+        "locality": this.data[index]["localityVerbose"], 
+      }
+      console.log(this._stateService._foodOrderRestauranData);
+      this._appService.IntentRouter("Show Menu", data);
     }
     
   }

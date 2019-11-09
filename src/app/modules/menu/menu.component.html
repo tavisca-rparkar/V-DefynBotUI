@@ -1,8 +1,8 @@
 <div class="card-container">
   <div class="card" *ngIf="!isCartVisible">
     <div class="restaurantInfo">
-      <h1>{{ data["restaurantName"] }}</h1>
-      <p>{{ data["locality"] }}</p>
+      <h1>{{ restaurantData["restaurantName"] }}</h1>
+      <p>{{ restaurantData["locality"] }}</p>
     </div>
     <hr />
     <p style="text-align: center; margin: 0%; font-size: 18px">MENU</p>
@@ -32,37 +32,38 @@
               <p>{{ item.price }}</p>
             </div>
             <div class="counter">
-              <button class="qtyChange" (click)="decrementCount(itemIndex)">
-                -
-              </button>
+              <div class="qtyChange remove-button" (click)="decrementCount(itemIndex)">
+                <i class="material-icons">remove_circle</i>
+              </div>
               <input
                 type="text"
                 class="quantity"
                 value="{{ item.quantity }}"
                 readonly="readonly"
               />
-              <button class="qtyChange" (click)="incrementCount(itemIndex)">
-                +
-              </button>
+              <div class="qtyChange add-button" (click)="incrementCount(itemIndex)">
+                <i class="material-icons">add_circle</i>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <hr />
+    <div *ngIf="isErrorDetected" class="points-error">
+      <p>{{ insufficientBalanceError }}</p>
+    </div>
     <div class="billInfo" *ngIf="totalPrice > 0">
       <p>Total Price : {{ totalPrice }}</p>
       <button (click)="SeeCart()" class="see-cart">
-        <p>View Cart</p>
+        <p>Order Details</p>
       </button>
     </div>
   </div>
+  <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
   <div class="card" *ngIf="isCartVisible">
     <div class="order">
-      <button (click)="BacktoMenu()" class="see-cart">
-        <p>Back</p>
-      </button>
-      <h1>Cart</h1>
+      <h1>Order Details</h1>
     </div>
     <hr />
     <ng-container
@@ -73,7 +74,7 @@
       >
         <div class="cartItems" *ngIf="item.quantity > 0">
           <p class="foodItem">{{ item.name }}</p>
-          <p>
+          <p class="foodItem-info">
             {{ item.quantity }} X {{ item.price }} :
             {{ item.quantity * item.price }}
           </p>
@@ -82,10 +83,16 @@
     </ng-container>
     <hr />
     <div class="billInfo">
-      <p>Total Price : {{ totalPrice }}</p>
-      <button (click)="SeeCart()" class="see-cart">
-        <p>Proceed To Pay</p>
+      <p>Total Price :</p>
+      <p>{{ totalPrice }}</p>
+    </div>
+    <div *ngIf="!isProceedToPayClicked" class="user-response">
+      <button (click)="BacktoMenu()" class="edit">
+        <p>Edit Order</p>
       </button>
+      <button (click)="ProceedToPay()" class="proceedToPay">
+        <p>Proceed To Pay</p>
+      </button>      
     </div>
   </div>
 </div>
