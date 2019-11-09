@@ -17,17 +17,20 @@
             selected: categoryIndex == selectedCategoryIndex
           }"
         >
+        *ngIf="{{ category.categoryName }}"
           {{ category.categoryName }}
         </div>
       </div>
       <hr />
+
       <div class="menu-container">
         <div class="menu">
           <div
             class="menu-item"
             *ngFor="let item of selectedCategoryMenu; let itemIndex = index"
           >
-            <div class="menu-item-info">
+
+            <div class="menu-item-info" >
               <h1>{{ item.name }}</h1>
               <p>{{ item.price }}</p>
             </div>
