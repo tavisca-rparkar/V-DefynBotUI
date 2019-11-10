@@ -58,7 +58,7 @@
 
 .selected {
   color: #fff;
-  background-color: #007bff;
+  background-color: var(--theme-color);
 }
 
 .foodItem-info{

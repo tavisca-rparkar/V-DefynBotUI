@@ -5,7 +5,7 @@
   display: inline-block;
   position: fixed;
   bottom: 0;
-  background-color: #007bff;
+  background-color: var(--theme-color);
   border: none;
 }
 
@@ -32,7 +32,7 @@
   cursor: pointer;
 }
 
-input{
+input {
   outline: none;
   cursor: pointer;
 }
@@ -49,17 +49,16 @@ input{
   background-color: white;
   padding: 3px 8px 3px 3px;
 }
-.voice-active{
+.voice-active {
   color: green;
 }
-.voice-disabled{
+.voice-disabled {
   color: white;
   visibility: hidden;
 }
-.voice-inactive{
-color: #007bff;
+.voice-inactive {
+  color: var(--theme-color);
 }
-
 
 .send {
   width: 20%;
@@ -79,9 +78,9 @@ color: #007bff;
   border-color: transparent;
   outline: none;
   background-color: white;
-  color: #007bff;
+  color: var(--theme-color);
 }
-.text .material-icons{
+.text .material-icons {
   margin: auto auto;
 }
 

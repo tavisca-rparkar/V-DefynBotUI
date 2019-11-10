@@ -8,7 +8,7 @@
   background-color: #fff;
 }
 
-.heading h1{
+.heading h1 {
   font-size: 20px;
   text-align: center;
 }
@@ -37,7 +37,7 @@ label {
 select {
   width: 96%;
   margin: 2%;
-  padding-left: 5%;;
+  padding-left: 5%;
 }
 
 button {
@@ -49,4 +49,24 @@ button {
   color: white;
   padding: 3%;
   font-size: 20px;
+}
+
+.points-error {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  width: 100%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  box-shadow: 1px 2px #8d8d8d;
+}
+
+.points-error p {
+  color: #a94442;
+  font-size: 16px;
+  margin: 0%;
 }

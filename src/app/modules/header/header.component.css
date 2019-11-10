@@ -3,7 +3,7 @@
   height: 10%;
   top: 0;
   display: inline-block;
-  background-color: #007bff;
+  background-color: var(--theme-color);
   min-height: 60px;
   border: none;
 }
@@ -16,6 +16,7 @@
   justify-content: center;
   float: left;
 }
+
 
 img {
   max-width: 90%;
@@ -40,8 +41,8 @@ img {
 
 .user-details {
   margin: auto;
-  margin:5px;
-  padding: 5px;;
+  margin: 5px;
+  padding: 5px;
   float: left;
   justify-content: center;
   align-items: center;
@@ -69,7 +70,7 @@ img {
   font-size: 14px;
 }
 
-.logout{
+.logout {
   height: 100%;
   float: right;
   display: flex;
@@ -77,21 +78,21 @@ img {
   align-items: center;
   cursor: pointer;
 }
-.logout .material-icons{
-  color: #007bff;
+.logout .material-icons {
+  color: var(--theme-color);
   font-size: 38px;
 }
 
 /* dropdown CSS */
 .dropbtn {
-  background-color: #007bff;
+  background-color: var(--theme-color);
   color: white;
   padding: 16px;
   font-size: 16px;
   border: none;
   cursor: pointer;
 }
-.dropbtn .material-icons{
+.dropbtn .material-icons {
   color: #fff;
   font-size: 150%;
 }
@@ -108,7 +109,7 @@ img {
   right: 0;
   background-color: #f9f9f9;
   min-width: 200px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   justify-content: space-between;
   align-items: center;

@@ -9,6 +9,7 @@ export class StateService {
 
   public appData:LauncherData = new LauncherData("","","","","",0,"","");
   public isAppDataSet:boolean = false;
+  public clientLogo:string;
   
   public CurrencyValueInPoints: number = 100;
   public _foodOrderRestauranData:any;
