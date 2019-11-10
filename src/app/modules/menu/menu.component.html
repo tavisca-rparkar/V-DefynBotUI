@@ -17,7 +17,6 @@
             selected: categoryIndex == selectedCategoryIndex
           }"
         >
-        *ngIf="{{ category.categoryName }}"
           {{ category.categoryName }}
         </div>
       </div>
@@ -29,13 +28,15 @@
             class="menu-item"
             *ngFor="let item of selectedCategoryMenu; let itemIndex = index"
           >
-
-            <div class="menu-item-info" >
+            <div class="menu-item-info">
               <h1>{{ item.name }}</h1>
               <p>{{ item.price }}</p>
             </div>
             <div class="counter">
-              <div class="qtyChange remove-button" (click)="decrementCount(itemIndex)">
+              <div
+                class="qtyChange remove-button"
+                (click)="decrementCount(itemIndex)"
+              >
                 <i class="material-icons">remove_circle</i>
               </div>
               <input
@@ -44,7 +45,10 @@
                 value="{{ item.quantity }}"
                 readonly="readonly"
               />
-              <div class="qtyChange add-button" (click)="incrementCount(itemIndex)">
+              <div
+                class="qtyChange add-button"
+                (click)="incrementCount(itemIndex)"
+              >
                 <i class="material-icons">add_circle</i>
               </div>
             </div>
@@ -95,7 +99,7 @@
       </button>
       <button (click)="ProceedToPay()" class="proceedToPay">
         <p>Proceed To Pay</p>
-      </button>      
+      </button>
     </div>
   </div>
 </div>
