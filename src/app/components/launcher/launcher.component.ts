@@ -7,6 +7,7 @@ import { catchError } from "rxjs/operators";
 import { throwError } from "rxjs";
 import { MockableApiService } from "src/app/services/mockableApi.service";
 import { ThemeService } from "src/app/services/theme.service";
+import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
 
 @Component({
   selector: "app-launcher",
@@ -22,7 +23,8 @@ export class LauncherComponent implements OnInit {
     private _stateService: StateService,
     private _launcherService: LauncherService,
     private _themingService: ThemeService,
-    private mockableApiService: MockableApiService
+    private mockableApiService: MockableApiService,
+    private _componentFactoryService : ComponentFactoryService
   ) {
     this.launcherData = new LauncherData(
       "development",
@@ -53,10 +55,12 @@ export class LauncherComponent implements OnInit {
   }
 
   redirect() {
+    this._componentFactoryService.StartLoader();
     this._launcherService
       .GetResponse(this.launcherData)
       .pipe(
         catchError(err => {
+          this._componentFactoryService.StopLoader();
           this.launcherData.error = "Sorry! Unable to connect at the momment.";
           console.log(this.launcherData.error);
           this.isErrorDetected = true;
@@ -73,6 +77,7 @@ export class LauncherComponent implements OnInit {
         this._themingService.setActiveTheme(
           this._themingService.getTheme(this.launcherData.client)
         );  //------------------------------------------------------------------
+        this._componentFactoryService.StopLoader();
         this._router.navigate(["./chatbot"]);
       });
   }
