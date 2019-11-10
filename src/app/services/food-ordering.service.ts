@@ -64,7 +64,7 @@ export class FoodOrderingService {
           "&suppliername="+
           supplierName
       )
-      .pipe(timeout(5000));
+      .pipe(timeout(15000));
   }
 
   PaymentforFoodOrdering(orderingPaymentData:OrderingPaymentData) {
@@ -81,6 +81,6 @@ export class FoodOrderingService {
     console.log(JSON.stringify(orderingPaymentData));
     return this._http
       .post(this._foodOrderingPaymentApiUrl, orderingPaymentData)
-      .pipe(timeout(5000));
+      .pipe(timeout(15000));
   }
 }

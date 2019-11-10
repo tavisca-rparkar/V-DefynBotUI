@@ -31,6 +31,6 @@ export class DialogflowApiService {
       "key": this._authKey,
       "text":userInput,
       "languageCode":"en"
-  }).pipe(timeout(5000));
+  }).pipe(timeout(10000));
   }
 }

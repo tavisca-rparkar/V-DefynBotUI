@@ -18,6 +18,6 @@ export class LocationApiService {
   }
   
   GetResponse(userInput: string) {
-    return this._http.get(this._apiUrl + userInput).pipe(timeout(3000));
+    return this._http.get(this._apiUrl + userInput).pipe(timeout(10000));
   }
 }

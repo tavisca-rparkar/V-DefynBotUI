@@ -21,7 +21,7 @@ export class LauncherService {
     "pointBalance":launcherData.pointBalance,
     "bank":launcherData.client,
     "locale":launcherData.language
-  }).pipe(timeout(5000));
+  }).pipe(timeout(10000));
   return response;
   }
 }

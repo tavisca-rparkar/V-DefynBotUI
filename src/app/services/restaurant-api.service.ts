@@ -45,7 +45,7 @@ export class RestaurantApiService {
   GetRestaurantDetails(restId, supplier) {
     return this._http
       .get(this._restaurantDetailsApiUrl + restId + "&supplierName=" + supplier)
-      .pipe(timeout(5000));
+      .pipe(timeout(15000));
   }
 
   BookingInitiateForRestaurant(bookingData){
@@ -59,12 +59,12 @@ export class RestaurantApiService {
     let perPersonPoints = bookingData["perPersonPoints"];
     let pointBalance = bookingData["pointBalance"];
 
-    return this._http.get(this._restaurantBookingApiUrl+"noOfGuests="+noOfGuests+"&date="+date+"&time="+time+"&restaurantId="+restaurantId+"&userName="+userName+"&restaurantName="+restaurantName+"&perPersonPoints="+perPersonPoints+"&pointBalance="+pointBalance).pipe(timeout(5000));
+    return this._http.get(this._restaurantBookingApiUrl+"noOfGuests="+noOfGuests+"&date="+date+"&time="+time+"&restaurantId="+restaurantId+"&userName="+userName+"&restaurantName="+restaurantName+"&perPersonPoints="+perPersonPoints+"&pointBalance="+pointBalance).pipe(timeout(15000));
   }
 
   MockBookingInitiateForRestaurant(bookingData){
     console.log("Warning : Mock Api Called For Initiating Booking For Restaurants !!!")
-    return this._http.get("http://demo8483055.mockable.io/mockbookingapi").pipe(timeout(5000));
+    return this._http.get("http://demo8483055.mockable.io/mockbookingapi").pipe(timeout(15000));
   }
 
   BookingPaymentForRestaurant(bookingPaymentData){
@@ -72,7 +72,7 @@ export class RestaurantApiService {
       "bookingId":bookingPaymentData["bookingId"],
       "pointBalance":bookingPaymentData["pointBalance"],
       "restaurantName":bookingPaymentData["restaurantName"]
-    }).pipe(timeout(5000));
+    }).pipe(timeout(15000));
   }
 
   BookingCancellationForRestaurant(bookingCancellationData){
@@ -80,7 +80,7 @@ export class RestaurantApiService {
       "bookingId":bookingCancellationData["bookingId"],
       "pointBalance":bookingCancellationData["pointBalance"],
       "totalPointPrice":bookingCancellationData["totalPointPrice"]
-    }).pipe(timeout(5000));
+    }).pipe(timeout(15000));
   }
 
   GetMockRestaurantDetails(){
