@@ -3,8 +3,8 @@ import { Cart, Category, MenuItem } from "src/app/models/cart";
 import { count } from "rxjs/operators";
 import { StateService } from "src/app/services/state.service";
 import { AppService } from "src/app/services/app.service";
-import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
-import { OrderingPaymentData } from 'src/app/models/OrderingPaymentData';
+import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
+import { OrderingPaymentData } from "src/app/models/OrderingPaymentData";
 
 @Component({
   selector: "app-menu",
@@ -15,14 +15,16 @@ export class MenuComponent implements OnInit {
   @Input() data;
   cart: Cart;
   isCartVisible: boolean = false;
-  isProceedToPayClicked:boolean = false;
+  isProceedToPayClicked: boolean = false;
   selectedCategoryIndex: number = 0;
   selectedCategoryMenu: any;
   totalPrice: number = 0;
-  restaurantData:any;
+  pointsPrice: number = 0;
+  restaurantData: any;
 
-  isErrorDetected:boolean = false;
-  insufficientBalanceError = "Can't add items to cart due to insufficient point balance.";
+  isErrorDetected: boolean = false;
+  insufficientBalanceError =
+    "Can't add items to cart due to insufficient point balance.";
 
   /*data = {
     restaurantId: "12345",
@@ -140,7 +142,6 @@ export class MenuComponent implements OnInit {
     ]
   };*/
 
-  
   constructor(
     private _stateService: StateService,
     private _appService: AppService,
@@ -148,30 +149,29 @@ export class MenuComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.cart = new Cart();
-    
+
     this.cart.AddToCart(this.data);
     this.GetCategoryMenu(this.selectedCategoryIndex);
     this.restaurantData = this._stateService._foodOrderRestauranData;
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this._componentFactoryService.updateScroll();
   }
 
-  
   incrementCount(item: number) {
     this.cart.IncrementCount(this.selectedCategoryIndex, item);
     this.UpdateTotalCost();
-    if(this.totalPrice > this._stateService.appData.pointBalance){
+    if (this.pointsPrice > this._stateService.appData.pointBalance) {
       this.isErrorDetected = true;
       this.decrementCount(item);
-      setTimeout(()=>{
-      this._componentFactoryService.updateScroll();
-        }, 50);
-      setTimeout(()=>{
+      setTimeout(() => {
+        this._componentFactoryService.updateScroll();
+      }, 50);
+      setTimeout(() => {
         this.isErrorDetected = false;
         this._componentFactoryService.updateScroll();
-        }, 3000);
+      }, 3000);
     }
   }
 
@@ -179,7 +179,6 @@ export class MenuComponent implements OnInit {
     this.cart.DecrementCount(this.selectedCategoryIndex, item);
     this.UpdateTotalCost();
   }
-
 
   UpdateTotalCost() {
     this.totalPrice = 0;
@@ -194,6 +193,8 @@ export class MenuComponent implements OnInit {
           this.cart.menu[category].menuItem[item].price;
       }
     }
+    this.pointsPrice =
+      this.totalPrice * this._stateService.CurrencyValueInPoints;
   }
 
   GetCategoryMenu(categoryIndex: number) {
@@ -219,12 +220,15 @@ export class MenuComponent implements OnInit {
         }
       });
     });
-    let orderingPaymentData:OrderingPaymentData = new OrderingPaymentData(
-      this.restaurantData["supplierName"]+"/"+this.restaurantData["restaurantId"],
-    this.restaurantData["restaurantName"],
-    this._stateService.appData.userId,
-    this.totalPrice,
-    cart);
+    let orderingPaymentData: OrderingPaymentData = new OrderingPaymentData(
+      this.restaurantData["supplierName"] +
+        "/" +
+        this.restaurantData["restaurantId"],
+      this.restaurantData["restaurantName"],
+      this._stateService.appData.userId,
+      this.pointsPrice,
+      cart
+    );
     //   restaurantId: 12,
     //   restaurantName: "Dominos Pizza",
     //   userId: this._stateService.appData.userId,
