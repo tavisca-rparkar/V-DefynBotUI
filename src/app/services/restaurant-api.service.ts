@@ -80,7 +80,7 @@ export class RestaurantApiService {
     let perPersonPoints = bookingData["perPersonPoints"];
     let pointBalance = bookingData["pointBalance"];
 
-    return this._http
+    /*return this._http
       .get(
         this._restaurantBookingApiUrl +
           "noOfGuests=" +
@@ -100,9 +100,9 @@ export class RestaurantApiService {
           "&pointBalance=" +
           pointBalance
       )
-      .pipe(timeout(15000));
+      .pipe(timeout(15000));*/
 
-    /*return this._http.post(this._restaurantBookingApiUrl, {
+    return this._http.post(this._restaurantBookingApiUrl, {
       noOfGuests: noOfGuests,
       date: date,
       time: time,
@@ -111,7 +111,7 @@ export class RestaurantApiService {
       restaurantName: restaurantName,
       perPersonPoints: perPersonPoints,
       pointBalance: pointBalance
-    });*/
+    });
   }
 
   MockBookingInitiateForRestaurant(bookingData) {
