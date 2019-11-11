@@ -22,7 +22,7 @@
   overflow-x: auto;
 
   -ms-overflow-style: auto;
-  scrollbar-width: 100%;
+  scrollbar-width: thin;
 }
 
 .image-gallery::-webkit-scrollbar {

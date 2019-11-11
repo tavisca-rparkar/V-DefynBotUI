@@ -45,10 +45,11 @@
 .category-selector {
   height: 10%;
   display: flex;
+  overflow-y: hidden;
   overflow-x: auto;
 
   -ms-overflow-style: auto;
-  scrollbar-width: 100%;
+  scrollbar-width: thin;
 }
 
 .category-selector::-webkit-scrollbar {
@@ -100,7 +101,7 @@
   overflow-x: hidden;
 
   -ms-overflow-style: auto;
-  scrollbar-width: 100%;
+  scrollbar-width: thin;
 }
 
 .menu-container::-webkit-scrollbar {
