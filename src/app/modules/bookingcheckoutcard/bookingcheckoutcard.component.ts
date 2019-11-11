@@ -12,7 +12,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
   @Input() data: string;
   isErrorDetected: boolean = false;
   disableAllButtons:boolean = false;
-  timer: number = 59;
+  timer: number = 299;
   minutes: number = 0;
   seconds: number = 59;
   pointBalance:number;
@@ -82,13 +82,18 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
   }
 
   cancelBooking(){
-    this.disableAllButtons=true;
-    let bookingCancelData ={
-      "bookingId": this.data["bookingId"],
-      "pointBalance": this._stateService.appData.pointBalance,
-      "totalPointPrice": this.data["totalPointPrice"]
+    if(confirm("Are you sure you want to proceed with cancellation of this booking?")){
+      this.disableAllButtons=true;
+      let bookingCancelData ={
+        "bookingId": this.data["bookingId"],
+        "pointBalance": this._stateService.appData.pointBalance,
+        "totalPointPrice": this.data["totalPointPrice"]
+      }
+      this._appService.IntentRouter("Cancel Booking",bookingCancelData);
+    }else{
+      ;
     }
-    this._appService.IntentRouter("Cancel Booking",bookingCancelData);
+    
   }
 
 
