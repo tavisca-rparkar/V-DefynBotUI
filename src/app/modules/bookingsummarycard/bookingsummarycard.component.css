@@ -247,3 +247,21 @@
 .cancel p:hover {
   color: #000000;
 }
+
+@media screen and (min-width: 1260px) {
+  .container {
+    width: 30%;
+    height: auto;
+    margin: 1% 0%;
+    margin-left: 5%;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .container {
+    width: 30%;
+    height: auto;
+    margin: 1% 0%;
+    margin-left: 5%;
+  }
+}

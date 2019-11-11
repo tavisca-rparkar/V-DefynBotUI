@@ -54,6 +54,7 @@
   border-radius: 10px 10px 10px 10px;
   font-size: 14px;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .selected {
@@ -61,7 +62,7 @@
   background-color: var(--theme-color);
 }
 
-.foodItem-info{
+.foodItem-info {
   white-space: nowrap;
 }
 
@@ -150,11 +151,12 @@
   width: 25px;
   height: 25px;
   text-align: center;
+  cursor: pointer;
 }
-.add-button{
+.add-button {
   color: #5fbf5e;
 }
-.remove-button{
+.remove-button {
   color: #e25656;
 }
 .billInfo {
@@ -166,6 +168,20 @@
 }
 
 .billInfo p {
+  margin: 0%;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pointsPrice {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pointsPrice p {
   margin: 0%;
   font-size: 18px;
   -webkit-font-smoothing: antialiased;
@@ -297,8 +313,6 @@ hr {
   color: #000000;
 }
 
-
-
 .points-error {
   display: inline-block;
   text-align: center;
@@ -317,4 +331,106 @@ hr {
   color: #a94442;
   font-size: 16px;
   margin: 0%;
+}
+
+@media screen and (min-width: 320px) {
+  .card-container {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 411px) {
+  .card-container {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .card-container {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .card-container {
+    width: 90%;
+    height: auto;
+  }
+
+  .category {
+    padding: 1%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card-container {
+    width: 90%;
+    height: auto;
+  }
+
+  .category {
+    padding: 1%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card-container {
+    width: 90%;
+    height: auto;
+  }
+
+  .category-selector {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .category-selector::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category {
+    padding: 1%;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .card-container {
+    width: 30%;
+    height: auto;
+    margin: 1% 0%;
+    margin-left: 5%;
+  }
+  .category-selector {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .category-selector::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category {
+    padding: 1%;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .card-container {
+    width: 30%;
+    height: auto;
+    margin: 1% 0%;
+    margin-left: 5%;
+  }
+  .category-selector {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .category-selector::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category {
+    padding: 1%;
+  }
 }

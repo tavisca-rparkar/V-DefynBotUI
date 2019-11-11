@@ -1,279 +1,299 @@
 .container {
-    width: 90%;
-    height: auto;
-    margin: 3% 5%;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
-    display: flex;
-    background-color: #fff;
-  }
-  
-  .ordering-card {
-    width: 96%;
-    height: 96%;
-    margin: 2% 2%;
-    border: none;
-  }
-  
-  .points-error {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
-    width: 100%;
-    padding: 2% 2%;
-    bottom: 0%;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #f2dede;
-    border: 1px solid #ebccd1;
-    box-shadow: 1px 2px #8d8d8d;
-  }
-  
-  .points-error p {
-    color: #a94442;
-    font-size: 16px;
-    margin: 0%;
-  }
-  
-  .ordered {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    width: 100%;
-    padding: 2% 2%;
-    bottom: 0%;
-    cursor: pointer;
-    font-weight: bolder;
-    border-radius: 5px;
-    background-color: #dff0d8;
-    border: 1px solid #d6e9c6;
-    box-shadow: 1px 2px #8d8d8d;
-  }
-  
-  .ordered h1 {
-    color: #3c763d;
-    font-size: 18px;
-    margin: 0%;
-  }
-  
-  .cancelled {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    width: 100%;
-    padding: 2% 2%;
-    bottom: 0%;
-    cursor: pointer;
-    font-weight: bolder;
-    border-radius: 5px;
-    background-color: #f2dede;
-    border: 1px solid #ebccd1;
-    box-shadow: 1px 2px #8d8d8d;
-  }
-  
-  .cancelled h1 {
-    color: #a94442;
-    font-size: 18px;
-    margin: 0%;
-  }
-  
-  .title {
-    width: 100%;
-    height: auto;
-    margin: 5% 0%;
-    text-align: center;
-  }
-  
-  .title h1 {
-    font-size: 26px;
-    line-height: 26px;
-    margin: 0%;
-    font-weight: normal;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  .title span {
-    float: right;
-  }
-  
-  .ordering-details {
-    width: 96%;
-    height: 96%;
-    margin: 2% 2%;
-    border: none;
-  }
-  
-  .orderingId {
-    width: 100%;
-    height: auto;
-    margin: 5% 0%;
-  }
+  width: 90%;
+  height: auto;
+  margin: 3% 5%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
+  display: flex;
+  background-color: #fff;
+}
 
-  .order-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-    line-height: 14px;
-  }
-  table{
-      border-collapse: separate;
-        border-spacing:0 10px; 
-        width: 100%;
-  }
-  td {
-      text-align: right;
-      
-  }
+.ordering-card {
+  width: 96%;
+  height: 96%;
+  margin: 2% 2%;
+  border: none;
+}
 
-  .item-name{
-      text-align: left;
-      padding-right: 5%;
-  }
-  
-  .orderingId p {
-    font-size: 16px;
-    line-height: 18px;
-    margin: 0%;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  .restaurant-details {
-    width: 100%;
+.points-error {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  width: 100%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  box-shadow: 1px 2px #8d8d8d;
+}
+
+.points-error p {
+  color: #a94442;
+  font-size: 16px;
+  margin: 0%;
+}
+
+.ordered {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  font-weight: bolder;
+  border-radius: 5px;
+  background-color: #dff0d8;
+  border: 1px solid #d6e9c6;
+  box-shadow: 1px 2px #8d8d8d;
+}
+
+.ordered h1 {
+  color: #3c763d;
+  font-size: 18px;
+  margin: 0%;
+}
+
+.cancelled {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  font-weight: bolder;
+  border-radius: 5px;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  box-shadow: 1px 2px #8d8d8d;
+}
+
+.cancelled h1 {
+  color: #a94442;
+  font-size: 18px;
+  margin: 0%;
+}
+
+.title {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+  text-align: center;
+}
+
+.title h1 {
+  font-size: 26px;
+  line-height: 26px;
+  margin: 0%;
+  font-weight: normal;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.title span {
+  float: right;
+}
+
+.ordering-details {
+  width: 96%;
+  height: 96%;
+  margin: 2% 2%;
+  border: none;
+}
+
+.orderingId {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.order-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 14px;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  width: 100%;
+}
+td {
+  text-align: right;
+}
+
+.item-name {
+  text-align: left;
+  padding-right: 5%;
+}
+
+.item-info {
+  white-space: nowrap;
+}
+
+.orderingId p {
+  font-size: 16px;
+  line-height: 18px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.restaurant-details {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.restaurant-details p {
+  margin: 0%;
+}
+
+.restaurant-details .sectionHeading {
+  color: lightgrey;
+}
+
+.restaurantName {
+  width: 100%;
+  height: auto;
+}
+
+.restaurantName h1 {
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0%;
+  font-weight: normal;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.address {
+  width: 100%;
+  height: auto;
+}
+
+.address p {
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ordering-details {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.ordering-details .sectionHeading {
+  color: lightgrey;
+}
+
+.ordering-details p {
+  font-size: 16px;
+  line-height: 18px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.billing-details {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.billing-details p {
+  font-size: 16px;
+  line-height: 18px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.billing-details p span {
+  float: right;
+}
+
+.billing-details .sectionHeading {
+  color: lightgrey;
+}
+
+.billing-details hr {
+  padding: 0%;
+  margin: 0%;
+}
+
+.pointsAfterPayment {
+  width: 100%;
+  height: auto;
+  margin: 5% 0%;
+}
+
+.pointsAfterPayment p {
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0%;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pointsAfterPayment p span {
+  float: right;
+}
+
+.user-response {
+  width: 100%;
+  margin: 5% 0%;
+}
+
+.cancel {
+  display: inline-block;
+  text-align: center;
+  font-weight: 400;
+  vertical-align: middle;
+  width: 98%;
+  margin: 0% 1%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #d9534f;
+  box-shadow: 1px 2px #8d8d8d;
+}
+
+.cancel:hover {
+  background-color: #ffffff;
+  border: 1px solid #d43f3a;
+}
+
+.cancel p {
+  color: #fff;
+  font-size: 16px;
+  margin: 0%;
+}
+
+.cancel p:hover {
+  color: #000000;
+}
+
+@media screen and (min-width: 1260px) {
+  .container {
+    width: 30%;
     height: auto;
-    margin: 5% 0%;
+    margin: 1% 0%;
+    margin-left: 5%;
   }
-  
-  .restaurant-details p {
-    margin: 0%;
-  }
-  
-  .restaurant-details .sectionHeading {
-    color: lightgrey;
-  }
-  
-  .restaurantName {
-    width: 100%;
+}
+
+@media screen and (min-width: 1281px) {
+  .container {
+    width: 30%;
     height: auto;
+    margin: 1% 0%;
+    margin-left: 5%;
   }
-  
-  .restaurantName h1 {
-    font-size: 18px;
-    line-height: 20px;
-    margin: 0%;
-    font-weight: normal;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  .address {
-    width: 100%;
-    height: auto;
-  }
-  
-  .address p {
-    font-size: 14px;
-    line-height: 16px;
-    margin: 0%;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  .ordering-details {
-    width: 100%;
-    height: auto;
-    margin: 5% 0%;
-  }
-  
-  .ordering-details .sectionHeading {
-    color: lightgrey;
-  }
-  
-  .ordering-details p {
-    font-size: 16px;
-    line-height: 18px;
-    margin: 0%;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  .billing-details {
-    width: 100%;
-    height: auto;
-    margin: 5% 0%;
-  }
-  
-  .billing-details p {
-    font-size: 16px;
-    line-height: 18px;
-    margin: 0%;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  .billing-details p span {
-    float: right;
-  }
-  
-  .billing-details .sectionHeading {
-    color: lightgrey;
-  }
-  
-  .billing-details hr {
-    padding: 0%;
-    margin: 0%;
-  }
-  
-  .pointsAfterPayment {
-    width: 100%;
-    height: auto;
-    margin: 5% 0%;
-  }
-  
-  .pointsAfterPayment p {
-    font-size: 14px;
-    line-height: 16px;
-    margin: 0%;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  .pointsAfterPayment p span {
-    float: right;
-  }
-  
-  .user-response {
-    width: 100%;
-    margin: 5% 0%;
-  }
-  
-  .cancel {
-    display: inline-block;
-    text-align: center;
-    font-weight: 400;
-    vertical-align: middle;
-    width: 98%;
-    margin: 0% 1%;
-    padding: 2% 2%;
-    bottom: 0%;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #d9534f;
-    box-shadow: 1px 2px #8d8d8d;
-  }
-  
-  .cancel:hover {
-    background-color: #ffffff;
-    border: 1px solid #d43f3a;
-  }
-  
-  .cancel p {
-    color: #fff;
-    font-size: 16px;
-    margin: 0%;
-  }
-  
-  .cancel p:hover {
-    color: #000000;
-  }
-  
+}
