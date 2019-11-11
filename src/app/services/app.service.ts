@@ -108,6 +108,12 @@ export class AppService {
       case "Book Table":
         this.BookTableIntent(response);
         break;
+      case "Proceed with current location":
+        this.ProceedBookingWithCurrentLocation(response);
+        break;
+      case "Proceed with specific location":
+        this.ProceedBookingWithSpecificLocation(response);
+        break;
       case "Show Details":
         this.ShowDetailsIntent(response);
         break;
@@ -157,7 +163,14 @@ export class AppService {
 
       this._stateService.setBookTableData(city, guestCount, date, time);
 
-      this._restaurantApiService
+      if(city == ""){
+        //ask for- do you want to see nearby hotels as per your current location or search for hotels in a specific area?
+        this._componentFactoryService.StopLoader();
+        this.IntentProcessing("running");
+      }
+      else{
+        // proceed to show results for specified city
+        this._restaurantApiService
         .GetRestaurantsList(
           city,
           this._stateService.getLatitude(),
@@ -190,7 +203,111 @@ export class AppService {
             });
           }
         });
+      }
     } else {
+      this._componentFactoryService.AddTextBubble(
+        response["queryResult"]["fulfillmentText"],
+        "bot"
+      );
+    }
+  }
+
+  ProceedBookingWithCurrentLocation(response){
+    if (response["queryResult"]["allRequiredParamsPresent"]) {
+      this._componentFactoryService.StartLoader();
+      let IsProceedWithLocation = response["queryResult"]["parameters"]["boolean"];
+      if(IsProceedWithLocation == "yes"){
+        // proceed to show results for browser Location
+        this._restaurantApiService
+        .GetRestaurantsList(
+          "",
+          this._stateService.getLatitude(),
+          this._stateService.getLongitude()
+        )
+        .pipe(
+          catchError(err => {
+            this._componentFactoryService.AddTextBubble(
+              "Sorry, I am unable to process this response at the moment",
+              "bot"
+            );
+            this._componentFactoryService.StopLoader();
+            return throwError(err);
+          })
+        )
+        .subscribe(data => {
+          if (data === 404) {
+            this._componentFactoryService.AddTextBubble(
+              "Sorry, I wasn't able to find any restaurants in that area.",
+              "bot"
+            );
+            this._componentFactoryService.StopLoader();
+          } else {
+            // show results here -
+            this._restaurantApiService.SetCarouselData(data);
+            this._componentFactoryService.StopLoader();
+            this._componentFactoryService.AddRestaurantCarousel({
+              data: data,
+              carouselType: "Restaurant Booking"
+            });
+          }
+        });
+      }
+      else{
+        // ask for location to serve
+        this._componentFactoryService.StopLoader();
+        this.IntentProcessing("singing in");
+      }
+    }else{
+      this._componentFactoryService.AddTextBubble(
+        response["queryResult"]["fulfillmentText"],
+        "bot"
+      );
+      this._componentFactoryService.AddChoiceButton([
+        "Yes",
+        "No"
+      ]);
+    }
+  }
+
+  ProceedBookingWithSpecificLocation(response){
+    if (response["queryResult"]["allRequiredParamsPresent"]) {
+      this._componentFactoryService.StartLoader();
+      let city = response["queryResult"]["parameters"]["address"];
+      // proceed to show results for browser Location
+      this._restaurantApiService
+      .GetRestaurantsList(
+        city,
+        this._stateService.getLatitude(),
+        this._stateService.getLongitude()
+      )
+      .pipe(
+        catchError(err => {
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I am unable to process this response at the moment",
+            "bot"
+          );
+          this._componentFactoryService.StopLoader();
+          return throwError(err);
+        })
+      )
+      .subscribe(data => {
+        if (data === 404) {
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I wasn't able to find any restaurants in that area.",
+            "bot"
+          );
+          this._componentFactoryService.StopLoader();
+        } else {
+          // show results here -
+          this._restaurantApiService.SetCarouselData(data);
+          this._componentFactoryService.StopLoader();
+          this._componentFactoryService.AddRestaurantCarousel({
+            data: data,
+            carouselType: "Restaurant Booking"
+          });
+        }
+      });
+    }else{
       this._componentFactoryService.AddTextBubble(
         response["queryResult"]["fulfillmentText"],
         "bot"
