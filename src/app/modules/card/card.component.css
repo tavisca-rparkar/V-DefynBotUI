@@ -30,7 +30,7 @@
 }
 
 .image-gallery::-webkit-scrollbar:horizontal {
-  height: 10px;
+  height: 15px;
 }
 
 .image-gallery::-webkit-scrollbar-thumb {

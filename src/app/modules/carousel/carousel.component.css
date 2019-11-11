@@ -15,7 +15,7 @@
 }
 
 .carousel-container::-webkit-scrollbar:horizontal {
-  height: 7px;
+  height: 15px;
 }
 
 .carousel-container::-webkit-scrollbar-thumb {
