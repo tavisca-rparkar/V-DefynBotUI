@@ -1,25 +1,47 @@
 .card-container {
-  width: 90%;
+  width: 100%;
   height: auto;
-  margin: 3% 5%;
+  margin: 3% 0%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
-  display: flex;
+  display: block;
   background-color: #fff;
 }
 
 .card {
   width: 96%;
-  height: 96%;
+  height: auto;
   margin: 2% 2%;
   border: none;
 }
 
+/*
 .image-gallery {
   width: 100%;
-  height: 180px;
+  height: auto;
   white-space: nowrap;
   overflow-y: hidden;
   overflow-x: auto;
+
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
+}
+
+.image-gallery::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.image-gallery::-webkit-scrollbar:horizontal {
+  height: 15px;
+}
+
+.image-gallery::-webkit-scrollbar-thumb {
+  background-color: var(--theme-color);
+  border-radius: 10px;
+  border: 2px solid #eee;
+}
+
+.image-gallery::-webkit-scrollbar-track {
+  background-color: #eee;
 }
 
 .image-container {
@@ -43,7 +65,7 @@
   width: 100%;
   height: 100%;
   object-fit: fill;
-}
+}*/
 
 .restaurantInfo {
   width: 100%;
@@ -205,35 +227,35 @@
 
 @media screen and (min-width: 320px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 }
 
 @media screen and (min-width: 411px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 }
 
 @media screen and (min-width: 481px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 }
 
 @media screen and (min-width: 600px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 }
 
 @media screen and (min-width: 768px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 
@@ -247,14 +269,7 @@
   .card-container {
     width: 90%;
     height: auto;
-  }
-
-  .image-gallery {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .image-gallery::-webkit-scrollbar {
-    display: none;
+    margin: 3% 5%;
   }
 
   .image-gallery {
@@ -269,14 +284,6 @@
     height: auto;
     margin: 1% 0%;
     margin-left: 5%;
-  }
-
-  .image-gallery {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .image-gallery::-webkit-scrollbar {
-    display: none;
   }
 
   .image-gallery {
@@ -295,14 +302,6 @@
     height: auto;
     margin: 1% 0%;
     margin-left: 5%;
-  }
-
-  .image-gallery {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .image-gallery::-webkit-scrollbar {
-    display: none;
   }
 
   .image-gallery {
