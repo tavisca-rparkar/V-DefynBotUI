@@ -81,9 +81,19 @@ export class AppPage {
   {
     return element(by.css('app-launcher'));
   }
-  getLaunchButton()
+  getEnvironmentDropdown()
+  {
+    return element(by.tagName("select#first"));
+  }
+  selectEnvironment()
   {
     
+		
+		return element(by.css("#first [value='development']"));
+  }
+  getLaunchButton()
+  {
+
   }
   
 

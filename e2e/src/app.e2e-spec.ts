@@ -42,7 +42,11 @@ describe('workspace-project App', () => {
     browser.manage().window().setSize(375,667);
     var EC = protractor.ExpectedConditions;
     browser.wait(EC.presenceOf(page.getLauncher()),10000);
-    
+    page.getEnvironmentDropdown().click();
+		// add sleep to give a time for te options to reveal
+    browser.sleep(1000)
+    page.selectEnvironment().click();
+
     browser.wait(EC.presenceOf(page.getBookATableButton()),10000);
     page.getBookATableButton().click();
     browser.wait(EC.presenceOf(page.getCorousal()), 10000);
