@@ -12,6 +12,7 @@
         <select
           [(ngModel)]="this.launcherData.environment"
           name="environment"
+          id="environment-dropdown"
           required
         >
           <option value="development">Development</option>
@@ -20,7 +21,7 @@
 
       <div class="client">
         <label>Client</label>
-        <select [(ngModel)]="this.launcherData.client" name="client" required>
+        <select [(ngModel)]="this.launcherData.client" name="client" id="client-dropdown" required>
           <option value="Test">Test</option>
           <option value="US Bank">US Bank</option>
           <option value="American Express">American Express</option>
@@ -32,6 +33,7 @@
         <select
           [(ngModel)]="this.launcherData.language"
           name="language"
+          id="language-dropdown"
           required
         >
           <option value="en-us">English US</option>
@@ -45,6 +47,7 @@
           name="userFirstName"
           [(ngModel)]="this.launcherData.userFirstName"
           placeholder="John Snow"
+          id="username-input"
           required
         />
       </div>
@@ -56,6 +59,7 @@
           name="userId"
           [(ngModel)]="this.launcherData.userId"
           placeholder="RETSB500"
+          id="userId-input"
         />
       </div>
 
@@ -66,6 +70,7 @@
           name="pointBalance"
           [(ngModel)]="this.launcherData.pointBalance"
           placeholder="990000"
+          id="pointBalance-input"
           required
         />
       </div>
@@ -73,7 +78,7 @@
         <app-loader></app-loader>
       </div>
 
-      <button type="submit" (click)="redirect()">Launch</button>
+      <button type="submit" id="launch-button" (click)="redirect()">Launch</button>
     </form>
   </div>
 </div>

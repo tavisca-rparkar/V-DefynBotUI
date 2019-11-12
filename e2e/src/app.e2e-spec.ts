@@ -45,12 +45,31 @@ describe('workspace-project App', () => {
     page.getEnvironmentDropdown().click();
 		// add sleep to give a time for te options to reveal
     browser.sleep(1000)
-    page.selectEnvironment().click();
-
+    page.selectEnvironment().click()
+    
+    page.getClientDropdown().click();
+    browser.sleep(1000);
+    page.selectClient().click();
+    page.getLanguageDropdown().click();
+    browser.sleep(1000);
+    page.selectLanguage().click();
+    page.getUsernameTextBox().clear();
+    page.getUsernameTextBox().sendKeys("john");
+    page.getUserIdTextBox().clear();
+    page.getUserIdTextBox().sendKeys("ryghjhik");
+    page.getPointBalanceTextBox().clear();
+    page.getPointBalanceTextBox().sendKeys("99000");
+    browser.actions().mouseMove(page.getLaunchButton()).click().perform();
+    
+    browser.wait(EC.presenceOf(page.getChatbot()), 10000)
+    //browser.sleep(15000);
     browser.wait(EC.presenceOf(page.getBookATableButton()),10000);
     page.getBookATableButton().click();
-    browser.wait(EC.presenceOf(page.getCorousal()), 10000);
-    browser.actions().mouseMove(page.getCorousal()).click().perform();
+    page.getTextBox().sendKeys("yes");
+    page.sendText().click();
+    browser.wait(EC.presenceOf(page.getCorousal()), 10000)
+    browser.actions().mouseMove(page.getRestaurantSlide()).click().perform();
+
     browser.wait(EC.presenceOf(page.getCard()), 10000);
     page.getCourousalAgain().click();
     browser.wait(EC.presenceOf(page.getLatestCorousal()), 10000);
@@ -69,9 +88,14 @@ describe('workspace-project App', () => {
     page.sendText().click();
     page.getTextBox().sendKeys("2");
     page.sendText().click();
-    browser.sleep(5000);
+    console.log("cancel button presence confirmed");
+        // browserLogs is an array of objects with level and message fields
+      
+    //browser.sleep(5000);
     browser.wait(EC.presenceOf(page.getCancelBookingButton()),10000);
-    // page.getCancelBookingButton().click();
+    console.log("cancel button presence confirmed");
+    browser.sleep(15000);
+   // page.getCancelBookingButton().click();
     
     
     

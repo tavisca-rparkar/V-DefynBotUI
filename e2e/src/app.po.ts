@@ -28,7 +28,11 @@ export class AppPage {
     return element.all(by.css('app-text-bubble')).last().element(by.css('div p')).getText();
   }
   getCorousal(){
-    return element(by.className('slide-card'));
+    return element(by.css("app-carousel"));
+  }
+  getRestaurantSlide()
+  {
+    return this.getCorousal().element(by.css(".carousel-container .slide .slide-card"));
   }
   getCard(){
     return element(by.className('proceed-button'));
@@ -45,7 +49,7 @@ export class AppPage {
     return this.getLatestCorousal().all(by.className('slide-card')).get(0);
   }
   getLatestCard()
-  {
+  { debugger;
      return element.all(by.className('proceed-button')).last();
   }
   getBrowserStop(){
@@ -68,7 +72,7 @@ export class AppPage {
     return element.all(by.className('proceedToPay')).last();
   }
   getCancelBookingButton()
-  {
+  { debugger;
     //console.log(element(by.className('cancel')))
     return element(by.buttonText('Cancel Booking'));
     
@@ -83,17 +87,47 @@ export class AppPage {
   }
   getEnvironmentDropdown()
   {
-    return element(by.tagName("select#first"));
+    return element(by.id("environment-dropdown"));
   }
   selectEnvironment()
   {
-    
-		
-		return element(by.css("#first [value='development']"));
+    return this.getEnvironmentDropdown().element(by.css("option[value='development']"));
+  }
+  getClientDropdown()
+  {
+    return element(by.id("client-dropdown"));
+  }
+  selectClient()
+  {
+    return this.getClientDropdown().element(by.css('option[value="American Express"]'));
+  }
+  getLanguageDropdown()
+  {
+    return element(by.id("language-dropdown"));
+  }
+  selectLanguage()
+  {
+    return this.getLanguageDropdown().element(by.css('option[value="en-us"]'));
+  }
+  getUsernameTextBox()
+  {
+    return element(by.id("username-input"));
+  }
+  getUserIdTextBox()
+  {
+    return element(by.id("userId-input"));
+  }
+  getPointBalanceTextBox()
+  {
+    return element(by.id("pointBalance-input"));
   }
   getLaunchButton()
   {
-
+    return element(by.id("launch-button"));
+  }
+  getChatbot()
+  {
+    return element(by.css("app-chatbot"));
   }
   
 
