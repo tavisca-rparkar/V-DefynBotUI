@@ -1,7 +1,7 @@
 .card-container {
-  width: 90%;
+  width: 100%;
   height: auto;
-  margin: 3% 5%;
+  margin: 3% 0%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
   display: flex;
   background-color: #fff;
@@ -45,7 +45,29 @@
 .category-selector {
   height: 10%;
   display: flex;
+  overflow-y: hidden;
   overflow-x: auto;
+
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
+}
+
+.category-selector::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.category-selector::-webkit-scrollbar:horizontal {
+  height: 7px;
+}
+
+.category-selector::-webkit-scrollbar-thumb {
+  background-color: var(--theme-color);
+  border-radius: 10px;
+  border: 2px solid #eee;
+}
+
+.category-selector::-webkit-scrollbar-track {
+  background-color: #eee;
 }
 
 .category {
@@ -77,6 +99,27 @@
   white-space: nowrap;
   overflow-y: auto;
   overflow-x: hidden;
+
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
+}
+
+.menu-container::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.menu-container::-webkit-scrollbar:vertical {
+  width: 7px;
+}
+
+.menu-container::-webkit-scrollbar-thumb {
+  background-color: var(--theme-color);
+  border-radius: 10px;
+  border: 2px solid #eee;
+}
+
+.menu-container::-webkit-scrollbar-track {
+  background-color: #eee;
 }
 
 .menu {
@@ -335,28 +378,28 @@ hr {
 
 @media screen and (min-width: 320px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 }
 
 @media screen and (min-width: 411px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 }
 
 @media screen and (min-width: 481px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 }
 
 @media screen and (min-width: 600px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 
@@ -367,7 +410,7 @@ hr {
 
 @media screen and (min-width: 768px) {
   .card-container {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 
@@ -380,14 +423,7 @@ hr {
   .card-container {
     width: 90%;
     height: auto;
-  }
-
-  .category-selector {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .category-selector::-webkit-scrollbar {
-    display: none;
+    margin: 3% 5%;
   }
 
   .category {
@@ -402,13 +438,6 @@ hr {
     margin: 1% 0%;
     margin-left: 5%;
   }
-  .category-selector {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .category-selector::-webkit-scrollbar {
-    display: none;
-  }
 
   .category {
     padding: 1%;
@@ -421,13 +450,6 @@ hr {
     height: auto;
     margin: 1% 0%;
     margin-left: 5%;
-  }
-  .category-selector {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .category-selector::-webkit-scrollbar {
-    display: none;
   }
 
   .category {

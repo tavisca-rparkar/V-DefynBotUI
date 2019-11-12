@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { CardComponent } from "./card.component";
-import { CarouselModule } from "ngx-bootstrap";
+import { MatCarouselModule } from "@ngmodule/material-carousel";
 
 @NgModule({
   declarations: [CardComponent],
-  imports: [CommonModule, CarouselModule.forRoot()],
+  imports: [CommonModule, MatCarouselModule.forRoot()],
   exports: [CardComponent, CommonModule]
 })
 export class CardModule {}

@@ -215,7 +215,6 @@ export class MenuComponent implements OnInit {
     this.cart.menu.forEach(category => {
       category.menuItem.forEach(item => {
         if (item.quantity > 0) {
-          console.log(item.price);
           cart.push(item);
         }
       });

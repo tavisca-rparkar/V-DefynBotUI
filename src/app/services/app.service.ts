@@ -10,6 +10,9 @@ import { StateService } from "./state.service";
 import { promise } from "protractor";
 import { timeout, resolve } from "q";
 import { FoodOrderingService } from "./food-ordering.service";
+import { ApiCallType } from '../models/ApiCallType';
+import { ApiCallMethod } from '../models/ApiCallMethod';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: "root"
@@ -22,7 +25,8 @@ export class AppService {
     private _restaurantApiService: RestaurantApiService,
     private _locationAccess: LocationAccessService,
     private _stateService: StateService,
-    private _foodOrderingService: FoodOrderingService
+    private _foodOrderingService: FoodOrderingService,
+    private _loggerService: LoggerService
   ) {}
 
   async InitiateConversation() {
@@ -68,34 +72,16 @@ export class AppService {
   IntentProcessing(userInput: string) {
     this._dialogflowService
       .GetResponse(userInput)
-      .pipe(
-        catchError(err => {
-          this._componentFactoryService.AddTextBubble(
-            "Sorry, I am unable to talk at the moment. Please contact the Site Administrator to report this issue.",
-            "bot"
-          );
-          return throwError(err);
-        })
-      )
       .subscribe(response => {
         this.IntentRouter(
           response["queryResult"]["intent"]["displayName"],
           response
         );
-
-        // logging all responses from dialogflow for developers
-        console.log("Query Text : ");
-        console.log(response["queryResult"]["queryText"]);
-        console.log("Result Parameters : ");
-        console.log(response["queryResult"]["parameters"]);
-        console.log("AllRequiredParametersPresent : ");
-        console.log(response["queryResult"]["allRequiredParamsPresent"]);
-        console.log("Response Text : ");
-        console.log(response["queryResult"]["fulfillmentText"]);
-        console.log("Intent : ");
-        console.log(response["queryResult"]["intent"]["displayName"]);
-        console.log(
-          "_________________________________________________________"
+      },
+      error => {
+        this._componentFactoryService.AddTextBubble(
+          "Sorry, I am unable to talk at the moment. Please contact the Site Administrator to report this issue.",
+          "bot"
         );
       });
   }
@@ -107,6 +93,12 @@ export class AppService {
         break;
       case "Book Table":
         this.BookTableIntent(response);
+        break;
+      case "Proceed with current location":
+        this.ProceedBookingWithCurrentLocation(response);
+        break;
+      case "Proceed with specific location":
+        this.ProceedBookingWithSpecificLocation(response);
         break;
       case "Show Details":
         this.ShowDetailsIntent(response);
@@ -157,21 +149,18 @@ export class AppService {
 
       this._stateService.setBookTableData(city, guestCount, date, time);
 
-      this._restaurantApiService
+      if(city == ""){
+        //ask for- do you want to see nearby hotels as per your current location or search for hotels in a specific area?
+        this._componentFactoryService.StopLoader();
+        this.IntentProcessing("running");
+      }
+      else{
+        // proceed to show results for specified city
+        this._restaurantApiService
         .GetRestaurantsList(
           city,
           this._stateService.getLatitude(),
           this._stateService.getLongitude()
-        )
-        .pipe(
-          catchError(err => {
-            this._componentFactoryService.AddTextBubble(
-              "Sorry, I am unable to process this response at the moment",
-              "bot"
-            );
-            this._componentFactoryService.StopLoader();
-            return throwError(err);
-          })
         )
         .subscribe(data => {
           if (data === 404) {
@@ -189,8 +178,116 @@ export class AppService {
               carouselType: "Restaurant Booking"
             });
           }
+        },
+        err => {
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I am unable to process this response at the moment",
+            "bot"
+          );
+          this._componentFactoryService.StopLoader();
+          return throwError(err);
         });
+      }
     } else {
+      this._componentFactoryService.AddTextBubble(
+        response["queryResult"]["fulfillmentText"],
+        "bot"
+      );
+    }
+  }
+
+  ProceedBookingWithCurrentLocation(response){
+    if (response["queryResult"]["allRequiredParamsPresent"]) {
+      this._componentFactoryService.StartLoader();
+      let IsProceedWithLocation = response["queryResult"]["parameters"]["boolean"];
+      if(IsProceedWithLocation == "yes"){
+        // proceed to show results for browser Location
+        this._restaurantApiService
+        .GetRestaurantsList(
+          "",
+          this._stateService.getLatitude(),
+          this._stateService.getLongitude()
+        )
+        .subscribe(data => {
+          if (data === 404) {
+            this._componentFactoryService.AddTextBubble(
+              "Sorry, I wasn't able to find any restaurants in that area.",
+              "bot"
+            );
+            this._componentFactoryService.StopLoader();
+          } else {
+            // show results here -
+            this._restaurantApiService.SetCarouselData(data);
+            this._componentFactoryService.StopLoader();
+            this._componentFactoryService.AddRestaurantCarousel({
+              data: data,
+              carouselType: "Restaurant Booking"
+            });
+          }
+        },
+        err => {
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I am unable to process this response at the moment",
+            "bot"
+          );
+          this._componentFactoryService.StopLoader();
+          return throwError(err);
+        });
+      }
+      else{
+        // ask for location to serve
+        this._componentFactoryService.StopLoader();
+        this.IntentProcessing("singing in");
+      }
+    }else{
+      this._componentFactoryService.AddTextBubble(
+        response["queryResult"]["fulfillmentText"],
+        "bot"
+      );
+      this._componentFactoryService.AddChoiceButton([
+        "Yes",
+        "No"
+      ]);
+    }
+  }
+
+  ProceedBookingWithSpecificLocation(response){
+    if (response["queryResult"]["allRequiredParamsPresent"]) {
+      this._componentFactoryService.StartLoader();
+      let city = response["queryResult"]["parameters"]["address"];
+      // proceed to show results for browser Location
+      this._restaurantApiService
+      .GetRestaurantsList(
+        city,
+        this._stateService.getLatitude(),
+        this._stateService.getLongitude()
+      )
+      .subscribe(data => {
+        if (data === 404) {
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I wasn't able to find any restaurants in that area.",
+            "bot"
+          );
+          this._componentFactoryService.StopLoader();
+        } else {
+          // show results here -
+          this._restaurantApiService.SetCarouselData(data);
+          this._componentFactoryService.StopLoader();
+          this._componentFactoryService.AddRestaurantCarousel({
+            data: data,
+            carouselType: "Restaurant Booking"
+          });
+        }
+      },
+      err => {
+        this._componentFactoryService.AddTextBubble(
+          "Sorry, I am unable to process this response at the moment",
+          "bot"
+        );
+        this._componentFactoryService.StopLoader();
+        return throwError(err);
+      });
+    }else{
       this._componentFactoryService.AddTextBubble(
         response["queryResult"]["fulfillmentText"],
         "bot"
@@ -202,16 +299,6 @@ export class AppService {
     this._componentFactoryService.StartLoader();
     this._restaurantApiService
       .GetRestaurantDetails(response[0], response[1])
-      .pipe(
-        catchError(err => {
-          this._componentFactoryService.StopLoader();
-          this._componentFactoryService.AddTextBubble(
-            "Sorry, I am unable to fetch the selected restaurant details",
-            "bot"
-          );
-          return throwError(err);
-        })
-      )
       .subscribe(data => {
         if (data === 404) {
           this._componentFactoryService.StopLoader();
@@ -224,6 +311,14 @@ export class AppService {
           // show results here -
           this._componentFactoryService.AddRestaurantDetailsCard(data);
         }
+      },
+      err => {
+        this._componentFactoryService.StopLoader();
+        this._componentFactoryService.AddTextBubble(
+          "Sorry, I am unable to fetch the selected restaurant details",
+          "bot"
+        );
+        return throwError(err);
       });
   }
 
@@ -265,20 +360,18 @@ export class AppService {
             perPersonPoints: restaurantData["pointsPerPerson"],
             pointBalance: restaurantData["pointBalance"]
           })
-          .pipe(
-            catchError(err => {
-              this._componentFactoryService.StopLoader();
-              this._componentFactoryService.AddTextBubble(
-                "Sorry, I am unable to proceed with the booking right now, Please try again later",
-                "bot"
-              );
-              return throwError(err);
-            })
-          )
           .subscribe(data => {
             // showing Checkout Card here -
             this._componentFactoryService.AddRestaurantCheckoutCard(data);
             this._componentFactoryService.StopLoader();
+          },
+          err => {
+            this._componentFactoryService.StopLoader();
+            this._componentFactoryService.AddTextBubble(
+              "Sorry, I am unable to proceed with the booking right now, Please try again later",
+              "bot"
+            );
+            return throwError(err);
           });
       }
     } else {
@@ -303,16 +396,6 @@ export class AppService {
 
     this._restaurantApiService
       .BookingPaymentForRestaurant(response)
-      .pipe(
-        catchError(err => {
-          this._componentFactoryService.StopLoader();
-          this._componentFactoryService.AddTextBubble(
-            "Sorry, I am unable to proceed with payment of the booking, Please try again later",
-            "bot"
-          );
-          return throwError(err);
-        })
-      )
       .subscribe(data => {
         //updating user point balance on UI
         if (data["status"] == "Booking Successful") {
@@ -321,6 +404,14 @@ export class AppService {
         // showing Booking Summary here -
         this._componentFactoryService.AddBookingSummaryCard(data);
         this._componentFactoryService.StopLoader();
+      },
+      err => {
+        this._componentFactoryService.StopLoader();
+        this._componentFactoryService.AddTextBubble(
+          "Sorry, I am unable to proceed with payment of the booking, Please try again later",
+          "bot"
+        );
+        return throwError(err);
       });
   }
 
@@ -341,25 +432,22 @@ export class AppService {
     } else {
       this._foodOrderingService
         .PaymentforFoodOrdering(response)
-        .pipe(
-          catchError(err => {
-            this._componentFactoryService.StartLoader();
-            this._componentFactoryService.AddTextBubble(
-              "Sorry, I am unable to proceed with payment of the order, Please try again later",
-              "bot"
-            );
-            return throwError(err);
-          })
-        )
         .subscribe(data => {
           //updating user point balance on UI
-          console.log(data);
           if(data["status"]== "Order Successful"){
             this._stateService.appData.pointBalance -= data["totalPoints"];
           }
           // showing Ordering Summary here -
           this._componentFactoryService.AddOrderingSummaryCard(data);
           this._componentFactoryService.StopLoader();
+        },
+        err => {
+          this._componentFactoryService.StartLoader();
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I am unable to proceed with payment of the order, Please try again later",
+            "bot"
+          );
+          return throwError(err);
         });
     }
   }
@@ -367,14 +455,11 @@ export class AppService {
   CancelBookingInBackground(response) {
     this._restaurantApiService
       .BookingCancellationForRestaurant(response)
-      .pipe(
-        catchError(err => {
+      .subscribe(data => {},
+        err => {
           this._componentFactoryService.StopLoader();
-          console.log(err);
           return throwError(err);
-        })
-      )
-      .subscribe(data => {});
+        });
   }
 
   CancelBookingIntent(response) {
@@ -386,11 +471,6 @@ export class AppService {
     this._componentFactoryService.StartLoader();
 
     this._restaurantApiService.BookingCancellationForRestaurant(response)
-    .pipe(catchError(err => {
-      this._componentFactoryService.StopLoader();
-        this._componentFactoryService.AddTextBubble("Sorry, I am unable to proceed with cancellation of this booking, Please try again later", "bot");
-        return throwError(err);            
-    }))
     .subscribe((data) => {
       //updating user point balance on UI
       if(data["status"]== "Cancelled"){
@@ -406,6 +486,11 @@ export class AppService {
         this._componentFactoryService.AddTextBubble("Booking Cancellation Failed for Booking-Id: "+data["bookingId"]+". Reason: "+data["error"],"bot");
       }
       this._componentFactoryService.StopLoader();
+    },
+    err => {
+      this._componentFactoryService.StopLoader();
+        this._componentFactoryService.AddTextBubble("Sorry, I am unable to proceed with cancellation of this booking, Please try again later", "bot");
+        return throwError(err);            
     });
   }
 
@@ -467,16 +552,6 @@ export class AppService {
           this._stateService.getLatitude(),
           this._stateService.getLongitude()
         )
-        .pipe(
-          catchError(err => {
-            this._componentFactoryService.AddTextBubble(
-              "Sorry, I am unable to process this request at the moment",
-              "bot"
-            );
-            this._componentFactoryService.StopLoader();
-            return throwError(err);
-          })
-        )
         .subscribe(data => {
           if (data === 404) {
             this._componentFactoryService.AddTextBubble(
@@ -493,6 +568,14 @@ export class AppService {
               carouselType: "Food Ordering"
             });
           }
+        },
+        err => {
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I am unable to process this request at the moment",
+            "bot"
+          );
+          this._componentFactoryService.StopLoader();
+          return throwError(err);
         });
     } else {
       this._componentFactoryService.AddTextBubble(
@@ -506,16 +589,6 @@ export class AppService {
     this._componentFactoryService.StartLoader();
     this._foodOrderingService
       .GetRestaurantMenu(response[0], response[1])
-      .pipe(
-        catchError(err => {
-          this._componentFactoryService.StopLoader();
-          this._componentFactoryService.AddTextBubble(
-            "Sorry, I am unable to fetch the menu of the selected restaurant",
-            "bot"
-          );
-          return throwError(err);
-        })
-      )
       .subscribe(data => {
         if (data === 404) {
           this._componentFactoryService.StopLoader();
@@ -528,6 +601,14 @@ export class AppService {
           // show menu here -
           this._componentFactoryService.AddOrderingMenuCard(data); 
        }
+      },
+      err => {
+        this._componentFactoryService.StopLoader();
+        this._componentFactoryService.AddTextBubble(
+          "Sorry, I am unable to fetch the menu of the selected restaurant",
+          "bot"
+        );
+        return throwError(err);
       });
   }
   
