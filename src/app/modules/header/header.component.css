@@ -17,7 +17,6 @@
   float: left;
 }
 
-
 img {
   max-width: 90%;
   max-height: 90%;
@@ -25,7 +24,7 @@ img {
 }
 
 .bankName {
-  width: 35%;
+  width: 55%;
   height: 100%;
   margin-left: 5%;
   float: left;
@@ -77,6 +76,7 @@ img {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  outline: none;
 }
 .logout .material-icons {
   color: var(--theme-color);
@@ -87,20 +87,35 @@ img {
 .dropbtn {
   background-color: var(--theme-color);
   color: white;
-  padding: 16px;
   font-size: 16px;
   border: none;
   cursor: pointer;
+  outline: none;
 }
 .dropbtn .material-icons {
   color: #fff;
   font-size: 150%;
 }
 
+.options {
+  width: 15%;
+  height: 100%;
+  margin-left: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+}
+
 .dropdown {
   position: relative;
+  width: 100%;
   height: 100%;
   float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .dropdown-content {
@@ -117,6 +132,7 @@ img {
 
 .dropdown:hover .dropdown-content {
   display: flex;
+  top: 100%;
 }
 
 .dropdown:hover .dropbtn {

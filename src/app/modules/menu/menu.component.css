@@ -1,7 +1,7 @@
 .card-container {
-  width: 90%;
+  width: 100%;
   height: auto;
-  margin: 3% 5%;
+  margin: 3% 0%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
   display: flex;
   background-color: #fff;
@@ -45,7 +45,29 @@
 .category-selector {
   height: 10%;
   display: flex;
+  overflow-y: hidden;
   overflow-x: auto;
+
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
+}
+
+.category-selector::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.category-selector::-webkit-scrollbar:horizontal {
+  height: 7px;
+}
+
+.category-selector::-webkit-scrollbar-thumb {
+  background-color: var(--theme-color);
+  border-radius: 10px;
+  border: 2px solid #eee;
+}
+
+.category-selector::-webkit-scrollbar-track {
+  background-color: #eee;
 }
 
 .category {
@@ -54,6 +76,7 @@
   border-radius: 10px 10px 10px 10px;
   font-size: 14px;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .selected {
@@ -61,7 +84,7 @@
   background-color: var(--theme-color);
 }
 
-.foodItem-info{
+.foodItem-info {
   white-space: nowrap;
 }
 
@@ -76,6 +99,27 @@
   white-space: nowrap;
   overflow-y: auto;
   overflow-x: hidden;
+
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
+}
+
+.menu-container::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.menu-container::-webkit-scrollbar:vertical {
+  width: 7px;
+}
+
+.menu-container::-webkit-scrollbar-thumb {
+  background-color: var(--theme-color);
+  border-radius: 10px;
+  border: 2px solid #eee;
+}
+
+.menu-container::-webkit-scrollbar-track {
+  background-color: #eee;
 }
 
 .menu {
@@ -150,11 +194,12 @@
   width: 25px;
   height: 25px;
   text-align: center;
+  cursor: pointer;
 }
-.add-button{
+.add-button {
   color: #5fbf5e;
 }
-.remove-button{
+.remove-button {
   color: #e25656;
 }
 .billInfo {
@@ -166,6 +211,20 @@
 }
 
 .billInfo p {
+  margin: 0%;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pointsPrice {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pointsPrice p {
   margin: 0%;
   font-size: 18px;
   -webkit-font-smoothing: antialiased;
@@ -297,8 +356,6 @@ hr {
   color: #000000;
 }
 
-
-
 .points-error {
   display: inline-block;
   text-align: center;
@@ -317,4 +374,85 @@ hr {
   color: #a94442;
   font-size: 16px;
   margin: 0%;
+}
+
+@media screen and (min-width: 320px) {
+  .card-container {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 411px) {
+  .card-container {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .card-container {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .card-container {
+    width: 100%;
+    height: auto;
+  }
+
+  .category {
+    padding: 1%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card-container {
+    width: 100%;
+    height: auto;
+  }
+
+  .category {
+    padding: 1%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card-container {
+    width: 90%;
+    height: auto;
+    margin: 3% 5%;
+  }
+
+  .category {
+    padding: 1%;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .card-container {
+    width: 30%;
+    height: auto;
+    margin: 1% 0%;
+    margin-left: 5%;
+  }
+
+  .category {
+    padding: 1%;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .card-container {
+    width: 30%;
+    height: auto;
+    margin: 1% 0%;
+    margin-left: 5%;
+  }
+
+  .category {
+    padding: 1%;
+  }
 }

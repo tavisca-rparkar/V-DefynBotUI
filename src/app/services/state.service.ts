@@ -55,7 +55,6 @@ export class StateService {
       pointBalance: this.appData.pointBalance
     };
     this._restaurantBookingInitiateData = data;
-    console.log(this._restaurantBookingInitiateData);
     this._isBookingInitiated = true;
   }
   public getRestaurantBookingInitiateData() {
@@ -72,7 +71,6 @@ export class StateService {
       date: date,
       time: time
     };
-    console.log("Guest Count is - " + this._bookTableData["guestCount"]);
   }
   public getBookTableData() {
     return this._bookTableData;

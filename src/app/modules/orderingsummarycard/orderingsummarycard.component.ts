@@ -1,20 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
-import { StateService } from 'src/app/services/state.service';
-import { AppService } from 'src/app/services/app.service';
-import { MenuItem } from 'src/app/models/cart';
+import { Component, OnInit, Input } from "@angular/core";
+import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
+import { StateService } from "src/app/services/state.service";
+import { AppService } from "src/app/services/app.service";
+import { MenuItem } from "src/app/models/cart";
 
 @Component({
-  selector: 'app-orderingsummarycard',
-  templateUrl: './orderingsummarycard.component.html',
-  styleUrls: ['./orderingsummarycard.component.css']
+  selector: "app-orderingsummarycard",
+  templateUrl: "./orderingsummarycard.component.html",
+  styleUrls: ["./orderingsummarycard.component.css"]
 })
 export class OrderingsummarycardComponent implements OnInit {
-
   @Input() data: string;
   isErrorDetected: boolean = false;
-  status:string = "";
-  pointBalance:number;
+  status: string = "";
+  pointBalance: number;
   /*data = {
     status: "Order Successful",
     error: null,
@@ -31,9 +30,11 @@ export class OrderingsummarycardComponent implements OnInit {
     pointBalance: 1000
   };
 */
-  constructor(private _componentFactoryService: ComponentFactoryService,
-    private _stateService : StateService,
-    private _appService : AppService) {}
+  constructor(
+    private _componentFactoryService: ComponentFactoryService,
+    private _stateService: StateService,
+    private _appService: AppService
+  ) {}
 
   ngOnInit() {
     console.log("ordering summary card build successfull !");
@@ -50,14 +51,10 @@ export class OrderingsummarycardComponent implements OnInit {
       this.isErrorDetected = true;
       this.status = "cancelled";
     }
-    this.pointBalance= this._stateService.appData.pointBalance;
+    this.pointBalance = this._stateService.appData.pointBalance;
   }
 
   ngAfterViewInit(): void {
     this._componentFactoryService.updateScroll();
   }
-
-  
-
-
 }

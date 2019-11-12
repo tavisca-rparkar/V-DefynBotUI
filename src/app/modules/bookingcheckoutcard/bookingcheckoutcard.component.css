@@ -1,7 +1,7 @@
 .container {
-  width: 90%;
+  width: 100%;
   height: auto;
-  margin: 3% 5%;
+  margin: 3% 0%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
   display: flex;
   background-color: #fff;
@@ -211,4 +211,38 @@
 
 .cancel p:hover {
   color: #000000;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 90%;
+    height: auto;
+    margin: 3% 5%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 90%;
+    height: auto;
+    margin: 3% 5%;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .container {
+    width: 30%;
+    height: auto;
+    margin: 1% 0%;
+    margin-left: 5%;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .container {
+    width: 30%;
+    height: auto;
+    margin: 1% 0%;
+    margin-left: 5%;
+  }
 }

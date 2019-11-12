@@ -43,15 +43,13 @@ export class ChatInputComponent implements OnInit {
   changeVoiceButtonIconTo(type: string) {
     switch (type) {
       case "inactive":
-        this.voiceButtonIcon ="voice-inactive";
+        this.voiceButtonIcon = "voice-inactive";
         break;
       case "active":
-        this.voiceButtonIcon =
-          "voice-active";
+        this.voiceButtonIcon = "voice-active";
         break;
       case "disabled":
-        this.voiceButtonIcon =
-          "voice-disabled";
+        this.voiceButtonIcon = "voice-disabled";
         break;
     }
   }
@@ -70,8 +68,8 @@ export class ChatInputComponent implements OnInit {
   //   }
   // }
 
-  listen(){
-    if(this.isListening==false){
+  listen() {
+    if (this.isListening == false) {
       this.changeVoiceButtonIconTo("active");
       this.isListening = true;
       try {
@@ -83,7 +81,6 @@ export class ChatInputComponent implements OnInit {
         recognition.interimResults = false;
         recognition.maxAlternatives = 2;
         recognition.start();
-        console.log("Speech recognition service started!");
         this.playStartSound();
 
         recognition.addEventListener("result", e => {
@@ -91,35 +88,31 @@ export class ChatInputComponent implements OnInit {
             .map(result => result[0])
             .map(result => result.transcript)
             .join("");
-          if(this.isListening==true){
+          if (this.isListening == true) {
             this._userInput = transcript;
           }
 
-          if (e.results[0].isFinal && this.isListening==true) {
+          if (e.results[0].isFinal && this.isListening == true) {
             this._userInput = transcript;
             this.SendUserInput();
-            console.log("User Said : "+transcript);
           }
         });
 
-         recognition.addEventListener('end', e => { 
-           if(this.isListening==true){
-            console.log('Speech recognition service stopped');
+        recognition.addEventListener("end", e => {
+          if (this.isListening == true) {
             this.playStopSound();
             this.changeVoiceButtonIconTo("inactive");
             this.isListening = false;
-           }          
+          }
         });
       } catch (err) {
-        //console.log(err);
         alert("Your browser Doesn't Support Voice Input!");
         this.changeVoiceButtonIconTo("disabled");
         this.isListening = false;
       }
-    }else{
+    } else {
       this.changeVoiceButtonIconTo("inactive");
       this.isListening = false;
-      console.log('Speech recognition service stopped');
       this.playStopSound();
     }
   }

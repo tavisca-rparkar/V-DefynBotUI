@@ -7,7 +7,7 @@ import { catchError } from "rxjs/operators";
 import { throwError } from "rxjs";
 import { MockableApiService } from "src/app/services/mockableApi.service";
 import { ThemeService } from "src/app/services/theme.service";
-import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
+import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 
 @Component({
   selector: "app-launcher",
@@ -24,7 +24,7 @@ export class LauncherComponent implements OnInit {
     private _launcherService: LauncherService,
     private _themingService: ThemeService,
     private mockableApiService: MockableApiService,
-    private _componentFactoryService : ComponentFactoryService
+    private _componentFactoryService: ComponentFactoryService
   ) {
     this.launcherData = new LauncherData(
       "development",
@@ -58,16 +58,6 @@ export class LauncherComponent implements OnInit {
     this._componentFactoryService.StartLoader();
     this._launcherService
       .GetResponse(this.launcherData)
-      .pipe(
-        catchError(err => {
-          this._componentFactoryService.StopLoader();
-          this.launcherData.error = "Sorry! Unable to connect at the momment.";
-          console.log(this.launcherData.error);
-          this.isErrorDetected = true;
-          console.log(err);
-          return throwError(err);
-        })
-      )
       .subscribe(response => {
         this.launcherData.sessionId = response["sessionId"];
         this._stateService.setSessionData(this.launcherData);
@@ -76,9 +66,15 @@ export class LauncherComponent implements OnInit {
         // Theming -------------------------------------------------------------
         this._themingService.setActiveTheme(
           this._themingService.getTheme(this.launcherData.client)
-        );  //------------------------------------------------------------------
+        ); //------------------------------------------------------------------
         this._componentFactoryService.StopLoader();
         this._router.navigate(["./chatbot"]);
+      },
+      err => {
+        this._componentFactoryService.StopLoader();
+        this.launcherData.error = "Sorry! Unable to connect at the moment.";
+        this.isErrorDetected = true;
+        return throwError(err);
       });
   }
 }

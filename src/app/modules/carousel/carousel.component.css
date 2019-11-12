@@ -5,6 +5,27 @@
   white-space: nowrap;
   overflow-y: hidden;
   overflow-x: auto;
+
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
+}
+
+.carousel-container::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.carousel-container::-webkit-scrollbar:horizontal {
+  height: 15px;
+}
+
+.carousel-container::-webkit-scrollbar-thumb {
+  background-color: var(--theme-color);
+  border-radius: 10px;
+  border: 2px solid #eee;
+}
+
+.carousel-container::-webkit-scrollbar-track {
+  background-color: #eee;
 }
 
 .slide {
@@ -114,4 +135,91 @@
   color: #000000;
   font-size: 14px;
   margin: 0;
+}
+
+@media screen and (min-width: 320px) {
+  .carousel-container {
+    width: 100%;
+    height: 50%;
+  }
+}
+
+@media screen and (min-width: 411px) {
+  .carousel-container {
+    width: 100%;
+    height: 50%;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .carousel-container {
+    width: 100%;
+    height: 50%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .carousel-container {
+    width: 100%;
+    height: 50%;
+  }
+  .slide {
+    width: 40%;
+    height: 85%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .carousel-container {
+    width: 100%;
+    height: 50%;
+  }
+  .slide {
+    width: 40%;
+    height: 85%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .carousel-container {
+    width: 100%;
+    height: 50%;
+  }
+
+  .slide {
+    width: 40%;
+    height: 85%;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .carousel-container {
+    width: 100%;
+    height: 60%;
+    margin: 1% 0%;
+  }
+  .slide {
+    width: 20%;
+    height: 90%;
+    margin: 1% 1%;
+  }
+  .slide-image-container {
+    height: 65%;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .carousel-container {
+    width: 100%;
+    height: 60%;
+    margin: 1% 0%;
+  }
+  .slide {
+    width: 20%;
+    height: 90%;
+    margin: 1% 1%;
+  }
+  .slide-image-container {
+    height: 65%;
+  }
 }

@@ -40,7 +40,6 @@ export class CarouselComponent implements AfterViewInit,OnInit {
         "supplierName":this.data[index]["supplierName"],
         "locality": this.data[index]["localityVerbose"], 
       }
-      console.log(this._stateService._foodOrderRestauranData);
       this._appService.IntentRouter("Show Menu", data);
     }
     
