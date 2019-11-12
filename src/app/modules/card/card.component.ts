@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { AppService } from "src/app/services/app.service";
 import { StateService } from "src/app/services/state.service";
+import { MatCarousel, MatCarouselComponent } from "@ngmodule/material-carousel";
 
 @Component({
   selector: "app-card",
@@ -28,10 +29,11 @@ export class CardComponent implements OnInit {
 
   proceedForBooking() {
     //setting restaurant detials in stateService
-    this._stateService.setRestaurantBookingInitiateData(this.data["restaurantId"],
-    this.data["restaurantName"],
-    this.data["pricePerHead"],
-    this.data["supplierName"]
+    this._stateService.setRestaurantBookingInitiateData(
+      this.data["restaurantId"],
+      this.data["restaurantName"],
+      this.data["pricePerHead"],
+      this.data["supplierName"]
     );
     // sending intent for Booking Initiation
     let requestString = "swimming";
@@ -52,6 +54,6 @@ export class CardComponent implements OnInit {
   }
 
   showRestaurantList() {
-    this._appService.IntentRouter("Show Carousel Again","Restaurant Booking");
+    this._appService.IntentRouter("Show Carousel Again", "Restaurant Booking");
   }
 }
