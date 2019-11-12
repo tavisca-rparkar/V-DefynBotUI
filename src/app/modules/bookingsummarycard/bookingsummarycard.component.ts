@@ -34,7 +34,6 @@ export class BookingsummarycardComponent implements OnInit {
     private _appService : AppService) {}
 
   ngOnInit() {
-    console.log("booking summary card build successfull !");
     if (this.data["status"] == "Booking Successful") {
       this.isErrorDetected = false;
       this.status = "booked";

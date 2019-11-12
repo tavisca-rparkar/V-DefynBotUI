@@ -1,34 +1,39 @@
 import { Injectable } from '@angular/core';
 import { ApiCallType } from '../models/ApiCallType';
 import { ApiCallMethod } from '../models/ApiCallMethod';
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { HttpClient } from '@angular/common/http';
+import { StateService } from './state.service';
+import { ApiCallStatus } from '../models/ApiCallStatus';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggerService {
 
-  constructor() { }
+  constructor(private _http:HttpClient,
+    private _stateService : StateService) { }
 
-  logApiCall(userSessionId:string,
-    clientId:string,
-    timestamp:string,
-    ApiCallUrl:string,
+  logApiCall(callType:ApiCallType,
     callMethod:ApiCallMethod,
+    ApiCallUrl:string,
     callData:any,
-    callType:ApiCallType){
+    status:ApiCallStatus
+    ){
       //logic for logger
+      let clientId = this._stateService.appData.client;
+      let userSessionId = this._stateService.appData.sessionId;
+      console.log("______________________________________________");
+      console.log("Log: API call");
+      console.log({
+        "userSessionId": userSessionId,
+          "clientId": clientId,
+          "timestamp":Date.now(),
+          "ApiCallMethod":callMethod,
+          "ApiCallType":callType,
+          "ApiCallUrl":ApiCallUrl,
+          "callData":callData
+      });
+      console.log("______________________________________________");
   }
-
-
-  logError(userSessionId:string,
-    clientId:string,
-    timestamp:string,
-    ErrorMessage:string,
-    ErrorData:any){
-      //logic for logger
-  }
-
-
 
 }

@@ -1,6 +1,6 @@
 export enum ApiCallMethod{
-    GET,
-    POST,
-    PUT,
-    DELETE
+    GET = "Get",
+    POST = "POST",
+    PUT = "PUT",
+    DELETE = "DELETE"
 }

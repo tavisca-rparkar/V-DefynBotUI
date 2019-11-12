@@ -58,16 +58,6 @@ export class LauncherComponent implements OnInit {
     this._componentFactoryService.StartLoader();
     this._launcherService
       .GetResponse(this.launcherData)
-      .pipe(
-        catchError(err => {
-          this._componentFactoryService.StopLoader();
-          this.launcherData.error = "Sorry! Unable to connect at the momment.";
-          console.log(this.launcherData.error);
-          this.isErrorDetected = true;
-          console.log(err);
-          return throwError(err);
-        })
-      )
       .subscribe(response => {
         this.launcherData.sessionId = response["sessionId"];
         this._stateService.setSessionData(this.launcherData);
@@ -79,6 +69,12 @@ export class LauncherComponent implements OnInit {
         );  //------------------------------------------------------------------
         this._componentFactoryService.StopLoader();
         this._router.navigate(["./chatbot"]);
+      },
+      err => {
+        this._componentFactoryService.StopLoader();
+        this.launcherData.error = "Sorry! Unable to connect at the momment.";
+        this.isErrorDetected = true;
+        return throwError(err);
       });
   }
 }

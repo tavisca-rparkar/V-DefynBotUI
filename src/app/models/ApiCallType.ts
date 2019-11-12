@@ -1,4 +1,4 @@
 export enum ApiCallType{
-    REQUEST,
-    RESPONSE
+    REQUEST = "REQUEST",
+    RESPONSE = "RESPONSE"
 }

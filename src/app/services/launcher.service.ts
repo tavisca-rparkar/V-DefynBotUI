@@ -15,13 +15,15 @@ export class LauncherService {
   }
 
   GetResponse(launcherData: LauncherData){
-    let response= this._http.post(this.ApiUrl,{
+    let requestData = {
       "environment":launcherData.environment,
     "userId":launcherData.userId,
     "pointBalance":launcherData.pointBalance,
     "bank":launcherData.client,
     "locale":launcherData.language
-  }).pipe(timeout(10000));
+  };
+
+    let response= this._http.post(this.ApiUrl,requestData).pipe(timeout(10000));
   return response;
   }
 }

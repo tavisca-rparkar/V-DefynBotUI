@@ -70,7 +70,6 @@ export class RestaurantApiService {
   }
 
   BookingInitiateForRestaurant(bookingData) {
-    console.log(bookingData);
     let noOfGuests = bookingData["noOfGuests"];
     let date = bookingData["date"];
     let time = bookingData["time"];
@@ -115,9 +114,6 @@ export class RestaurantApiService {
   }
 
   MockBookingInitiateForRestaurant(bookingData) {
-    console.log(
-      "Warning : Mock Api Called For Initiating Booking For Restaurants !!!"
-    );
     return this._http
       .get("http://demo8483055.mockable.io/mockbookingapi")
       .pipe(timeout(15000));

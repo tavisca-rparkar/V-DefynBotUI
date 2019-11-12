@@ -81,7 +81,6 @@ export class ChatInputComponent implements OnInit {
         recognition.interimResults = false;
         recognition.maxAlternatives = 2;
         recognition.start();
-        console.log("Speech recognition service started!");
         this.playStartSound();
 
         recognition.addEventListener("result", e => {
@@ -96,20 +95,17 @@ export class ChatInputComponent implements OnInit {
           if (e.results[0].isFinal && this.isListening == true) {
             this._userInput = transcript;
             this.SendUserInput();
-            console.log("User Said : " + transcript);
           }
         });
 
         recognition.addEventListener("end", e => {
           if (this.isListening == true) {
-            console.log("Speech recognition service stopped");
             this.playStopSound();
             this.changeVoiceButtonIconTo("inactive");
             this.isListening = false;
           }
         });
       } catch (err) {
-        //console.log(err);
         alert("Your browser Doesn't Support Voice Input!");
         this.changeVoiceButtonIconTo("disabled");
         this.isListening = false;
@@ -117,7 +113,6 @@ export class ChatInputComponent implements OnInit {
     } else {
       this.changeVoiceButtonIconTo("inactive");
       this.isListening = false;
-      console.log("Speech recognition service stopped");
       this.playStopSound();
     }
   }
