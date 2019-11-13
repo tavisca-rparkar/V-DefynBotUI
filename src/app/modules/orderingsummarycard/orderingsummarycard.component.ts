@@ -32,7 +32,7 @@ export class OrderingsummarycardComponent implements OnInit {
 */
   constructor(
     private _componentFactoryService: ComponentFactoryService,
-    private _stateService: StateService,
+    public _stateService: StateService,
     private _appService: AppService
   ) {}
 
