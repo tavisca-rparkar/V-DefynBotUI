@@ -51,8 +51,19 @@ input {
   background-color: white;
 }
 .voice-active {
-  color: green;
+  color: var(--mic-icon-color);
+  animation: blinker 0.3s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
 }
+
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .voice-disabled {
   color: white;
   visibility: hidden;
