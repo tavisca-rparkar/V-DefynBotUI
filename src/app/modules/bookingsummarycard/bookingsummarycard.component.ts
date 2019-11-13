@@ -49,12 +49,14 @@ export class BookingsummarycardComponent implements OnInit {
   }
 
   cancelBooking(){
-    this.disableAllButtons=true;
-    let bookingCancelData ={
-      "bookingId": this.data["bookingId"],
-      "pointBalance": this._stateService.appData.pointBalance,
-      "totalPointPrice": this.data["totalPointPrice"]
+    if(confirm("Are you sure you want to proceed with cancellation of this booking?")){
+      this.disableAllButtons=true;
+      let bookingCancelData ={
+        "bookingId": this.data["bookingId"],
+        "pointBalance": this._stateService.appData.pointBalance,
+        "totalPointPrice": this.data["totalPointPrice"]
+      }
+      this._appService.IntentRouter("Cancel Booking",bookingCancelData);
     }
-    this._appService.IntentRouter("Cancel Booking",bookingCancelData);
   }
 }

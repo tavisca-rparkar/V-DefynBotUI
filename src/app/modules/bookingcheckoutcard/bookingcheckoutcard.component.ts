@@ -87,11 +87,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
   }
 
   cancelBooking() {
-    if (
-      confirm(
-        "Are you sure you want to proceed with cancellation of this booking?"
-      )
-    ) {
+    if (confirm("Are you sure you want to proceed with cancellation of this booking?")) {
       this.disableAllButtons = true;
       let bookingCancelData = {
         bookingId: this.data["bookingId"],
@@ -99,7 +95,6 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
         totalPointPrice: this.data["totalPointPrice"]
       };
       this._appService.IntentRouter("Cancel Booking", bookingCancelData);
-    } else {
     }
   }
 
