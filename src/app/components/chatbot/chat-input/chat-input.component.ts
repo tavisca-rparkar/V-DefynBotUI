@@ -44,9 +44,11 @@ export class ChatInputComponent implements OnInit {
     switch (type) {
       case "inactive":
         this.voiceButtonIcon = "voice-inactive";
+        this._userInput = "";
         break;
       case "active":
         this.voiceButtonIcon = "voice-active";
+        this._userInput = "Listening...";
         break;
       case "disabled":
         this.voiceButtonIcon = "voice-disabled";

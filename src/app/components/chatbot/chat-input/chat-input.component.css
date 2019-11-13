@@ -32,6 +32,10 @@
   cursor: pointer;
 }
 
+.input-box:disabled {
+  background-color: white;
+}
+
 input {
   outline: none;
   cursor: pointer;
@@ -285,4 +289,3 @@ input {
     height: 45px;
   }
 }
-
