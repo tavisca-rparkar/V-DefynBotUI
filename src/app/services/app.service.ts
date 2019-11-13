@@ -146,13 +146,50 @@ export class AppService {
       let guestCount = response["queryResult"]["parameters"]["number"];
       let date = response["queryResult"]["parameters"]["date"];
       let time = response["queryResult"]["parameters"]["time"];
+      let showNearby = response["queryResult"]["parameters"]["nearby"];
 
       this._stateService.setBookTableData(city, guestCount, date, time);
 
       if(city == ""){
-        //ask for- do you want to see nearby hotels as per your current location or search for hotels in a specific area?
-        this._componentFactoryService.StopLoader();
-        this.IntentProcessing("running");
+        if(showNearby != ""){
+          // proceed to show results for browser Location
+          this._restaurantApiService
+          .GetRestaurantsList(
+            "",
+            this._stateService.getLatitude(),
+            this._stateService.getLongitude()
+          )
+          .subscribe(data => {
+            if (data === 404) {
+              this._componentFactoryService.AddTextBubble(
+                "Sorry, I wasn't able to find any restaurants in that area.",
+                "bot"
+              );
+              this._componentFactoryService.StopLoader();
+            } else {
+              // show results here -
+              this._componentFactoryService.AddTextBubble("Showing you results near your location..." ,"bot");
+              this._restaurantApiService.SetCarouselData(data);
+              this._componentFactoryService.StopLoader();
+              this._componentFactoryService.AddRestaurantCarousel({
+                data: data,
+                carouselType: "Restaurant Booking"
+              });
+            }
+          },
+          err => {
+            this._componentFactoryService.AddTextBubble(
+              "Sorry, I am unable to retrieve the response at this moment",
+              "bot"
+            );
+            this._componentFactoryService.StopLoader();
+            return throwError(err);
+          });
+        }else{
+          //ask for- do you want to see nearby hotels as per your current location or search for hotels in a specific area?
+          this._componentFactoryService.StopLoader();
+          this.IntentProcessing("running");
+        }
       }
       else{
         // proceed to show results for specified city
@@ -171,6 +208,7 @@ export class AppService {
             this._componentFactoryService.StopLoader();
           } else {
             // show results here -
+            this._componentFactoryService.AddTextBubble("Showing you results in "+city+"..." ,"bot");
             this._restaurantApiService.SetCarouselData(data);
             this._componentFactoryService.StopLoader();
             this._componentFactoryService.AddRestaurantCarousel({
@@ -181,7 +219,7 @@ export class AppService {
         },
         err => {
           this._componentFactoryService.AddTextBubble(
-            "Sorry, I am unable to process this response at the moment",
+            "Sorry, I am unable to retrieve the response at this moment",
             "bot"
           );
           this._componentFactoryService.StopLoader();
@@ -217,6 +255,7 @@ export class AppService {
             this._componentFactoryService.StopLoader();
           } else {
             // show results here -
+            this._componentFactoryService.AddTextBubble("Showing you results near your location..." ,"bot");
             this._restaurantApiService.SetCarouselData(data);
             this._componentFactoryService.StopLoader();
             this._componentFactoryService.AddRestaurantCarousel({
@@ -227,7 +266,7 @@ export class AppService {
         },
         err => {
           this._componentFactoryService.AddTextBubble(
-            "Sorry, I am unable to process this response at the moment",
+            "Sorry, I am unable to retrieve the response at this moment",
             "bot"
           );
           this._componentFactoryService.StopLoader();
@@ -271,6 +310,7 @@ export class AppService {
           this._componentFactoryService.StopLoader();
         } else {
           // show results here -
+          this._componentFactoryService.AddTextBubble("Showing you results in "+city+"..." ,"bot");
           this._restaurantApiService.SetCarouselData(data);
           this._componentFactoryService.StopLoader();
           this._componentFactoryService.AddRestaurantCarousel({
@@ -281,7 +321,7 @@ export class AppService {
       },
       err => {
         this._componentFactoryService.AddTextBubble(
-          "Sorry, I am unable to process this response at the moment",
+          "Sorry, I am unable to retrieve the response at this moment",
           "bot"
         );
         this._componentFactoryService.StopLoader();

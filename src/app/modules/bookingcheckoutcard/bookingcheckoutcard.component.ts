@@ -13,7 +13,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
   isErrorDetected: boolean = false;
   disableAllButtons:boolean = false;
   timer: number = 299;
-  minutes: number = 0;
+  minutes: number = 4;
   seconds: number = 59;
   pointBalance:number;
   /*data2 = {
