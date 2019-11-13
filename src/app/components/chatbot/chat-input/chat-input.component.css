@@ -84,6 +84,14 @@ input {
   background-color: white;
   color: var(--theme-color);
 }
+.voice-active {
+  animation: blinker 0.3s cubic-bezier(.5, 0, 1, 1) infinite alternate;  
+}
+
+@keyframes blinker {  
+from { opacity: 1; }
+to { opacity: 0; }
+}
 
 @media screen and (min-width: 320px) {
   .header {
