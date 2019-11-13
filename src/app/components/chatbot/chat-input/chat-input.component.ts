@@ -43,7 +43,6 @@ export class ChatInputComponent implements OnInit {
       this._appService.ProcessInput(this._userInput);
     }
     this._userInput = "";
-    this._componentFactoryService.updateScroll();
   }
 
   changeVoiceButtonIconTo(type: string) {

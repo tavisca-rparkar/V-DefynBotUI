@@ -11,7 +11,7 @@
 
 .inputWithMic {
   width: 80%;
-  height: 96%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,3 +236,42 @@ input {
     height: 45px;
   }
 }
+
+@media screen and (min-width: 1440px) {
+  .input-block {
+    width: 100%;
+    height: 10%;
+  }
+  .text {
+    width: 40px;
+    height: 40px;
+  }
+  .voice {
+    width: 40px;
+    height: 45px;
+  }
+  .input-box {
+    width: 80%;
+    height: 45px;
+  }
+}
+
+@media screen and (min-width: 2300px) {
+  .input-block {
+    width: 100%;
+    height: 10%;
+  }
+  .text {
+    width: 40px;
+    height: 40px;
+  }
+  .voice {
+    width: 40px;
+    height: 45px;
+  }
+  .input-box {
+    width: 80%;
+    height: 45px;
+  }
+}
+

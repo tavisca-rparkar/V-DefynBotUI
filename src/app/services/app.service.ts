@@ -80,7 +80,7 @@ export class AppService {
       },
       error => {
         this._componentFactoryService.AddTextBubble(
-          "Sorry, I am unable to talk at the moment. Please contact the Site Administrator to report this issue.",
+          "Sorry, I am unable to help you at the moment. Please try again later.",
           "bot"
         );
       });
@@ -118,9 +118,6 @@ export class AppService {
       case "After Cancellation Process":
         this.AfterCancellationProcessIntent(response);
         break;
-      case "Process Ordering Payment":
-        this.ProcesssOrderingPaymentIntent(response);
-        break;
       case "Fallback":
         this.FallbackIntent(response);
         break;
@@ -129,6 +126,9 @@ export class AppService {
         break;
       case "Show Menu":
         this.ShowFoodOrderMenu(response);
+        break;
+      case "Process Ordering Payment":
+        this.ProcesssOrderingPaymentIntent(response);
         break;
       case "Get Point Balance":
         this.GetPointBalanceIntent(response);
@@ -166,6 +166,8 @@ export class AppService {
                 "bot"
               );
               this._componentFactoryService.StopLoader();
+              // send flow to :  proceed with current location
+              this.IntentProcessing("running");
             } else {
               // show results here -
               this._componentFactoryService.AddTextBubble("Showing you results near your location..." ,"bot");
@@ -179,7 +181,7 @@ export class AppService {
           },
           err => {
             this._componentFactoryService.AddTextBubble(
-              "Sorry, I am unable to retrieve the response at this moment",
+              "Sorry, I am unable to retrieve the response at this moment. Please try again later.",
               "bot"
             );
             this._componentFactoryService.StopLoader();
@@ -354,7 +356,7 @@ export class AppService {
       },
       err => {
         this._componentFactoryService.AddTextBubble(
-          "Sorry, I am unable to fetch the selected restaurant details",
+          "Sorry, I am unable to retrieve the response at the moment. Please try again later.",
           "bot"
         );
         this._componentFactoryService.StopLoader();
@@ -504,14 +506,7 @@ export class AppService {
       if(IsBrowseMore == "yes"){
         this.ShowCarouselAgainIntent("Restaurant Booking");
       }else{
-        this._componentFactoryService.AddTextBubble(
-          "I can help you with the following-",
-          "bot"
-        );
-        this._componentFactoryService.AddChoiceButton([
-          "Book a Table",
-          "Order Food"
-        ]);
+        this.RestartConversationAfterEndOfIntent();
       }
     }else{
       this._componentFactoryService.AddTextBubble(
@@ -547,11 +542,9 @@ export class AppService {
 
   OrderFoodIntent(response) {
     if (response["queryResult"]["allRequiredParamsPresent"]) {
+      alert("We only support food ordering for take-away!");
       this._componentFactoryService.StartLoader();
       let city = response["queryResult"]["parameters"]["address"];
-      if(city!=""){
-        this._componentFactoryService.AddTextBubble("We only support food ordering with your current location.","bot");
-      }
       this._foodOrderingService.GetFoodOrderList(
           "",
           this._stateService.getLatitude(),
@@ -560,7 +553,7 @@ export class AppService {
         .subscribe(data => {
           if (data === 404) {
             this._componentFactoryService.AddTextBubble(
-              "Sorry, I wasn't able to find any restaurants in your area.",
+              "Sorry, I wasn't able to find any restaurants in "+city,
               "bot"
             );
             this._componentFactoryService.StopLoader();
@@ -643,7 +636,7 @@ export class AppService {
           // showing Ordering Summary here -
           this._componentFactoryService.AddOrderingSummaryCard(data);
           this._componentFactoryService.StopLoader();
-          this._componentFactoryService.AddTextBubble("Order will be delivered as per your current location","bot");
+          this._componentFactoryService.AddTextBubble("Restaurant will notify you when your take-away order is ready.","bot");
         },
         err => {
           this._componentFactoryService.StartLoader();
@@ -679,8 +672,20 @@ export class AppService {
       response["queryResult"]["fulfillmentText"],
       "bot"
     );
+    this.RestartConversationAfterEndOfIntent();
   }
   GetPointBalanceIntent(response){
     this._componentFactoryService.AddTextBubble("Point Balance: "+this._stateService.appData.pointBalance, "bot");
+  }
+
+  RestartConversationAfterEndOfIntent(){
+    this._componentFactoryService.AddTextBubble(
+      "I can help you with the following-",
+      "bot"
+    );
+    this._componentFactoryService.AddChoiceButton([
+      "Book a Table",
+      "Order Food"
+    ]);
   }
 }
