@@ -63,7 +63,7 @@
     <div class="billInfo" *ngIf="totalPrice > 0">
       <p>Total Price : $ {{ totalPrice }}</p>
       <button (click)="SeeCart()" class="see-cart">
-        <p>Order Details</p>
+        Order Details
       </button>
     </div>
   </div>
@@ -100,10 +100,10 @@
     </div>
     <div *ngIf="!isProceedToPayClicked" class="user-response">
       <button (click)="BacktoMenu()" class="edit">
-        <p>Edit Order</p>
+        Edit Order
       </button>
       <button (click)="ProceedToPay()" class="proceedToPay">
-        <p>Proceed To Pay</p>
+        Proceed To Pay
       </button>
     </div>
   </div>

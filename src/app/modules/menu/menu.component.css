@@ -241,21 +241,15 @@
   border-radius: 5px;
   background-color: #5cb85c;
   box-shadow: 1px 2px #8d8d8d;
+  color: #fff;
+  font-size: 16px;
 }
 
 .see-cart:hover {
   background-color: #ffffff;
   border: 1px solid #4cae4c;
-}
-
-.see-cart p {
-  color: #fff;
-  font-size: 16px;
-  margin: 0%;
-}
-
-.see-cart p:hover {
   color: #5cb85c;
+
 }
 
 .order {
@@ -310,20 +304,13 @@ hr {
   border-radius: 5px;
   background-color: #5cb85c;
   box-shadow: 1px 2px #8d8d8d;
+  color: #fff;
+  font-size: 16px;
 }
 
 .proceedToPay:hover {
   background-color: #ffffff;
   border: 1px solid #4cae4c;
-}
-
-.proceedToPay p {
-  color: #fff;
-  font-size: 16px;
-  margin: 0%;
-}
-
-.proceedToPay p:hover {
   color: #5cb85c;
 }
 
@@ -339,21 +326,14 @@ hr {
   border-radius: 5px;
   background-color: #d9534f;
   box-shadow: 1px 2px #8d8d8d;
+  color: #fff;
+  font-size: 16px;
 }
 
 .edit:hover {
   background-color: #ffffff;
   border: 1px solid #d43f3a;
-}
-
-.edit p {
-  color: #fff;
-  font-size: 16px;
-  margin: 0%;
-}
-
-.edit p:hover {
-  color: #000000;
+  color: #d9534f;
 }
 
 .points-error {
