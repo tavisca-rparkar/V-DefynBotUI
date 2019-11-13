@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, OnInit } from "@angular/core";
 import { AppService } from "src/app/services/app.service";
 import { Meta } from "@angular/platform-browser";
-import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 
 @Component({
   selector: "app-chat-input",
@@ -13,11 +12,7 @@ export class ChatInputComponent implements OnInit {
   voiceButtonIcon: string = "voice-inactive";
   isListening = false;
 
-  constructor(
-    private _appService: AppService,
-    private meta: Meta,
-    private _componentFactoryService: ComponentFactoryService
-  ) {
+  constructor(private _appService: AppService, private meta: Meta) {
     this.meta.addTag({
       name: "viewport",
       content: "width=device-width, initial-scale=1.0"
@@ -43,7 +38,6 @@ export class ChatInputComponent implements OnInit {
       this._appService.ProcessInput(this._userInput);
     }
     this._userInput = "";
-    this._componentFactoryService.updateScroll();
   }
 
   changeVoiceButtonIconTo(type: string) {
