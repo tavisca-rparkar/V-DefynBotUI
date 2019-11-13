@@ -11,7 +11,7 @@
 
 .inputWithMic {
   width: 80%;
-  height: 96%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +30,10 @@
   padding: 2% 5%;
   outline: none;
   cursor: pointer;
+}
+
+.input-box:disabled {
+  background-color: white;
 }
 
 input {
@@ -51,8 +55,19 @@ input {
   background-color: white;
 }
 .voice-active {
-  color: green;
+  color: var(--mic-icon-color);
+  animation: blinker 0.3s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
 }
+
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .voice-disabled {
   color: white;
   visibility: hidden;
@@ -229,10 +244,48 @@ input {
   }
   .voice {
     width: 40px;
-    height: 45px;
+    height: 44px;
   }
   .input-box {
     width: 80%;
-    height: 45px;
+    height: 44px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .input-block {
+    width: 100%;
+    height: 10%;
+  }
+  .text {
+    width: 40px;
+    height: 40px;
+  }
+  .voice {
+    width: 40px;
+    height: 40px;
+  }
+  .input-box {
+    width: 80%;
+    height: 40px;
+  }
+}
+
+@media screen and (min-width: 2300px) {
+  .input-block {
+    width: 100%;
+    height: 10%;
+  }
+  .text {
+    width: 40px;
+    height: 40px;
+  }
+  .voice {
+    width: 40px;
+    height: 40px;
+  }
+  .input-box {
+    width: 80%;
+    height: 40px;
   }
 }
