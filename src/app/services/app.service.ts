@@ -455,43 +455,6 @@ export class AppService {
       });
   }
 
-  ProcesssOrderingPaymentIntent(response) {
-    //process ordering payment
-    this._componentFactoryService.AddTextBubble(
-      "Placing your order...",
-      "bot"
-    );
-
-    this._componentFactoryService.StartLoader();
-
-    if (response.totalPoints > this._stateService.appData.pointBalance) {
-      this._componentFactoryService.AddTextBubble(
-        "You don't have enough points to complete this transaction",
-        "bot"
-      );
-    } else {
-      this._foodOrderingService
-        .PaymentforFoodOrdering(response)
-        .subscribe(data => {
-          //updating user point balance on UI
-          if(data["status"]== "Order Successful"){
-            this._stateService.appData.pointBalance -= data["totalPoints"];
-          }
-          // showing Ordering Summary here -
-          this._componentFactoryService.AddOrderingSummaryCard(data);
-          this._componentFactoryService.StopLoader();
-        },
-        err => {
-          this._componentFactoryService.StartLoader();
-          this._componentFactoryService.AddTextBubble(
-            "Sorry, I am unable to proceed with payment of the order, Please try again later",
-            "bot"
-          );
-          return throwError(err);
-        });
-    }
-  }
-
   CancelBookingInBackground(response) {
     this._restaurantApiService
       .BookingCancellationForRestaurant(response)
@@ -586,9 +549,11 @@ export class AppService {
     if (response["queryResult"]["allRequiredParamsPresent"]) {
       this._componentFactoryService.StartLoader();
       let city = response["queryResult"]["parameters"]["address"];
-
+      if(city!=""){
+        this._componentFactoryService.AddTextBubble("We only support food ordering with your current location.","bot");
+      }
       this._foodOrderingService.GetFoodOrderList(
-          city,
+          "",
           this._stateService.getLatitude(),
           this._stateService.getLongitude()
         )
@@ -601,6 +566,7 @@ export class AppService {
             this._componentFactoryService.StopLoader();
           } else {
             // show results here -
+            this._componentFactoryService.AddTextBubble("Showing you food ordering options near your location...","bot");
             this._foodOrderingService.SetCarouselData(data);
             this._componentFactoryService.StopLoader();
             this._componentFactoryService.AddRestaurantCarousel({
@@ -650,6 +616,44 @@ export class AppService {
         );
         return throwError(err);
       });
+  }
+
+  ProcesssOrderingPaymentIntent(response) {
+    //process ordering payment
+    this._componentFactoryService.AddTextBubble(
+      "Placing your order...",
+      "bot"
+    );
+
+    this._componentFactoryService.StartLoader();
+
+    if (response.totalPoints > this._stateService.appData.pointBalance) {
+      this._componentFactoryService.AddTextBubble(
+        "You don't have enough points to complete this transaction",
+        "bot"
+      );
+    } else {
+      this._foodOrderingService
+        .PaymentforFoodOrdering(response)
+        .subscribe(data => {
+          //updating user point balance on UI
+          if(data["status"]== "Order Successful"){
+            this._stateService.appData.pointBalance -= data["totalPoints"];
+          }
+          // showing Ordering Summary here -
+          this._componentFactoryService.AddOrderingSummaryCard(data);
+          this._componentFactoryService.StopLoader();
+          this._componentFactoryService.AddTextBubble("Order will be delivered as per your current location","bot");
+        },
+        err => {
+          this._componentFactoryService.StartLoader();
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I am unable to proceed with payment of the order, Please try again later",
+            "bot"
+          );
+          return throwError(err);
+        });
+    }
   }
   
   WelcomeIntentIntent(response) {
