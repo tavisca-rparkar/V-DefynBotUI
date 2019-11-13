@@ -28,7 +28,7 @@ export class LauncherComponent implements OnInit {
   ) {
     this.launcherData = new LauncherData(
       "development",
-      "US Bank",
+      "VISA",
       "en-us",
       "John Snow",
       "RJ27",
@@ -56,9 +56,8 @@ export class LauncherComponent implements OnInit {
 
   redirect() {
     this._componentFactoryService.StartLoader();
-    this._launcherService
-      .GetResponse(this.launcherData)
-      .subscribe(response => {
+    this._launcherService.GetResponse(this.launcherData).subscribe(
+      response => {
         this.launcherData.sessionId = response["sessionId"];
         this._stateService.setSessionData(this.launcherData);
         this._stateService.appData = this.launcherData;
@@ -75,6 +74,7 @@ export class LauncherComponent implements OnInit {
         this.launcherData.error = "Sorry! Unable to connect at the moment.";
         this.isErrorDetected = true;
         return throwError(err);
-      });
+      }
+    );
   }
 }
