@@ -43,7 +43,7 @@
 }
 
 .category-selector {
-  height: 10%;
+  height: 15%;
   display: flex;
   overflow-y: hidden;
   overflow-x: auto;
