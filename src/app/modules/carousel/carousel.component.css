@@ -1,6 +1,6 @@
 .carousel-container {
   width: 100%;
-  height: 100px;
+  height: auto;
   margin: 5% 0%;
   white-space: nowrap;
   overflow-y: hidden;
@@ -48,7 +48,7 @@
   display: block;
   position: relative;
   width: 100%;
-  height: 65%;
+  height: 160px;
 }
 
 .slide-image-container img {
@@ -61,7 +61,7 @@
   display: block;
   position: relative;
   width: 100%;
-  height: 30%;
+  height: auto;
   margin-top: 3%;
   letter-spacing: 0px;
 }
