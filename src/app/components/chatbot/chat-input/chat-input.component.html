@@ -6,6 +6,7 @@
       [(ngModel)]="_userInput"
       placeholder="Type your message here..."
       (keydown.enter)="SendUserInput()"
+      [disabled]="isListening"
       autofocus
     />
     <button (click)="listen()" class="voice">
