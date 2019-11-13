@@ -170,11 +170,11 @@ export class AppService {
               // show results here -
               this._componentFactoryService.AddTextBubble("Showing you results near your location..." ,"bot");
               this._restaurantApiService.SetCarouselData(data);
-              this._componentFactoryService.StopLoader();
               this._componentFactoryService.AddRestaurantCarousel({
                 data: data,
                 carouselType: "Restaurant Booking"
               });
+              this._componentFactoryService.StopLoader();
             }
           },
           err => {
@@ -210,11 +210,11 @@ export class AppService {
             // show results here -
             this._componentFactoryService.AddTextBubble("Showing you results in "+city+"..." ,"bot");
             this._restaurantApiService.SetCarouselData(data);
-            this._componentFactoryService.StopLoader();
             this._componentFactoryService.AddRestaurantCarousel({
               data: data,
               carouselType: "Restaurant Booking"
             });
+            this._componentFactoryService.StopLoader();
           }
         },
         err => {
@@ -347,17 +347,17 @@ export class AppService {
             "bot"
           );
         } else {
-          this._componentFactoryService.StopLoader();
           // show results here -
           this._componentFactoryService.AddRestaurantDetailsCard(data);
+          this._componentFactoryService.StopLoader();
         }
       },
       err => {
-        this._componentFactoryService.StopLoader();
         this._componentFactoryService.AddTextBubble(
           "Sorry, I am unable to fetch the selected restaurant details",
           "bot"
         );
+        this._componentFactoryService.StopLoader();
         return throwError(err);
       });
   }
@@ -370,11 +370,11 @@ export class AppService {
     } else if (carouselType == "Food Ordering") {
       data = this._foodOrderingService.GetCarouselData();
     }
-    this._componentFactoryService.StopLoader();
     this._componentFactoryService.AddRestaurantCarousel({
       data: data,
       carouselType: carouselType
     });
+    this._componentFactoryService.StopLoader();
   }
 
   ProceedTableBookingIntent(response) {
@@ -406,11 +406,11 @@ export class AppService {
             this._componentFactoryService.StopLoader();
           },
           err => {
-            this._componentFactoryService.StopLoader();
             this._componentFactoryService.AddTextBubble(
               "Sorry, I am unable to proceed with the booking right now, Please try again later",
               "bot"
             );
+            this._componentFactoryService.StopLoader();
             return throwError(err);
           });
       }
@@ -446,11 +446,11 @@ export class AppService {
         this._componentFactoryService.StopLoader();
       },
       err => {
-        this._componentFactoryService.StopLoader();
         this._componentFactoryService.AddTextBubble(
           "Sorry, I am unable to proceed with payment of the booking, Please try again later",
           "bot"
         );
+        this._componentFactoryService.StopLoader();
         return throwError(err);
       });
   }
@@ -491,8 +491,8 @@ export class AppService {
       this._componentFactoryService.StopLoader();
     },
     err => {
-      this._componentFactoryService.StopLoader();
         this._componentFactoryService.AddTextBubble("Sorry, I am unable to proceed with cancellation of this booking, Please try again later", "bot");
+        this._componentFactoryService.StopLoader();
         return throwError(err);            
     });
   }
