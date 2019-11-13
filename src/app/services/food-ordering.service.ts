@@ -30,7 +30,7 @@ export class FoodOrderingService {
   }
 
   GetFoodOrderList(city: string, latitude: string, longitude: string) {
-    if ((city = "")) {
+    if ((city == "")) {
       return this._http
         .get(
           this._restaurantListApiUrl +
