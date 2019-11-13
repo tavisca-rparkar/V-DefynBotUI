@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, Input } from "@angular/core";
-import { ComponentFactoryService } from 'src/app/services/ComponentFactory.service';
-import { StateService } from 'src/app/services/state.service';
-import { AppService } from 'src/app/services/app.service';
+import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
+import { StateService } from "src/app/services/state.service";
+import { AppService } from "src/app/services/app.service";
 
 @Component({
   selector: "app-bookingcheckoutcard",
@@ -11,11 +11,11 @@ import { AppService } from 'src/app/services/app.service';
 export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
   @Input() data: string;
   isErrorDetected: boolean = false;
-  disableAllButtons:boolean = false;
+  disableAllButtons: boolean = false;
   timer: number = 299;
-  minutes: number = 0;
+  minutes: number = 4;
   seconds: number = 59;
-  pointBalance:number;
+  pointBalance: number;
   /*data2 = {
     status: "BookingInitiated",
     error: null,
@@ -31,13 +31,15 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     pointBalance: 1000
   };*/
 
-  constructor(private _componentFactoryService:ComponentFactoryService,
+  constructor(
+    private _componentFactoryService: ComponentFactoryService,
     private _stateService: StateService,
-    private _appService: AppService) {}
+    private _appService: AppService
+  ) {}
 
   ngOnInit() {
-  this.pointBalance= this._stateService.appData.pointBalance;
-  this.startCountdown(this.timer);
+    this.pointBalance = this._stateService.appData.pointBalance;
+    this.startCountdown(this.timer);
   }
 
   ngAfterViewInit(): void {
@@ -46,7 +48,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     } else {
       this.isErrorDetected = true;
     }
-    
+
     this._componentFactoryService.updateScroll();
   }
 
@@ -62,7 +64,7 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
         clearInterval(interval);
         this.isErrorDetected = true;
         this.data["error"] = "Session Expired!";
-        if(!this.disableAllButtons){
+        if (!this.disableAllButtons) {
           // auto cancel when timer expires only if the proceed/cancel buttons are not manually clicked
           this.cancelBookingInBG();
         }
@@ -70,40 +72,44 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
     }, 1000);
   }
 
-  proceedToPay(){
-    this.disableAllButtons=true;
+  proceedToPay() {
+    this.disableAllButtons = true;
     let bookingPaymentData = {
-      "bookingId": this.data["bookingId"],
-      "pointBalance": this._stateService.appData.pointBalance,
-      "restaurantName":this.data["restaurantName"],
-      "totalPointPrice": this.data["totalPointPrice"]
+      bookingId: this.data["bookingId"],
+      pointBalance: this._stateService.appData.pointBalance,
+      restaurantName: this.data["restaurantName"],
+      totalPointPrice: this.data["totalPointPrice"]
     };
-    this._appService.IntentRouter("Process Booking Payment",bookingPaymentData);
+    this._appService.IntentRouter(
+      "Process Booking Payment",
+      bookingPaymentData
+    );
   }
 
-  cancelBooking(){
-    if(confirm("Are you sure you want to proceed with cancellation of this booking?")){
-      this.disableAllButtons=true;
-      let bookingCancelData ={
-        "bookingId": this.data["bookingId"],
-        "pointBalance": this._stateService.appData.pointBalance,
-        "totalPointPrice": this.data["totalPointPrice"]
-      }
-      this._appService.IntentRouter("Cancel Booking",bookingCancelData);
-    }else{
-      ;
+  cancelBooking() {
+    if (
+      confirm(
+        "Are you sure you want to proceed with cancellation of this booking?"
+      )
+    ) {
+      this.disableAllButtons = true;
+      let bookingCancelData = {
+        bookingId: this.data["bookingId"],
+        pointBalance: this._stateService.appData.pointBalance,
+        totalPointPrice: this.data["totalPointPrice"]
+      };
+      this._appService.IntentRouter("Cancel Booking", bookingCancelData);
+    } else {
     }
-    
   }
 
-
-  cancelBookingInBG(){
-    this.disableAllButtons=true;
-    let bookingCancelData ={
-      "bookingId": this.data["bookingId"],
-      "pointBalance": this._stateService.appData.pointBalance,
-      "totalPointPrice": this.data["totalPointPrice"]
-    }
+  cancelBookingInBG() {
+    this.disableAllButtons = true;
+    let bookingCancelData = {
+      bookingId: this.data["bookingId"],
+      pointBalance: this._stateService.appData.pointBalance,
+      totalPointPrice: this.data["totalPointPrice"]
+    };
     this._appService.CancelBookingInBackground(bookingCancelData);
   }
 }

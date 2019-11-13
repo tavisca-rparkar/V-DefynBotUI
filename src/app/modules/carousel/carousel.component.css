@@ -1,6 +1,6 @@
 .carousel-container {
   width: 100%;
-  height: auto;
+  height: 100px;
   margin: 5% 0%;
   white-space: nowrap;
   overflow-y: hidden;
