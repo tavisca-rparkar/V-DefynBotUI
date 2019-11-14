@@ -51,7 +51,7 @@ export class LauncherComponent implements OnInit {
           this._themingService.getTheme(this.launcherData.client)
         ); //------------------------------------------------------------------
         this._componentFactoryService.StopLoader();
-        this._router.navigate(["./chatbot"]);
+        this._router.navigate(["./chatbot/"+this.launcherData.client]);
       },
       err => {
         this._componentFactoryService.StopLoader();

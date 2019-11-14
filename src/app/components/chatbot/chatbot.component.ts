@@ -22,13 +22,17 @@ export class ChatbotComponent implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem("isLoggedIn")!="true"){
-      alert("Your session expired! Please launch the app again!");
       this._router.navigate(['./launcher']);
     }else{
+      
       this._stateService.getSessionData();
       this._themingService.setActiveTheme(
         this._themingService.getTheme(this._stateService.appData.client)
       ); 
+      if(this._router.url !== '/chatbot/'+this._stateService.appData.client){
+        alert("You are not authenticated to view the requested page.");
+        this._router.navigate(['./launcher']);
+      }
     }
   }
 }
