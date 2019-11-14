@@ -10,11 +10,10 @@ export class LocationApiService {
 
   constructor(private _http: HttpClient) {}
 
-  private _apiUrl =
-    "http://172.16.5.195:5000/api/restrauntsearch?localityverbose=";
+  private _apiUrl = "bookingtable?locality=";
 
   SetURL(url: string) {
-    this._apiUrl = url;
+    this._apiUrl = url+"bookingtable?locality=";
   }
   
   GetResponse(userInput: string) {

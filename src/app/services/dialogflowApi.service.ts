@@ -22,7 +22,7 @@ export class DialogflowApiService {
   }
 
   SetUrl(url:string){
-    this._dialogflowApi = url;
+    this._dialogflowApi = url+"dialougflow";
   }
 
   GetResponse(userInput: string){
