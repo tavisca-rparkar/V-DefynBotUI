@@ -6,6 +6,7 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
   display: flex;
   background-color: #fff;
+  padding: 2px;
 }
 
 .heading h1 {
@@ -27,11 +28,13 @@ input {
   margin: 2%;
   padding-left: 5%;
 }
+
 label {
   width: 96%;
   display: block;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   margin: 2%;
+  color: darkslategray;
 }
 
 select {

@@ -29,29 +29,33 @@ export class AppService {
     private _loggerService: LoggerService
   ) {}
 
-  async InitiateConversation() {
-    await this._mockableService.GetResponse();
-    this._locationAccess.getLocation().then(() => {
-      if (this._stateService.IslatLongProvided()) {
-        this.IntentProcessing("Hello");
-      }
-    });
-    navigator.permissions.query({ name: "geolocation" }).then(result => {
-      if (result.state == "granted") {
-      } else if (result.state == "prompt") {
-        this._componentFactoryService.AddTextBubble(
-          "Please grant us your Browser location access.",
-          "bot"
-        );
-        this._componentFactoryService.addLocationButton();
-      } else {
-        this._componentFactoryService.AddTextBubble(
-          "Please grant us your Browser location access and click on reload.",
-          "bot"
-        );
-        this._componentFactoryService.addLocationButton();
-      }
-    });
+  InitiateConversation() {
+    this._componentFactoryService.StartLoader();
+     this._mockableService.GetResponse()
+     .subscribe(()=>{
+       this._componentFactoryService.StopLoader();
+      this._locationAccess.getLocation().then(() => {
+        if (this._stateService.IslatLongProvided()) {
+          this.IntentProcessing("Hello");
+        }
+      });
+      navigator.permissions.query({ name: "geolocation" }).then(result => {
+        if (result.state == "granted") {
+        } else if (result.state == "prompt") {
+          this._componentFactoryService.AddTextBubble(
+            "Please grant us your Browser location access.",
+            "bot"
+          );
+          this._componentFactoryService.addLocationButton();
+        } else {
+          this._componentFactoryService.AddTextBubble(
+            "Please grant us your Browser location access and click on reload.",
+            "bot"
+          );
+          this._componentFactoryService.addLocationButton();
+        }
+      });
+     });
   }
 
   ProcessInput(userInput: string) {
@@ -129,6 +133,9 @@ export class AppService {
         break;
       case "Process Ordering Payment":
         this.ProcesssOrderingPaymentIntent(response);
+        break;
+      case "Cancel Order":
+        this.CancelOrder();
         break;
       case "Get Point Balance":
         this.GetPointBalanceIntent(response);
@@ -446,6 +453,7 @@ export class AppService {
         // showing Booking Summary here -
         this._componentFactoryService.AddBookingSummaryCard(data);
         this._componentFactoryService.StopLoader();
+        this.RestartConversationAfterEndOfIntent();
       },
       err => {
         this._componentFactoryService.AddTextBubble(
@@ -454,6 +462,7 @@ export class AppService {
         );
         this._componentFactoryService.StopLoader();
         return throwError(err);
+        this.RestartConversationAfterEndOfIntent();
       });
   }
 
@@ -625,6 +634,7 @@ export class AppService {
         "You don't have enough points to complete this transaction",
         "bot"
       );
+      this.RestartConversationAfterEndOfIntent();
     } else {
       this._foodOrderingService
         .PaymentforFoodOrdering(response)
@@ -637,6 +647,7 @@ export class AppService {
           this._componentFactoryService.AddOrderingSummaryCard(data);
           this._componentFactoryService.StopLoader();
           this._componentFactoryService.AddTextBubble("Restaurant will notify you when your take-away order is ready.","bot");
+          this.RestartConversationAfterEndOfIntent();
         },
         err => {
           this._componentFactoryService.StartLoader();
@@ -644,9 +655,15 @@ export class AppService {
             "Sorry, I am unable to proceed with payment of the order, Please try again later",
             "bot"
           );
+          this.RestartConversationAfterEndOfIntent();
           return throwError(err);
         });
     }
+  }
+
+  CancelOrder(){
+    this._componentFactoryService.AddTextBubble("Order was cancelled!","bot");
+    this.RestartConversationAfterEndOfIntent();
   }
   
   WelcomeIntentIntent(response) {
@@ -679,13 +696,16 @@ export class AppService {
   }
 
   RestartConversationAfterEndOfIntent(){
-    this._componentFactoryService.AddTextBubble(
-      "I can help you with the following-",
-      "bot"
-    );
-    this._componentFactoryService.AddChoiceButton([
-      "Book a Table",
-      "Order Food"
-    ]);
+    setTimeout(()=>{
+      this._componentFactoryService.AddTextBubble(
+        "Anything else? I can help you with the following-",
+        "bot"
+      );
+      this._componentFactoryService.AddChoiceButton([
+        "Book a Table",
+        "Order Food"
+      ]);
+    },
+    1500);
   }
 }

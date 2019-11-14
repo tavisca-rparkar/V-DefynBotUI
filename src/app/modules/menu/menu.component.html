@@ -102,9 +102,15 @@
       <button (click)="BacktoMenu()" class="edit">
         Edit Order
       </button>
+      <button (click)="CancelOrder()" class="cancelOrderButton">
+        Cancel Order
+      </button>
       <button (click)="ProceedToPay()" class="proceedToPay">
         Proceed To Pay
       </button>
+    </div>
+    <div *ngIf="isCancelled" class="points-error">
+      <p>{{ cancelMessage }}</p>
     </div>
   </div>
 </div>

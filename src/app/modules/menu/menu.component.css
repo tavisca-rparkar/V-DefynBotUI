@@ -292,12 +292,35 @@ hr {
   margin: 5% 0%;
 }
 
-.proceedToPay {
+
+.cancelOrderButton {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
   width: 48%;
   margin: 0% 1%;
+  padding: 2% 2%;
+  bottom: 0%;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #d9534f;
+  box-shadow: 1px 2px #8d8d8d;
+  color: #fff;
+  font-size: 16px;
+}
+
+.cancelOrderButton:hover {
+  background-color: #ffffff;
+  border: 1px solid #d43f3a;
+  color: #d9534f;
+}
+
+.proceedToPay {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 98%;
+  margin: 1% 1%;
   padding: 2% 2%;
   bottom: 0%;
   cursor: pointer;
@@ -324,7 +347,7 @@ hr {
   bottom: 0%;
   cursor: pointer;
   border-radius: 5px;
-  background-color: #d9534f;
+  background-color: #202020;
   box-shadow: 1px 2px #8d8d8d;
   color: #fff;
   font-size: 16px;
@@ -332,8 +355,8 @@ hr {
 
 .edit:hover {
   background-color: #ffffff;
-  border: 1px solid #d43f3a;
-  color: #d9534f;
+  border: 1px solid #000000;
+  color: #202020;
 }
 
 .points-error {

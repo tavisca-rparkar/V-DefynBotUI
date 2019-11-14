@@ -5,6 +5,7 @@ import { LocationApiService } from "./locationApi.service";
 import { RestaurantApiService } from "./restaurant-api.service";
 import { FoodOrderingService } from "./food-ordering.service";
 import { LauncherService } from "./launcher.service";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: "root"
@@ -22,17 +23,16 @@ export class MockableApiService {
   // Mockable.io URL for custom made Api for dialogflow key and api urls
   private _apiUrl = "https://demo8483055.mockable.io/dialogflowAuthKey";
 
-  async GetResponse() {
-    try {
-      const data = await this._http.get(this._apiUrl).toPromise();
-      this._dialogflowService.SetKey(data["key"]);
-      this._dialogflowService.SetUrl(data["ApiBaseUrl"]);
-      this._locationService.SetURL(data["ApiBaseUrl"]);
-      this._restaurantApiService.SetURL(data["ApiBaseUrl"]);
-      this._launcherService.SetUrl(data["ApiBaseUrl"]);
-      this._foodOrderingService.SetURL(data["ApiBaseUrl"]);
-    } catch (err) {
-      return await Promise.resolve();
-    }
+  GetResponse() {
+      const dataObservable:Observable<Object> = this._http.get(this._apiUrl);
+      dataObservable.subscribe((data) => {
+        this._dialogflowService.SetKey(data["key"]);
+        this._dialogflowService.SetUrl(data["ApiBaseUrl"]);
+        this._locationService.SetURL(data["ApiBaseUrl"]);
+        this._restaurantApiService.SetURL(data["ApiBaseUrl"]);
+        this._launcherService.SetUrl(data["ApiBaseUrl"]);
+        this._foodOrderingService.SetURL(data["ApiBaseUrl"]);
+      });
+      return dataObservable;
   }
 }
