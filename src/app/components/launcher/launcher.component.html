@@ -21,7 +21,7 @@
       <div class="client">
         <label>Client</label>
         <select [(ngModel)]="this.launcherData.client" name="client" required>
-          <option value="Test">Test</option>
+          <option value="Demo">Demo</option>
           <option value="VISA">VISA</option>
           <option value="Capital One">Capital One</option>
         </select>
@@ -44,6 +44,7 @@
           type="text"
           name="userFirstName"
           [(ngModel)]="this.launcherData.userFirstName"
+          pattern="[A-Za-z]"
           required
         />
       </div>
