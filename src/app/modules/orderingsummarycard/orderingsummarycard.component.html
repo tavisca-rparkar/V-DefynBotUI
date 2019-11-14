@@ -43,28 +43,18 @@
               <td class="item-info">
                 x
               </td>
-              <td>${{ item.price }}</td>
+              <td>{{ item.price }}</td>
               <td class="item-info">
                 :
               </td>
-              <td>${{ item.quantity * item.price }}</td>
+              <td>{{ item.quantity * item.price }}</td>
             </tr>
           </table>
         </div>
-
-        <hr />
-        <p>
-          Final Amount:
-          <span
-            >${{
-              data["totalPoints"] / _stateService.CurrencyValueInPoints
-            }}</span
-          >
-        </p>
         <hr />
         <p style="margin-top: 5%;">
-          Final Amount in Points:
-          <span>{{ data["totalPoints"] }}</span>
+          Final Amount :
+          <span>{{ data["totalPoints"] }} points</span>
         </p>
       </div>
       <hr />
