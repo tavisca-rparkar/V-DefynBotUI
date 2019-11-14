@@ -32,7 +32,7 @@ export class LauncherComponent implements OnInit {
       "en-us",
       "",
       "",
-      0,
+      null,
       "",
       ""
     );

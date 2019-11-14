@@ -7,27 +7,20 @@ import { timeout } from "rxjs/operators";
 })
 export class RestaurantApiService {
   constructor(private _http: HttpClient) {}
-  private _restaurantListApiUrl = "http://172.16.5.151/api/bookingtable?";
-  private _restaurantDetailsApiUrl =
-    "http://172.16.5.143:5000/api/RestaurantDetails?restaurantId=";
-  private _restaurantBookingApiUrl = "https://localhost:44367/api/booking?";
-  private _restaurantBookingPaymentApiUrl =
-    "https://localhost:44367/api/payment";
-  private _restaurantBookingCancelApiUrl = "https://localhost:44367/api/cancel";
+  private _restaurantListApiUrl = "";
+  private _restaurantDetailsApiUrl = "";
+  private _restaurantBookingApiUrl = "";
+  private _restaurantBookingPaymentApiUrl = "";
+  private _restaurantBookingCancelApiUrl = "";
   private _carouselData;
 
-  SetURL(
-    listUrl: string,
-    detailsUrl: string,
-    bookingUrl: string,
-    paymentUrl: string,
-    cancelUrl: string
+  SetURL(apiBaseUrl:string
   ) {
-    this._restaurantListApiUrl = listUrl;
-    this._restaurantDetailsApiUrl = detailsUrl;
-    this._restaurantBookingApiUrl = bookingUrl;
-    this._restaurantBookingPaymentApiUrl = paymentUrl;
-    this._restaurantBookingCancelApiUrl = cancelUrl;
+    this._restaurantListApiUrl = apiBaseUrl+"restaurant?";
+    this._restaurantDetailsApiUrl = apiBaseUrl+"restaurantdetails?restaurantid=";
+    this._restaurantBookingApiUrl = apiBaseUrl+"booking?";
+    this._restaurantBookingPaymentApiUrl = apiBaseUrl+"payment";
+    this._restaurantBookingCancelApiUrl = apiBaseUrl+"cancell";
   }
 
   SetCarouselData(data) {
