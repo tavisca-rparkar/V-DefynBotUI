@@ -25,30 +25,31 @@ export class LauncherComponent implements OnInit {
     private _themingService: ThemeService,
     private mockableApiService: MockableApiService,
     private _componentFactoryService: ComponentFactoryService
-  ) {
+  ) 
+  {
     this.launcherData = new LauncherData(
-      "development",
-      "VISA",
-      "en-us",
-      "",
-      "",
-      0,
-      "",
-      ""
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined
     );
   }
 
   async ngOnInit() {
     await this.mockableApiService.GetResponse();
     this._stateService.appData = new LauncherData(
-      "",
-      "",
-      "",
-      "",
-      "",
-      0,
-      "",
-      ""
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined
     );
     this._stateService.isAppDataSet = false;
     this._stateService.clearSessionData();

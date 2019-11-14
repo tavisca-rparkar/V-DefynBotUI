@@ -6,7 +6,7 @@
     <div *ngIf="isErrorDetected" class="points-error">
       <p>{{ launcherData.error }}</p>
     </div>
-    <form action="">
+    <form  #launchForm="ngForm" action="" ngNativeValidate >
       <div class="environment">
         <Label>Environment</Label>
         <select
@@ -43,8 +43,9 @@
         <input
           type="text"
           name="userFirstName"
+          pattern="[A-Za-z\s]+"
           [(ngModel)]="this.launcherData.userFirstName"
-          placeholder="John Snow"
+          placeholder="Eg: John"
           required
         />
       </div>
@@ -54,18 +55,20 @@
         <input
           type="text"
           name="userId"
+          pattern="[A-Za-z0-9\s]+"
           [(ngModel)]="this.launcherData.userId"
-          placeholder="RETSB500"
+          placeholder="Eg: TSER47U"
+          required
         />
       </div>
 
       <div class="pointBalance">
         <label>Point Balance</label>
         <input
-          type="text"
+          type="number"
           name="pointBalance"
           [(ngModel)]="this.launcherData.pointBalance"
-          placeholder="990000"
+          placeholder="Eg: 99647"
           required
         />
       </div>
@@ -73,7 +76,7 @@
         <app-loader></app-loader>
       </div>
 
-      <button type="submit" (click)="redirect()">Launch</button>
+      <input type="submit" class="button" value="launch" (click)="launchForm.valid ? redirect() : null">
     </form>
   </div>
 </div>

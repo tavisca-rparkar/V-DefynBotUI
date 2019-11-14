@@ -40,7 +40,7 @@ select {
   padding-left: 5%;
 }
 
-button {
+.button {
   border-radius: 20px;
   border: none;
   width: 96%;
