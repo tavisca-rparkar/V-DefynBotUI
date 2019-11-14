@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Theme } from "../models/theme";
-import { americanExpress } from "../clients/americanExpress/theme";
+import { capitalOne } from "../clients/capitalOne/theme";
 import { defaultTheme } from "../clients/defaultClient/theme";
 import { visa } from "../clients/visa/theme";
 import { StateService } from "./state.service";
@@ -10,7 +10,7 @@ import { StateService } from "./state.service";
 })
 export class ThemeService {
   private active: Theme = defaultTheme;
-  private availableThemes: Theme[] = [defaultTheme, visa, americanExpress];
+  private availableThemes: Theme[] = [defaultTheme, visa, capitalOne];
 
   constructor(private _stateService: StateService) {}
 
@@ -31,8 +31,8 @@ export class ThemeService {
       case "VISA":
         return visa;
         break;
-      case "American Express":
-        return americanExpress;
+      case "Capital One":
+        return capitalOne;
         break;
       default:
         return defaultTheme;

@@ -30,9 +30,9 @@ export class LauncherComponent implements OnInit {
       "development",
       "VISA",
       "en-us",
-      "John Snow",
-      "RJ27",
-      990000,
+      "",
+      "",
+      0,
       "",
       ""
     );
