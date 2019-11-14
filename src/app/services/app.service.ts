@@ -542,7 +542,7 @@ export class AppService {
 
   OrderFoodIntent(response) {
     if (response["queryResult"]["allRequiredParamsPresent"]) {
-      alert("We only support food ordering for take-away!");
+      this._componentFactoryService.AddTextBubble("We only support food ordering for take-away!","bot");
       this._componentFactoryService.StartLoader();
       let city = response["queryResult"]["parameters"]["address"];
       this._foodOrderingService.GetFoodOrderList(
