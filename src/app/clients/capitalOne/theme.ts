@@ -5,8 +5,9 @@ export const capitalOne: Theme = {
   name: "Capital One",
   id: "capital-one",
   style: {
-    "--theme-color": "#2d2d2d",
-    "--gradient-color": "linear-gradient(to right, #2d2d2d, #4d4d4d, #5d5d5d)",
+    "--theme-color": "#004879",
+    "--gradient-color":
+      "linear-gradient(to top right, #004879, #005279, #d22e1e)",
     icon:
       "https://pbs.twimg.com/profile_images/1006893718098665472/Mh3fEzCO_400x400.jpg",
     "--mic-icon-color": "#ff0000"
