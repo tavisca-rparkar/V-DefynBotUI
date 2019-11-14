@@ -4,6 +4,7 @@
   top: 0;
   display: inline-block;
   background-color: var(--theme-color);
+  background-image: var(--gradient-color);
   min-height: 60px;
   border: none;
 }
