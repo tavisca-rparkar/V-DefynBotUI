@@ -11,7 +11,6 @@ export class StateService {
   public isAppDataSet:boolean = false;
   public clientLogo:string;
   
-  public CurrencyValueInPoints: number = 100;
   public _foodOrderRestauranData:any;
 
   private _latitude: string;
@@ -45,7 +44,7 @@ export class StateService {
     perPersonPrice,
     supplier
   ) {
-    let points = perPersonPrice * this.CurrencyValueInPoints; // converting price to points
+    let points = perPersonPrice// price is already in points
     let restaurantIdWithSupplier = supplier + "/" + restaurantId;
     let data = {
       restaurantID: restaurantIdWithSupplier,

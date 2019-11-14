@@ -3,6 +3,7 @@ import { url } from "inspector";
 
 export const capitalOne: Theme = {
   name: "Capital One",
+  id: "capital-one",
   style: {
     "--theme-color": "#2d2d2d",
     "--gradient-color": "linear-gradient(to right, #2d2d2d, #4d4d4d, #5d5d5d)",

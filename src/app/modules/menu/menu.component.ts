@@ -194,7 +194,7 @@ export class MenuComponent implements OnInit {
       }
     }
     this.pointsPrice =
-      this.totalPrice * this._stateService.CurrencyValueInPoints;
+      this.totalPrice;
   }
 
   GetCategoryMenu(categoryIndex: number) {

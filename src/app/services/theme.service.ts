@@ -1,18 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Theme } from "../models/theme";
-import { capitalOne } from "../clients/capitalOne/theme";
-import { defaultTheme } from "../clients/defaultClient/theme";
-import { visa } from "../clients/visa/theme";
+import { defaultClient } from "../clients/defaultClient/theme";
 import { StateService } from "./state.service";
+import { Clients } from '../clients/clients';
 
 @Injectable({
   providedIn: "root"
 })
 export class ThemeService {
-  private active: Theme = defaultTheme;
-  private availableThemes: Theme[] = [defaultTheme, visa, capitalOne];
+  private active: Theme = defaultClient;
 
-  constructor(private _stateService: StateService) {}
+  constructor(private _stateService: StateService,
+    private _clients:Clients) {}
 
   setActiveTheme(theme: Theme): void {
     this.active = theme;
@@ -26,17 +25,7 @@ export class ThemeService {
     });
   }
 
-  getTheme(themeName: string) {
-    switch (themeName) {
-      case "VISA":
-        return visa;
-        break;
-      case "Capital One":
-        return capitalOne;
-        break;
-      default:
-        return defaultTheme;
-        break;
-    }
+  getTheme(themeName: string):Theme {
+   return this._clients.getClientTheme(themeName);
   }
 }

@@ -8,6 +8,7 @@ import { throwError } from "rxjs";
 import { MockableApiService } from "src/app/services/mockableApi.service";
 import { ThemeService } from "src/app/services/theme.service";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
+import { Clients } from 'src/app/clients/clients';
 
 @Component({
   selector: "app-launcher",
@@ -16,6 +17,7 @@ import { ComponentFactoryService } from "src/app/services/ComponentFactory.servi
 })
 export class LauncherComponent implements OnInit {
   launcherData: LauncherData;
+  clientList:string[];
   isErrorDetected = false;
 
   constructor(
@@ -24,7 +26,8 @@ export class LauncherComponent implements OnInit {
     private _launcherService: LauncherService,
     private _themingService: ThemeService,
     private mockableApiService: MockableApiService,
-    private _componentFactoryService: ComponentFactoryService
+    private _componentFactoryService: ComponentFactoryService,
+    private _clients: Clients
   ){
     this.launcherData = new LauncherData(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined);
   }
@@ -35,6 +38,7 @@ export class LauncherComponent implements OnInit {
       this._stateService.appData = new LauncherData(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined);
       this._stateService.isAppDataSet = false;
       this._stateService.clearSessionData();
+       this.clientList = this._clients.getClientNameList();
     });
   }
 
@@ -51,7 +55,8 @@ export class LauncherComponent implements OnInit {
           this._themingService.getTheme(this.launcherData.client)
         ); //------------------------------------------------------------------
         this._componentFactoryService.StopLoader();
-        this._router.navigate(["./chatbot/"+this.launcherData.client]);
+        let routePath = this._clients.getClientId(this.launcherData.client);
+        this._router.navigate(["./chatbot/"+routePath]);
       },
       err => {
         this._componentFactoryService.StopLoader();

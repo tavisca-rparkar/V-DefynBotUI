@@ -33,10 +33,10 @@ export class AppService {
     this._componentFactoryService.StartLoader();
      this._mockableService.GetResponse()
      .subscribe(()=>{
-       this._componentFactoryService.StopLoader();
       this._locationAccess.getLocation().then(() => {
         if (this._stateService.IslatLongProvided()) {
           this.IntentProcessing("Hello");
+          this._componentFactoryService.StopLoader();
         }
       });
       navigator.permissions.query({ name: "geolocation" }).then(result => {
@@ -47,12 +47,14 @@ export class AppService {
             "bot"
           );
           this._componentFactoryService.addLocationButton();
+          this._componentFactoryService.StopLoader();
         } else {
           this._componentFactoryService.AddTextBubble(
             "Please grant us your Browser location access and click on reload.",
             "bot"
           );
           this._componentFactoryService.addLocationButton();
+          this._componentFactoryService.StopLoader();
         }
       });
      });
