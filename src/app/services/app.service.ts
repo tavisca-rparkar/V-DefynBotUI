@@ -232,7 +232,7 @@ export class AppService {
           return throwError(err);
         });
       }
-    } else {
+    }else{
       this._componentFactoryService.AddTextBubble(
         response["queryResult"]["fulfillmentText"],
         "bot"
@@ -410,6 +410,7 @@ export class AppService {
             // showing Checkout Card here -
             this._componentFactoryService.AddRestaurantCheckoutCard(data);
             this._componentFactoryService.StopLoader();
+            this.RestartConversationAfterEndOfIntent();
           },
           err => {
             this._componentFactoryService.AddTextBubble(
@@ -417,6 +418,7 @@ export class AppService {
               "bot"
             );
             this._componentFactoryService.StopLoader();
+            this.RestartConversationAfterEndOfIntent();
             return throwError(err);
           });
       }
