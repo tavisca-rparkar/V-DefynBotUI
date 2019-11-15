@@ -16,12 +16,6 @@
         <div class="restaurantName">
           <h1>{{ data["restaurantName"] }}</h1>
         </div>
-        <!--div class="address">
-          <p>
-            Next to Vaishali Restaurant, FC Road, Deccan, Pune, Maharashtra,
-            India
-          </p>
-        </div-->
       </div>
       <hr />
       <div class="booking-details">
@@ -30,8 +24,8 @@
         <p>Date : {{ data["date"].split("T")[0] }}</p>
         <p>Time : {{ data["time"] }}</p>
       </div>
-      <hr/>
-      <div  class="billing-details">
+      <hr />
+      <div class="billing-details">
         <p class="sectionHeading">Billing Details :</p>
         <p>
           Available Point Balance : <span>{{ pointBalance }}</span>
@@ -46,7 +40,9 @@
         <p>
           <b
             >Final Amount :
-            <span>{{ data["perPersonPoints"] * data["noOfGuests"] }}</span></b
+            <span
+              >{{ data["perPersonPoints"] * data["noOfGuests"] }} points</span
+            ></b
           >
         </p>
       </div>

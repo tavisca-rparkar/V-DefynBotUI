@@ -23,9 +23,9 @@ export class MenuComponent implements OnInit {
   restaurantData: any;
 
   isErrorDetected: boolean = false;
-  insufficientBalanceError =
-    "Can't add items to cart due to insufficient point balance.";
-
+  isCancelled:boolean = false;
+  insufficientBalanceError = "Can't add items to cart due to insufficient point balance.";
+  cancelMessage = "Order Cancelled";
   /*data = {
     restaurantId: "12345",
     supplierName: "Zomato",
@@ -194,7 +194,7 @@ export class MenuComponent implements OnInit {
       }
     }
     this.pointsPrice =
-      this.totalPrice * this._stateService.CurrencyValueInPoints;
+      this.totalPrice;
   }
 
   GetCategoryMenu(categoryIndex: number) {
@@ -208,6 +208,17 @@ export class MenuComponent implements OnInit {
 
   BacktoMenu() {
     this.isCartVisible = false;
+  }
+
+  CancelOrder(){
+    if(confirm("Are you sure you want to cancel the order?")){
+      this.isProceedToPayClicked = true;
+      this.isCancelled = true;
+      this._appService.IntentRouter(
+        "Cancel Order",
+        null
+      );
+    }
   }
 
   ProceedToPay() {
@@ -228,12 +239,7 @@ export class MenuComponent implements OnInit {
       this.pointsPrice,
       cart
     );
-    //   restaurantId: 12,
-    //   restaurantName: "Dominos Pizza",
-    //   userId: this._stateService.appData.userId,
-    //   totalPoints: this.totalPrice,
-    //   menuItems: cart
-    // };
+
     this.isProceedToPayClicked = true;
     this._appService.IntentRouter(
       "Process Ordering Payment",

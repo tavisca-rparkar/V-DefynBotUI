@@ -30,7 +30,7 @@
           >
             <div class="menu-item-info">
               <h1>{{ item.name }}</h1>
-              <p>$ {{ item.price }}</p>
+              <p>{{ item.price }} points</p>
             </div>
             <div class="counter">
               <div
@@ -61,7 +61,7 @@
       <p>{{ insufficientBalanceError }}</p>
     </div>
     <div class="billInfo" *ngIf="totalPrice > 0">
-      <p>Total Price : $ {{ totalPrice }}</p>
+      <p>Total Price : {{ totalPrice }} points</p>
       <button (click)="SeeCart()" class="see-cart">
         Order Details
       </button>
@@ -82,7 +82,7 @@
         <div class="cartItems" *ngIf="item.quantity > 0">
           <p class="foodItem">{{ item.name }}</p>
           <p class="foodItem-info">
-            {{ item.quantity }} X $ {{ item.price }} : $
+            {{ item.quantity }} X {{ item.price }} :
             {{ item.quantity * item.price }}
           </p>
         </div>
@@ -91,20 +91,22 @@
     <hr />
     <div class="billInfo">
       <p>Total Price :</p>
-      <p>$ {{ totalPrice }}</p>
+      <p>{{ totalPrice }} points</p>
     </div>
     <hr />
-    <div class="pointsPrice">
-      <p>Price In Points :</p>
-      <p>{{ pointsPrice }}</p>
-    </div>
     <div *ngIf="!isProceedToPayClicked" class="user-response">
       <button (click)="BacktoMenu()" class="edit">
         Edit Order
       </button>
+      <button (click)="CancelOrder()" class="cancelOrderButton">
+        Cancel Order
+      </button>
       <button (click)="ProceedToPay()" class="proceedToPay">
         Proceed To Pay
       </button>
+    </div>
+    <div *ngIf="isCancelled" class="points-error">
+      <p>{{ cancelMessage }}</p>
     </div>
   </div>
 </div>

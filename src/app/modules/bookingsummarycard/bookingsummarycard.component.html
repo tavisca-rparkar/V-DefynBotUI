@@ -5,12 +5,12 @@
     </div>
     <div [ngClass]="status">
       <h1>
-        {{data["status"]}}
+        {{ data["status"] }}
       </h1>
     </div>
     <div class="booking-details">
       <div class="bookingId">
-        <p>Booking ID : {{data["bookingId"]}}</p>
+        <p>Booking ID : {{ data["bookingId"] }}</p>
       </div>
       <hr />
       <div class="restaurant-details">
@@ -44,19 +44,14 @@
         <hr />
         <p>
           Final Amount :
-          <span>{{ data["perPersonPoints"] * data["noOfGuests"] }}</span>
+          <span>{{ data["perPersonPoints"] * data["noOfGuests"] }} points</span>
         </p>
       </div>
       <hr />
       <div class="pointsAfterPayment">
         <p>
           <b
-            >Point Balance Available :
-            <span>
-              {{
-                pointBalance
-              }}</span
-            ></b
+            >Point Balance Available : <span> {{ pointBalance }}</span></b
           >
         </p>
       </div>

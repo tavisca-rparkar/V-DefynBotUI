@@ -71,6 +71,7 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // initiating conversation for default welcome message-
     this._appService.InitiateConversation();
+    this.cdRef.detectChanges();
   }
 
   addLocationButton() {
@@ -79,6 +80,7 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     );
     const componentRef1 = this.vc.createComponent(factory);
     let instance = <LocationButtonComponent>componentRef1.instance;
+    this.cdRef.detectChanges();
   }
   addTextBubble(data) {
     const factory = this._factory.resolveComponentFactory(TextBubbleComponent);
@@ -86,6 +88,7 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     let instance = <TextBubbleComponent>componentRef.instance;
     instance.text = data.userText;
     instance.textType = data.textType;
+    this.cdRef.detectChanges();
   }
 
   addChoiceButton(buttonText: string[]) {
@@ -97,7 +100,8 @@ export class ChatBodyComponent implements OnInit, AfterViewInit {
     instance1.buttonText = buttonText[0];
     const componentRef2 = this.vc.createComponent(factory);
     let instance2 = <ChoiceButtonComponent>componentRef2.instance;
-    instance2.buttonText = buttonText[1];
+    instance2.buttonText = buttonText[1];    
+    this.cdRef.detectChanges();
   }
 
   addRestaurantCarousel(data) {

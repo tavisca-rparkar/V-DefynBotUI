@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule, ChangeDetectorRef } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -27,6 +27,7 @@ import { MenuModule } from "./modules/menu/menu.module";
 import { OrderingsummarycardModule } from './modules/orderingsummarycard/orderingsummarycard.module';
 import { OrderingsummarycardComponent } from './modules/orderingsummarycard/orderingsummarycard.component';
 import { MenuComponent } from './modules/menu/menu.component';
+import { Clients } from './clients/clients';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { MenuComponent } from './modules/menu/menu.component';
     MenuModule,
     OrderingsummarycardModule
   ],
-  providers: [],
+  providers: [Clients],
   bootstrap: [AppComponent],
   entryComponents: [
     TextBubbleComponent,
