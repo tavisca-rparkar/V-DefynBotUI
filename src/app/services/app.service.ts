@@ -1,17 +1,12 @@
 import { Injectable } from "@angular/core";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { DialogflowApiService } from "./dialogflowApi.service";
-import { catchError, delay } from "rxjs/operators";
 import { throwError } from "rxjs";
 import { MockableApiService } from "./mockableApi.service";
 import { RestaurantApiService } from "./restaurant-api.service";
 import { LocationAccessService } from "./locationAccess.service";
 import { StateService } from "./state.service";
-import { promise } from "protractor";
-import { timeout, resolve } from "q";
 import { FoodOrderingService } from "./food-ordering.service";
-import { ApiCallType } from '../models/ApiCallType';
-import { ApiCallMethod } from '../models/ApiCallMethod';
 import { LoggerService } from './logger.service';
 
 @Injectable({
@@ -557,7 +552,7 @@ export class AppService {
       this._componentFactoryService.StartLoader();
       let city = response["queryResult"]["parameters"]["address"];
       this._foodOrderingService.GetFoodOrderList(
-          "",
+          city,
           this._stateService.getLatitude(),
           this._stateService.getLongitude()
         )
