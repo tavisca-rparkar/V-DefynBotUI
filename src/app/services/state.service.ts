@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { LauncherData } from '../models/launcherData';
+import { LauncherData } from "../models/launcherData";
 
 @Injectable({
   providedIn: "root"
@@ -7,11 +7,20 @@ import { LauncherData } from '../models/launcherData';
 export class StateService {
   constructor() {}
 
-  public appData:LauncherData = new LauncherData("","","","","",0,"","");
-  public isAppDataSet:boolean = false;
-  public clientLogo:string;
-  
-  public _foodOrderRestauranData:any;
+  public appData: LauncherData = new LauncherData(
+    "",
+    "",
+    "",
+    "",
+    "",
+    0,
+    "",
+    ""
+  );
+  public isAppDataSet: boolean = false;
+  public clientLogo: string;
+
+  public _foodOrderRestauranData: any;
 
   private _latitude: string;
   private _longitude: string;
@@ -19,9 +28,6 @@ export class StateService {
   private _restaurantBookingInitiateData: any;
   private _isBookingInitiated: boolean = false;
   private _bookTableData: any;
-  
-
-
 
   public IslatLongProvided() {
     return this._isLatLongProvided;
@@ -42,16 +48,20 @@ export class StateService {
     restaurantId,
     restaurantName,
     perPersonPrice,
-    supplier
+    supplier,
+    latitude,
+    longitude
   ) {
-    let points = perPersonPrice// price is already in points
+    let points = perPersonPrice; // price is already in points
     let restaurantIdWithSupplier = supplier + "/" + restaurantId;
     let data = {
       restaurantID: restaurantIdWithSupplier,
       restaurantName: restaurantName,
       pointsPerPerson: points,
       userName: this.appData.userFirstName,
-      pointBalance: this.appData.pointBalance
+      pointBalance: this.appData.pointBalance,
+      latitude: latitude,
+      longitude: longitude
     };
     this._restaurantBookingInitiateData = data;
     this._isBookingInitiated = true;
@@ -75,31 +85,33 @@ export class StateService {
     return this._bookTableData;
   }
 
-  setSessionData(launcherData:LauncherData){
-    localStorage.setItem("sessionId",launcherData.sessionId);
-    localStorage.setItem("userId",launcherData.userId);
-    localStorage.setItem("environment",launcherData.environment);
-    localStorage.setItem("client",launcherData.client);
-    localStorage.setItem("userFirstName",launcherData.userFirstName);
-    localStorage.setItem("pointBalance",launcherData.pointBalance.toString());
-    localStorage.setItem("language",launcherData.language);
-    localStorage.setItem("isLoggedIn","true");
+  setSessionData(launcherData: LauncherData) {
+    localStorage.setItem("sessionId", launcherData.sessionId);
+    localStorage.setItem("userId", launcherData.userId);
+    localStorage.setItem("environment", launcherData.environment);
+    localStorage.setItem("client", launcherData.client);
+    localStorage.setItem("userFirstName", launcherData.userFirstName);
+    localStorage.setItem("pointBalance", launcherData.pointBalance.toString());
+    localStorage.setItem("language", launcherData.language);
+    localStorage.setItem("isLoggedIn", "true");
   }
 
-  getSessionData(){
-    if(localStorage.getItem("isLoggedIn")=="true"){
+  getSessionData() {
+    if (localStorage.getItem("isLoggedIn") == "true") {
       this.appData.sessionId = localStorage.getItem("sessionId");
       this.appData.userId = localStorage.getItem("userId");
       this.appData.environment = localStorage.getItem("environment");
       this.appData.client = localStorage.getItem("client");
       this.appData.userFirstName = localStorage.getItem("userFirstName");
-      this.appData.pointBalance = parseInt(localStorage.getItem("pointBalance"));
+      this.appData.pointBalance = parseInt(
+        localStorage.getItem("pointBalance")
+      );
       this.appData.language = localStorage.getItem("language");
       this.isAppDataSet = true;
-    }   
+    }
   }
 
-  clearSessionData(){
-      localStorage.clear();
+  clearSessionData() {
+    localStorage.clear();
   }
 }

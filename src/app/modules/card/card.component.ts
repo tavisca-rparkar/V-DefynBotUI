@@ -33,7 +33,9 @@ export class CardComponent implements OnInit {
       this.data["restaurantId"],
       this.data["restaurantName"],
       this.data["pricePerHead"],
-      this.data["supplierName"]
+      this.data["supplierName"],
+      this.data["lat"],
+      this.data["lon"]
     );
     // sending intent for Booking Initiation
     let requestString = "swimming";
