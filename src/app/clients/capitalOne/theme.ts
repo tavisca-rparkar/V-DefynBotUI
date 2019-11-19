@@ -1,5 +1,4 @@
 import { Theme } from "src/app/models/theme";
-import { url } from "inspector";
 
 export const capitalOne: Theme = {
   name: "Capital One",
