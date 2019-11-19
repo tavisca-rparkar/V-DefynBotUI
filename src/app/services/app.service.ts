@@ -430,7 +430,6 @@ export class AppService {
               // showing Checkout Card here -
               this._componentFactoryService.AddRestaurantCheckoutCard(data);
               this._componentFactoryService.StopLoader();
-              this.RestartConversationAfterEndOfIntent();
             },
             err => {
               this._componentFactoryService.AddTextBubble(
