@@ -8,8 +8,7 @@ export const capitalOne: Theme = {
     "--theme-color": "#004879",
     "--gradient-color":
       "linear-gradient(to top right, #004879, #005279, #d22e1e)",
-    icon:
-      "https://pbs.twimg.com/profile_images/1006893718098665472/Mh3fEzCO_400x400.jpg",
+    icon: "../../../assets/featureImages/CapitalOne.jpg",
     "--mic-icon-color": "#ff0000"
   }
 };
