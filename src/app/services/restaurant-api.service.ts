@@ -14,13 +14,13 @@ export class RestaurantApiService {
   private _restaurantBookingCancelApiUrl = "";
   private _carouselData;
 
-  SetURL(apiBaseUrl:string
-  ) {
-    this._restaurantListApiUrl = apiBaseUrl+"restaurant?";
-    this._restaurantDetailsApiUrl = apiBaseUrl+"restaurantdetails?restaurantid=";
-    this._restaurantBookingApiUrl = apiBaseUrl+"booking?";
-    this._restaurantBookingPaymentApiUrl = apiBaseUrl+"payment";
-    this._restaurantBookingCancelApiUrl = apiBaseUrl+"cancell";
+  SetURL(apiBaseUrl: string) {
+    this._restaurantListApiUrl = apiBaseUrl + "restaurant?";
+    this._restaurantDetailsApiUrl =
+      apiBaseUrl + "restaurantdetails?restaurantid=";
+    this._restaurantBookingApiUrl = apiBaseUrl + "booking?";
+    this._restaurantBookingPaymentApiUrl = apiBaseUrl + "payment";
+    this._restaurantBookingCancelApiUrl = apiBaseUrl + "cancell";
   }
 
   SetCarouselData(data) {
@@ -71,6 +71,8 @@ export class RestaurantApiService {
     let restaurantName = bookingData["restaurantName"];
     let perPersonPoints = bookingData["perPersonPoints"];
     let pointBalance = bookingData["pointBalance"];
+    let latitude = bookingData["latitude"];
+    let longitude = bookingData["longitude"];
 
     /*return this._http
       .get(
@@ -102,7 +104,9 @@ export class RestaurantApiService {
       userName: userName,
       restaurantName: restaurantName,
       perPersonPoints: perPersonPoints,
-      pointBalance: pointBalance
+      pointBalance: pointBalance,
+      latitude: latitude,
+      longitude: longitude
     });
   }
 
