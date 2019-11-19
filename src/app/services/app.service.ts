@@ -7,12 +7,8 @@ import { RestaurantApiService } from "./restaurant-api.service";
 import { LocationAccessService } from "./locationAccess.service";
 import { StateService } from "./state.service";
 import { FoodOrderingService } from "./food-ordering.service";
-<<<<<<< HEAD
 import { LoggerService } from './logger.service';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
-=======
-import { LoggerService } from "./logger.service";
->>>>>>> 36f6d233ff9023e63a75eebfce16bff8880bec1b
 
 @Injectable({
   providedIn: "root"
