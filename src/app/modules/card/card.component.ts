@@ -36,9 +36,14 @@ export class CardComponent implements OnInit {
       this.data["supplierName"]
     );
     // sending intent for Booking Initiation
-    let requestString = "swimming";
+    let requestString = "V-defyn001 date is";
     let BookTableData = this._stateService.getBookTableData();
-
+    
+    if (BookTableData["date"] != "") {
+      requestString += BookTableData["date"].split("T")[0];
+    }
+    
+    /*
     if (BookTableData["guestCount"] != "") {
       requestString += " for " + BookTableData["guestCount"] + " people";
     }
@@ -48,7 +53,7 @@ export class CardComponent implements OnInit {
     if (BookTableData["time"] != "") {
       let time: string = BookTableData["time"].split("T")[1];
       requestString += " at " + time.split("+")[0];
-    }
+    }*/
 
     this._appService.IntentProcessing(requestString);
   }

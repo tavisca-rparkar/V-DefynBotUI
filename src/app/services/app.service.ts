@@ -8,6 +8,7 @@ import { LocationAccessService } from "./locationAccess.service";
 import { StateService } from "./state.service";
 import { FoodOrderingService } from "./food-ordering.service";
 import { LoggerService } from './logger.service';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 @Injectable({
   providedIn: "root"
@@ -110,6 +111,15 @@ export class AppService {
       case "Proceed Table Booking":
         this.ProceedTableBookingIntent(response);
         break;
+      case "ValidateBookingDate":
+        this.ValidateBookingDate(response);
+        break;
+      case "ValidateBookingTime":
+          this.ValidateBookingTime(response);
+          break;
+      case "ValidateBookingGuestCount":
+          this.ValidateBookingGuestCount(response);
+          break;
       case "Process Booking Payment":
         this.ProcessBookingPaymentIntent(response);
         break;
@@ -381,6 +391,81 @@ export class AppService {
       carouselType: carouselType
     });
     this._componentFactoryService.StopLoader();
+  }
+
+
+  ValidateBookingDate(response){
+    if (response["queryResult"]["allRequiredParamsPresent"]) {
+      let date: string = response["queryResult"]["parameters"]["date"];
+      let date2 = date.split("T")[0];
+      if( Date.parse(date2+"T23:59:59+05:30") - Date.now() < 0 ){
+        //invalid date
+        this._componentFactoryService.AddTextBubble("Please provide a valid date for booking","bot");
+        this.IntentProcessing("V-defyn001 date is");
+      }else{
+        if(this._stateService.getBookTableData()["time"] != ""){
+          let savedTime: string = this._stateService.getBookTableData()["time"].split("T")[1];
+          savedTime = savedTime.split("+")[0];
+          this.IntentProcessing("V-defyn002 on "+date2+" and  time is "+savedTime);
+        }else{
+          this.IntentProcessing("V-defyn002 on "+date2+" and  time is ");
+        }
+      }
+    }else {
+      this._componentFactoryService.AddTextBubble(
+        response["queryResult"]["fulfillmentText"],
+        "bot"
+      );
+    }
+  }
+
+
+  ValidateBookingTime(response){
+    if (response["queryResult"]["allRequiredParamsPresent"]) {
+      let time: string = response["queryResult"]["parameters"]["time"];
+      let date: string = response["queryResult"]["parameters"]["date"];
+      date = date.split("T")[0];
+      time = time.split("T")[1].split("+")[0];
+      if( Date.parse(date+"T"+time+"+05:30") - Date.now() < 0  ){
+        //invalid time
+        this._componentFactoryService.AddTextBubble("Please provide a valid time for booking","bot");
+        this.IntentProcessing("V-defyn002 on "+date+" and  time is ");
+      }else{
+        if(this._stateService.getBookTableData()["guestCount"] != ""){
+          this.IntentProcessing("V-defyn003 on "+date+" and  time is "+time+" and guests are "+ this._stateService.getBookTableData()["guestCount"]);
+        }else{
+          this.IntentProcessing("V-defyn003 on "+date+" and  time is "+time+" and guests are ");
+        }        
+      }
+    }else {
+      this._componentFactoryService.AddTextBubble(
+        response["queryResult"]["fulfillmentText"],
+        "bot"
+      );
+    }
+  }
+
+  ValidateBookingGuestCount(response){
+    if (response["queryResult"]["allRequiredParamsPresent"]) {
+      let guestCount = response["queryResult"]["parameters"]["number"];
+      let date: string = response["queryResult"]["parameters"]["date"];
+      date = date.split("T")[0];
+      let time: string = response["queryResult"]["parameters"]["time"];
+      time = time.split("T")[1].split("+")[0];
+
+      if( guestCount > 15 ){
+        //invalid guestCount
+        this._componentFactoryService.AddTextBubble("Guest Count can't be more than 15.","bot");
+        this.IntentProcessing("V-defyn003 on "+date+" and  time is "+time+" and guests are ");
+      }else{
+        this.IntentProcessing("swimming on "+date+" at "+time+" for "+guestCount+" guests.");
+      }
+    }else {
+      this._componentFactoryService.AddTextBubble(
+        response["queryResult"]["fulfillmentText"],
+        "bot"
+      );
+    }
   }
 
   ProceedTableBookingIntent(response) {

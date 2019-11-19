@@ -13,11 +13,12 @@ export class LoggerService {
   constructor(private _http:HttpClient,
     private _stateService : StateService) { }
 
-  logApiCall(callType:ApiCallType,
+  logEvent(callType:ApiCallType,
     callMethod:ApiCallMethod,
     ApiCallUrl:string,
     callData:any,
-    status:ApiCallStatus
+    status:ApiCallStatus,
+    error:string
     ){
       //logic for logger
       let clientId = this._stateService.appData.client;
@@ -31,7 +32,8 @@ export class LoggerService {
           "ApiCallMethod":callMethod,
           "ApiCallType":callType,
           "ApiCallUrl":ApiCallUrl,
-          "callData":callData
+          "callData":callData,
+          "error":error
       });
       console.log("______________________________________________");
   }
