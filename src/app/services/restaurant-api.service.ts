@@ -18,7 +18,7 @@ export class RestaurantApiService {
     this._restaurantListApiUrl = apiBaseUrl + "restaurant?";
     this._restaurantDetailsApiUrl =
       apiBaseUrl + "restaurantdetails?restaurantid=";
-    this._restaurantBookingApiUrl = apiBaseUrl + "booking?";
+    this._restaurantBookingApiUrl = apiBaseUrl + "booking";
     this._restaurantBookingPaymentApiUrl = apiBaseUrl + "payment";
     this._restaurantBookingCancelApiUrl = apiBaseUrl + "cancell";
   }
