@@ -67,17 +67,7 @@ export class FoodOrderingService {
       .pipe(timeout(15000));
   }
 
-  PaymentforFoodOrdering(orderingPaymentData:OrderingPaymentData) {
-    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-    console.log(orderingPaymentData.menuItems[0].price);
-    /*let data = {
-      "restaurantId": orderingPaymentData.restaurantId,
-      "restaurantName": orderingPaymentData.restaurantName,
-      "userId": orderingPaymentData.userId,
-      "totalPoints": orderingPaymentData.totalPoints,
-      "menuItems": orderingPaymentData.menuItems
-    };*/
-   
+  PaymentforFoodOrdering(orderingPaymentData:OrderingPaymentData) {   
     console.log(JSON.stringify(orderingPaymentData));
     return this._http
       .post(this._foodOrderingPaymentApiUrl, orderingPaymentData)

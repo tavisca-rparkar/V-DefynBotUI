@@ -19,14 +19,20 @@
         </i>
       </button>
       <div class="dropdown-content">
-        <div class="user-details">
-          <div class="details">
-            <p class="username">{{ userFirstName }}</p>
-            <p class="points">{{ pointBalance }}</p>
-          </div>
+        <div class="user-options">
+            <div class="user-details">
+                <div class="details">
+                  <p class="username">{{ userFirstName }}</p>
+                  <p class="points">{{ pointBalance }}</p>
+                </div>
+              </div>
+              <div class="logout" (click)="logout()">
+                <i class="material-icons">exit_to_app</i>
+              </div>
         </div>
-        <div class="logout" (click)="logout()">
-          <i class="material-icons">exit_to_app</i>
+        <div class="dropdown-links">
+          <a (click)="ShowPastBooking()">Past bookings</a>
+          <a (click)="ShowPastOrders()">Past orders</a>
         </div>
       </div>
     </div>

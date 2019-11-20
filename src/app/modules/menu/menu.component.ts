@@ -222,6 +222,10 @@ export class MenuComponent implements OnInit {
   }
 
   ProceedToPay() {
+    let date = new Date();
+    let dateStr = date.getFullYear() +"-"+(date.getMonth()+1) +"-"+date.getDate() +"T"+
+    date.getHours() +":"+date.getMinutes()+"  "+date;
+
     let cart = new Array<MenuItem>();
     this.cart.menu.forEach(category => {
       category.menuItem.forEach(item => {
@@ -237,6 +241,7 @@ export class MenuComponent implements OnInit {
       this.restaurantData["restaurantName"],
       this._stateService.appData.userId,
       this.pointsPrice,
+      dateStr,
       cart
     );
 

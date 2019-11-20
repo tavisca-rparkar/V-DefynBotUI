@@ -56,6 +56,7 @@ export class AppService {
 
   ProcessInput(userInput: string) {
     // print on screen
+    
     this._componentFactoryService.AddTextBubble(userInput, "user");
     // send to dialogflow and call necessary functions
     if (this._stateService.IslatLongProvided()) {
@@ -135,6 +136,12 @@ export class AppService {
         break;
       case "Get Point Balance":
         this.GetPointBalanceIntent(response);
+        break;
+      case "Show Booking History":
+        this.ShowBookingHistory();
+        break;
+      case "Show Ordering History":
+        this.ShowOrderingHistory();
         break;
       default:
         this.SmallTalkIntent(response);
@@ -745,6 +752,14 @@ export class AppService {
       "Point Balance: " + this._stateService.appData.pointBalance,
       "bot"
     );
+  }
+
+  ShowBookingHistory(){
+    this._componentFactoryService.AddTextBubble("Routing you to your booking history","bot");
+  }
+
+  ShowOrderingHistory(){
+    this._componentFactoryService.AddTextBubble("Routing you to your ordering history","bot");
   }
 
   RestartConversationAfterEndOfIntent() {

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Meta } from "@angular/platform-browser";
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: "app-header",
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit {
   @Input() clientLogo:string;
 
   constructor( private meta: Meta,
-    private _router:Router) {
+    private _router:Router,
+    private _appService: AppService) {
     this.meta.addTag({
       name: "viewport",
       content: "width=device-width, initial-scale=1.0"
@@ -27,6 +29,12 @@ export class HeaderComponent implements OnInit {
   logout(){
     localStorage.clear();
     this._router.navigate(['./launcher']);
+  }
+
+  ShowPastBooking(){
+  }
+
+  ShowPastOrders(){
   }
   
 }
