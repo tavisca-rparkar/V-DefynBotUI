@@ -1,0 +1,11 @@
+<div class="history">
+  <app-history-header></app-history-header>
+  <nav class="categories">
+    <button (click)="setCategory('booking')">
+      View Past Bookings
+    </button>
+    <button (click)="setCategory('ordering')">View Past Orders</button>
+  </nav>
+  <app-user-history *ngIf="category == 'booking'"></app-user-history>
+  <app-ordering-history *ngIf="category == 'ordering'"></app-ordering-history>
+</div>

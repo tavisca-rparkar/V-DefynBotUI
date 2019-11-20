@@ -24,10 +24,15 @@ import { BookingCheckoutcardComponent } from "./modules/bookingcheckoutcard/book
 import { BookingsummarycardModule } from "./modules/bookingsummarycard/bookingsummarycard.module";
 import { BookingsummarycardComponent } from "./modules/bookingsummarycard/bookingsummarycard.component";
 import { MenuModule } from "./modules/menu/menu.module";
-import { OrderingsummarycardModule } from './modules/orderingsummarycard/orderingsummarycard.module';
-import { OrderingsummarycardComponent } from './modules/orderingsummarycard/orderingsummarycard.component';
-import { MenuComponent } from './modules/menu/menu.component';
-import { Clients } from './clients/clients';
+import { OrderingsummarycardModule } from "./modules/orderingsummarycard/orderingsummarycard.module";
+import { OrderingsummarycardComponent } from "./modules/orderingsummarycard/orderingsummarycard.component";
+import { MenuComponent } from "./modules/menu/menu.component";
+import { Clients } from "./clients/clients";
+import { UserHistoryComponent } from "./modules/booking-history/booking-history.component";
+import { UserHistoryModule } from "./modules/booking-history/booking-history.module";
+import { HistoryComponent } from "./components/history/history.component";
+import { HistoryHeaderComponent } from "./components/history/history-header/history-header.component";
+import { OrderingHistoryModule } from "./modules/ordering-history/ordering-history.module";
 
 @NgModule({
   declarations: [
@@ -38,7 +43,9 @@ import { Clients } from './clients/clients';
     LauncherComponent,
     TextBubbleComponent,
     ChoiceButtonComponent,
-    LocationButtonComponent
+    LocationButtonComponent,
+    HistoryComponent,
+    HistoryHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,9 @@ import { Clients } from './clients/clients';
     BookingCheckoutcardModule,
     BookingsummarycardModule,
     MenuModule,
-    OrderingsummarycardModule
+    OrderingsummarycardModule,
+    UserHistoryModule,
+    OrderingHistoryModule
   ],
   providers: [Clients],
   bootstrap: [AppComponent],

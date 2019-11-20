@@ -1,0 +1,56 @@
+<div class="carousel-container">
+  <div class="container" *ngFor="let slide of data">
+    <div class="ordering-card">
+      <div class="status">
+        <h1>
+          Order Successful
+        </h1>
+      </div>
+      <div class="ordering-details">
+        <div class="orderingId">
+          <p style="margin-bottom: 1%;">Order ID : {{ slide["orderId"] }}</p>
+          <p>Date : {{ slide["date"] }}</p>
+          <p>Time : {{ slide["time"] }}</p>
+        </div>
+        <hr />
+        <div class="restaurant-details">
+          <p class="sectionHeading">Ordeing From :</p>
+          <div class="restaurantName">
+            <h1>{{ slide["restaurantName"] }}</h1>
+          </div>
+        </div>
+        <hr />
+        <div class="billing-details">
+          <p class="sectionHeading">Order Details :</p>
+
+          <div class="order-info">
+            <table>
+              <tr *ngFor="let item of slide['menuItems']">
+                <td class="item-name">
+                  {{ item.name }}
+                </td>
+                <td class="item-info">
+                  {{ item.quantity }}
+                </td>
+                <td class="item-info">
+                  x
+                </td>
+                <td>{{ item.price }}</td>
+                <td class="item-info">
+                  :
+                </td>
+                <td>{{ item.quantity * item.price }}</td>
+              </tr>
+            </table>
+          </div>
+          <hr />
+          <p style="margin-top: 5%;">
+            Final Amount :
+            <span>{{ slide["totalPoints"] }} points</span>
+          </p>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+</div>

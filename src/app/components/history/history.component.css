@@ -1,0 +1,76 @@
+.history {
+  margin: auto;
+  font-family: sans-serif;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+}
+
+.categories {
+  background-color: #545454;
+  width: 100%;
+  height: 6%;
+}
+
+.categories button {
+  background-color: gray;
+  color: white;
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  border: none;
+  outline: none;
+}
+
+.categories button:focus {
+  background-color: black;
+  color: white;
+}
+
+@media (min-width: 320px) {
+  .history {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 411px) {
+  .history {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 481px) {
+  .history {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 600px) {
+  .history {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 769px) {
+  .history {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 1260px) {
+  .history {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 1281px) {
+  .history {
+    width: 100%;
+    height: 100%;
+  }
+}

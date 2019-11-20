@@ -1,0 +1,51 @@
+<div class="carousel-container">
+  <div class="container" *ngFor="let slide of data">
+    <div class="booking-card">
+      <div [ngClass]="slide['status']">
+        <h1>
+          {{ slide["status"] }}
+        </h1>
+      </div>
+      <div class="booking-details">
+        <div class="bookingId">
+          <p>Booking ID : {{ slide["bookingId"] }}</p>
+        </div>
+        <hr />
+        <div class="restaurant-details">
+          <p class="sectionHeading">Booking For :</p>
+          <div class="restaurantName">
+            <h1>{{ slide["restaurantName"] }}</h1>
+          </div>
+        </div>
+        <hr />
+        <div class="booking-details">
+          <p class="sectionHeading">Booking Details :</p>
+          <p>Guests : {{ slide["noOfGuests"] }}</p>
+          <p>Date : {{ slide["date"].split("T")[0] }}</p>
+          <p>Time : {{ slide["time"] }}</p>
+        </div>
+        <hr />
+        <div class="billing-details">
+          <p class="sectionHeading">Billing Details :</p>
+          <p>
+            Cost Per Person : <span>{{ slide["perPersonPoints"] }}</span>
+          </p>
+          <p>
+            Guests : <span>X {{ slide["noOfGuests"] }}</span>
+          </p>
+          <hr />
+          <p>
+            Final Amount :
+            <span
+              >{{ slide["perPersonPoints"] * slide["noOfGuests"] }} points</span
+            >
+          </p>
+        </div>
+        <hr />
+      </div>
+      <div *ngIf="slide['isCancellable']" class="user-response">
+        <button class="cancel" (click)="cancelBooking()">Cancel Booking</button>
+      </div>
+    </div>
+  </div>
+</div>
