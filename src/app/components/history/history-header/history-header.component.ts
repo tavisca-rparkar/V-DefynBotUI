@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Meta } from "@angular/platform-browser";
 import { Router } from "@angular/router";
+import { Clients } from "src/app/clients/clients";
+import { StateService } from "src/app/services/state.service";
 
 @Component({
   selector: "app-history-header",
@@ -11,7 +13,12 @@ export class HistoryHeaderComponent implements OnInit {
   @Input() userFirstName: string;
   @Input() pointBalance: number;
 
-  constructor(private meta: Meta, private _router: Router) {
+  constructor(
+    private meta: Meta,
+    private _router: Router,
+    private _clients: Clients,
+    private _stateService: StateService
+  ) {
     this.meta.addTag({
       name: "viewport",
       content: "width=device-width, initial-scale=1.0"
@@ -19,4 +26,16 @@ export class HistoryHeaderComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  logout() {
+    localStorage.clear();
+    this._router.navigate(["./launcher"]);
+  }
+
+  backToChat() {
+    let routePath = this._clients.getClientId(
+      this._stateService.appData.client
+    );
+    this._router.navigate(["./chatbot/" + routePath]);
+  }
 }

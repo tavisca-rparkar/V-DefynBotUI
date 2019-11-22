@@ -28,6 +28,8 @@ export class StateService {
   private _restaurantBookingInitiateData: any;
   private _isBookingInitiated: boolean = false;
   private _bookTableData: any;
+  private _bookingHistoryData: any;
+  private _orderingHistoryData: any;
 
   public IslatLongProvided() {
     return this._isLatLongProvided;
@@ -58,7 +60,7 @@ export class StateService {
       restaurantID: restaurantIdWithSupplier,
       restaurantName: restaurantName,
       pointsPerPerson: points,
-      userName: this.appData.userFirstName,
+      userId: this.appData.userId,
       pointBalance: this.appData.pointBalance,
       latitude: latitude,
       longitude: longitude
@@ -113,5 +115,27 @@ export class StateService {
 
   clearSessionData() {
     localStorage.clear();
+  }
+
+  setBookingHistoryData(userBookingHistory) {
+    this._bookingHistoryData = {
+      isDataAvailable: userBookingHistory["isDataAvailable"],
+      bookingHistories: userBookingHistory["bookingHistories"]
+    };
+  }
+
+  getBookingHistoryData() {
+    return this._bookingHistoryData;
+  }
+
+  setOrderingHistoryData(userOrderingHistory) {
+    this._orderingHistoryData = {
+      isDataAvailable: userOrderingHistory["isDataAvailable"],
+      orderingHistories: userOrderingHistory["data"]
+    };
+  }
+
+  getOrderingHistoryData() {
+    return this._orderingHistoryData;
   }
 }

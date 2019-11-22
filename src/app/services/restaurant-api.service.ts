@@ -67,7 +67,7 @@ export class RestaurantApiService {
     let date = bookingData["date"];
     let time = bookingData["time"];
     let restaurantId = bookingData["restaurantId"];
-    let userName = bookingData["userName"];
+    let userId = bookingData["userId"];
     let restaurantName = bookingData["restaurantName"];
     let perPersonPoints = bookingData["perPersonPoints"];
     let pointBalance = bookingData["pointBalance"];
@@ -101,7 +101,7 @@ export class RestaurantApiService {
       date: date,
       time: time,
       restaurantId: restaurantId,
-      userName: userName,
+      userName: userId,
       restaurantName: restaurantName,
       perPersonPoints: perPersonPoints,
       pointBalance: pointBalance,

@@ -11,7 +11,7 @@
   height: 6%;
 }
 
-.categories button {
+.inactive {
   background-color: gray;
   color: white;
   display: inline-block;
@@ -21,9 +21,14 @@
   outline: none;
 }
 
-.categories button:focus {
-  background-color: black;
+.active {
+  background-color: var(--theme-color);
   color: white;
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  border: none;
+  outline: none;
 }
 
 @media (min-width: 320px) {

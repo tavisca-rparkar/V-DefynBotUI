@@ -1,5 +1,9 @@
-<div class="carousel-container">
-  <div class="container" *ngFor="let slide of data">
+<div class="noDataAvailable" *ngIf="!isDataAvailable">
+  <p>You do not have any past orders.</p>
+</div>
+
+<div class="carousel-container" *ngIf="isDataAvailable">
+  <div class="container" *ngFor="let slide of orderingHistories">
     <div class="ordering-card">
       <div class="status">
         <h1>

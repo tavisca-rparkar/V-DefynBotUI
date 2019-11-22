@@ -1,11 +1,39 @@
 <div class="history">
-  <app-history-header></app-history-header>
+  <app-history-header
+    *ngIf="this._stateService.isAppDataSet"
+    [userFirstName]="this._stateService.appData.userFirstName"
+    [pointBalance]="this._stateService.appData.pointBalance"
+  ></app-history-header>
   <nav class="categories">
-    <button (click)="setCategory('booking')">
+    <button
+      (click)="setCategory('booking')"
+      [ngClass]="category == 'booking' ? 'active' : 'inactive'"
+    >
       View Past Bookings
     </button>
-    <button (click)="setCategory('ordering')">View Past Orders</button>
+    <button
+      (click)="setCategory('ordering')"
+      [ngClass]="category == 'ordering' ? 'active' : 'inactive'"
+    >
+      View Past Orders
+    </button>
   </nav>
-  <app-user-history *ngIf="category == 'booking'"></app-user-history>
-  <app-ordering-history *ngIf="category == 'ordering'"></app-ordering-history>
+  <app-user-history
+    *ngIf="category == 'booking'"
+    [isDataAvailable]="
+      this._stateService.getBookingHistoryData().isDataAvailable
+    "
+    [bookingHistories]="
+      this._stateService.getBookingHistoryData().bookingHistories
+    "
+  ></app-user-history>
+  <app-ordering-history
+    *ngIf="category == 'ordering'"
+    [isDataAvailable]="
+      this._stateService.getOrderingHistoryData().isDataAvailable
+    "
+    [orderingHistories]="
+      this._stateService.getOrderingHistoryData().orderingHistories
+    "
+  ></app-ordering-history>
 </div>

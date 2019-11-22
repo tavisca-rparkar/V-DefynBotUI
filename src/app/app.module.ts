@@ -33,6 +33,8 @@ import { UserHistoryModule } from "./modules/booking-history/booking-history.mod
 import { HistoryComponent } from "./components/history/history.component";
 import { HistoryHeaderComponent } from "./components/history/history-header/history-header.component";
 import { OrderingHistoryModule } from "./modules/ordering-history/ordering-history.module";
+import { RouteReuseStrategy } from "@angular/router";
+import { CustomRouteReuseStrategy } from "./models/router-strategy";
 
 @NgModule({
   declarations: [
@@ -64,7 +66,13 @@ import { OrderingHistoryModule } from "./modules/ordering-history/ordering-histo
     UserHistoryModule,
     OrderingHistoryModule
   ],
-  providers: [Clients],
+  providers: [
+    Clients,
+    {
+      provide: RouteReuseStrategy,
+      useClass: CustomRouteReuseStrategy
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     TextBubbleComponent,

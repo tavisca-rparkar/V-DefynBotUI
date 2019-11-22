@@ -1,5 +1,8 @@
-<div class="carousel-container">
-  <div class="container" *ngFor="let slide of data">
+<div class="noDataAvailable" *ngIf="!isDataAvailable">
+  <p>You do not have any past bookings.</p>
+</div>
+<div class="carousel-container" *ngIf="isDataAvailable">
+  <div class="container" *ngFor="let slide of bookingHistories">
     <div class="booking-card">
       <div [ngClass]="slide['status']">
         <h1>
@@ -36,9 +39,7 @@
           <hr />
           <p>
             Final Amount :
-            <span
-              >{{ slide["perPersonPoints"] * slide["noOfGuests"] }} points</span
-            >
+            <span>{{ slide["finalBill"] }} points</span>
           </p>
         </div>
         <hr />
