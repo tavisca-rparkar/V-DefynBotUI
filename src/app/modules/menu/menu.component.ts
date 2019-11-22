@@ -23,8 +23,9 @@ export class MenuComponent implements OnInit {
   restaurantData: any;
 
   isErrorDetected: boolean = false;
-  isCancelled:boolean = false;
-  insufficientBalanceError = "Can't add items to cart due to insufficient point balance.";
+  isCancelled: boolean = false;
+  insufficientBalanceError =
+    "Can't add items to cart due to insufficient point balance.";
   cancelMessage = "Order Cancelled";
   /*data = {
     restaurantId: "12345",
@@ -193,8 +194,7 @@ export class MenuComponent implements OnInit {
           this.cart.menu[category].menuItem[item].price;
       }
     }
-    this.pointsPrice =
-      this.totalPrice;
+    this.pointsPrice = this.totalPrice;
   }
 
   GetCategoryMenu(categoryIndex: number) {
@@ -210,21 +210,27 @@ export class MenuComponent implements OnInit {
     this.isCartVisible = false;
   }
 
-  CancelOrder(){
-    if(confirm("Are you sure you want to cancel the order?")){
+  CancelOrder() {
+    if (confirm("Are you sure you want to cancel the order?")) {
       this.isProceedToPayClicked = true;
       this.isCancelled = true;
-      this._appService.IntentRouter(
-        "Cancel Order",
-        null
-      );
+      this._appService.IntentRouter("Cancel Order", null);
     }
   }
 
   ProceedToPay() {
     let date = new Date();
-    let dateStr = date.getFullYear() +"-"+(date.getMonth()+1) +"-"+date.getDate() +"T"+
-    date.getHours() +":"+date.getMinutes()+"  "+date;
+    let dateStr =
+      date.getFullYear() +
+      "-" +
+      (date.getMonth() + 1) +
+      "-" +
+      date.getDate() +
+      "T" +
+      date.getHours() +
+      ":";
+    dateStr +=
+      date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
 
     let cart = new Array<MenuItem>();
     this.cart.menu.forEach(category => {
