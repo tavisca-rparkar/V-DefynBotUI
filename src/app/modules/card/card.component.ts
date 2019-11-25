@@ -22,9 +22,11 @@ export class CardComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this._componentFactoryService.updateScroll();
     let str = this.data["cuisines"];
     this.data["cuisines"] = str.join(", ");
+    setTimeout(() => {
+      this._componentFactoryService.updateScroll();
+    }, 300);
   }
 
   proceedForBooking() {

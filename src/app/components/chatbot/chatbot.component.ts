@@ -36,12 +36,6 @@ export class ChatbotComponent implements OnInit {
         this._stateService.appData.client
       );
       if (this._router.url !== "/chatbot/" + routePath) {
-        alert(
-          this._router.url +
-            " --- " +
-            "/chatbot/" +
-            this._stateService.appData.client
-        );
         this._router.navigate(["./launcher"]);
       }
     }

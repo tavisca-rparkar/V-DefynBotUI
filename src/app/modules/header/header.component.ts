@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit {
       response => {
         console.log(response);
         this._stateService.setBookingHistoryData(response);
+        console.log("booking history data set");
       },
       err => {
         this._componentFactoryService.StopLoader();
@@ -54,6 +55,7 @@ export class HeaderComponent implements OnInit {
     this._userHistoryService.GetOrderingResponse().subscribe(
       response => {
         this._stateService.setOrderingHistoryData(response);
+        console.log("ordering history data set");
       },
       err => {
         this._componentFactoryService.StopLoader();
