@@ -14,6 +14,19 @@
   border: none;
 }
 
+#imgcarousel {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 240px;
+}
+
+#imgcarousel img {
+  max-height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 /*
 .image-gallery {
   width: 100%;

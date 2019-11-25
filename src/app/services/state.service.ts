@@ -21,6 +21,7 @@ export class StateService {
   public clientLogo: string;
   public  UserAskedForHistory:boolean= false; 
   public _foodOrderRestauranData: any;
+  public IsBackButtonClicked:boolean= false;
 
   private _latitude: string;
   private _longitude: string;

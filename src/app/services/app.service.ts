@@ -77,6 +77,7 @@ export class AppService {
           response["queryResult"]["intent"]["displayName"],
           response
         );
+        console.log(response);
       },
       error => {
         this._componentFactoryService.AddTextBubble(

@@ -34,6 +34,7 @@ export class HistoryHeaderComponent implements OnInit {
   }
 
   backToChat() {
+    this._stateService.IsBackButtonClicked = true;
     let routePath = this._clients.getClientId(
       this._stateService.appData.client
     );
