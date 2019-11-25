@@ -29,26 +29,17 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if (localStorage.getItem("isLoggedIn") != "true") {
-    //   this._router.navigate(["./launcher"]);
-    // } else {
-    //   this._stateService.getSessionData();
-    //   this._themingService.setActiveTheme(
-    //     this._themingService.getTheme(this._stateService.appData.client)
-    //   );
-    //   let routePath = this._clients.getClientId(
-    //     this._stateService.appData.client
-    //   );
-    //   if (this._router.url !== "/chatbot/" + routePath) {
-    //     alert(
-    //       this._router.url +
-    //         " --- " +
-    //         "/chatbot/" +
-    //         this._stateService.appData.client
-    //     );
-    //     this._router.navigate(["./launcher"]);
-    //   }
-    // }
+    if (localStorage.getItem("isLoggedIn") != "true") {
+      this._router.navigate(["./launcher"]);
+    } else {
+      this._stateService.getSessionData();
+      this._themingService.setActiveTheme(
+        this._themingService.getTheme(this._stateService.appData.client)
+      );
+      if (this._router.url !== "/history") {
+        this._router.navigate(["./launcher"]);
+      }
+    }
   }
 
   setCategory(category) {

@@ -6,6 +6,7 @@ import { ComponentFactoryService } from "src/app/services/ComponentFactory.servi
 import { UserHistoryService } from "src/app/services/user-history.service";
 import { StateService } from "src/app/services/state.service";
 import { throwError } from "rxjs";
+import { CustomRouteReuseStrategy } from "src/app/models/router-strategy";
 
 @Component({
   selector: "app-header",

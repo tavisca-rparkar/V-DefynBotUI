@@ -11,10 +11,16 @@ import { ChatbotComponent } from "./components/chatbot/chatbot.component";
 import { LauncherComponent } from "./components/launcher/launcher.component";
 import { Clients } from "./clients/clients";
 import { HistoryComponent } from "./components/history/history.component";
+import { UserHistoryComponent } from "./modules/booking-history/booking-history.component";
+import { OrderingHistoryComponent } from "./modules/ordering-history/ordering-history.component";
 
 const appRoutes: Routes = [
   { path: "launcher", component: LauncherComponent },
-  { path: "chatbot", component: ChatbotComponent, data: { reuse: true } },
+  {
+    path: "chatbot",
+    component: ChatbotComponent,
+    data: { shouldDetach: true }
+  },
   { path: "history", component: HistoryComponent },
   { path: "", redirectTo: "launcher", pathMatch: "full" }
 ];
@@ -32,7 +38,8 @@ export class AppRoutingModule {
     this._clients.getAvailableThemes().forEach(element => {
       this._router.config.push({
         path: "chatbot/" + element.id,
-        component: ChatbotComponent
+        component: ChatbotComponent,
+        data: { shouldDetach: true }
       });
     });
     // setting fallback route after configuring all client routes

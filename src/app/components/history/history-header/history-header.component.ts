@@ -3,6 +3,7 @@ import { Meta } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { Clients } from "src/app/clients/clients";
 import { StateService } from "src/app/services/state.service";
+import { CustomRouteReuseStrategy } from "src/app/models/router-strategy";
 
 @Component({
   selector: "app-history-header",

@@ -2,7 +2,10 @@
   <p>You do not have any past bookings.</p>
 </div>
 <div class="carousel-container" *ngIf="isDataAvailable">
-  <div class="container" *ngFor="let slide of bookingHistories">
+  <div
+    class="container"
+    *ngFor="let slide of bookingHistories; let index = index"
+  >
     <div class="booking-card">
       <div [ngClass]="slide['status']">
         <h1>
@@ -45,7 +48,12 @@
         <hr />
       </div>
       <div *ngIf="slide['isCancellable']" class="user-response">
-        <button class="cancel" (click)="cancelBooking()">Cancel Booking</button>
+        <button
+          class="cancel"
+          (click)="cancelBooking(slide['bookingId'], slide['finalBill'], index)"
+        >
+          Cancel Booking
+        </button>
       </div>
     </div>
   </div>
