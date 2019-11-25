@@ -1,6 +1,10 @@
 <div class="card-container">
-
-  <mdb-carousel class="carousel slide carousel-slide" [animation]="'slide'" [interval]="'0'">
+  <mdb-carousel
+    #carousel
+    class="carousel slide carousel-slide"
+    [animation]="'slide'"
+    [interval]="'0'"
+  >
     <mdb-carousel-item *ngFor="let image of data['images']; let i = index">
       <div id="imgcarousel" class="view w-100">
         <img class="d-block w-100" [src]="image" />

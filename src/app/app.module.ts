@@ -1,4 +1,8 @@
-import { BrowserModule } from "@angular/platform-browser";
+import {
+  BrowserModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG
+} from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
@@ -35,6 +39,32 @@ import { HistoryHeaderComponent } from "./components/history/history-header/hist
 import { OrderingHistoryModule } from "./modules/ordering-history/ordering-history.module";
 import { RouteReuseStrategy } from "@angular/router";
 import { CustomRouteReuseStrategy } from "./models/router-strategy";
+declare var Hammer: any;
+
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    pan: { direction: Hammer.DIRECTION_All },
+    swipe: { direction: Hammer.DIRECTION_VERTICAL }
+  };
+
+  buildHammer(element: HTMLElement) {
+    const mc = new Hammer(element, {
+      touchAction: "auto",
+      inputClass: Hammer.SUPPORT_POINTER_EVENTS
+        ? Hammer.PointerEventInput
+        : Hammer.TouchInput,
+      recognizers: [
+        [
+          Hammer.Swipe,
+          {
+            direction: Hammer.DIRECTION_HORIZONTAL
+          }
+        ]
+      ]
+    });
+    return mc;
+  }
+}
 
 @NgModule({
   declarations: [
@@ -71,6 +101,10 @@ import { CustomRouteReuseStrategy } from "./models/router-strategy";
     {
       provide: RouteReuseStrategy,
       useClass: CustomRouteReuseStrategy
+    },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig
     }
   ],
   bootstrap: [AppComponent],

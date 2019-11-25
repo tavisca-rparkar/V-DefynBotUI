@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  HostListener
+} from "@angular/core";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { AppService } from "src/app/services/app.service";
 import { StateService } from "src/app/services/state.service";
@@ -10,6 +16,15 @@ import { MatCarousel, MatCarouselComponent } from "@ngmodule/material-carousel";
   styleUrls: ["./card.component.css"]
 })
 export class CardComponent implements OnInit {
+  @ViewChild("carousel", { static: true }) public el: any;
+
+  @HostListener("swipeleft", ["$event"]) public swipePrev(event: any) {
+    this.el.previousSlide();
+  }
+
+  @HostListener("swiperight", ["$event"]) public swipeNext(event: any) {
+    this.el.nextSlide();
+  }
   constructor(
     private _componentFactoryService: ComponentFactoryService,
     private _appService: AppService,
