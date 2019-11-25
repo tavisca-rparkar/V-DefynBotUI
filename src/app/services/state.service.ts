@@ -19,7 +19,7 @@ export class StateService {
   );
   public isAppDataSet: boolean = false;
   public clientLogo: string;
-
+  public  UserAskedForHistory:boolean= false; 
   public _foodOrderRestauranData: any;
 
   private _latitude: string;

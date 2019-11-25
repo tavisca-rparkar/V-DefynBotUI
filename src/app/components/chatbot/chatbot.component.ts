@@ -26,7 +26,7 @@ export class ChatbotComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem("isLoggedIn") != "true") {
-      this._router.navigate(["./launcher"]);
+      window.open("./launcher","_self");
     } else {
       this._stateService.getSessionData();
       this._themingService.setActiveTheme(
@@ -42,7 +42,7 @@ export class ChatbotComponent implements OnInit {
             "/chatbot/" +
             this._stateService.appData.client
         );
-        this._router.navigate(["./launcher"]);
+        window.open("./launcher","_self");
       }
     }
   }

@@ -19,7 +19,7 @@
     </button>
   </nav>
   <app-user-history
-    *ngIf="category == 'booking'"
+    *ngIf="category == 'booking' && !isLoading"
     [isDataAvailable]="
       this._stateService.getBookingHistoryData().isDataAvailable
     "
@@ -28,7 +28,7 @@
     "
   ></app-user-history>
   <app-ordering-history
-    *ngIf="category == 'ordering'"
+    *ngIf="category == 'ordering' && !isLoading"
     [isDataAvailable]="
       this._stateService.getOrderingHistoryData().isDataAvailable
     "
@@ -36,4 +36,10 @@
       this._stateService.getOrderingHistoryData().orderingHistories
     "
   ></app-ordering-history>
+  <div
+  *ngIf="isLoading"
+  class="loader"
+  >
+    <img src="https://media.giphy.com/media/WOZVhRvUaR2t51GK6v/giphy.gif" alt="loader" class="loader-image" >
+  </div>
 </div>

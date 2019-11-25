@@ -5,8 +5,6 @@ import { AppService } from "src/app/services/app.service";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { UserHistoryService } from "src/app/services/user-history.service";
 import { StateService } from "src/app/services/state.service";
-import { throwError } from "rxjs";
-import { CustomRouteReuseStrategy } from "src/app/models/router-strategy";
 
 @Component({
   selector: "app-header",
@@ -32,35 +30,39 @@ export class HeaderComponent implements OnInit {
       content: "width=device-width, initial-scale=1.0"
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   logout() {
     localStorage.clear();
-    this._router.navigate(["./launcher"]);
+    window.open("./launcher","_self");
   }
 
   ViewPastTransactions() {
-    this._componentFactoryService.StartLoader();
-    this._userHistoryService.GetBookingResponse().subscribe(
-      response => {
-        console.log(response);
-        this._stateService.setBookingHistoryData(response);
-      },
-      err => {
-        this._componentFactoryService.StopLoader();
-        return throwError(err);
-      }
-    );
-    this._userHistoryService.GetOrderingResponse().subscribe(
-      response => {
-        this._stateService.setOrderingHistoryData(response);
-      },
-      err => {
-        this._componentFactoryService.StopLoader();
-        return throwError(err);
-      }
-    );
-    this._componentFactoryService.StopLoader();
+
+    // this._userHistoryService.GetOrderingResponse().subscribe(
+    //   response => {
+    //     this._stateService.setOrderingHistoryData(response);
+    //     console.log("Ordering history Done");
+    //   },
+    //   err => {
+    //     console.log("Order history Done with error");
+    //     console.log(err);
+    //   }
+    // );
+
+    // this._userHistoryService.GetBookingResponse().subscribe(
+    //   response => {
+    //     this._stateService.setBookingHistoryData(response);
+    //     console.log("Booking history Done");
+    //   },
+    //   err => {
+    //     console.log("Booking history Done with error");
+    //     console.log(err);
+    //   }
+    // );
+    this._stateService.UserAskedForHistory = true;
     this._router.navigate(["./history"]);
   }
 }

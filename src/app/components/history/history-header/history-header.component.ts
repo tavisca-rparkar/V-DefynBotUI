@@ -30,7 +30,7 @@ export class HistoryHeaderComponent implements OnInit {
 
   logout() {
     localStorage.clear();
-    this._router.navigate(["./launcher"]);
+    window.open("./launcher","_self");
   }
 
   backToChat() {
