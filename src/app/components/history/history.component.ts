@@ -21,7 +21,7 @@ export class HistoryComponent implements OnInit {
   constructor(
     private meta: Meta,
     private _router: Router,
-    private _stateService: StateService,
+    public _stateService: StateService,
     private _themingService: ThemeService,
     private _clients: Clients,
     private _userHistoryService: UserHistoryService
