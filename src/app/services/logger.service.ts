@@ -20,7 +20,7 @@ export class LoggerService {
   ) {
     //logic for logger
     let clientId = this._stateService.appData.client;
-    let userSessionId = this._stateService.appData.logInfo;
+    let userSessionId = this._stateService.appData.sessionId;
     console.log("______________________________________________");
     console.log("Log: API call");
     console.log({

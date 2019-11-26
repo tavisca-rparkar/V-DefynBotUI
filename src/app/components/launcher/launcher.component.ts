@@ -63,7 +63,7 @@ export class LauncherComponent implements OnInit {
     this._componentFactoryService.StartLoader();
     this._launcherService.GetResponse(this.launcherData).subscribe(
       response => {
-        this.launcherData.logInfo = response["logInfo"];
+        this.launcherData.sessionId = response["sessionId"];
         this._stateService.setSessionData(this.launcherData);
         this._stateService.appData = this.launcherData;
         this._stateService.isAppDataSet = true;

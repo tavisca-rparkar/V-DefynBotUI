@@ -5,7 +5,7 @@ export class LauncherData {
   userFirstName: string;
   userId: string;
   pointBalance: number;
-  logInfo: any;
+  sessionId: string;
   error: string;
 
   constructor(
@@ -15,7 +15,7 @@ export class LauncherData {
     userFirstName: string,
     userId: string,
     pointBalance: number,
-    logInfo: any,
+    sessionId: string,
     error: string
   ) {
     this.environment = environment;
@@ -24,7 +24,7 @@ export class LauncherData {
     this.pointBalance = pointBalance;
     this.userFirstName = userFirstName;
     this.userId = userId;
-    this.logInfo = logInfo;
+    this.sessionId = sessionId;
     this.error = error;
   }
 }

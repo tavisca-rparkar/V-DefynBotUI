@@ -89,7 +89,7 @@ export class StateService {
   }
 
   setSessionData(launcherData: LauncherData) {
-    localStorage.setItem("sessionId", launcherData.logInfo);
+    localStorage.setItem("sessionId", launcherData.sessionId);
     localStorage.setItem("userId", launcherData.userId);
     localStorage.setItem("environment", launcherData.environment);
     localStorage.setItem("client", launcherData.client);
@@ -101,7 +101,7 @@ export class StateService {
 
   getSessionData() {
     if (localStorage.getItem("isLoggedIn") == "true") {
-      this.appData.logInfo = localStorage.getItem("sessionId");
+      this.appData.sessionId = localStorage.getItem("sessionId");
       this.appData.userId = localStorage.getItem("userId");
       this.appData.environment = localStorage.getItem("environment");
       this.appData.client = localStorage.getItem("client");

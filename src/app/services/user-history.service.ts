@@ -23,7 +23,7 @@ export class UserHistoryService {
           "userId=" +
           this._stateService.appData.userId +
           "&corelationId=" +
-          this._stateService.appData.logInfo
+          this._stateService.appData.sessionId
       )
       .pipe(timeout(10000));
     return response;
@@ -36,7 +36,7 @@ export class UserHistoryService {
           "userId=" +
           this._stateService.appData.userId +
           "&corelationId=" +
-          this._stateService.appData.logInfo
+          this._stateService.appData.sessionId
       )
       .pipe(timeout(100000));
     return response;
