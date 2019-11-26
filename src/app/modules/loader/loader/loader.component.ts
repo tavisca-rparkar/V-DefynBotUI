@@ -11,7 +11,7 @@ import { ComponentFactoryService } from "src/app/services/ComponentFactory.servi
   templateUrl: "./loader.component.html",
   styleUrls: ["./loader.component.css"]
 })
-export class LoaderComponent implements OnInit, AfterViewChecked {
+export class LoaderComponent implements OnInit {
   isDivVisible: boolean = false;
   isListening: boolean = false;
   constructor(private _componentFactoryService: ComponentFactoryService) {}
@@ -25,7 +25,4 @@ export class LoaderComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  ngAfterViewChecked(): void {
-    this._componentFactoryService.updateScroll();
-  }
 }

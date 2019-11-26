@@ -66,21 +66,35 @@ export class ComponentFactoryService {
   updateScroll() {
     // called in AfterViewInit of all the chatbody components
     var element = document.getElementById("msg-page");
-    element.scrollTop = element.scrollHeight;
+    if(element){
+      element.scrollTop = element.scrollHeight;
+    }
   }
 
   StartLoader() {
     this._loader.next(true);
+    setTimeout(() => {
+      this.updateScroll();
+    }, 400);
   }
   StopLoader() {
     this._loader.next(false);
+    setTimeout(() => {
+      this.updateScroll();
+    }, 400);
   }
 
   StartListening() {
     this._listenLoader.next(true);
+    setTimeout(() => {
+      this.updateScroll();
+    }, 400);
   }
   StopListening() {
     this._listenLoader.next(false);
+    setTimeout(() => {
+      this.updateScroll();
+    }, 400);
   }
   addLocationButton() {
     this._loationButton.next();
