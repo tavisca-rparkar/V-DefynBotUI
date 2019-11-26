@@ -10,6 +10,7 @@ button {
   font-size: 14px;
   cursor: pointer;
   box-shadow: 1px 2px #8d8d8d;
+  outline: none;
 }
 
 button:hover {
