@@ -1,3 +1,14 @@
-<div [ngStyle]="{'visibility':isDivVisible ? 'visible' : 'hidden'}">
-    <img src="https://media.giphy.com/media/WOZVhRvUaR2t51GK6v/giphy.gif" alt="loader" class="loader-image" >
+<div *ngIf="isDivVisible">
+  <img
+    src="https://media.giphy.com/media/WOZVhRvUaR2t51GK6v/giphy.gif"
+    alt="Loading"
+    class="loader-image"
+  />
+</div>
+<div *ngIf="isListening">
+  <img
+    src="../../assets/media/listening.gif"
+    alt="Listening"
+    class="loader-image"
+  />
 </div>

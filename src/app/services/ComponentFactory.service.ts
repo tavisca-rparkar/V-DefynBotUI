@@ -15,6 +15,8 @@ export class ComponentFactoryService {
   createRestaurantDetailsCard$ = this._restaurantDetailsCard.asObservable();
   private _loader = new Subject<boolean>();
   isLoaderShown$ = this._loader.asObservable();
+  private _listenLoader = new Subject<boolean>();
+  isListening$ = this._listenLoader.asObservable();
   private _loationButton = new Subject<boolean>();
   locationButton$ = this._loationButton.asObservable();
   private _restaurantCheckoutCard = new Subject<boolean>();
@@ -72,6 +74,13 @@ export class ComponentFactoryService {
   }
   StopLoader() {
     this._loader.next(false);
+  }
+
+  StartListening() {
+    this._listenLoader.next(true);
+  }
+  StopListening() {
+    this._listenLoader.next(false);
   }
   addLocationButton() {
     this._loationButton.next();

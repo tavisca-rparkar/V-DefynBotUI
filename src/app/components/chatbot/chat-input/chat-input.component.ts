@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, OnInit } from "@angular/core";
 import { AppService } from "src/app/services/app.service";
 import { Meta } from "@angular/platform-browser";
+import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 
 @Component({
   selector: "app-chat-input",
@@ -12,7 +13,11 @@ export class ChatInputComponent implements OnInit {
   voiceButtonIcon: string = "voice-inactive";
   isListening = false;
 
-  constructor(private _appService: AppService, private meta: Meta) {
+  constructor(
+    private _appService: AppService,
+    private _componentFactoryService: ComponentFactoryService,
+    private meta: Meta
+  ) {
     this.meta.addTag({
       name: "viewport",
       content: "width=device-width, initial-scale=1.0"
@@ -120,12 +125,14 @@ export class ChatInputComponent implements OnInit {
   }
 
   playStartSound() {
+    this._componentFactoryService.StartListening();
     let x = new Audio();
     x.src = "../../../../assets/media/Robot_blip-Marianne_Gagnon-120342607.mp3";
     x.load();
     x.play();
   }
   playStopSound() {
+    this._componentFactoryService.StopListening();
     let x = new Audio();
     x.src =
       "../../../../assets/media/Computer Error-SoundBible.com-1655839472.mp3";
