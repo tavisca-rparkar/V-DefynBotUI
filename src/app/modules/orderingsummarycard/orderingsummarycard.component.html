@@ -12,11 +12,11 @@
       <div class="orderingId">
         <p style="margin-bottom: 1%;">Order ID : {{ data["orderId"] }}</p>
         <p>Date : {{ data["date"].split("T")[0] }}</p>
-        <p>Time : {{ data["date"].split("T")[1].split(".")[0] }}</p>
+        <p>Time : {{ data["date"].split("T")[1].split("+")[0] }}</p>
       </div>
       <hr />
       <div class="restaurant-details">
-        <p class="sectionHeading">Ordeing From :</p>
+        <p class="sectionHeading">Ordering From :</p>
         <div class="restaurantName">
           <h1>{{ data["restaurantName"] }}</h1>
         </div>

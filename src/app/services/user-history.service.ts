@@ -6,7 +6,6 @@ import { timeout } from "rxjs/internal/operators/timeout";
 @Injectable({
   providedIn: "root"
 })
-
 export class UserHistoryService {
   BookingHistoryApiUrl = "";
   OrderingHistoryApiUrl = "";
@@ -24,7 +23,7 @@ export class UserHistoryService {
           "userId=" +
           this._stateService.appData.userId +
           "&corelationId=" +
-          this._stateService.appData.sessionId
+          this._stateService.appData.logInfo
       )
       .pipe(timeout(10000));
     return response;
@@ -37,7 +36,7 @@ export class UserHistoryService {
           "userId=" +
           this._stateService.appData.userId +
           "&corelationId=" +
-          this._stateService.appData.sessionId
+          this._stateService.appData.logInfo
       )
       .pipe(timeout(100000));
     return response;
