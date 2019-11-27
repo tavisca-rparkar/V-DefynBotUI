@@ -41,7 +41,7 @@ export class CardComponent implements OnInit {
     this.data["cuisines"] = str.join(", ");
     setTimeout(() => {
       this._componentFactoryService.updateScroll();
-    }, 600);
+    }, 300);
   }
 
   proceedForBooking() {
