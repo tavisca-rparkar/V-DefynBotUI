@@ -19,9 +19,9 @@ export class StateService {
   );
   public isAppDataSet: boolean = false;
   public clientLogo: string;
-  public  UserAskedForHistory:boolean= false; 
+  public UserAskedForHistory: boolean = false;
   public _foodOrderRestauranData: any;
-  public IsBackButtonClicked:boolean= false;
+  public IsBackButtonClicked: boolean = false;
 
   private _latitude: string;
   private _longitude: string;

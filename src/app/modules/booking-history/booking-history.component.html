@@ -8,9 +8,17 @@
   >
     <div class="booking-card">
       <div [ngClass]="slide['status']">
-        <h1>
+        <!-- <h1>
           {{ slide["status"] }}
-        </h1>
+        </h1> -->
+        <img
+          *ngIf="slide['status'] == 'Booked'"
+          src="../../assets/media/booked.jpg"
+        />
+        <img
+          *ngIf="slide['status'] == 'Cancelled'"
+          src="../../assets/media/cancelled.jpg"
+        />
       </div>
       <div class="booking-details">
         <div class="bookingId">
@@ -40,7 +48,7 @@
             Guests : <span>X {{ slide["noOfGuests"] }}</span>
           </p>
           <hr />
-          <p>
+          <p style="margin-top: 5%;">
             Final Amount :
             <span>{{ slide["finalBill"] }} points</span>
           </p>
