@@ -102,10 +102,10 @@
 }
 
 .container {
-  width: 100%;
+  width: 90%;
   height: auto;
-  margin: 3% 0%;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
+  margin: 3% 5% 7% 5%;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 12px, rgba(0, 0, 0, 0.2) 0px 6px 6px;
   display: flex;
   background-color: #fff;
 }
@@ -130,7 +130,8 @@
 
 .status h1 {
   color: #3c763d;
-  font-size: 18px;
+  font-size: 22px;
+  font-weight: bolder;
   margin: 0%;
 }
 
@@ -184,6 +185,7 @@ td {
 
 .item-name {
   text-align: left;
+  white-space: initial;
   padding-right: 5%;
 }
 

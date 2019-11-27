@@ -15,11 +15,13 @@
 }
 
 #imgcarousel {
-  display: block;
+  display: flex;
   position: relative;
   width: 100%;
-  height: auto;
-  max-height: 240px;
+  height: 240px;
+  background-color: #000000;
+  align-items: center;
+  justify-content: center;
 }
 
 #imgcarousel img {

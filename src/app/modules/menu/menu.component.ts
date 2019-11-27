@@ -220,17 +220,14 @@ export class MenuComponent implements OnInit {
 
   ProceedToPay() {
     let date = new Date();
-    let dateStr =
-      date.getFullYear() +
-      "-" +
-      (date.getMonth() + 1) +
-      "-" +
-      date.getDate() +
-      "T" +
-      date.getHours() +
-      ":";
-    dateStr +=
-      date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
+    let dateStr = date.getFullYear() +"-";
+    dateStr += (date.getMonth() + 1) > 9 ?(date.getMonth() + 1) : "0" + (date.getMonth() + 1);
+    dateStr += "-";
+    dateStr += date.getDate() >9 ?date.getDate(): "0" + date.getDate();
+    dateStr +=   "T" ;
+    dateStr += date.getHours()>9 ? date.getHours(): "0" + date.getHours();
+    dateStr += ":";
+    dateStr += date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
 
     let cart = new Array<MenuItem>();
     this.cart.menu.forEach(category => {
