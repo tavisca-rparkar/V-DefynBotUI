@@ -1,77 +1,57 @@
-import { visa } from './visa/theme';
-import { defaultClient } from './defaultClient/theme';
-import { capitalOne } from './capitalOne/theme';
-import { Theme } from '../models/theme';
-import { Router } from '@angular/router';
+import { visa } from "./visa/theme";
+import { defaultClient } from "./defaultClient/theme";
+import { capitalOne } from "./capitalOne/theme";
+import { Theme } from "../models/theme";
+import { Router } from "@angular/router";
 
+export class Clients {
+  constructor() {}
 
-export class Clients{
-    constructor(){
+  private availableThemes: Theme[] = [defaultClient, visa, capitalOne];
+
+  getClientTheme(clientName: string): Theme {
+    let isClientFound = false;
+    let client;
+    this.availableThemes.forEach(element => {
+      if (element.name === clientName) {
+        isClientFound = true;
+        client = element;
+      }
+    });
+    if (isClientFound) {
+      return client;
+    } else {
+      return defaultClient;
     }
+  }
 
-    private availableThemes: Theme[] = [defaultClient, visa, capitalOne];
+  getClientNameList(): string[] {
+    let clientNames = new Array<string>();
+    this.availableThemes.forEach(client => {
+      clientNames.push(client.name);
+    });
+    return clientNames;
+  }
 
-    getClientTheme(clientName:string):Theme{
-        let isClientFound = false;
-        let client;
-        this.availableThemes.forEach(element => {
-            if(element.name === clientName){
-                isClientFound = true;
-                client = element;
-            }
-        });
-        if(isClientFound){
-            return client;
-        }else{
-            return defaultClient;
-        }
-    }
+  getClientIdList(): string[] {
+    let clientIds = new Array<string>();
+    this.availableThemes.forEach(client => {
+      clientIds.push(client.id);
+    });
+    return clientIds;
+  }
 
-    getClientNameList():string[]{
-        let clientNames = new Array<string>();
-        this.availableThemes.forEach(client => {
-           clientNames.push(client.name);
-        });
-        return clientNames;
-    }
+  getClientId(clientName: string): string {
+    let reqId = "";
+    this.availableThemes.forEach(client => {
+      if (client.name == clientName) {
+        reqId = client.id;
+      }
+    });
+    return reqId;
+  }
 
-    getClientIdList():string[]{
-        let clientIds = new Array<string>();
-        this.availableThemes.forEach(client => {
-            clientIds.push(client.id);
-        });
-        return clientIds;
-    }
-
-    getClientId(clientName:string):string{
-        let reqId = "";
-        this.availableThemes.forEach(client => {
-            if(client.name == clientName){
-                reqId = client.id;
-            }
-        });
-        return reqId;
-    }
-
-
-    getAvailableThemes(){
-        return this.availableThemes;
-    }
-
+  getAvailableThemes() {
+    return this.availableThemes;
+  }
 }
-
-
-
-  // getTheme(themeName: string) {
-  //   switch (themeName) {
-  //     case "VISA":
-  //       return visa;
-  //       break;
-  //     case "Capital One":
-  //       return capitalOne;
-  //       break;
-  //     default:
-  //       return defaultClient;
-  //       break;
-  //   }
-  // }

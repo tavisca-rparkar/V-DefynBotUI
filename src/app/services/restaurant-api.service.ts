@@ -74,28 +74,6 @@ export class RestaurantApiService {
     let latitude = bookingData["latitude"];
     let longitude = bookingData["longitude"];
 
-    /*return this._http
-      .get(
-        this._restaurantBookingApiUrl +
-          "noOfGuests=" +
-          noOfGuests +
-          "&date=" +
-          date +
-          "&time=" +
-          time +
-          "&restaurantId=" +
-          restaurantId +
-          "&userName=" +
-          userName +
-          "&restaurantName=" +
-          restaurantName +
-          "&perPersonPoints=" +
-          perPersonPoints +
-          "&pointBalance=" +
-          pointBalance
-      )
-      .pipe(timeout(15000));*/
-
     return this._http.post(this._restaurantBookingApiUrl, {
       noOfGuests: noOfGuests,
       date: date,

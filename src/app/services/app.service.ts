@@ -55,8 +55,6 @@ export class AppService {
   }
 
   ProcessInput(userInput: string) {
-    // print on screen
-
     this._componentFactoryService.AddTextBubble(userInput, "user");
     // send to dialogflow and call necessary functions
     if (this._stateService.IslatLongProvided()) {

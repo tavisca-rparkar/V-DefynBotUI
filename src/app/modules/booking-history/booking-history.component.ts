@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { ComponentFactoryService } from "src/app/services/ComponentFactory.service";
 import { StateService } from "src/app/services/state.service";
 import { AppService } from "src/app/services/app.service";
-import { RestaurantApiService } from 'src/app/services/restaurant-api.service';
+import { RestaurantApiService } from "src/app/services/restaurant-api.service";
 
 @Component({
   selector: "app-user-history",
@@ -15,7 +15,7 @@ export class UserHistoryComponent {
   constructor(
     private _stateService: StateService,
     private _appService: AppService,
-    private _restaurantApiService : RestaurantApiService
+    private _restaurantApiService: RestaurantApiService
   ) {}
 
   cancelBooking(bookingId, finalBill, index) {
@@ -32,14 +32,15 @@ export class UserHistoryComponent {
       this.bookingHistories[index]["status"] = "Cancelled";
       this.bookingHistories[index]["isCancellable"] = false;
       this._restaurantApiService
-      .BookingCancellationForRestaurant(bookingCancelData)
-      .subscribe((response)=>{
-        console.log(response);
-      },
-      err =>{
-        console.log(err);
-      });
-      //this._appService.IntentRouter("Cancel Booking", bookingCancelData);
+        .BookingCancellationForRestaurant(bookingCancelData)
+        .subscribe(
+          response => {
+            console.log(response);
+          },
+          err => {
+            console.log(err);
+          }
+        );
     }
   }
 }

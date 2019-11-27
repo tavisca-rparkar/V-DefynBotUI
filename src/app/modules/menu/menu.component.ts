@@ -27,121 +27,6 @@ export class MenuComponent implements OnInit {
   insufficientBalanceError =
     "Can't add items to cart due to insufficient point balance.";
   cancelMessage = "Order Cancelled";
-  /*data = {
-    restaurantId: "12345",
-    supplierName: "Zomato",
-    restaurantName: "Domino's Pizza",
-    locality: "Viman Nagar, Pune",
-    categories: [
-      {
-        categoryName: "Appetizers",
-        items: [
-          {
-            name: "Pani Puri",
-            price: 40
-          },
-          {
-            name: "Masala Papad",
-            price: 30
-          },
-          {
-            name: "Veg Crispy",
-            price: 120
-          },
-          {
-            name: "Pani Puri",
-            price: 40
-          },
-          {
-            name: "Masala Papad",
-            price: 30
-          },
-          {
-            name: "Veg Crispy",
-            price: 120
-          }
-        ]
-      },
-      {
-        categoryName: "Deserts",
-        items: [
-          {
-            name: "Icecream",
-            price: 50
-          },
-          {
-            name: "Cake",
-            price: 100
-          }
-        ]
-      },
-      {
-        categoryName: "Deserts",
-        items: [
-          {
-            name: "Icecream",
-            price: 50
-          },
-          {
-            name: "Cake",
-            price: 100
-          }
-        ]
-      },
-      {
-        categoryName: "Deserts",
-        items: [
-          {
-            name: "Icecream",
-            price: 50
-          },
-          {
-            name: "Cake",
-            price: 100
-          }
-        ]
-      },
-      {
-        categoryName: "Deserts",
-        items: [
-          {
-            name: "Icecream",
-            price: 50
-          },
-          {
-            name: "Cake",
-            price: 100
-          }
-        ]
-      },
-      {
-        categoryName: "Deserts",
-        items: [
-          {
-            name: "Icecream",
-            price: 50
-          },
-          {
-            name: "Cake",
-            price: 100
-          }
-        ]
-      },
-      {
-        categoryName: "Deserts",
-        items: [
-          {
-            name: "Icecream",
-            price: 50
-          },
-          {
-            name: "Cake",
-            price: 100
-          }
-        ]
-      }
-    ]
-  };*/
 
   constructor(
     private _stateService: StateService,
@@ -220,14 +105,18 @@ export class MenuComponent implements OnInit {
 
   ProceedToPay() {
     let date = new Date();
-    let dateStr = date.getFullYear() +"-";
-    dateStr += (date.getMonth() + 1) > 9 ?(date.getMonth() + 1) : "0" + (date.getMonth() + 1);
+    let dateStr = date.getFullYear() + "-";
+    dateStr +=
+      date.getMonth() + 1 > 9
+        ? date.getMonth() + 1
+        : "0" + (date.getMonth() + 1);
     dateStr += "-";
-    dateStr += date.getDate() >9 ?date.getDate(): "0" + date.getDate();
-    dateStr +=   "T" ;
-    dateStr += date.getHours()>9 ? date.getHours(): "0" + date.getHours();
+    dateStr += date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+    dateStr += "T";
+    dateStr += date.getHours() > 9 ? date.getHours() : "0" + date.getHours();
     dateStr += ":";
-    dateStr += date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
+    dateStr +=
+      date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes();
 
     let cart = new Array<MenuItem>();
     this.cart.menu.forEach(category => {

@@ -16,20 +16,6 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
   minutes: number = 4;
   seconds: number = 59;
   pointBalance: number;
-  /*data2 = {
-    status: "BookingInitiated",
-    error: null,
-    totalPointPrice: 300,
-    bookingId: 7,
-    noOfGuests: 3,
-    date: "2019-11-11T00:00:00",
-    time: "11:59:59",
-    restaurantId: "zomato/1",
-    userName: "swar",
-    restaurantName: "Novotel",
-    perPersonPoints: 100,
-    pointBalance: 1000
-  };*/
 
   constructor(
     private _componentFactoryService: ComponentFactoryService,
@@ -87,7 +73,11 @@ export class BookingCheckoutcardComponent implements OnInit, AfterViewInit {
   }
 
   cancelBooking() {
-    if (confirm("Are you sure you want to proceed with cancellation of this booking?")) {
+    if (
+      confirm(
+        "Are you sure you want to proceed with cancellation of this booking?"
+      )
+    ) {
       this.disableAllButtons = true;
       let bookingCancelData = {
         bookingId: this.data["bookingId"],

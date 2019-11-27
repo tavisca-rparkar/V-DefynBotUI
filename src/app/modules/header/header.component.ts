@@ -30,38 +30,14 @@ export class HeaderComponent implements OnInit {
       content: "width=device-width, initial-scale=1.0"
     });
   }
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   logout() {
     localStorage.clear();
-    window.open("./launcher","_self");
+    window.open("./launcher", "_self");
   }
 
   ViewPastTransactions() {
-
-    // this._userHistoryService.GetOrderingResponse().subscribe(
-    //   response => {
-    //     this._stateService.setOrderingHistoryData(response);
-    //     console.log("Ordering history Done");
-    //   },
-    //   err => {
-    //     console.log("Order history Done with error");
-    //     console.log(err);
-    //   }
-    // );
-
-    // this._userHistoryService.GetBookingResponse().subscribe(
-    //   response => {
-    //     this._stateService.setBookingHistoryData(response);
-    //     console.log("Booking history Done");
-    //   },
-    //   err => {
-    //     console.log("Booking history Done with error");
-    //     console.log(err);
-    //   }
-    // );
     this._stateService.UserAskedForHistory = true;
     this._router.navigate(["./history"]);
   }
