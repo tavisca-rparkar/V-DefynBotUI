@@ -475,9 +475,14 @@ export class AppService {
         //updating user point balance on UI
         if (data["status"] == "Booking Successful") {
           this._stateService.appData.pointBalance = data["pointBalance"];
+          // showing Booking Summary here -
+          this._componentFactoryService.AddBookingSummaryCard(data);
+        } else {
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I am unable to proceed with payment of the booking, Please try again later",
+            "bot"
+          );
         }
-        // showing Booking Summary here -
-        this._componentFactoryService.AddBookingSummaryCard(data);
         this._componentFactoryService.StopLoader();
         this.RestartConversationAfterEndOfIntent();
       },
@@ -695,15 +700,22 @@ export class AppService {
           //updating user point balance on UI
           if (data["status"] == "Order Successful") {
             this._stateService.appData.pointBalance -= data["totalPoints"];
+            // showing Ordering Summary here -
+            this._componentFactoryService.AddOrderingSummaryCard(data);
+            this._componentFactoryService.StopLoader();
+            this._componentFactoryService.AddTextBubble(
+              "Restaurant will notify you when your take-away order is ready.",
+              "bot"
+            );
+            this.RestartConversationAfterEndOfIntent();
+          } else {
+            this._componentFactoryService.AddTextBubble(
+              "We are unable to place your order at the moment. Please try again later.",
+              "bot"
+            );
+            this._componentFactoryService.StopLoader();
+            this.RestartConversationAfterEndOfIntent();
           }
-          // showing Ordering Summary here -
-          this._componentFactoryService.AddOrderingSummaryCard(data);
-          this._componentFactoryService.StopLoader();
-          this._componentFactoryService.AddTextBubble(
-            "Restaurant will notify you when your take-away order is ready.",
-            "bot"
-          );
-          this.RestartConversationAfterEndOfIntent();
         },
         err => {
           this._componentFactoryService.StartLoader();
