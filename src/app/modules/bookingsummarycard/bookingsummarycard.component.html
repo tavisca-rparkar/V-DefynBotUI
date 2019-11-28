@@ -4,9 +4,14 @@
       <p *ngFor="let error of data['error']">-{{ error }}</p>
     </div>
     <div [ngClass]="status">
-      <h1>
-        {{ data["status"] }}
-      </h1>
+      <img
+          *ngIf="status == 'booked'"
+          src="../../assets/media/booked.jpg"
+        />
+        <img
+          *ngIf="status == 'cancelled'"
+          src="../../assets/media/cancelled.jpg"
+        />
     </div>
     <div class="booking-details">
       <div class="bookingId">
