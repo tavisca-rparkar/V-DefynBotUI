@@ -4,9 +4,14 @@
       <p *ngFor="let error of data['error']">-{{ error }}</p>
     </div>
     <div [ngClass]="status">
-      <h1>
-        {{ data["status"] }}
-      </h1>
+      <img
+          *ngIf="status == 'booked'"
+          src="../../assets/media/booked.jpg"
+        />
+        <img
+          *ngIf="status == 'cancelled'"
+          src="../../assets/media/cancelled.jpg"
+        />
     </div>
     <div class="booking-details">
       <div class="bookingId">
@@ -18,12 +23,6 @@
         <div class="restaurantName">
           <h1>{{ data["restaurantName"] }}</h1>
         </div>
-        <!--div class="address">
-          <p>
-            Next to Vaishali Restaurant, FC Road, Deccan, Pune, Maharashtra,
-            India
-          </p>
-        </div-->
       </div>
       <hr />
       <div class="booking-details">
