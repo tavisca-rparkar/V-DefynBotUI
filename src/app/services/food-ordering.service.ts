@@ -68,7 +68,6 @@ export class FoodOrderingService {
   }
 
   PaymentforFoodOrdering(orderingPaymentData:OrderingPaymentData) {   
-    console.log(JSON.stringify(orderingPaymentData));
     return this._http
       .post(this._foodOrderingPaymentApiUrl, orderingPaymentData)
       .pipe(timeout(15000));

@@ -22,7 +22,6 @@ export class OrderingsummarycardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("ordering summary card build successfull !");
 
     if (this.data["status"] == "Order Successful") {
       this.isErrorDetected = false;

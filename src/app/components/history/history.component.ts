@@ -7,7 +7,7 @@ import { ThemeService } from "src/app/services/theme.service";
 import { Clients } from "src/app/clients/clients";
 import { UserHistoryComponent } from "src/app/modules/booking-history/booking-history.component";
 import { OrderingHistoryComponent } from "src/app/modules/ordering-history/ordering-history.component";
-import { UserHistoryService } from 'src/app/services/user-history.service';
+import { UserHistoryService } from "src/app/services/user-history.service";
 
 @Component({
   selector: "app-history",
@@ -16,7 +16,7 @@ import { UserHistoryService } from 'src/app/services/user-history.service';
 })
 export class HistoryComponent implements OnInit {
   category: string = "booking";
-  isLoading:boolean = true;
+  isLoading: boolean = true;
 
   constructor(
     private meta: Meta,
@@ -34,16 +34,18 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem("isLoggedIn") != "true") {
-      window.open("./launcher","_self");
+      window.open("./launcher", "_self");
     } else {
       this._stateService.getSessionData();
       this._themingService.setActiveTheme(
         this._themingService.getTheme(this._stateService.appData.client)
       );
-      if(!this._stateService.UserAskedForHistory){
-        let routePath = this._clients.getClientId(this._stateService.appData.client);
+      if (!this._stateService.UserAskedForHistory) {
+        let routePath = this._clients.getClientId(
+          this._stateService.appData.client
+        );
         this._router.navigate(["./chatbot/" + routePath]);
-      }else{
+      } else {
         this.GetBookingHistory();
       }
     }
@@ -66,12 +68,16 @@ export class HistoryComponent implements OnInit {
     this._userHistoryService.GetBookingResponse().subscribe(
       response => {
         this._stateService.setBookingHistoryData(response);
-        console.log("Booking history Done");
         this.isLoading = false;
       },
       err => {
-        console.log("Booking history Done with error");
-        console.log(err);
+        alert(
+          "Couldn't load the ordering history at the moment. Please try again later."
+        );
+        let routePath = this._clients.getClientId(
+          this._stateService.appData.client
+        );
+        this._router.navigate(["./chatbot/" + routePath]);
       }
     );
   }
@@ -80,15 +86,17 @@ export class HistoryComponent implements OnInit {
     this._userHistoryService.GetOrderingResponse().subscribe(
       response => {
         this._stateService.setOrderingHistoryData(response);
-        console.log("Ordering history Done");
         this.isLoading = false;
       },
       err => {
-        console.log("Order history Done with error");
-        console.log(err);
+        alert(
+          "Couldn't load the ordering history at the moment. Please try again later."
+        );
+        let routePath = this._clients.getClientId(
+          this._stateService.appData.client
+        );
+        this._router.navigate(["./chatbot/" + routePath]);
       }
     );
   }
-
-} 
-
+}

@@ -61,19 +61,6 @@ export class ChatInputComponent implements OnInit {
     }
   }
 
-  // listenCheck(){
-  //   if(!!window.chrome){
-  //     navigator.permissions.query({name:'microphone'}).then((result) => {
-  //       if (result.state == 'granted') {
-  //         this.listen();
-  //       } else if (result.state == 'prompt') {
-  //         this.listen();
-  //       } else {
-  //         alert("mic permission not granted!");
-  //       }
-  //      });
-  //   }
-  // }
 
   listen() {
     if (this.isListening == false) {

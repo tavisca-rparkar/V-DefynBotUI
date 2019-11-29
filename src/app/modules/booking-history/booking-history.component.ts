@@ -35,10 +35,7 @@ export class UserHistoryComponent {
         .BookingCancellationForRestaurant(bookingCancelData)
         .subscribe(
           response => {
-            console.log(response);
-          },
-          err => {
-            console.log(err);
+            ;
           }
         );
     }
