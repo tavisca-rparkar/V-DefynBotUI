@@ -69,20 +69,36 @@ export class AppService {
   }
 
   IntentProcessing(userInput: string) {
-    this._dialogflowService.GetResponse(userInput).subscribe(
-      response => {
-        this.IntentRouter(
-          response["queryResult"]["intent"]["displayName"],
-          response
-        );
-      },
-      error => {
-        this._componentFactoryService.AddTextBubble(
-          "Sorry, I am unable to help you at the moment. Please try again later.",
-          "bot"
-        );
+    if(this._stateService._currentFlow == "Restaurant Carousel"){
+      let RestaurantIndex = this._stateService.RestaurantDataMatcher(userInput);
+      console.log("js-restaurant-"+RestaurantIndex);
+      if(RestaurantIndex!=-1){
+        let cardList:any = document.getElementsByClassName("js-restaurant-"+RestaurantIndex);
+        let card:any = cardList[cardList.length -1];
+        console.log(card);
+        console.log(cardList);
+        card.click();
+      }else{
+        this._componentFactoryService.AddTextBubble("Couldn't find that restaurant in the list. Try again or click on any card above.", "bot");
       }
-    );
+      
+
+    }else{
+      this._dialogflowService.GetResponse(userInput).subscribe(
+        response => {
+          this.IntentRouter(
+            response["queryResult"]["intent"]["displayName"],
+            response
+          );
+        },
+        error => {
+          this._componentFactoryService.AddTextBubble(
+            "Sorry, I am unable to help you at the moment. Please try again later.",
+            "bot"
+          );
+        }
+      );
+    }
   }
 
   IntentRouter(intent: string, response) {
@@ -98,6 +114,9 @@ export class AppService {
         break;
       case "Proceed with specific location":
         this.ProceedBookingWithSpecificLocation(response);
+        break;
+      case "VoiceCommand Proceed to Book":
+        this.VoiceCommandProceedToBook(response);
         break;
       case "Show Details":
         this.ShowDetailsIntent(response);
@@ -147,6 +166,15 @@ export class AppService {
     }
   }
 
+  VoiceCommandProceedToBook(response: any) {
+    if(this._stateService._currentFlow=="Restaurant Details Card"){
+      let ProceedButtonList:any = document.getElementsByClassName("proceed-button");
+      let ProceedButton:any = ProceedButtonList[ProceedButtonList.length -1];
+      console.log(ProceedButton);
+      ProceedButton.click();
+    }
+  }
+
   BookTableIntent(response) {
     if (response["queryResult"]["allRequiredParamsPresent"]) {
       this._componentFactoryService.StartLoader();
@@ -184,6 +212,8 @@ export class AppService {
                     "bot"
                   );
                   this._restaurantApiService.SetCarouselData(data);
+                  this._stateService.IndexRestaurants(data);
+                  this._stateService._currentFlow= "Restaurant Carousel";
                   this._componentFactoryService.AddRestaurantCarousel({
                     data: data,
                     carouselType: "Restaurant Booking"
@@ -228,6 +258,8 @@ export class AppService {
                   "bot"
                 );
                 this._restaurantApiService.SetCarouselData(data);
+                this._stateService.IndexRestaurants(data);
+                this._stateService._currentFlow= "Restaurant Carousel";
                 this._componentFactoryService.AddRestaurantCarousel({
                   data: data,
                   carouselType: "Restaurant Booking"
@@ -282,6 +314,8 @@ export class AppService {
                 );
                 this._restaurantApiService.SetCarouselData(data);
                 this._componentFactoryService.StopLoader();
+                this._stateService.IndexRestaurants(data);
+                this._stateService._currentFlow= "Restaurant Carousel";
                 this._componentFactoryService.AddRestaurantCarousel({
                   data: data,
                   carouselType: "Restaurant Booking"
@@ -338,6 +372,8 @@ export class AppService {
               );
               this._restaurantApiService.SetCarouselData(data);
               this._componentFactoryService.StopLoader();
+              this._stateService.IndexRestaurants(data);
+              this._stateService._currentFlow= "Restaurant Carousel";
               this._componentFactoryService.AddRestaurantCarousel({
                 data: data,
                 carouselType: "Restaurant Booking"
@@ -376,6 +412,7 @@ export class AppService {
           } else {
             // show results here -
             this._componentFactoryService.AddRestaurantDetailsCard(data);
+            this._stateService._currentFlow = "Restaurant Details Card";
             this._componentFactoryService.StopLoader();
           }
         },
@@ -398,6 +435,8 @@ export class AppService {
     } else if (carouselType == "Food Ordering") {
       data = this._foodOrderingService.GetCarouselData();
     }
+    this._stateService.IndexRestaurants(data);
+    this._stateService._currentFlow= "Restaurant Carousel";
     this._componentFactoryService.AddRestaurantCarousel({
       data: data,
       carouselType: carouselType
@@ -627,6 +666,8 @@ export class AppService {
               );
               this._foodOrderingService.SetCarouselData(data);
               this._componentFactoryService.StopLoader();
+              this._stateService.IndexRestaurants(data);
+              this._stateService._currentFlow= "Restaurant Carousel";
               this._componentFactoryService.AddRestaurantCarousel({
                 data: data,
                 carouselType: "Food Ordering"

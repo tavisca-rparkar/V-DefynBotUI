@@ -40,8 +40,8 @@ export class CarouselComponent implements AfterViewInit,OnInit {
         "supplierName":this.data[index]["supplierName"],
         "locality": this.data[index]["localityVerbose"], 
       }
+      this._stateService._currentFlow = "Seeking user interaction";
       this._appService.IntentRouter("Show Menu", data);
     }
-    
   }
 }

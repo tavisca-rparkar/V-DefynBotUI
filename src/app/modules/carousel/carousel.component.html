@@ -1,6 +1,6 @@
 <div class="carousel-container">
   <div class="slide" *ngFor="let slide of data; let index = index">
-    <div class="slide-card" (click)="showDetails(index)">
+    <div class="slide-card {{ 'js-restaurant-' + index }}" (click)="showDetails(index)">
       <div class="slide-image-container">
         <img
           [src]="slide['thumbURL']"

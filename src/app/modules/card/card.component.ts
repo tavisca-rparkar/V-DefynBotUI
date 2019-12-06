@@ -68,7 +68,6 @@ export class CardComponent implements OnInit {
       let time: string = BookTableData["time"].split("T")[1];
       requestString += " at " + time.split("+")[0];
     }
-
     this._appService.IntentProcessing(requestString);
   }
 

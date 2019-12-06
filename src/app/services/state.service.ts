@@ -5,6 +5,7 @@ import { LauncherData } from "../models/launcherData";
   providedIn: "root"
 })
 export class StateService {
+
   constructor() {}
 
   public appData: LauncherData = new LauncherData(
@@ -22,6 +23,9 @@ export class StateService {
   public UserAskedForHistory: boolean = false;
   public _foodOrderRestauranData: any;
   public IsBackButtonClicked: boolean = false;
+  public _currentFlow= "Seeking user interaction";
+  public _restaurantList:string[];
+  public _restaurantLookupValue:number[];
 
   private _latitude: string;
   private _longitude: string;
@@ -139,4 +143,47 @@ export class StateService {
   getOrderingHistoryData() {
     return this._orderingHistoryData;
   }
+  
+  IndexRestaurants(data: any) {
+    this.ReInitRestaurantIndexing();
+    data.forEach(restaurant => {
+      this._restaurantList.push(restaurant["restaurantName"]);
+      this._restaurantLookupValue.push(0);
+    });
+    console.log(this._restaurantList.length);
+  }
+
+  ReInitRestaurantIndexing(){
+   this._restaurantList = [];
+   this._restaurantLookupValue = [];
+  }
+
+  RestaurantDataMatcher(restaurantSearchString:String):number{
+    let words = restaurantSearchString.split(' ');
+    let wordCount = words.length;
+    let max = 0;
+    let maxAtIndex = -1;
+
+    words.forEach(word => {
+      console.log("---"+word+"===");
+      for(let i=0; i<this._restaurantList.length;i++){
+        console.log(this._restaurantList[i]);
+        if(this._restaurantList[i].toLowerCase().includes(word)){
+          this._restaurantLookupValue[i]+=1;
+          console.log("OOOOOOOOOOOOOOOOOOOO"+this._restaurantList[i]);
+          if(this._restaurantLookupValue[i] > max){
+            max= this._restaurantLookupValue[i];
+            maxAtIndex = i;
+          }
+        }
+      }
+    });
+
+    if(max > 0){
+      return maxAtIndex;
+    }else{
+      return -1
+    }
+  }
+
 }
